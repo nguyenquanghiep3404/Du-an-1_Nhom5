@@ -15,3 +15,10 @@ Chịu trách nghiệm xử lý logic và hiển thị file view tương ứng
 
 ### 5. folder asset
 Phần liên quan đến giao diện người dùng
+
+trong đó( File index.php xử lý router của cả trang web.
+Folder views chứa giao diện liên quan đến phần khách hàng.
+Folder admin chứa giao diện liên quan đến quản trị.
+Folder upload chứa ảnh được upload từ người quản trị
+Folder assets chứa các css, js, image,
+Folder module chứa các function tương tác với database)
