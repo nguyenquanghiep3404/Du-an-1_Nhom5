@@ -1,7 +1,5 @@
 Dự án 1 - Nhóm 5: 
-Thành viên: Nguyễn Quang Hiệp - Nhóm trưởng (nguyenquanghiep3404),
-Thành viên: Đỗ Thanh Bình (dothanhbinh05),
-Thành viên: Trần Quốc Việt (Tranquocviet05).
+Thành viên: Nguyễn Quang Hiệp - Nhóm trưởng (nguyenquanghiep3404), Đỗ Thanh Bình (dothanhbinh05), Trần Quốc Việt(Tranquocviet05).
 # Thông tin về cách hoạt động của luồng MVC 
 
 ### 1. File index.php
