@@ -8,10 +8,4 @@ require_once "../models/pdo.php";
 require_once './controllers/CategoryControllers.php';
 require_once './models/homeModels.php';
 
-// Route
-$act = $_GET['act'] ?? '/';
-
-// match ($act) {
-//     'home_admin' => (new CategoryControllers)->admin_dm(),
-// }
 ?>
