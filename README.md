@@ -1,7 +1,5 @@
 Dự án 1 - Nhóm 5: 
-Thành viên: Nguyễn Quang Hiệp - Nhóm trưởng (nguyenquanghiep3404),
-Thành viên: Đỗ Thanh Bình (dothanhbinh05),
-Thành viên: Trần Quốc Việt (Tranquocviet05).
+Thành viên: Nguyễn Quang Hiệp - Nhóm trưởng (nguyenquanghiep3404), Đỗ Thanh Bình (dothanhbinh05), Trần Quốc Việt(Tranquocviet05).
 # Thông tin về cách hoạt động của luồng MVC 
 
 ### 1. File index.php
@@ -19,7 +17,7 @@ Folder views chứa giao diện liên quan đến phần khách hàng.
 ### 5. folder commons 
 Chịu trách nhiệm kết nối với database
 
-### 6. folder asset
+### 6. folder public
 Phần liên quan đến giao diện người dùng
 
 ### 7. Folder admin
@@ -28,3 +26,5 @@ Chứa giao diện liên quan đến quản trị
 ### 8. Folder upload 
 Chứa ảnh được upload từ người quản trị
 
+### 9. layout 
+Chứa phần dùng chung giao diện như header, footer
