@@ -1,8 +1,17 @@
 <?php 
-$action = isset($_GET["action"]) ? $_GET["action"] :"admin";
+$action = isset($_GET["action"]) ? $_GET["action"] :'admin';
 switch ($action) {
     case "admin":
-        include('./views/admin/dashboard.php');
+        include './views/admin/dashboard.php';
+        break;
+    case "product":
+        include './views/admin/product/list.php';
+        break;
+    case "product-create":
+        include './views/admin/product/create.php';
+        break;
+    case "product-edit":
+        include './views/admin/product/edit.php';
         break;
 }
 
