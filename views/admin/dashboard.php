@@ -3,7 +3,7 @@
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
-        <img src="../uploads/logo_owenstore.svg" alt="">
+        <img src="#### lay tu upload" alt="">
     </a>
     <ul class="side-menu top">
         <li class="active">
