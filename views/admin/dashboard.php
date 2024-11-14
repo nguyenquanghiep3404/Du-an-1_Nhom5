@@ -7,43 +7,43 @@
     </a>
     <ul class="side-menu top">
         <li class="active">
-            <a href="index.php?page=home">
+            <a href="index.php?action=admin">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=category">
+            <a href="index.php?action=category">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=product">
+            <a href="index.php?action=product">
                 <i class='bx bxs-window-alt'></i>
                 <span class="text">Sản Phẩm</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=bill">
+            <a href="index.php?action=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=respon">
+            <a href="index.php?action=respon">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=user">
+            <a href="index.php?action=user">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="index.php?action=voucher">
                 <i class='bx bxs-offer'></i>
                 <span class="text">Mã Giảm Giá</span>
             </a>
@@ -55,7 +55,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=arrange">
+            <a href="index.php?action=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -63,7 +63,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="index.php?page=logout" class="logout">
+            <a href="index.php?action=logout" class="logout">
                 <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Đăng Xuất</span>
             </a>
@@ -140,10 +140,7 @@
                     <i class='bx bx-filter'></i>
                 </div>
                 <p class="err">
-                    <?php if (isset($_SESSION['message'])) {
-                        echo $_SESSION['message'];
-                        unset($_SESSION['message']);
-                    } ?>
+                    
                 </p>
                 <table>
                     <thead>
@@ -155,7 +152,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?= $html_bill_unconfirm ?>
+                        
                     </tbody>
                 </table>
             </div>

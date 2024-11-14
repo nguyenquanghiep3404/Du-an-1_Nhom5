@@ -11,6 +11,8 @@ function debug($data)
 }
 
 // Kết nối CSDL qua PDO
+
+class connect_db {
 function connect_db(){
     $hostname=DB_HOST;
     $dbname=DB_NAME;
@@ -24,4 +26,5 @@ function connect_db(){
     }catch(PDOException $e){
         $e->getMessage();
     }
+}
 }
