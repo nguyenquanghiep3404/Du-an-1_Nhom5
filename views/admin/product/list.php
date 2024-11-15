@@ -3,61 +3,59 @@
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
-        <img src="#### lay tu upload" alt="">
+        <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?action=admin">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
         <li>
-
-            <!-- <a href="index.php?act=home-dm"> -->
-            <a href="index.php?action=home-dm">
+            <a href="index.php?page=category">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?action=product">
                 <i class='bx bxs-window-alt'></i>
                 <span class="text">Sản Phẩm</span>
             </a>
         </li>
         <li>
-            <a href="index.php?action=bill">
+            <a href="index.php?page=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
             </a>
         </li>
         <li>
-            <a href="index.php?action=respon">
+            <a href="index.php?page=respon">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>
         </li>
         <li>
-            <a href="index.php?action=user">
+            <a href="index.php?page=user">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
         <li>
-            <a href="index.php?action=voucher">
+            <a href="index.php?page=voucher">
                 <i class='bx bxs-offer'></i>
                 <span class="text">Mã Giảm Giá</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=voucher">
                 <i class='bx bxs-slideshow'></i>
                 <span class="text">Slider Shows</span>
             </a>
         </li>
         <li>
-            <a href="index.php?action=arrange">
+            <a href="index.php?page=voucher">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -65,17 +63,15 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="index.php?action=logout" class="logout">
+            <a href="index.php?page=logout" class="logout">
                 <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Đăng Xuất</span>
             </a>
         </li>
     </ul>
-</section>
-
-<!-- CONTENT -->
+</section>>
+<!-- NAVBAR -->
 <section id="content">
-    <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
         <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
@@ -92,22 +88,53 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            <!-- <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>"> -->
         </a>
     </nav>
-    <!-- NAVBAR -->
+    <main>
+    <h3 class="text-center">Quản Lý Sản Phẩm</h3>
+<a href="index.php?action=product-create">Thêm sản phẩm mới</a>
+<table class="table table-show-category">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Hình Ảnh</th>
+            <th>Giá</th>
+            <th>Ngày Nhập</th>
+            <th>Ngày chỉnh sửa</th>
+            <th>Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach ($products as $key => $product) {
+        ?>
+            <tr>
+                <td><?php echo $product['product_id']; ?></td>
+                <td><?php echo $product['name']; ?></td>
+                <td><img src="./uploads/<?php echo $product['image']; ?>" alt="" width="50px"></td>
+                <td><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></td>
+                
+                <td><?php echo $product['created_at']; ?></td>
+                <td><?php echo $product['updated_at']; ?></td>
+                <td>
+                    <a href="index.php?action=product-edit&id=<?php echo $product['product_id']; ?>"  class="btn btn-warning">Sửa</a>
 
-    <h1>New Category</h1>
-    <form action="?action=createPost-dm" method="POST">
-        <label for="">ID:</label>
-        <input type="text" id="id" disabled>
-        <label for="">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="">Description:</label>
-        <input type="text" id="description" name="description" required>
-        <label for="">Status:</label>
-        <input type="text" disabled>
-        <input type="submit" value="New">
-    </form>
+                    <?php if ($product['status'] == 0): ?>
+                        <a href="index.php?action=hide-product&id=<?= $product['product_id'] ?>" class="btn btn-warning">Ẩn SP</a>
+                    <?php else: ?>
+                        <a href="index.php?action=unhide-product&id=<?= $product['product_id'] ?>" class="btn btn-success">Hiển Thị SP</a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php
+        }
+        ?>
+    </tbody>
+</table>
+            
 
-    <?php include ('./views/admin/layout/footer.php'); ?>
+
+
+<?php include ('./views/admin/layout/footer.php'); ?>

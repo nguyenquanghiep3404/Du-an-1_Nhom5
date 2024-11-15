@@ -1,15 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <title>Document</title>
-</head>
-<body>
- <?php include 'views/admin/layout/header.php' ?>
-<a href="?act=create-dm"><input type="button" value="Nhập thêm" class="input"></a>
+<?php include ('./views/admin/layout/header.php'); ?>
+
+<!-- SIDEBAR -->
+<section id="sidebar">
+    <a href="index.php" class="brand">
+        <img src="#### lay tu upload" alt="">
+    </a>
+    <ul class="side-menu top">
+        <li class="active">
+            <a href="index.php?action=admin">
+                <i class='bx bxs-home'></i>
+                <span class="text">Trang Chủ</span>
+            </a>
+        </li>
+        <li>
+
+            <!-- <a href="index.php?act=home-dm"> -->
+            <a href="index.php?action=home-dm">
+                <i class='bx bxs-category-alt'></i>
+                <span class="text">Danh Mục</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.php?action=product">
+                <i class='bx bxs-window-alt'></i>
+                <span class="text">Sản Phẩm</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.php?action=bill">
+                <i class='bx bxs-calendar-check'></i>
+                <span class="text">Đơn Hàng</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.php?action=respon">
+                <i class='bx bxs-chat'></i>
+                <span class="text">Phản Hồi</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.php?action=user">
+                <i class='bx bxs-group'></i>
+                <span class="text">Tài Khoản</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.php?action=voucher">
+                <i class='bx bxs-offer'></i>
+                <span class="text">Mã Giảm Giá</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-slideshow'></i>
+                <span class="text">Slider Shows</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.php?action=arrange">
+                <i class='bx bxs-analyse'></i>
+                <span class="text">Thống Kê</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="side-menu">
+        <li>
+            <a href="index.php?action=logout" class="logout">
+                <i class='bx bxs-log-out-circle'></i>
+                <span class="text">Đăng Xuất</span>
+            </a>
+        </li>
+    </ul>
+</section>
+
+<!-- CONTENT -->
+<section id="content">
+    <!-- NAVBAR -->
+    <nav>
+        <i class='bx bx-menu'></i>
+        <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Tìm Kiếm...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+            </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden>
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="#" class="notification">
+            <i class='bx bxs-bell'></i>
+            <span class="num">8</span>
+        </a>
+        <a href="#" class="profile">
+            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+        </a>
+    </nav>
+    <!-- NAVBAR -->
+
+<a href="?action=create-dm"><input type="button" value="Nhập thêm" class="input"></a>
 <table class="table">
     <thead>
         <tr>
@@ -29,15 +117,13 @@
             <td><?= $cates['status'] ?></td>
             <td>
                <!-- <a href="?act=delete-dm&id=<?= $cates['id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a> -->
-               <a href="?act=update-dm&id=<?= $cates['id'] ?>" ><input type="button" value="Sửa"></a>
-               <a href="?act=hide-dm&id=<?= $cates['id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a>
-               <a href="?act=show-dm&id=<?= $cates['id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')"><input type="button" value="Bỏ xoá"></a>
+               <a href="?action=update-dm&id=<?= $cates['id'] ?>" ><input type="button" value="Sửa"></a>
+               <a href="?action=hide-dm&id=<?= $cates['id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a>
+               <a href="?action=show-dm&id=<?= $cates['id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')"><input type="button" value="Bỏ xoá"></a>
             </td>
         </tr>
         <?php }?>
     </tbody>
 </table>
-   <?php include 'views/admin/layout/footer.php' ?>
-</body>
-</html>
 
+<?php include ('./views/admin/layout/footer.php'); ?>
