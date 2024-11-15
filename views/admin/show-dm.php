@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<?php include './views/admin/layout/header.php' ?>
+ <?php include 'views/admin/layout/header.php' ?>
 <a href="?act=create-dm"><input type="button" value="Nhập thêm" class="input"></a>
 <table class="table">
     <thead>
@@ -37,7 +37,7 @@
         <?php }?>
     </tbody>
 </table>
-   <?php include './views/admin/layout/footer.php' ?>
+   <?php include 'views/admin/layout/footer.php' ?>
 </body>
 </html>
 

@@ -13,7 +13,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=category">
+            <a href="index.php?act=category">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
