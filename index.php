@@ -1,18 +1,29 @@
 <?php 
+require_once './controllers/admin/ProductAdminController.php';
+
 $action = isset($_GET["action"]) ? $_GET["action"] :'admin';
+$productAdmin = new ProductAdminController();
 switch ($action) {
     case "admin":
         include './views/admin/dashboard.php';
         break;
     case "product":
-        include './views/admin/product/list.php';
+        $productAdmin->index();
         break;
     case "product-create":
-        include './views/admin/product/create.php';
+        $productAdmin->create();
         break;
     case "product-edit":
-        include './views/admin/product/edit.php';
+        $productAdmin->edit();
         break;
+    case "hide-product":
+        $productAdmin->hide();
+        break;
+    case "unhide-product":
+        $productAdmin->unhide();
+        break;
+   
+    
 }
 
 
