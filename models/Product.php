@@ -1,21 +1,66 @@
 <?php 
 
-require_once '../commons/function.php';
-require_once '../commons/env.php';
+require_once './commons/function.php';
+require_once './commons/env.php';
 
-    // Lấy ra toàn bộ dữ liệu của bảng Product trong database
-    class Product extends connect_db {
-        public function listProduct() {
-            $sql = 'select * from products';
-            $stmt = $this->connect_db()->prepare($sql); 
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+class ProductModel {
+    public function getAllProducts() {
+        $conn = connect_db();
+        $sql = "SELECT * FROM products WHERE status = 0";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
-    // Lấy dữ liệu từ ban
-    public function addProduct($name, $image, $description, $short_description, $price, $content, $sale_price, $link) {
-        $sql = 'INSERT INTO products (name, image, description, short_description, content, sale_price, price, link) VALUES (?,?,?,?,?,?,?,?)';
-        $stmt = $this->connect_db()->prepare($sql);
-        return $stmt->execute([$name, $image, $description, $short_description, $price, $content, $sale_price, $link]);
+
+    public function getProductById($product_id){
+        $conn = connect_db();
+        $sql = "SELECT * FROM products WHERE product_id = :product_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':product_id', $product_id);
+        $stmt->execute();
+        return $stmt->fetch();
     }
+    public function createProduct($name, $image, $price, $created_at, $updated_at){
+        $conn = connect_db();
+        $sql = "INSERT INTO products (name, image, price, created_at, updated_at) VALUES (:name, :image, :price, :created_at, :updated_at)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':created_at', $created_at);
+        $stmt->bindParam(':updated_at', $updated_at);
+        return $stmt->execute();
+    }
+    public function updateProduct($product_id, $name, $image, $price, $created_at, $updated_at){
+        $conn = connect_db();
+        $sql = "UPDATE products SET name = :name, image = :image, price = :price WHERE product_id  = :product_id ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':product_id ', $product_id);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':price', $price);
+        return $stmt->execute();
+    }
+    function hideProduct($product_id) {
+        $conn = connect_db(); 
+        $sql = "UPDATE products SET status = 1 WHERE product_id  = :product_id ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':product_id ', $product_id);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+    function unhideProduct($product_id) {
+        $conn = connect_db();
+        $sql = "UPDATE products SET status = 0 WHERE product_id  = :product_id ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':product_id ', $product_id);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+    
+
+
+
+
 }
 ?>
