@@ -2,13 +2,13 @@
 
 
 <?php
-$gallery_db = json_decode($one[0]['gallery'], true);
-$gallery = [];
-$html_gallery = '';
-foreach($gallery_db as $img_gallery) {
-    $gallery[] = $img_gallery;
-    $html_gallery .= '<img src="../uploads/'.$img_gallery.'" width="50px" alt="">';
-}
+// $gallery_db = json_decode($one[0]['gallery'], true);
+// $gallery = [];
+// $html_gallery = '';
+// foreach($gallery_db as $img_gallery) {
+//     $gallery[] = $img_gallery;
+//     $html_gallery .= '<img src="../uploads/'.$img_gallery.'" width="50px" alt="">';
+// }
 ?>
 
 <section id="sidebar">
@@ -135,14 +135,14 @@ foreach($gallery_db as $img_gallery) {
                     <input type="hidden" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
                 </div>
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
                     <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
                     <?= $html_gallery ?>
                     <input type="hidden" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
-                </div>
+                </div> -->
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>

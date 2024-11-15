@@ -22,6 +22,12 @@ switch ($action) {
     case "unhide-product":
         $productAdmin->unhide();
         break;
+    case "category":
+        include './views/admin/category/show-dm.php';
+        break;
+    case "client":
+        include './views/client/dashboardClient.php';
+        break;
    
     
 }
