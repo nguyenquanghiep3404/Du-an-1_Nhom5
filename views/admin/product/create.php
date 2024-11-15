@@ -11,7 +11,7 @@ input {
 <?php include ('./views/admin/layout/header.php'); ?>
 <section id="sidebar">
     <a href="index.php" class="brand">
-        <img src="../uploads/logo_owenstore.svg" alt="">
+        <image src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
         <li>
@@ -82,7 +82,7 @@ input {
 <section id="content">
     <nav>
         <i class='bx bx-menu'></i>
-        <a href="#index.php?action=home" class="nav-link">Trang Chủ</a>
+        <a href="#index.php?action=admin" class="nav-link">Trang Chủ</a>
         <form action="#">
             <div class="form-input">
                 <input type="search" placeholder="Tìm Kiếm...">
@@ -96,14 +96,14 @@ input {
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            <image src="./uploads/<?= $_SESSION['admin']['avatar'] ?>">
         </a>
     </nav>
 
     <main class="my-5">
         <div class="container">
             <h3 class="text-center">Thêm Sản Phẩm</h3>
-            <form action="index.php?action=add-product" method="post" style="width:500px; margin:0 auto;"
+            <form action="index.php?action=product-create" method="post" style="width:500px; margin:0 auto;"
                 class="mt-3 mb-5" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <div class=" form-group mb-3">
                     <label for="id_category">Tên Danh Mục</label>
@@ -129,16 +129,16 @@ input {
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="img">Hình Ảnh</label>
-                    <input type="file" name="img" id="img" class="form-control d-block">
+                    <label for="image">Hình Ảnh</label>
+                    <input type="file" name="image" id="image" class="form-control d-block">
 
-                    <span class="err" id="imgErr"></span>
+                    <span class="err" id="imageErr"></span>
                 </div>
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
                     <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
                     <span class="err" id="galleryErr"></span>
-                </div>
+                </div> -->
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>
@@ -209,83 +209,83 @@ function validateForm() {
     resetErrors();
 
     // Validate category
-    var category = document.getElementById('id_category');
-    if (category.value.trim() === '0') {
-        displayError('categoryErr', 'Vui lòng chọn danh mục');
-        category.focus();
-        return false;
-    }
+    // var category = document.getElementById('id_category');
+    // if (category.value.trim() === '0') {
+    //     displayError('categoryErr', 'Vui lòng chọn danh mục');
+    //     category.focus();
+    //     return false;
+    // }
 
     // Validate name
-    var name = document.getElementById('name');
-    if (name.value.trim() === '') {
-        displayError('nameErr', 'Vui lòng nhập tên sản phẩm');
-        name.focus();
-        return false;
-    }
-    // Validate image
-    var img = document.getElementById('img');
-    if (img.files.length === 0) {
-        displayError('imgErr', 'Vui lòng chọn hình ảnh');
-        img.focus();
-        return false;
-    }
-    var gallery = document.getElementById('gallery');
-    if (gallery.value.trim() === '') {
-        displayError('galleryErr', 'Vui lòng chọn 4 ảnh chi tiết');
-        gallery.focus();
-        return false;
-    }
+    // var name = document.getElementById('name');
+    // if (name.value.trim() === '') {
+    //     displayError('nameErr', 'Vui lòng nhập tên sản phẩm');
+    //     name.focus();
+    //     return false;
+    // }
+    // // Validate image
+    // var image = document.getElementById('image');
+    // if (image.files.length === 0) {
+    //     displayError('imageErr', 'Vui lòng chọn hình ảnh');
+    //     image.focus();
+    //     return false;
+    // }
+    // var gallery = document.getElementById('gallery');
+    // if (gallery.value.trim() === '') {
+    //     displayError('galleryErr', 'Vui lòng chọn 4 ảnh chi tiết');
+    //     gallery.focus();
+    //     return false;
+    // }
 
 
-    var info = document.getElementById('info');
-    if (info.files.length === 0) {
-        displayError('infoErr', 'Vui lòng chọn hình ảnh');
-        info.focus();
-        return false;
-    }
-    // Validate image
-    var price = document.getElementById('price');
-    if (price.files.length === 0) {
-        displayError('priceErr', 'Vui lòng chọn hình ảnh');
-        price.focus();
-        return false;
-    }
-    // Validate image
-    var sale = document.getElementById('sale');
-    if (sale.files.length === 0) {
-        displayError('saleErr', 'Vui lòng chọn hình ảnh');
-        sale.focus();
-        return false;
-    }
-    // Validate image
-    var view = document.getElementById('view');
-    if (view.files.length === 0) {
-        displayError('viewErr', 'Vui lòng chọn hình ảnh');
-        view.focus();
-        return false;
-    }
-    // Validate image
-    var size = document.getElementById('size');
-    if (size.files.length === 0) {
-        displayError('sizeErr', 'Vui lòng chọn hình ảnh');
-        size.focus();
-        return false;
-    }
-    // Validate image
-    var color = document.getElementById('color');
-    if (color.files.length === 0) {
-        displayError('colorErr', 'Vui lòng chọn hình ảnh');
-        color.focus();
-        return false;
-    }
-    // Validate image
-    var quantity = document.getElementById('quantity');
-    if (quantity.files.length === 0) {
-        displayError('quantityErr', 'Vui lòng chọn hình ảnh');
-        quantity.focus();
-        return false;
-    }
+    // var info = document.getElementById('info');
+    // if (info.files.length === 0) {
+    //     displayError('infoErr', 'Vui lòng chọn hình ảnh');
+    //     info.focus();
+    //     return false;
+    // }
+    // // Validate image
+    // var price = document.getElementById('price');
+    // if (price.files.length === 0) {
+    //     displayError('priceErr', 'Vui lòng chọn hình ảnh');
+    //     price.focus();
+    //     return false;
+    // }
+    // // Validate image
+    // var sale = document.getElementById('sale');
+    // if (sale.files.length === 0) {
+    //     displayError('saleErr', 'Vui lòng chọn hình ảnh');
+    //     sale.focus();
+    //     return false;
+    // }
+    // // Validate image
+    // var view = document.getElementById('view');
+    // if (view.files.length === 0) {
+    //     displayError('viewErr', 'Vui lòng chọn hình ảnh');
+    //     view.focus();
+    //     return false;
+    // }
+    // // Validate image
+    // var size = document.getElementById('size');
+    // if (size.files.length === 0) {
+    //     displayError('sizeErr', 'Vui lòng chọn hình ảnh');
+    //     size.focus();
+    //     return false;
+    // }
+    // // Validate image
+    // var color = document.getElementById('color');
+    // if (color.files.length === 0) {
+    //     displayError('colorErr', 'Vui lòng chọn hình ảnh');
+    //     color.focus();
+    //     return false;
+    // }
+    // // Validate image
+    // var quantity = document.getElementById('quantity');
+    // if (quantity.files.length === 0) {
+    //     displayError('quantityErr', 'Vui lòng chọn hình ảnh');
+    //     quantity.focus();
+    //     return false;
+    // }
     // Add more validations as needed
 
     // If all validations pass, return true to allow form submission
@@ -307,7 +307,4 @@ function displayError(elementId, message) {
 }
 </script>
 
-<!-- ... Your existing HTML code ... -->
-
-<!-- ... Your existing HTML code ... -->
 <?php include ('./views/admin/layout/footer.php'); ?>
