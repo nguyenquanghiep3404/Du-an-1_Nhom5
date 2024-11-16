@@ -14,13 +14,13 @@ class categoryModel{
     }
 // Ẩn danh mục 
    public function hide_dm($id) 
-   { $sql = "UPDATE categories SET status = 0 WHERE id = {$id}"; 
+   { $sql = "UPDATE categories SET status = 0 WHERE category_id = {$id}"; 
      $this->conn->exec($sql); 
    } 
 // Hiển thị lại danh mục 
     public function show_dm($id) 
     { 
-        $sql = "UPDATE categories SET status = 1 WHERE id = {$id}"; 
+        $sql = "UPDATE categories SET status = 1 WHERE category_id = {$id}"; 
         $this->conn->exec($sql); 
     } 
 // Xoá 
@@ -38,13 +38,13 @@ class categoryModel{
 // Sửa
     public function update_dm($id,$name,$description)
     {
-        $sql = "UPDATE `categories` SET `name` = '{$name}', `description` = '{$description}' WHERE `categories`.`id` = {$id}";
+        $sql = "UPDATE `categories` SET `name` = '{$name}', `description` = '{$description}' WHERE `categories`.`category_id` = {$id}";
         $this->conn->exec($sql); 
     }
 // Lấy thông tin cho trước
     public function find_dm($id)
     {
-        $sql = "SELECT * FROM categories WHERE `categories` . `id` = {$id}";
+        $sql = "SELECT * FROM categories WHERE `categories` . `category_id` = {$id}";
         $stml = $this->conn->query($sql);
         $data = $stml->fetch();
         return $data;

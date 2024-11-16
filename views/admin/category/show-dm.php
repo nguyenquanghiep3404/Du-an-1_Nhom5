@@ -96,18 +96,34 @@
         </a>
     </nav>
     <!-- NAVBAR -->
+    
+<a href="?action=create-dm"><input type="button" value="Nhập thêm" class="input mt-5 input-group bg-primary text-white"></a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Status</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($cate as $cates) {?>
+        <tr>
+            <td><?= $cates['category_id'] ?></td>
+            <td><?= $cates['name'] ?></td>
+            <td><?= $cates['description'] ?></td>
+            <td><?= $cates['status'] ?></td>
+            <td>
+               <!-- <a href="?act=delete-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a> -->
+               <a href="?action=update-dm&id=<?= $cates['category_id'] ?>" ><input type="button" class="" value="Sửa"></a>
+               <a href="?action=hide-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a>
+               <a href="?action=show-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')"><input type="button" value="Bỏ xoá"></a>
+            </td>
+        </tr>
+        <?php }?>
+    </tbody>
+</table>
 
-    <h1>Update Category</h1>
-    <form action="?action=updatePost-dm&id=<?= $cateEdit['id'] ?>" method="POST">
-        <label for="">ID:</label>
-        <input type="text" id="id" disabled>
-        <label for="">Name:</label>
-        <input type="text" id="name" name="name" value="<?= $cateEdit['name'] ?>"required>
-        <label for="">Description:</label>
-        <input type="text" id="description" name="description" value="<?= $cateEdit['description'] ?>" required>
-        <label for="">Status:</label>
-        <input type="text" disabled>
-        <input type="submit" value="Update">
-    </form>
-
-    <?php include ('./views/admin/layout/footer.php'); ?>
+<?php include ('./views/admin/layout/footer.php'); ?>

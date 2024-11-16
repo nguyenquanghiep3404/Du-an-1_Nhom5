@@ -9,19 +9,21 @@ class categoryControllers{
     public function all_dm()
     {
         $cate = $this->categoryModel->all_dm();
-        require_once "./views/admin/show-dm.php";
+        require_once "./views/admin/category/show-dm.php";
     }
     // Ẩn danh mục 
     public function hide_dm() 
     { 
-        $id = $_GET['id']; $this->categoryModel->hide_dm($id); 
-        header('location:?act=home-dm'); 
+        $id = $_GET['id']; 
+        $this->categoryModel->hide_dm($id); 
+        header('location:?action=home-dm'); 
     } 
     // Hiển thị lại danh mục 
     public function show_dm() 
     { 
-        $id = $_GET['id']; $this->categoryModel->show_dm($id); 
-        header('location:?act=home-dm'); 
+        $id = $_GET['id']; 
+        $this->categoryModel->show_dm($id); 
+        header('location:?action=home-dm'); 
     }
 
 // Xoá 
@@ -36,21 +38,21 @@ class categoryControllers{
 // Thêm
     public function create_dm()
     {
-        require_once './views/admin/formCategory.php';
+        require_once './views/admin/category/formCategory.php';
     }
     public function createPost_dm()
     {
         $name = $_POST['name'];
         $description = $_POST['description'];
         $this->categoryModel->inset_dm($name,$description);
-        header('location:?act=home-dm');
+        header('location:?action=home-dm');
     }
 // Sửa
     public function update_dm()
     {
         $id = $_GET['id'];
         $cateEdit = $this->categoryModel->find_dm($id);
-        require_once './views/admin/updateCategory.php';
+        require_once './views/admin/category/updateCategory.php';
     }
     public function updatePost_dm()
     {
@@ -58,7 +60,7 @@ class categoryControllers{
         $name = $_POST['name'];
         $description = $_POST['description'];
         $this->categoryModel->update_dm($id,$name,$description);
-        header('location:?act=home-dm');
+        header('location:?action=home-dm');
     }
 }
 ?>

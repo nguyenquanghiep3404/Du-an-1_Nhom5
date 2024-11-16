@@ -10,6 +10,7 @@ require_once './controllers/admin/categoryControllers.php   ';
 $action = isset($_GET["action"]) ? $_GET["action"] :'admin';
 $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
+$loginAdmin = new loginController();
 switch ($action) {
     case "admin":
         include './views/admin/dashboard.php';
@@ -50,6 +51,13 @@ switch ($action) {
         break;
     case "updatePost-dm";
         $categoryAdmin->updatePost_dm();
+        break;
+    // Login
+    case "login";
+        $loginAdmin->login();
+        break;
+    case "loginPost";
+        $loginAdmin->loginPost();
         break;
 }
 ?>
