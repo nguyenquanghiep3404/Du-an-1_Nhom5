@@ -1,9 +1,10 @@
 <?php
 class categoryModel{
     public $conn;
+    
     public function __construct()
     {
-        $this->conn = `connect_db`();
+        $this->conn = connect_db();
     }
 // Lấy danh sách danh mục
     public function all_dm()
