@@ -101,22 +101,22 @@ input {
     </nav>
 
     <main class="my-5">
-        <div class="container">
+        <div class="container ">
             <h3 class="text-center">Thêm Sản Phẩm</h3>
             <form action="index.php?action=product-create" method="post" style="width:500px; margin:0 auto;"
-                class="mt-3 mb-5" enctype="multipart/form-data" onsubmit="return validateForm()">
+                class="mt-3 mb-5" enctype="multipart/form-data">
                 <div class=" form-group mb-3">
-                    <label for="id_category">Tên Danh Mục</label>
+                    <label for="category_id">Tên Danh Mục</label>
 
-                    <select class="form-control" name="id_category" id="id_category">
+                    <select class="form-control" name="category_id" id="category_id">
                         <option value="0">Chọn Danh Mục</option>
-                        <?php
-                        if(isset($list_category)) {
-                            foreach($list_category as $dm) {
-                                echo '<option value="'.$dm['id'].'">'.$dm['name'].'</option>';
-                            }
-                        }
-                        ?>
+                        <!-- <?php
+                        // if(isset($list_category)) {
+                        //     foreach($list_category as $dm) {
+                        //         echo '<option value="'.$dm['id'].'">'.$dm['name'].'</option>';
+                        //     }
+                        // }
+                        ?> -->
 
                     </select>
                     <span class="err" id="categoryErr"></span>
@@ -124,15 +124,27 @@ input {
 
                 <div class="form-group mb-3">
                     <label for="name">Tên Sản Phẩm</label>
-                    <input type="text" name="name" id="name" class="form-control">
-                    <span class="err" id="nameErr"></span>
+                    <input type="text" name="name" id="name" class="form-control" value="<?=$product->name?>">
+                    <!-- <span class="err" id="nameErr"></span> -->
                 </div>
-
+                <!-- Khu vực nhập ảnh -->
                 <div class="form-group mb-3">
                     <label for="image">Hình Ảnh</label>
-                    <input type="file" name="image" id="image" class="form-control d-block">
+                    <input type="file" name="file_anh_upload" id="image" class="form-control d-block">
 
-                    <span class="err" id="imageErr"></span>
+                    <!-- <span class="err" id="imageErr"></span> -->
+                </div>
+                <div>
+                <!-- Hiển thị ảnh -->
+                <div>
+                    <span>Ảnh hiện tại:</span>
+                    <div style="height: 60px; width: 100px">
+                        <img style="max-height:100%; max-width:100%;" src="<?= $product->image ?>">
+                    </div>
+                </div>
+
+                <span>Đường dẫn ảnh:</span>
+                <input type="text" name="image" value="<?= $product->image ?>">
                 </div>
                 <!-- <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
@@ -142,28 +154,28 @@ input {
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>
-                    <input type="text" name="info" id="info" class="form-control">
-                    <span class="err" id="infoErr"></span>
+                    <input type="text" name="content" id="info" class="form-control" value="<?= $product->content ?>">
+                    <!-- <span class="err" id="infoErr"></span> -->
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="price">Giá</label>
-                    <input type="text" name="price" id="price" class="form-control">
-                    <span class="err" id="priceErr"></span>
+                    <input type="text" name="price" id="price" class="form-control" value="<?= $product->price ?>">
+                    <!-- <span class="err" id="priceErr"></span> -->
                 </div>
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                     <label for="sale">Sale</label>
                     <input type="text" name="sale" id="sale" class="form-control">
                     <span class="err" id="saleErr"></span>
-                </div>
+                </div> -->
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                     <label for="view">Lượt Xem</label>
                     <input type="text" name="view" id="view" class="form-control">
                     <span class="err" id="viewErr"></span>
-                </div>
-                <div class="form-group mb-3">
+                </div> -->
+                <!-- <div class="form-group mb-3">
                     <div class="group-checkout">
                         <label for="hot">Hot</label>
 
@@ -173,29 +185,38 @@ input {
                         </select>
                         <span class="err" id="hotErr"></span>
                     </div>
-                </div>
-                <div class="form-group mb-3">
+                </div> -->
+                <!-- <div class="form-group mb-3">
                     <label for="size">Size</label>
                     <input type="text" name="size" id="size" class="form-control">
                     <span class="err" id="sizeErr"></span>
-                </div>
+                </div> -->
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                     <label for="color">Màu Sắc</label>
                     <input type="text" name="color" id="color" class="form-control">
                     <span class="err" id="colorErr"></span>
-                </div>
+                </div> -->
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                     <label for="quantity">Số Lượng</label>
                     <input type="text" name="quantity" id="quantity" class="form-control">
                     <span class="err" id="quantityErr"></span>
+                </div> -->
+                <div class="form-group mb-3">
+                    <input type="submit" name="submitForm" value="Thêm Sản Phẩm Mới" class="btn btn-dark px-5">
+                </div>
+                <!-- Khu vực thông báo lỗi -->
+                <div style="color: red;">
+                    <?= $thongBaoLoi ?>
+                </div>
+                <div style="color: red;">
+                    <?= $thongBaoLoiUploadFile ?>
                 </div>
 
-
-
-                <div class="form-group mb-3">
-                    <input type="submit" name="themmoi" value="Thêm Sản Phẩm Mới" class="btn btn-dark px-5">
+                <!-- Khu vực thông báo thành công -->
+                <div style="color: green;">
+                    <?= $thongBaoThanhCong ?>
                 </div>
             </form>
         </div>
@@ -203,13 +224,13 @@ input {
 
 
 </section>
-<script>
+<!-- <script>
 function validateForm() {
     // Reset errors
     resetErrors();
 
     // Validate category
-    // var category = document.getElementById('id_category');
+    // var category = document.getElementById('category_id');
     // if (category.value.trim() === '0') {
     //     displayError('categoryErr', 'Vui lòng chọn danh mục');
     //     category.focus();
@@ -305,6 +326,6 @@ function displayError(elementId, message) {
     var errorElement = document.getElementById(elementId);
     errorElement.innerText = message;
 }
-</script>
+</script> -->
 
 <?php include ('./views/admin/layout/footer.php'); ?>
