@@ -1,18 +1,18 @@
-<?php include ('./views/admin/layout/header.php'); ?>
+<?php include './views/admin/layout/header.php' ?>
 
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
-        <img src="#### lay tu upload" alt="">
+        <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?action=admin">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?action=category">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
@@ -49,7 +49,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?action=voucher">
                 <i class='bx bxs-slideshow'></i>
                 <span class="text">Slider Shows</span>
             </a>
@@ -76,7 +76,7 @@
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
-        <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
+        <a href="#index.php?action=category" class="nav-link">Danh Mục Sản Phẩm</a>
         <form action="#">
             <div class="form-input">
                 <input type="search" placeholder="Tìm Kiếm...">
@@ -90,78 +90,22 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            <img src="img/people.png">
         </a>
     </nav>
     <!-- NAVBAR -->
-
-    <!-- MAIN -->
-    <main>
-        <div class="head-title">
-            <div class="left">
-                <h1>Quản Trị Viên</h1>
-            </div>
-            <a href="#" class="btn-download">
-                <i class='bx bxs-cloud-download'></i>
-                <span class="text">Download PDF</span>
-            </a>
-        </div>
-
-        <ul class="box-info">
-            <li>
-                <i class='bx bxs-calendar-check'></i>
-                <span class="text c-bill">
-                    <h3>0</h3>
-                    <p>Đơn Hàng</p>
-                </span>
-            </li>
-            <li>
-                <i class='bx bxs-group'></i>
-                <span class="text c-user">
-                    <h3>0</h3>
-                    <p>Tài Khoản</p>
-                </span>
-            </li>
-            <li>
-                <i class='bx bxs-category'></i>
-                <span class="text c-product">
-                    <h3>0</h3>
-                    <p>Sản Phẩm</p>
-                </span>
-            </li>
-        </ul>
-
-
-        <div class="table-data">
-            <div class="order">
-                <div class="head">
-                    <h3>Đơn Hàng Chưa Được Xác Nhận</h3>
-                    <i class='bx bx-search'></i>
-                    <i class='bx bx-filter'></i>
-                </div>
-                <p class="err">
-                    
-                </p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Khách Hàng</th>
-                            <th>Ngày Đặt Hàng</th>
-                            <th>Trạng Thái</th>
-                            <th>Thao Tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
-    <!-- MAIN -->
-</section>
-<!-- CONTENT -->
-
-
-
-<?php include ('./views/admin/layout/footer.php'); ?>
+<body>
+    <h1>Update Category</h1>
+    <form action="?act=updatePost-dm&id=<?= $cateEdit['id'] ?>" method="POST">
+        <label for="">ID:</label>
+        <input type="text" id="id" disabled>
+        <label for="">Name:</label>
+        <input type="text" id="name" name="name" value="<?= $cateEdit['name'] ?>"required>
+        <label for="">Description:</label>
+        <input type="text" id="description" name="description" value="<?= $cateEdit['description'] ?>" required>
+        <label for="">Status:</label>
+        <input type="text" disabled>
+        <input type="submit" value="Update">
+    </form>
+</body>
+<?php include './views/admin/layout/footer.php' ?>

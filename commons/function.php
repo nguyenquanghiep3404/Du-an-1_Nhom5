@@ -1,27 +1,20 @@
+
 <?php
+// require_once './commons/env.php';
+function connect_db() {
+    try {
+        $dsn = 'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8';
+        $conn = new PDO($dsn, DB_USERNAME, DB_PASSWORD);
 
-// Hỗ trợ show bất kỳ data nào
-function debug($data)
-{
-    echo "<pre>";
+        // Cài đặt chế độ xử lý lỗi của PDO
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    print_r($data);
+        // Cài đặt chế độ trả về dữ liệu dạng mảng kết hợp
+        $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-    die;
-}
-
-// Kết nối CSDL qua PDO
-function connect_db(){
-    $hostname=DB_HOST;
-    $dbname=DB_NAME;
-    try{
-        $conn= new PDO("mysql:host=$hostname;dbname=$dbname",DB_USERNAME,DB_PASSWORD);
-        // Cài đặt chế độ sử lý ngoại lệ
-        $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        // Cài đặt chế độ trả về dữ liệu
-        $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
         return $conn;
-    }catch(PDOException $e){
-        $e->getMessage();
+    } catch (PDOException $e) {
+        die('Lỗi kết nối CSDL: ' . $e->getMessage());
     }
 }
+?>
