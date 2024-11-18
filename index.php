@@ -5,8 +5,8 @@ require_once './models/Product.php';
 
 // Lấy giá trị "id" từ đường dẫn url
 $product_id = "";
-if (isset($_GET["product_id"])) {
-    $id = $_GET["product_id"];
+if (isset($_GET["id"])) {
+    $product_id = $_GET["id"];
 }
 
 $action = isset($_GET["action"]) ? $_GET["action"] :'admin';

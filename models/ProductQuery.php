@@ -70,7 +70,7 @@ class ProductQuery {
     public function find($product_id)
     {
         try{
-            $sql = "SELECT * FROM products WHERE id = $product_id";
+            $sql = "SELECT * FROM products WHERE product_id = $product_id";
             $data = $this->conn->query($sql)->fetch();
             // 3. Convert dữ liệu từ array sang object
             if ($data !== false) {
@@ -96,7 +96,7 @@ class ProductQuery {
     public function edit($product_id, Product $product)
     {
         try{
-            $sql = "UPDATE `products` SET `name`='$product->name',`image`='$product->image',`price`='$product->price' WHERE id = $product_id";
+            $sql = "UPDATE `products` SET `name`='$product->name',`image`='$product->image',`price`='$product->price' WHERE product_id = $product_id";
 
             // 2. Thực hiện truy vấn
             $data = $this->conn->query($sql);
@@ -114,36 +114,6 @@ class ProductQuery {
         }
     }
 
-
-
-    // Lấy tât cả từ bảng sản phẩm
-    // public function getProductById($product_id){
-    //     $conn = connect_db();
-    //     $sql = "SELECT * FROM products WHERE product_id = :product_id";
-    //     $stmt = $conn->prepare($sql);
-    //     $stmt->bindParam(':product_id', $product_id);
-    //     $stmt->execute();
-    //     return $stmt->fetch();
-    // }
-    // // them moi san pham
-    // public function createProduct($name, $image, $price, $created_at, $updated_at, $category_id)
-    // {
-    //     $sql = "INSERT INTO `products` ( `name`, `image`, `created_at`, `price`, `updated_at`, `category_id`) VALUES ('$name', $price, '$image', '$updated_at',$category_id)";
-    //     $this->conn->exec($sql);
-    // }
-    // public function updateProduct($id,$name,$price,$image,$updated_at)
-    // {
-    //     $sql = "UPDATE `products` SET `name` = '$name', `price` = '$price', `img` = '$image',  WHERE `products`.`product_id` = {$product_id}";
-    //     $this->conn->exec($sql);
-    // }
-    // // Lấy thông tin của Cate cho trc
-    // public function find_sp($id)
-    // {
-    //   $sql = "SELECT * FROM `sanpham` WHERE `sanpham`.`id`={$id}";
-    //   $stml = $this->conn->query($sql);
-    //   $data = $stml->fetch();
-    //   return $data;
-    // }
     
     // function hideProduct($product_id) {
     //     $conn = connect_db(); 

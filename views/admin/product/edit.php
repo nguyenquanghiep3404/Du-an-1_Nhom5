@@ -112,18 +112,10 @@
                 <div class="form-group mb-3">
                     <label for="id_category">Tên Danh Mục</label>
 
-                    <select class="form-control" name="id_category" id="id_category">
-                        <?php
-                        if(isset($list_category)) {
-                            foreach($list_category as $dm) {
-                                echo '<option value="'.$dm['id'].'">'.$dm['name'].'</option>';
-                            }
-                        }
-                        ?>
-                    </select>
+                    
                     <div class="form-group mb-3">
                         <label for="name">Tên Sản Phẩm</label>
-                        <input type="text" name="name" id="name" class="form-control" value="<?=$product->name?>">
+                        <input type="text" name="name" id="name" class="form-control" value="<?= $product->name ?>">
                         <!-- <span class="err" id="nameErr"></span> -->
                     </div>
                 <!-- Khu vực nhập ảnh -->
@@ -205,9 +197,22 @@
                 <div class="form-group mb-3">
                     <input type="submit" name="submitForm" value="Chỉnh Sửa Sản Phẩm" class="btn btn-dark px-5">
                 </div>
+                <!-- Khu vực thông báo lỗi -->
+                <div style="color: red;">
+                    <?= $thongBaoLoi ?>
+                </div>
+                <div style="color: red;">
+                    <?= $thongBaoLoiUploadFile ?>
+                </div>
+
+                <!-- Khu vực thông báo thành công -->
+                <div style="color: green;">
+                    <?= $thongBaoThanhCong ?>
+                </div>
             </form>
         </div>
     </main>
+
 
 
 
