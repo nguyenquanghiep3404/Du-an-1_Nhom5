@@ -99,6 +99,7 @@ class ProductAdminController  {
 
     public function edit($product_id)
     {
+        if ($product_id !== "") {
         
             $product = new Product();
             $thongBaoLoi = "";
@@ -174,6 +175,9 @@ class ProductAdminController  {
         }// END if submit form
         // Hiển thị file view
         include "./views/admin/product/edit.php";
+    } else {
+        echo "<h1> Lỗi: Tham số id trống. Mời bạn kiểm tra tham số id trên đường dẫn url. </h1>";
+    }
         
         
     } // end showupdate

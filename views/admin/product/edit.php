@@ -105,7 +105,7 @@
         <div class="container">
             <h3 class="text-center"> Chỉnh Sửa Sản Phẩm</h3>
 
-            <form action="index.php?action=product-edit&id=" method="post"
+            <form  method="post"
                 style="width:500px; margin:0 auto;" class="mt-3 mb-5" enctype="multipart/form-data">
 
 
@@ -115,7 +115,7 @@
                     
                     <div class="form-group mb-3">
                         <label for="name">Tên Sản Phẩm</label>
-                        <input type="text" name="name" id="name" class="form-control" value="<?= $product->name ?>">
+                        <input type="text" name="name" class="form-control" value="<?= $product->name ?>">
                         <!-- <span class="err" id="nameErr"></span> -->
                     </div>
                 <!-- Khu vực nhập ảnh -->

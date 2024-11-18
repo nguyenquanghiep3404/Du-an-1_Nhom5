@@ -51,7 +51,7 @@ class ProductQuery {
 
     public function insert (Product $product)
     {
-        //khai bao tr catch
+        //khai bao try catch
         try{
             $sql = "INSERT INTO `products`(`product_id`, `name`, `image`,`content`, `price`) VALUES (not null, '$product->name','$product->image','$product->content','$product->price')";
              // 2. Thực hiện truy vấn
