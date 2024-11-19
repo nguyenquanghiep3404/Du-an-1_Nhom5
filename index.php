@@ -6,7 +6,18 @@ require_once "./commons/function.php";
 require_once './models/categoryModel.php';
 // Kết nối Controller
 require_once './controllers/admin/ProductAdminController.php';
+
 require_once './controllers/admin/categoryControllers.php   ';
+
+require_once './models/ProductQuery.php';
+require_once './models/Product.php';
+
+// Lấy giá trị "id" từ đường dẫn url
+$product_id = "";
+if (isset($_GET["id"])) {
+    $product_id = $_GET["id"];
+}
+
 $action = isset($_GET["action"]) ? $_GET["action"] :'admin';
 $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
@@ -16,19 +27,25 @@ switch ($action) {
         include './views/admin/dashboard.php';
         break;
     case "product":
-        $productAdmin->index();
+        $productAdmin->showList();
         break;
     case "product-create":
         $productAdmin->create();
         break;
     case "product-edit":
-        $productAdmin->edit();
+        $productAdmin->edit($product_id);
         break;
-    case "hide-product":
-        $productAdmin->hide();
+    // case "hide-product":
+    //     $productAdmin->hide();
+    //     break;
+    // case "unhide-product":
+    //     $productAdmin->unhide();
+        
+    case "category":
+        include './views/admin/category/show-dm.php';
         break;
-    case "unhide-product":
-        $productAdmin->unhide();
+    case "client":
+        include './views/client/dashboardClient.php';
         break;
     // Danh muc
     case "home-dm";
