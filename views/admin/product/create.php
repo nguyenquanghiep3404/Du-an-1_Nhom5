@@ -96,14 +96,14 @@ input {
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <image src="./uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            <!-- <image src="./uploads/<?= $_SESSION['admin']['avatar'] ?>"> -->
         </a>
     </nav>
 
     <main class="my-5">
         <div class="container ">
             <h3 class="text-center">Thêm Sản Phẩm</h3>
-            <form action="index.php?action=product-create" method="post" style="width:500px; margin:0 auto;"
+            <form method="post" style="width:500px; margin:0 auto;"
                 class="mt-3 mb-5" enctype="multipart/form-data">
                 <div class=" form-group mb-3">
                     <label for="category_id">Tên Danh Mục</label>

@@ -182,30 +182,7 @@ class ProductAdminController  {
         
     } // end showupdate
     
-//     public function edit() {
-//         $product_id = $_GET['product_id'];
-//         $productModel = new ProductModel();
-//         $product = $productModel->getProductById($product_id);
 
-//         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//             $name = $_POST['name'];
-//             $image = $_FILES['image']['name'];
-//             $price = $_POST['price'];
-
-//             // Xử lý upload ảnh mới nếu có, nếu không giữ nguyên ảnh cũ
-//             if (!empty($image)) {
-//                 move_uploaded_file($_FILES['image']['tmp_name'], "./uploads/" . $image);
-//             } else {
-//                 $image = $product['image'];
-//             }
-
-//             if ($productModel->updateProduct($product_id, $name, $image, $price)) {
-//                 header('Location: index.php?action=product');
-//                 exit();
-//             }
-//         }
-//         include './views/admin/product/edit.php';
-//     }
 //     public function hide() {
 //         $product_id = $_GET['id'];
 //         $productModel = new ProductModel();
