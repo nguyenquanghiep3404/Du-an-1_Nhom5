@@ -13,7 +13,9 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=category">
+
+            <!-- <a href="index.php?act=home-dm"> -->
+            <a href="index.php?action=home-dm">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
