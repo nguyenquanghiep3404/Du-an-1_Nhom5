@@ -65,7 +65,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="index.php?action=logout" class="logout">
+            <a href="?action=home_login" class="logout">
                 <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Đăng Xuất</span>
             </a>
@@ -92,7 +92,7 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            <!-- <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>"> -->
         </a>
     </nav>
     <!-- NAVBAR -->

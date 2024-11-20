@@ -1,4 +1,5 @@
 <?php 
+session_start();
 // Kết nối PDO
 require_once "./commons/env.php";
 require_once "./commons/function.php";
@@ -61,6 +62,9 @@ switch ($action) {
         break;
     case "loginPost";
         $loginAdmin->loginPost();
+        break;
+    case "home_login";
+        $loginAdmin->home_login();
         break;
 }
 ?>
