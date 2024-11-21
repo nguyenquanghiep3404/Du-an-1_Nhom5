@@ -65,7 +65,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="?action=home_login" class="logout">
+            <a href="?action=logout" class="logout">
                 <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Đăng Xuất</span>
             </a>

@@ -6,7 +6,7 @@ class loginController{
     {
         $this->loginModel = new loginModel();
     }
-    public function home_login()
+    public function home()
     {
         require_once './views/client/dashboardClient.php';
     }
@@ -25,7 +25,7 @@ class loginController{
                $_SESSION['name'] = $user;
                $_SESSION['id_role'] = $this->loginModel->Role($username)['id_role'];
             //    var_dump($_SESSION['id_role']);
-               header('location:?action=home_login');
+               header('location:?action=home');
             }else{
                echo "Sai tên đăng nhập hoặc mất khẩu";
             }
@@ -36,7 +36,7 @@ class loginController{
     public function logout()
     {
         unset($_SESSION['name']);
-        header('location:?action=home_login');
+        header('location:?action=home');
     } 
 }
 

@@ -251,6 +251,7 @@
                                             {
                                             ?>
                                             <li><a href="#">Thông tin cá nhân</a></li>
+                                            <li><a href="#">My Account</a></li>
                                             <?php 
                     
                                             if($_SESSION['id_role'] == 1){
@@ -259,12 +260,10 @@
                                             <?php 
                                             } 
                                             ?>
-
+                                            
                                             <?php }else{?>
-
-                                            <li><a href="#">My Account</a></li>
                                             <li><a href="?action=login">Login</a></li>
-                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="?action=register">Register</a></li>
                                             <?php }?> 
                                         </ul>
                                     </li>

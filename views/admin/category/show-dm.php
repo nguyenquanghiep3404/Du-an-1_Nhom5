@@ -39,7 +39,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=user">
+            <a href="index.php?action=all_register">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
@@ -65,7 +65,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="?action=home_login" class="logout">
+            <a href="?action=logout" class="logout">
                 <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Đăng Xuất</span>
             </a>
@@ -96,10 +96,10 @@
         </a>
     </nav>
     <!-- NAVBAR -->
-    
-<a href="?action=create-dm"><input type="button" value="Nhập thêm" class="input mt-5 input-group bg-primary text-white"></a>
-<table class="table table-striped">
-    <thead>
+    <H2 class="mb-4">Quản Lý Danh mục</H2>
+<a href="?action=create-dm"><input type="button" value="Nhập thêm" class="btn btn-primary mb-3"></a>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <td>ID</td>
             <td>Name</td>
@@ -117,9 +117,9 @@
             <td><?= $cates['status'] ?></td>
             <td>
                <!-- <a href="?act=delete-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a> -->
-               <a href="?action=update-dm&id=<?= $cates['category_id'] ?>" ><input type="button" class="" value="Sửa"></a>
-               <a href="?action=hide-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a>
-               <a href="?action=show-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')"><input type="button" value="Bỏ xoá"></a>
+               <a href="?action=update-dm&id=<?= $cates['category_id'] ?>" ><button class="button btn btn-primary">Sửa</button></a>
+               <a href="?action=hide-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><button class="button btn btn-danger">Xoá</button></a>
+               <a href="?action=show-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')"><button class="button btn btn-success">Bỏ xoá</button></a>   
             </td>
         </tr>
         <?php }?>

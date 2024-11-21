@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-        <div class="bg-white p-4 rounded shadow-sm w-100" style="max-width: 400px;">
+        <div class="bg-white p-4 rounded shadow-sm w-100 " style="max-width: 400px;">
    <form action="?action=loginPost" method="POST">
         <h2 class="text-center mb-4">Đăng Nhập</h2>
     
