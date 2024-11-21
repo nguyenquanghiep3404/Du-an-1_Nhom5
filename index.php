@@ -24,14 +24,14 @@ switch ($action) {
     case "product-edit":
         $productAdmin->edit($product_id);
         break;
-// <<<<<<< HEAD
+<<<<<<< HEAD
       case "login":
         include './views/auth/login.php'  ;
         break;
         case "register":
          include './views/auth/register.php';
          break;
-// =======
+=======
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
@@ -46,6 +46,6 @@ switch ($action) {
         break;
    
     
-// >>>>>>> 19d2853e80a175c6ffe5e5e3614651ad1db7ac61
+>>>>>>> 19d2853e80a175c6ffe5e5e3614651ad1db7ac61
 }
 ?>
