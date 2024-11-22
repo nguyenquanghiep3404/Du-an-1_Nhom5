@@ -1,5 +1,5 @@
 
-
+<?php include ('./views/admin/layout/header.php'); ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
@@ -119,4 +119,4 @@
         <input type="text" disabled>
         <input type="submit" value="New">
     </form>
-
+    <?php include ('./views/admin/layout/footer.php'); ?>

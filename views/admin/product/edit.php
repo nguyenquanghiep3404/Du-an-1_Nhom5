@@ -9,9 +9,9 @@
 //     $gallery[] = $img_gallery;
 //     $html_gallery .= '<img src="../uploads/'.$img_gallery.'" width="50px" alt="">';
 // }
-?> -->
+// ?> -->
 
-<!-- <section id="sidebar">
+<section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
@@ -79,7 +79,7 @@
             </a>
         </li>
     </ul>
-</section>> -->
+</section>>
 <section id="content">
     <nav>
         <i class='bx bx-menu'></i>
@@ -97,7 +97,7 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            
         </a>
     </nav>
 
@@ -105,7 +105,7 @@
         <div class="container">
             <h3 class="text-center"> Chỉnh Sửa Sản Phẩm</h3>
 
-            <form action="index.php?action=product-edit&id=" method="post"
+            <form  method="post"
                 style="width:500px; margin:0 auto;" class="mt-3 mb-5" enctype="multipart/form-data">
 
 
@@ -115,13 +115,13 @@
                     
                     <div class="form-group mb-3">
                         <label for="name">Tên Sản Phẩm</label>
-                        <input type="text" name="name" id="name" class="form-control" value="<?= $product->name ?>">
+                        <input type="text" name="name" class="form-control" value="<?= $product->name ?>">
                         <!-- <span class="err" id="nameErr"></span> -->
                     </div>
                 <!-- Khu vực nhập ảnh -->
                 <div class="form-group mb-3">
                     <label for="image">Hình Ảnh</label>
-                    <input type="file" name="file_anh_upload" id="image" class="form-control d-block">
+                    <input type="file" name="file_anh_upload"  class="form-control d-block">
 
                     <!-- <span class="err" id="imageErr"></span> -->
                 </div>
@@ -145,13 +145,13 @@
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>
-                    <input type="text" name="content" id="info" class="form-control" value="<?= $product->content ?>">
+                    <input type="text" name="content" class="form-control" value="<?= $product->content ?>">
                     <!-- <span class="err" id="infoErr"></span> -->
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="price">Giá</label>
-                    <input type="text" name="price" id="price" class="form-control" value="<?= $product->price ?>">
+                    <input type="text" name="price" class="form-control" value="<?= $product->price ?>">
                     <!-- <span class="err" id="priceErr"></span> -->
                 </div>
 

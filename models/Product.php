@@ -16,6 +16,7 @@ class Product
     public $created_at;
     
     public $status;
+    public $category_id;
 
 }
 

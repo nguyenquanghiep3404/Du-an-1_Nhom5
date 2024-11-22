@@ -1,4 +1,4 @@
-
+<?php include ('./views/admin/layout/header.php'); ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
@@ -137,3 +137,4 @@
         <?php }?>
     </tbody>
 </table>
+<?php include ('./views/admin/layout/footer.php'); ?>
