@@ -1,8 +1,8 @@
-<?php include './views/admin/layout/header.php' ?>
-
+<?php include ('./views/admin/layout/header.php'); ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
+
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
@@ -12,8 +12,12 @@
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
-        <li class="active">
-            <a href="index.php?action=category">
+
+        <li>
+
+            <!-- <a href="index.php?act=home-dm"> -->
+            <a href="index.php?action=home-dm">
+
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
@@ -76,7 +80,9 @@
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
+
         <a href="#index.php?action=category" class="nav-link">Danh Mục Sản Phẩm</a>
+
         <form action="#">
             <div class="form-input">
                 <input type="search" placeholder="Tìm Kiếm...">
@@ -90,40 +96,45 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="img/people.png">
+
+            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
         </a>
     </nav>
     <!-- NAVBAR -->
+    
+<a href="?action=create-dm"><input type="button" value="Nhập thêm" class="input mt-5 input-group bg-primary text-white"></a>
+<table class="table table-striped">
 
-
-<a href="?act=create-dm"><input type="button" value="Nhập thêm" class="input"></a>
-<table class="table">
     <thead>
         <tr>
             <td>ID</td>
             <td>Name</td>
             <td>Description</td>
             <td>Status</td>
-            <td></td>
+
+            <td>Operation</td>
+
         </tr>
     </thead>
     <tbody>
         <?php foreach($cate as $cates) {?>
         <tr>
-            <td><?= $cates['id'] ?></td>
+
+            <td><?= $cates['category_id'] ?></td>
             <td><?= $cates['name'] ?></td>
             <td><?= $cates['description'] ?></td>
             <td><?= $cates['status'] ?></td>
             <td>
-               <!-- <a href="?act=delete-dm&id=<?= $cates['id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a> -->
-               <a href="?act=update-dm&id=<?= $cates['id'] ?>" ><input type="button" value="Sửa"></a>
-               <a href="?act=hide-dm&id=<?= $cates['id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a>
-               <a href="?act=show-dm&id=<?= $cates['id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')"><input type="button" value="Bỏ xoá"></a>
+
+              
+               <!-- <a href="?act=delete-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a> -->
+               <a href="?action=update-dm&id=<?= $cates['category_id'] ?>" ><input type="button" class="" value="Sửa"></a>
+               <a href="?action=hide-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a>
+               <a href="?action=show-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')"><input type="button" value="Bỏ xoá"></a>
+
             </td>
         </tr>
         <?php }?>
     </tbody>
 </table>
-   <?php include './views/admin/layout/footer.php' ?>
-
-
+<?php include ('./views/admin/layout/footer.php'); ?>

@@ -9,7 +9,7 @@
 //     $gallery[] = $img_gallery;
 //     $html_gallery .= '<img src="../uploads/'.$img_gallery.'" width="50px" alt="">';
 // }
-?> -->
+// ?> -->
 
 <section id="sidebar">
     <a href="index.php" class="brand">

@@ -1,19 +1,25 @@
-<?php include './views/admin/layout/header.php' ?>
 
+<?php include ('./views/admin/layout/header.php'); ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
+
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
         <li>
+
             <a href="index.php?action=admin">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
-        <li class="active">
-            <a href="index.php?action=category">
+
+        <li>
+
+            <!-- <a href="index.php?act=home-dm"> -->
+            <a href="index.php?action=home-dm">
+
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
@@ -49,7 +55,9 @@
             </a>
         </li>
         <li>
+
             <a href="index.php?action=voucher">
+
                 <i class='bx bxs-slideshow'></i>
                 <span class="text">Slider Shows</span>
             </a>
@@ -76,7 +84,9 @@
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
-        <a href="#index.php?action=category" class="nav-link">Danh Mục Sản Phẩm</a>
+
+        <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
+
         <form action="#">
             <div class="form-input">
                 <input type="search" placeholder="Tìm Kiếm...">
@@ -90,6 +100,7 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
+
             <img src="img/people.png">
         </a>
     </nav>
@@ -97,6 +108,7 @@
 <body>
     <h1>New Category</h1>
     <form action="?act=createPost-dm" method="POST">
+
         <label for="">ID:</label>
         <input type="text" id="id" disabled>
         <label for="">Name:</label>
@@ -107,5 +119,4 @@
         <input type="text" disabled>
         <input type="submit" value="New">
     </form>
-</body>
-<?php include './views/admin/layout/footer.php' ?>
+    <?php include ('./views/admin/layout/footer.php'); ?>
