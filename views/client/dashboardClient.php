@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title> Codex. Mendoza - Website bán áo nam </title>
-    <meta name="description" content="Codex. Mendoza - Website bán áo nam." />
+    <meta name="description" content="Uthr Fashion eCommerce Bootstrap 5 Template is an innovative and modern e-commerce online store website template." />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <link rel="canonical" href="Replace_with_your_PAGE_URL" />
@@ -5386,8 +5386,39 @@
     </section>
     <!-- blog section end -->
 
+    <!--newsletter section start-->
+    <section class="newsletter_section newsletter_padding border-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="newsletter_inner d-flex justify-content-between align-items-center">
+                        <div class="newsletter_text">
+                            <h3>Giữ liên lạc</h3>
+                            <p>Luôn nhận thông báo về các sản phẩm mới nhất</p>
+                        </div>
+                        <div class="newsletter_subscribe">
+                            <form id="mc-form">
+                                <input class="border-0" id="mc-email" type="email" autocomplete="off"
+                                    placeholder="Nhập email của bạn vào đây">
+                                <i class="icon-envelope-open icons"></i>
+                                <button class="border-0" id="mc-submit">Đăng ký</button>
+                            </form>
+                            <!-- mailchimp-alerts Start -->
+                            <div class="mailchimp-alerts text-centre">
+                                <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                            </div><!-- mailchimp-alerts end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--newsletter section end-->
+
     <!--footer area start-->
-    <footer class="footer_widgets newsletter_padding border-top">
+    <footer class="footer_widgets">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-5">

@@ -1,11 +1,17 @@
- <!--footer area start-->
- <footer class="footer_widgets newsletter_padding border-top ">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-5">
-                    <div class="footer_widget_list">
-                        <div class="footer_logo">
-                            <a href="#"><img src="assets/img/logo/logo.png" ></a>
+
+<footer class="footer_widgets">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <div class="footer_widget_list">
+                    <div class="footer_logo">
+                        <a href="#"><img src="assets/img/logo/logo.png" ></a>
+                    </div>
+                    <div class="footer_contact">
+                        <div class="footer_contact_list">
+                            <span>Địa chỉ</span>
+                            <p>Tòa nhà FPT Polytechnic, đường Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.</p>
+
                         </div>
                         <div class="footer_contact">
                             <div class="footer_contact_list">
