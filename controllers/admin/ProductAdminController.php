@@ -1,7 +1,7 @@
 <?php 
 require_once './models/Product.php';
 require_once './models/ProductQuery.php';
-session_start();
+
 ob_start();
 
 
