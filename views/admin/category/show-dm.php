@@ -95,6 +95,7 @@
             <i class='bx bxs-bell'></i>
             <span class="num">8</span>
         </a>
+        
     </nav>
     <!-- NAVBAR -->
     

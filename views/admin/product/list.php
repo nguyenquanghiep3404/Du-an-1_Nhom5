@@ -1,7 +1,7 @@
 <?php include ('./views/admin/layout/header.php'); ?>
 
 <!-- SIDEBAR -->
-<!-- <section id="sidebar">
+<section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
@@ -69,7 +69,7 @@
             </a>
         </li>
     </ul>
-</section>> -->
+</section>
 <!-- NAVBAR -->
 <section id="content">
     <nav>
