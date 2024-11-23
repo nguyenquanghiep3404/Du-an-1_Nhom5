@@ -28,7 +28,7 @@ if (isset($_GET["id"])) {
     $product_id = $_GET["id"];
 }
 
-$action = isset($_GET["action"]) ? $_GET["action"] :'admin';
+$action = isset($_GET["action"]) ? $_GET["action"] :'client';
 $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
 $loginAdmin = new loginController();
@@ -46,6 +46,7 @@ switch ($action) {
     case "product-edit":
         $productAdmin->edit($product_id);
         break;
+    
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
