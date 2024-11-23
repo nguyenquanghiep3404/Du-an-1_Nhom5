@@ -6,11 +6,12 @@ require_once "./commons/function.php";
 require_once './models/categoryModel.php';
 require_once './models/Product.php';
 require_once './models/ProductQuery.php';
+require_once './models/loginModel.php';
 // Kết nối Controller
 require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php';
 require_once './controllers/admin/loginController.php';
-require_once './models/loginModel.php';
+
 
 
 // Lấy giá trị "id" từ đường dẫn url
@@ -70,5 +71,13 @@ switch ($action) {
     case "loginPost";
         $loginAdmin->loginPost();
         break;
+    // client
+    case "client";
+        include './views/client/dashboardClient.php';
+        break;
+    case "cart";
+        include './views/client/cart.php';
+        break;
+
 }
 ?>

@@ -107,54 +107,49 @@ input {
                 class="mt-3 mb-5" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <div class=" form-group mb-3">
                     <label for="id_category">Tên Danh Mục</label>
-
-                   
-                        
                         <select class="form-control" name="category_id" id="id_category">
                             <?php foreach ($listCategories as $cate): ?> 
                                 <option value="">Chọn Danh Mục</option>
                                 <option value="<?= $cate['category_id'] ?>"><?= $cate['name'] ?></option>
                             <?php endforeach; ?>   
                         </select>
-
-                  
                     <span class="err" id="categoryErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="name">Tên Sản Phẩm</label>
                     <input type="text" name="product_name" id="name" class="form-control">
-                    <span class="err" id="nameErr"></span>
+                    <span class="err text-danger" id="nameErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="img">Hình Ảnh</label>
                     <input type="file" name="product_image" id="img" class="form-control d-block">
 
-                    <span class="err" id="imgErr"></span>
+                    <span class="err text-danger" id="imgErr"></span>
                 </div>
                 <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
                     <input type="file" name="product_gallery[]" id="gallery" class="form-control d-block" multiple>
-                    <span class="err" id="galleryErr"></span>
+                    <span class="err text-danger" id="galleryErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>
                     <input type="text" name="product_description" id="info" class="form-control">
-                    <span class="err" id="infoErr"></span>
+                    <span class="err text-danger" id="infoErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="price">Giá</label>
                     <input type="text" name="product_price" id="price" class="form-control">
-                    <span class="err" id="priceErr"></span>
+                    <span class="err text-danger" id="priceErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="sale">Sale</label>
                     <input type="text" name="product_sale_price" id="sale" class="form-control">
-                    <span class="err" id="saleErr"></span>
+                    <span class="err text-danger" id="saleErr"></span>
                 </div>
 
                 <!-- <div class="form-group mb-3">
@@ -176,23 +171,19 @@ input {
                 <div class="form-group mb-3">
                     <label for="size">Size</label>
                     <input type="text" name="size" id="size" class="form-control">
-                    <span class="err" id="sizeErr"></span>
+                    <span class="err text-danger" id="sizeErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="color">Màu Sắc</label>
                     <input type="text" name="color" id="color" class="form-control">
-                    <span class="err" id="colorErr"></span>
+                    <span class="err text-danger" id="colorErr"></span>
                 </div>
-
                 <div class="form-group mb-3">
                     <label for="quantity">Số Lượng</label>
                     <input type="text" name="quantity" id="quantity" class="form-control">
-                    <span class="err" id="quantityErr"></span>
+                    <span class="err text-danger" id="quantityErr"></span>
                 </div>
-
-
-
                 <div class="form-group mb-3">
                     <input type="submit" name="themmoi" value="Thêm Sản Phẩm Mới" class="btn btn-dark px-5">
                 </div>
@@ -208,12 +199,12 @@ function validateForm() {
     resetErrors();
 
     // Validate category
-    // var category = document.getElementById('id_category');
-    // if (category.value.trim() === '0') {
-    //     displayError('categoryErr', 'Vui lòng chọn danh mục');
-    //     category.focus();
-    //     return false;
-    // }
+    var category = document.getElementById('id_category');
+    if (category.value.trim() === '0') {
+        displayError('categoryErr', 'Vui lòng chọn danh mục');
+        category.focus();
+        return false;
+    }
 
     // Validate name
     var name = document.getElementById('name');

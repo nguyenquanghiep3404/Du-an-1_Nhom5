@@ -100,73 +100,80 @@
             
         </a>
     </nav>
-
     <main class="my-5">
         <div class="container">
             <h3 class="text-center"> Chỉnh Sửa Sản Phẩm</h3>
 
-            <form  method="post"
+            <form action="index.php?page=update-product&id=<?= $one[0]['id'] ?>" method="post"
                 style="width:500px; margin:0 auto;" class="mt-3 mb-5" enctype="multipart/form-data">
 
 
                 <div class="form-group mb-3">
                     <label for="id_category">Tên Danh Mục</label>
 
-                    
-                    <div class="form-group mb-3">
-                        <label for="name">Tên Sản Phẩm</label>
-                        <input type="text" name="name" class="form-control" value="<?= $product->name ?>">
-                        <!-- <span class="err" id="nameErr"></span> -->
-                    </div>
-                <!-- Khu vực nhập ảnh -->
+                    <select class="form-control" name="id_category" id="id_category">
+                        <?php
+                        if(isset($list_category)) {
+                            foreach($list_category as $dm) {
+                                echo '<option value="'.$dm['id'].'">'.$dm['name'].'</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+
                 <div class="form-group mb-3">
-                    <label for="image">Hình Ảnh</label>
-                    <input type="file" name="file_anh_upload"  class="form-control d-block">
-
-                    <!-- <span class="err" id="imageErr"></span> -->
-                </div>
-                <div>
-                <!-- Hiển thị ảnh -->
-                <div>
-                    <span>Ảnh hiện tại:</span>
-                    <div style="height: 60px; width: 100px">
-                        <img style="max-height:100%; max-width:100%;" src="<?= $product->image ?>">
-                    </div>
+                    <label for="name">Tên Sản Phẩm</label>
+                    <input type="text" name="name" id="name" class="form-control" value="<?= $one[0]['name'] ?>">
                 </div>
 
-                <span>Đường dẫn ảnh:</span>
-                <input type="text" name="image" value="<?= $product->image ?>">
+                <div class="form-group mb-3">
+                    <label for="img">Hình Ảnh</label>
+                    <input type="file" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
+                    <img src="../uploads/<?= $one[0]['img'] ?>" width="50px" alt="">
+                    <input type="hidden" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
                 </div>
-                <!-- <div class="form-group mb-3">
+
+                <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
-                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
-                    <span class="err" id="galleryErr"></span>
-                </div> -->
+                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
+                        value="<?= $one[0]['gallery'] ?>">
+                    <?= $html_gallery ?>
+                    <input type="hidden" name="gallery[]" id="gallery" class="form-control d-block" multiple
+                        value="<?= $one[0]['gallery'] ?>">
+                </div>
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>
-                    <input type="text" name="content" class="form-control" value="<?= $product->content ?>">
-                    <!-- <span class="err" id="infoErr"></span> -->
+                    <!-- <input type="text" name="info" id="info" class="form-control" value="<?= $one[0]['info'] ?>"> -->
+                    <textarea name="info" id="info" cols="30" rows="10"
+                        class="form-control"><?= $one[0]['info'] ?></textarea>
+                </div>
+
+                <div class=" form-group mb-3">
+                    <label for="price">Giá</label>
+                    <input type="text" name="price" id="price" class="form-control" value="<?= $one[0]['price'] ?>">
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="price">Giá</label>
-                    <input type="text" name="price" class="form-control" value="<?= $product->price ?>">
-                    <!-- <span class="err" id="priceErr"></span> -->
+                    <label for="sale">Sale</label>
+                    <input type="text" name="sale" id="sale" class="form-control" value="<?= $one[0]['sale'] ?>">
                 </div>
 
-                <!-- <div class="form-group mb-3">
-                    <label for="sale">Sale</label>
-                    <input type="text" name="sale" id="sale" class="form-control">
-                    <span class="err" id="saleErr"></span>
-                </div> -->
-
-                <!-- <div class="form-group mb-3">
+                <div class="form-group mb-3">
                     <label for="view">Lượt Xem</label>
-                    <input type="text" name="view" id="view" class="form-control">
-                    <span class="err" id="viewErr"></span>
-                </div> -->
-                <!-- <div class="form-group mb-3">
+                    <input type="text" name="view" id="view" class="form-control" value="<?= $one[0]['view'] ?>">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="hot">Hot</label>
+
+                    <select class="form-control" name="hot" id="hot">
+                        <option value="0">Bình Thường</option>
+                        <option value="1">Sản Phẩm Hot</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
                     <div class="group-checkout">
                         <label for="hot">Hot</label>
 
@@ -174,44 +181,74 @@
                             <option value="0">Bình Thường</option>
                             <option value="1">Sản Phẩm Hot</option>
                         </select>
-                        <span class="err" id="hotErr"></span>
                     </div>
-                </div> -->
-                <!-- <div class="form-group mb-3">
-                    <label for="size">Size</label>
-                    <input type="text" name="size" id="size" class="form-control">
-                    <span class="err" id="sizeErr"></span>
-                </div> -->
+                </div>
 
-                <!-- <div class="form-group mb-3">
-                    <label for="color">Màu Sắc</label>
-                    <input type="text" name="color" id="color" class="form-control">
-                    <span class="err" id="colorErr"></span>
-                </div> -->
-
-                <!-- <div class="form-group mb-3">
-                    <label for="quantity">Số Lượng</label>
-                    <input type="text" name="quantity" id="quantity" class="form-control">
-                    <span class="err" id="quantityErr"></span>
-                </div> -->
                 <div class="form-group mb-3">
-                    <input type="submit" name="submitForm" value="Chỉnh Sửa Sản Phẩm" class="btn btn-dark px-5">
-                </div>
-                <!-- Khu vực thông báo lỗi -->
-                <div style="color: red;">
-                    <?= $thongBaoLoi ?>
-                </div>
-                <div style="color: red;">
-                    <?= $thongBaoLoiUploadFile ?>
+                    <div class="group-checkout">
+                        <label for="size">
+                            Size
+                            <span>*</span>
+                        </label>
+                        <select class="form-select" name="size" id="size">
+                            <option selected disabled hidden>
+                                <?php
+                                if(isset($variant)) {
+                                    foreach($variant as $size) {
+                                        echo '<option value="'.$size['id'].'">'.$size['size'].'</option>';
+
+                                    }
+                                }
+                                ?>
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="group-checkout">
+                        <label for="size">
+                            Màu
+                            <span>*</span>
+                        </label>
+                        <select class="form-select" name="color" id="color">
+
+                            <?php
+                            if(isset($variant)) {
+                                foreach($variant as $color) {
+                                    echo '<option value="'.$color['id'].'">'.$color['color'].'</option>';
+
+                                }
+                            }
+                            ?>
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="group-checkout">
+                        <label for="size">
+                            Số Lượng
+                            <span>*</span>
+                        </label>
+                        <select class="form-select" name="color" id="color">
+
+                            <?php
+                            if(isset($variant)) {
+                                foreach($variant as $quantity) {
+                                    echo '<option value="'.$quantity['id'].'">'.$quantity['quantity'].'</option>';
+                                }
+                            }
+                            ?>
+                            </option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Khu vực thông báo thành công -->
-                <div style="color: green;">
-                    <?= $thongBaoThanhCong ?>
+                <div class="form-group mb-3">
+                    <input type="submit" name="capnhat" value="Chỉnh Sửa Sản Phẩm" class="btn btn-dark px-5">
                 </div>
             </form>
         </div>
     </main>
+    
 
 
 
