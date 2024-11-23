@@ -9,7 +9,7 @@
                             <li><a href="index.html">home</a></li>
                             <li><a href="#">pages</a></li>
                         </ul>
-                        <h3>Shopping Cart</h3>
+                        <h3>Giỏ hàng</h3>
                     </div>
                 </div>
             </div>
@@ -28,11 +28,11 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>product </th>
-                                            <th>information</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
+                                            <th>Sản phẩm </th>
+                                            <th>Thông Tin</th>
+                                            <th>Giá</th>
+                                            <th>Số Lượng</th>
+                                            <th>Tổng Tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,11 +115,11 @@
                             </div>
                             <div class="cart_page_button border-top d-flex justify-content-between">
                                 <div class="shopping_cart_btn">
-                                    <a href="#" class="btn btn-primary border">CLEAR SHOPPING CART</a>
+                                    <a href="#" class="btn btn-primary border">XÓA TOÀN BỘ GIỎ HÀNG</a>
                                     <button class="btn btn-primary border" type="submit">UPDATE YOUR CART</button>
                                 </div>
                                 <div class="shopping_continue_btn">
-                                    <button class="btn btn-primary" type="submit">CONTINUE SHOPPING</button>
+                                    <button class="btn btn-primary" type="submit">TIẾP TỤC MUA SẮM</button>
                                 </div>
                             </div>
                          </div>
@@ -130,7 +130,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="shopping_coupon_calculate top">
-                                <h3 class="border-bottom">Calculate Shipping </h3>
+                                <h3 class="border-bottom">Tính Toán Vận Chuyển </h3>
                                 <select class="select_option border">
                                     <option value="1">United Kingdom (UK)  </option>
                                     <option value="2">Åland Islands  </option>
@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="shopping_coupon_calculate">
-                                <h3 class="border-bottom">Coupon Discount   </h3>
+                                <h3 class="border-bottom">Mã Giảm Giá   </h3>
                                 <p>Enter your coupon code if you have one.</p>
                                 <input class="border" placeholder="Enter your code" type="text">
                                 <button class="btn btn-primary" type="submit">apply coupon</button>
@@ -164,7 +164,7 @@
                                    </div>
                                </div>
                                <div class="proceed_checkout_btn">
-                                   <a class="btn btn-primary" href="#">Proceed to Checkout</a>
+                                   <a class="btn btn-primary" href="#">Tiến Hành Thanh Toán</a>
                                </div>
                                <a href="#">Checkout with Mutilple Adresses</a>
                             </div>

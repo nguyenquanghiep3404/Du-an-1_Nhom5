@@ -50,7 +50,7 @@ class ProductQuery  {
             echo "Thêm thành công variant!";
         
     }
-
+    // Truy xuất tất cả sản phẩm từ bảng product
         function render_allproduct()
     {
         $sql = "SELECT * FROM products";
@@ -59,7 +59,7 @@ class ProductQuery  {
     // lấy chi tiết 1 số sản phẩm dựa trên ID
         function getone_product($product_id)
     {
-        $sql = "SELECT * FROM products WHERE id=?";
+        $sql = "SELECT * FROM products WHERE product_id=?";
         return pdo_query($sql, $product_id);
     }
     // Truy xuất tất cả sản phẩm từ bảng product biến thể
@@ -68,29 +68,29 @@ class ProductQuery  {
         $sql = "SELECT * FROM product_variant";
         return pdo_query($sql);
     }
-    // Cập nhật cả ảnh sản phẩm.
-    // function update_product($id, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot)
-    // {
-    //     try {
-    //         $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-    //         pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
-    //         echo "Chỉnh sửa thành công";
-    //     } catch (PDOException $e) {
-    //         echo "Chỉnh Sửa thất bại! ".$e->getMessage();
-    //     }
+    // Cập nhật cả ảnh sản phẩm.(khi người dùng tải lên hình ảnh mới hoặc thay đổi thư viện ảnh.)
+    function update_product($name, $image,	$price,$category_id,$sale_price, $description, $gallery, $product_id)
+    {
+        try {
+            $sql = "UPDATE products SET  name = ?, image = ?,	price =?,category_id = ?,sale_price =?, description = ?, gallery = ?, created_at=NOW(), updated_at=NOW() WHERE product_id=?";
+            pdo_execute($sql, $name, $image,$price,$category_id,$sale_price, $description, $gallery, $product_id);
+            echo "Chỉnh sửa thành công";
+        } catch (PDOException $e) {
+            echo "Chỉnh Sửa thất bại! ".$e->getMessage();
+        }
       
         
-    // }
-    // Không cập nhật ảnh
-    // function update_product_noneimg($id,$id_category, $name, $info, $price, $sale, $view, $hot ){
-    //     try {
-    //         $sql = "UPDATE product SET id_category=?, name=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-    //         pdo_execute($sql, $id_category, $name, $info, $price, $sale, $view, $hot, $id);
-    //         echo "Chỉnh sửa thành công";
-    //     } catch (PDOException $e) {
-    //         echo "Chỉnh Sửa thất bại! ".$e->getMessage();
-    //     }
-    // }
+    }
+    // Không cập nhật ảnh (Dùng để cập nhật sản phẩm không bao gồm hình ảnh (trong trường hợp hình ảnh không được tải lên mới).)
+    function update_product_noneimg($name,	$price,$category_id,$sale_price, $description,$product_id){
+        try {
+            $sql = "UPDATE products SET id_category=?, name=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
+            pdo_execute($sql, $name,	$price,$category_id,$sale_price, $description, $product_id);
+            echo "Chỉnh sửa thành công";
+        } catch (PDOException $e) {
+            echo "Chỉnh Sửa thất bại! ".$e->getMessage();
+        }
+    }
 
     // Lấy sản phẩm kèm tên danh mục liên quan
         function get_product_by_id($id)
@@ -236,6 +236,7 @@ public function all()
         }
 
     } // END FUNCTION ALL()
+
 
     // public function find($product_id)
     // {

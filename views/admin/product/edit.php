@@ -1,17 +1,17 @@
 <?php include ('./views/admin/layout/header.php'); ?>
 
 
-<!-- <?php
-// $gallery_db = json_decode($one[0]['gallery'], true);
-// $gallery = [];
-// $html_gallery = '';
-// foreach($gallery_db as $img_gallery) {
-//     $gallery[] = $img_gallery;
-//     $html_gallery .= '<img src="../uploads/'.$img_gallery.'" width="50px" alt="">';
-// }
-// ?> -->
+<?php
+$gallery_db = json_decode($one[0]['product_gallery'], true);
+$product_gallery = [];
+$html_gallery = '';
+foreach($gallery_db as $img_gallery) {
+    $product_gallery[] = $img_gallery;
+    $html_gallery .= '<img src="./uploads/product_gallery/'.$img_gallery.'" width="50px" alt="">';
+}
+ ?>
 
-<section id="sidebar">
+<!-- <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
@@ -79,7 +79,7 @@
             </a>
         </li>
     </ul>
-</section>>
+</section>> -->
 <section id="content">
     <nav>
         <i class='bx bx-menu'></i>
@@ -104,7 +104,7 @@
         <div class="container">
             <h3 class="text-center"> Chỉnh Sửa Sản Phẩm</h3>
 
-            <form action="index.php?page=update-product&id=<?= $one[0]['id'] ?>" method="post"
+            <form action="index.php?page=product-edit&id=<?= $one[0]['product_id'] ?>" method="post"
                 style="width:500px; margin:0 auto;" class="mt-3 mb-5" enctype="multipart/form-data">
 
 
@@ -129,61 +129,36 @@
 
                 <div class="form-group mb-3">
                     <label for="img">Hình Ảnh</label>
-                    <input type="file" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
-                    <img src="../uploads/<?= $one[0]['img'] ?>" width="50px" alt="">
-                    <input type="hidden" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
+                    <input type="file" name="image" id="img" class="form-control d-block" value="<?= $one[0]['image'] ?>">
+                    <img src="../uploads/<?= $one[0]['image'] ?>" width="50px" alt="">
+                    <input type="hidden" name="image" id="img" class="form-control d-block" value="<?= $one[0]['image'] ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
-                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
-                        value="<?= $one[0]['gallery'] ?>">
+                    <input type="file" name="product_gallery[]" id="gallery" class="form-control d-block" multiple
+                        value="<?= $one[0]['product_gallery'] ?>">
                     <?= $html_gallery ?>
-                    <input type="hidden" name="gallery[]" id="gallery" class="form-control d-block" multiple
-                        value="<?= $one[0]['gallery'] ?>">
+                    <input type="hidden" name="product_gallery[]" id="gallery" class="form-control d-block" multiple
+                        value="<?= $one[0]['product_gallery'] ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>
-                    <!-- <input type="text" name="info" id="info" class="form-control" value="<?= $one[0]['info'] ?>"> -->
-                    <textarea name="info" id="info" cols="30" rows="10"
-                        class="form-control"><?= $one[0]['info'] ?></textarea>
+                    <!-- <input type="text" name="info" id="info" class="form-control" value="<?= $one[0]['product_description'] ?>"> -->
+                    <textarea name="product_description" id="info" cols="30" rows="10"
+                        class="form-control"><?= $one[0]['product_description'] ?></textarea>
                 </div>
 
                 <div class=" form-group mb-3">
-                    <label for="price">Giá</label>
+                    <label for="product_price">Giá</label>
                     <input type="text" name="price" id="price" class="form-control" value="<?= $one[0]['price'] ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="sale">Sale</label>
-                    <input type="text" name="sale" id="sale" class="form-control" value="<?= $one[0]['sale'] ?>">
+                    <input type="text" name="product_sale_price" id="sale" class="form-control" value="<?= $one[0]['sale'] ?>">
                 </div>
-
-                <div class="form-group mb-3">
-                    <label for="view">Lượt Xem</label>
-                    <input type="text" name="view" id="view" class="form-control" value="<?= $one[0]['view'] ?>">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="hot">Hot</label>
-
-                    <select class="form-control" name="hot" id="hot">
-                        <option value="0">Bình Thường</option>
-                        <option value="1">Sản Phẩm Hot</option>
-                    </select>
-                </div>
-
-                <div class="form-group mb-3">
-                    <div class="group-checkout">
-                        <label for="hot">Hot</label>
-
-                        <select class="form-control" name="hot" id="hot">
-                            <option value="0">Bình Thường</option>
-                            <option value="1">Sản Phẩm Hot</option>
-                        </select>
-                    </div>
-                </div>
-
                 <div class="form-group mb-3">
                     <div class="group-checkout">
                         <label for="size">

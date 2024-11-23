@@ -152,22 +152,7 @@ input {
                     <span class="err text-danger" id="saleErr"></span>
                 </div>
 
-                <!-- <div class="form-group mb-3">
-                    <label for="view">Lượt Xem</label>
-                    <input type="text" name="view" id="view" class="form-control">
-                    <span class="err" id="viewErr"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <div class="group-checkout">
-                        <label for="hot">Hot</label>
-
-                        <select class="form-control" name="hot" id="hot">
-                            <option value="0">Bình Thường</option>
-                            <option value="1">Sản Phẩm Hot</option>
-                        </select>
-                        <span class="err" id="hotErr"></span>
-                    </div>
-                </div> -->
+                
                 <div class="form-group mb-3">
                     <label for="size">Size</label>
                     <input type="text" name="size" id="size" class="form-control">

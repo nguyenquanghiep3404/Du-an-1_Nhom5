@@ -6,6 +6,7 @@ require_once "./commons/function.php";
 // Kết nối với model
 require_once './models/Product.php';
 require_once './models/categoryModel.php';
+
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
 // Kết nối Controller
@@ -27,7 +28,6 @@ if (isset($_GET["id"])) {
     $product_id = $_GET["id"];
 }
 
-
 $action = isset($_GET["action"]) ? $_GET["action"] :'admin';
 $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
@@ -43,9 +43,9 @@ switch ($action) {
     case "product-create":
         $productAdmin->create();
         break;
-    // case "product-edit":
-    //     $productAdmin->edit($product_id);
-    //     break;
+    case "product-edit":
+        $productAdmin->edit($product_id);
+        break;
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;

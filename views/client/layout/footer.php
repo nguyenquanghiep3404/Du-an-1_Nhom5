@@ -1,17 +1,11 @@
-
-<footer class="footer_widgets">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-md-5 col-sm-5">
-                <div class="footer_widget_list">
-                    <div class="footer_logo">
-                        <a href="#"><img src="assets/img/logo/logo.png" ></a>
-                    </div>
-                    <div class="footer_contact">
-                        <div class="footer_contact_list">
-                            <span>Địa chỉ</span>
-                            <p>Tòa nhà FPT Polytechnic, đường Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.</p>
-
+    <!--footer area start-->
+    <footer class="footer_widgets newsletter_padding border-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <div class="footer_widget_list">
+                        <div class="footer_logo">
+                            <a href="#"><img src="public/client/assets/img/logo/logo.png" ></a>
                         </div>
                         <div class="footer_contact">
                             <div class="footer_contact_list">
@@ -69,24 +63,24 @@
 <!-- JS
 ============================================ -->
 
-<script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-<script src="assets/js/vendor/popper.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/slick.min.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/jquery.scrollup.min.js"></script>
-<script src="assets/js/images-loaded.min.js"></script>
-<script src="assets/js/isotope.pkgd.min.js"></script>
-<script src="assets/js/jquery.nice-select.js"></script>
-<script src="assets/js/tippy-bundle.umd.js"></script>
-<script src="assets/js/jquery-ui.min.js"></script>
-<script src="assets/js/jquery.instagramFeed.min.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/mailchimp-ajax.js"></script>
+<script src="public/client/assets/js/vendor/jquery-3.4.1.min.js"></script>
+<script src="public/client/assets/js/vendor/popper.js"></script>
+<script src="public/client/assets/js/vendor/bootstrap.min.js"></script>
+<script src="public/client/assets/js/slick.min.js"></script>
+<script src="public/client/assets/js/wow.min.js"></script>
+<script src="public/client/assets/js/jquery.scrollup.min.js"></script>
+<script src="public/client/assets/js/images-loaded.min.js"></script>
+<script src="public/client/assets/js/isotope.pkgd.min.js"></script>
+<script src="public/client/assets/js/jquery.nice-select.js"></script>
+<script src="public/client/assets/js/tippy-bundle.umd.js"></script>
+<script src="public/client/assets/js/jquery-ui.min.js"></script>
+<script src="public/client/assets/js/jquery.instagramFeed.min.js"></script>
+<script src="public/client/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="public/client/assets/js/mailchimp-ajax.js"></script>
 
 
 <!-- Main JS -->
-<script src="assets/js/main.js"></script>
+<script src="public/client/assets/js/main.js"></script>
 
 
 
