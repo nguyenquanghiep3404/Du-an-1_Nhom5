@@ -216,7 +216,7 @@
                                 <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
                             </div>
                             <div class="header_logo">
-                                <a class="sticky_none" href="index.html"><img src="public/client/assets/img/logo/logo.png" width="86px" ></a>
+                                <a class="sticky_none" href="###"><img src="public/client/assets/img/logo/logo.png" width="86px" ></a>
                             </div>
                             <!--main menu start-->
                             <div class="main_menu d-none d-lg-block">

@@ -32,7 +32,7 @@
                                             <th>Thông Tin</th>
                                             <th>Giá</th>
                                             <th>Số Lượng</th>
-                                            <th>Tổng Tiền</th>
+                                            <th>Tổng </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -155,7 +155,7 @@
                             <div class="grand_totall_area">
                                <div class="grand_totall_inner border-bottom">
                                    <div class="cart_subtotal d-flex justify-content-between">
-                                       <p>sub total </p>
+                                       <p>tổng cộng </p>
                                        <span>$126.00</span>
                                    </div>
                                    <div class="cart_grandtotal d-flex justify-content-between">
