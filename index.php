@@ -75,7 +75,7 @@ switch ($action) {
         $categoryAdmin->updatePost_dm();
         break;
     // Login
-    case "home";
+    case "client";
         $loginAdmin->home();
         break;
     case "login";

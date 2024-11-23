@@ -91,9 +91,6 @@
             <i class='bx bxs-bell'></i>
             <span class="num">8</span>
         </a>
-        <a href="#" class="profile">
-            <!-- <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>"> -->
-        </a>
     </nav>
     <!-- NAVBAR -->
     
