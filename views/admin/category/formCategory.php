@@ -99,14 +99,11 @@
             <i class='bx bxs-bell'></i>
             <span class="num">8</span>
         </a>
-        <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
-        </a>
     </nav>
     <!-- NAVBAR -->
 <body>
     <h1>New Category</h1>
-    <form action="?act=createPost-dm" method="POST">
+    <form action="?action=createPost-dm" method="POST">
 
         <label for="">ID:</label>
         <input type="text" id="id" disabled>
