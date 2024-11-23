@@ -8,6 +8,10 @@ class loginController{
     {
         $this->loginModel = new loginModel();
     }
+    public function home()
+    {
+        require_once './views/client/dashboardClient.php';
+    }
     public function login()
     {
         require_once './views/admin/login/login.php';
@@ -15,14 +19,27 @@ class loginController{
     public function loginPost()
     {
         if(isset($_POST['btn-login'])){
-            if($this->loginModel->check($_POST['name'],$_POST['password'] > 0)){
-                 header('location:?action=admin');
-                 $_SESSION['name'] = $_POST['name'];
+            $username = $_POST['name'];
+            $password = $_POST['password'];
+            $user = $this->loginModel->check($username,$password);
+
+            if($user){
+               $_SESSION['name'] = $user;
+               $_SESSION['id_role'] = $this->loginModel->Role($username)['id_role'];
+            //    var_dump($_SESSION['id_role']);
+               header('location:?action=home');
             }else{
-                echo '<label for="">Sai Tài khoản hoặc mk</label>';
+               echo "Sai tên đăng nhập hoặc mất khẩu";
             }
+
         }
     }
-    
+
+    public function logout()
+    {
+        unset($_SESSION['name']);
+        header('location:?action=home');
+    } 
 }
+
 ?>

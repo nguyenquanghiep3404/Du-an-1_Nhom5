@@ -1,21 +1,23 @@
 <?php 
+session_start();
 // Kết nối PDO
 require_once "./commons/env.php";
 require_once "./commons/function.php";
 // Kết nối với model
-require_once './models/categoryModel.php';
-require_once './models/loginModel.php';
 require_once './models/Product.php';
-require_once './models/ProductQuery.php';
+require_once './models/categoryModel.php';
+require_once './models/registerModels.php';
+require_once './models/loginModel.php';
 // Kết nối Controller
 require_once './controllers/admin/ProductAdminController.php';
-
-require_once './controllers/admin/categoryControllers.php   ';
+require_once './controllers/admin/categoryControllers.php';
+require_once './controllers/admin/registerControllers.php';
 require_once './controllers/admin/loginController.php';
-
-require_once './models/ProductQuery.php';
-require_once './models/Product.php';
-
+$action = isset($_GET["action"]) ? $_GET["action"] :'admin';
+$productAdmin = new ProductAdminController();
+$categoryAdmin = new categoryControllers();
+$loginAdmin = new loginController();
+$registerAdmin = new registerController();
 // Lấy giá trị "id" từ đường dẫn url
 $product_id = "";
 if (isset($_GET["id"])) {
@@ -26,6 +28,7 @@ $action = isset($_GET["action"]) ? $_GET["action"] :'admin';
 $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
 $loginAdmin = new loginController();
+$registerAdmin = new registerController();
 switch ($action) {
     case "admin":
         include './views/admin/dashboard.php';
@@ -39,14 +42,6 @@ switch ($action) {
     case "product-edit":
         $productAdmin->edit($product_id);
         break;
-
-      case "login":
-        include './views/auth/login.php'  ;
-        break;
-        case "register":
-         include './views/auth/register.php';
-         break;
-
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
@@ -59,11 +54,6 @@ switch ($action) {
     case "client":
         include './views/client/dashboardClient.php';
         break;
-
-    
-
-
-
     // Danh muc
     case "home-dm";
         $categoryAdmin->all_dm();
@@ -87,6 +77,9 @@ switch ($action) {
         $categoryAdmin->updatePost_dm();
         break;
     // Login
+    case "home";
+        $loginAdmin->home();
+        break;
     case "login";
         $loginAdmin->login();
         break;
@@ -116,5 +109,4 @@ switch ($action) {
 //     'updatePost-dm'=>(new categoryControllers)->updatePost_dm(),
 
 // }
-
 ?>

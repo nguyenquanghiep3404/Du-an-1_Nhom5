@@ -1,42 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title> <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h3>Login</h3>
-                    </div>
-                    <div class="card-body">
-                        <form action="your_login_action" method="POST">
-                            <div class="form-group"> 
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="name" required> 
-                            </div>
-                            <div class="form-group"> 
-                                <label for="password">Password</label> 
-                                <input type="password" class="form-control" id="password" name="password" required> 
-                            </div> 
-                            <button type="submit" name="btn-login" class="btn btn-primary btn-block">Login</button>
-                        </form>
-                    </div>
-                    <div class="card-footer text-center"> <a href="#">Forgot Password?</a> | <a href="#">Register</a> </div>
+        <div class="bg-white p-4 rounded shadow-sm w-100 " style="max-width: 400px;">
+   <form action="?action=loginPost" method="POST">
+        <h2 class="text-center mb-4">Đăng Nhập</h2>
+    
+            <div class="mb-3">
+                <label for="email" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên của bạn">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mật Khẩu</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu của bạn">
+                    <span class="input-group-text" id="togglePassword"><i class="fas fa-eye"></i></span>
                 </div>
             </div>
-        </div>
-    </div> <!-- Bootstrap JS and dependencies -->
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-</body>
+            <button type="submit" name="btn-login" class="btn btn-danger w-100">Đăng Nhập</button>
 
-</html>
+        <div class="text-center mt-3">
+            <p>Bạn chưa có tài khoản? <a href="#" class="text-danger">Đăng Ký Ngay</a></p>
+            <a href="#" class="text-danger">Quên Mật Khẩu</a>
+        </div>
+</form>

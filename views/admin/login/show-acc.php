@@ -39,7 +39,7 @@
             </a>
         </li>
         <li>
-            <a href="?action=all_register">
+            <a href="index.php?action=all_register">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
@@ -65,7 +65,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="index.php?action=logout" class="logout">
+            <a href="?action=logout" class="logout">
                 <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Đăng Xuất</span>
             </a>
@@ -96,74 +96,35 @@
         </a>
     </nav>
     <!-- NAVBAR -->
-
-    <!-- MAIN -->
-    <main>
-        <div class="head-title">
-            <div class="left">
-                <h1>Quản Trị Viên</h1>
-            </div>
-            <a href="#" class="btn-download">
-                <i class='bx bxs-cloud-download'></i>
-                <span class="text">Download PDF</span>
-            </a>
-        </div>
-
-        <ul class="box-info">
-            <li>
-                <i class='bx bxs-calendar-check'></i>
-                <span class="text c-bill">
-                    <h3>0</h3>
-                    <p>Đơn Hàng</p>
-                </span>
-            </li>
-            <li>
-                <i class='bx bxs-group'></i>
-                <span class="text c-user">
-                    <h3>0</h3>
-                    <p>Tài Khoản</p>
-                </span>
-            </li>
-            <li>
-                <i class='bx bxs-category'></i>
-                <span class="text c-product">
-                    <h3>0</h3>
-                    <p>Sản Phẩm</p>
-                </span>
-            </li>
-        </ul>
-
-
-        <div class="table-data">
-            <div class="order">
-                <div class="head">
-                    <h3>Đơn Hàng Chưa Được Xác Nhận</h3>
-                    <i class='bx bx-search'></i>
-                    <i class='bx bx-filter'></i>
-                </div>
-                <p class="err">
-                    
-                </p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Khách Hàng</th>
-                            <th>Ngày Đặt Hàng</th>
-                            <th>Trạng Thái</th>
-                            <th>Thao Tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
-    <!-- MAIN -->
-</section>
-<!-- CONTENT -->
-
-
+    
+<h2 class="mb-4">Quản lý Users</h2>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Password</td>
+            <td>Phone</td>
+            <td>Address</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($register as $registers) {?>
+        <tr>
+            <td><?= $registers['id'] ?></td>
+            <td><?= $registers['name'] ?></td>
+            <td><?= $registers['email'] ?></td>
+            <td><?= $registers['password'] ?></td>
+            <td><?= $registers['phone'] ?></td>
+            <td><?= $registers['address'] ?></td>
+            <td>
+               <a href="?action=delete&id=<?= $registers['id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><button class="button btn btn-danger">Xoá</button></a>
+            </td>
+        </tr>
+        <?php }?>
+    </tbody>
+</table>
 
 <?php include ('./views/admin/layout/footer.php'); ?>

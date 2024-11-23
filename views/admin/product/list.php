@@ -1,7 +1,7 @@
 <?php include ('./views/admin/layout/header.php'); ?>
 
 <!-- SIDEBAR -->
-<section id="sidebar">
+<!-- <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
@@ -69,7 +69,7 @@
             </a>
         </li>
     </ul>
-</section>>
+</section>> -->
 <!-- NAVBAR -->
 <section id="content">
     <nav>
@@ -93,8 +93,8 @@
     </nav>
     <main>
     <h3 class="text-center">Quản Lý Sản Phẩm</h3>
-<a href="index.php?action=product-create">Thêm sản phẩm mới</a>
-<table class="table table-show-category">
+    <a href="index.php?action=product-create">Thêm sản phẩm mới</a>
+    <table class="table table-show-category">
         <thead>
             <tr>
                 <th>ID</th>
@@ -107,7 +107,9 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($danhSachProduct as $product) { ?>
+            <?php 
+            $i = 1;
+            foreach ($danhSachProduct as $product) { ?>
                 <tr>
                     <td> <?= $product->product_id ?> </td>
                     <td> <?= $product->name ?></td>
@@ -117,14 +119,62 @@
                         </div>
                     </td>
                     <td> <?= $product->price ?> </td>
-                    
+                    <td><?= htmlspecialchars($product->created_at) ?></td>
+                    <td>
+                        
+                    </td>
                     <td>
                         <a href="?action=product-edit&id=<?= $product->product_id ?>">Sửa</a>
                         <a href="?action=product-delete&id=<?= $product->product_id ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
                     </td>
                 </tr>
-            <?php } ?>
+            <?php
+        $i++;
+        } ?>
         </tbody>
     </table >
+
+    <!-- <main>
+        <h3 class="text-center">Quản Lý Sản Phẩm</h3>
+        <a href="index.php?action=product-create">Thêm sản phẩm mới</a>
+        <table class="table table-show-category">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Hình Ảnh</th>
+                    <th>Giá</th>
+                    <th>Ngày Nhập</th>
+
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <?php
+            $i = 1;
+            foreach ($product as $key => $product) {
+            ?>
+                <tbody>
+                    <tr>
+                        <td>
+                            <?php echo $i ?>
+                        </td>
+                        <td>
+                            <?php echo $product['name'] ?>
+                        </td>
+                        <td><img src="..\uploads\product<?php echo $product['image'] ?>" alt="" width="50px"></td>
+                        <td>
+                            <?php echo number_format($product['price'], 0, ',', '.') . 'đ' ?>
+                        </td>
+
+                        <td>
+                            <?php echo $product['created_at'] ?>
+                        </td>
+                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i class="bx bx-edit"></i></a><a href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i class="bx bx-trash"></i></a></td>
+                    </tr>
+                </tbody>
+            <?php
+                $i++;
+            }
+            ?> -->
 
 <?php include ('./views/admin/layout/footer.php'); ?>
