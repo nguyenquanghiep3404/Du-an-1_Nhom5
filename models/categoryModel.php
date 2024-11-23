@@ -1,6 +1,7 @@
 <?php
 class categoryModel{
     public $conn;
+    
     public function __construct()
     {
         $this->conn = connect_db();

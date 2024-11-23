@@ -15,7 +15,7 @@ input {
     </a>
     <ul class="side-menu top">
         <li>
-            <a href="index.php?action=admin">
+            <a href="index.php?action=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
@@ -96,69 +96,68 @@ input {
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            <!-- <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>"> -->
         </a>
     </nav>
 
     <main class="my-5">
         <div class="container">
             <h3 class="text-center">Thêm Sản Phẩm</h3>
-            <form action="index.php?action=add-product" method="post" style="width:500px; margin:0 auto;"
+            <form  method="post" style="width:500px; margin:0 auto;"
                 class="mt-3 mb-5" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <div class=" form-group mb-3">
                     <label for="id_category">Tên Danh Mục</label>
 
-                    <select class="form-control" name="id_category" id="id_category">
-                        <option value="0">Chọn Danh Mục</option>
-                        <?php
-                        if(isset($list_category)) {
-                            foreach($list_category as $dm) {
-                                echo '<option value="'.$dm['id'].'">'.$dm['name'].'</option>';
-                            }
-                        }
-                        ?>
+                   
+                        
+                        <select class="form-control" name="category_id" id="id_category">
+                            <?php foreach ($listCategories as $cate): ?> 
+                                <option value="">Chọn Danh Mục</option>
+                                <option value="<?= $cate['category_id'] ?>"><?= $cate['name'] ?></option>
+                            <?php endforeach; ?>   
+                        </select>
 
-                    </select>
+                  
                     <span class="err" id="categoryErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="name">Tên Sản Phẩm</label>
-                    <input type="text" name="name" id="name" class="form-control">
+                    <input type="text" name="product_name" id="name" class="form-control">
                     <span class="err" id="nameErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="img">Hình Ảnh</label>
-                    <input type="file" name="img" id="img" class="form-control d-block">
+                    <input type="file" name="product_image" id="img" class="form-control d-block">
 
                     <span class="err" id="imgErr"></span>
                 </div>
                 <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
-                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
+                    <input type="file" name="product_gallery[]" id="gallery" class="form-control d-block" multiple>
                     <span class="err" id="galleryErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>
-                    <input type="text" name="info" id="info" class="form-control">
+                    <input type="text" name="product_description" id="info" class="form-control">
                     <span class="err" id="infoErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="price">Giá</label>
-                    <input type="text" name="price" id="price" class="form-control">
+                    <input type="text" name="product_price" id="price" class="form-control">
                     <span class="err" id="priceErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="sale">Sale</label>
-                    <input type="text" name="sale" id="sale" class="form-control">
+                    <input type="text" name="product_sale_price" id="sale" class="form-control">
                     <span class="err" id="saleErr"></span>
                 </div>
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                     <label for="view">Lượt Xem</label>
                     <input type="text" name="view" id="view" class="form-control">
                     <span class="err" id="viewErr"></span>
@@ -173,7 +172,7 @@ input {
                         </select>
                         <span class="err" id="hotErr"></span>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group mb-3">
                     <label for="size">Size</label>
                     <input type="text" name="size" id="size" class="form-control">
@@ -209,12 +208,12 @@ function validateForm() {
     resetErrors();
 
     // Validate category
-    var category = document.getElementById('id_category');
-    if (category.value.trim() === '0') {
-        displayError('categoryErr', 'Vui lòng chọn danh mục');
-        category.focus();
-        return false;
-    }
+    // var category = document.getElementById('id_category');
+    // if (category.value.trim() === '0') {
+    //     displayError('categoryErr', 'Vui lòng chọn danh mục');
+    //     category.focus();
+    //     return false;
+    // }
 
     // Validate name
     var name = document.getElementById('name');
@@ -306,8 +305,7 @@ function displayError(elementId, message) {
     errorElement.innerText = message;
 }
 </script>
-
-<!-- ... Your existing HTML code ... -->
-
-<!-- ... Your existing HTML code ... -->
 <?php include ('./views/admin/layout/footer.php'); ?>
+<!-- ... Your existing HTML code ... -->
+
+<!-- ... Your existing HTML code ... -->

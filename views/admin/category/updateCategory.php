@@ -1,21 +1,26 @@
-<?php include ('./views/admin/layout/header.php'); ?>
 
+
+<?php include ('./views/admin/layout/header.php'); ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
-        <img src="#### lay tu upload" alt="">
+
+        <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
+
             <a href="index.php?action=admin">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
+
         <li>
 
             <!-- <a href="index.php?act=home-dm"> -->
             <a href="index.php?action=home-dm">
+
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
@@ -51,7 +56,9 @@
             </a>
         </li>
         <li>
-            <a href="#">
+
+            <a href="index.php?action=voucher">
+
                 <i class='bx bxs-slideshow'></i>
                 <span class="text">Slider Shows</span>
             </a>
@@ -78,7 +85,9 @@
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
+
         <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
+
         <form action="#">
             <div class="form-input">
                 <input type="search" placeholder="Tìm Kiếm...">
@@ -92,13 +101,14 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <!-- <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>"> -->
+            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
         </a>
     </nav>
     <!-- NAVBAR -->
 
     <h1>Update Category</h1>
     <form action="?action=updatePost-dm&id=<?= $cateEdit['category_id'] ?>" method="POST">
+
         <label for="">ID:</label>
         <input type="text" id="id" disabled>
         <label for="">Name:</label>
@@ -109,5 +119,4 @@
         <input type="text" disabled>
         <input type="submit" value="Update">
     </form>
-
     <?php include ('./views/admin/layout/footer.php'); ?>

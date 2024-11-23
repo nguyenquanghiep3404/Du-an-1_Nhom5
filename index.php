@@ -6,13 +6,9 @@ require_once "./commons/function.php";
 // Kết nối với model
 require_once './models/Product.php';
 require_once './models/categoryModel.php';
-require_once './models/loginModel.php';
-require_once './models/registerModels.php';
 // Kết nối Controller
 require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php   ';
-require_once './controllers/admin/loginController.php';
-require_once './controllers/admin/registerControllers.php';
 $action = isset($_GET["action"]) ? $_GET["action"] :'admin';
 $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
@@ -23,20 +19,19 @@ switch ($action) {
         include './views/admin/dashboard.php';
         break;
     case "product":
-        $productAdmin->index();
+        $productAdmin->showList();
         break;
     case "product-create":
         $productAdmin->create();
         break;
-    case "product-edit":
-        $productAdmin->edit();
-        break;
-    case "hide-product":
-        $productAdmin->hide();
-        break;
-    case "unhide-product":
-        $productAdmin->unhide();
-        break;
+    // case "product-edit":
+    //     $productAdmin->edit($product_id);
+    //     break;
+    // case "hide-product":
+    //     $productAdmin->hide();
+    //     break;
+    // case "unhide-product":
+    //     $productAdmin->unhide();
     // Danh muc
     case "home-dm";
         $categoryAdmin->all_dm();
@@ -86,26 +81,4 @@ switch ($action) {
         $registerAdmin->delete();
         break;
 }
-?>
-<?php
-// // Kết nối với cơ sơ dự liệu PDO
-// require_once "./commons/env.php";
-// require_once "./commons/function.php";
-// // Kết nối với các file Model
-// require_once "./models/categoryModel.php";
-// // Kết nối với các file Controller
-// require_once "./controllers/admin/categoryControllers.php";
-// $act = $_GET['act'] ?? '/';
-// match($act){
-//     // Quản lý danh mục
-//     'home-dm'=>(new categoryControllers)->all_dm(),
-//     // 'delete-dm'=>(new categoryControllers)->delete_dm(),
-//     'hide-dm' => (new categoryControllers)->hide_dm(), 
-//     'show-dm' => (new categoryControllers)->show_dm(),
-//     'create-dm'=>(new categoryControllers)->create_dm(),
-//     'createPost-dm'=>(new categoryControllers)->createPost_dm(),
-//     'update-dm'=>(new categoryControllers)->update_dm(),
-//     'updatePost-dm'=>(new categoryControllers)->updatePost_dm(),
-
-// }
 ?>
