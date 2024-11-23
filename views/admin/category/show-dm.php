@@ -41,7 +41,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=user">
+            <a href="index.php?action=all_register">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
@@ -67,7 +67,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="index.php?action=logout" class="logout">
+            <a href="?action=logout" class="logout">
                 <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Đăng Xuất</span>
             </a>
@@ -96,7 +96,6 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-
             <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
         </a>
     </nav>
@@ -104,7 +103,6 @@
     
 <a href="?action=create-dm"><input type="button" value="Nhập thêm" class="input mt-5 input-group bg-primary text-white"></a>
 <table class="table table-striped">
-
     <thead>
         <tr>
             <td>ID</td>
@@ -131,7 +129,6 @@
                <a href="?action=update-dm&id=<?= $cates['category_id'] ?>" ><input type="button" class="" value="Sửa"></a>
                <a href="?action=hide-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a>
                <a href="?action=show-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')"><input type="button" value="Bỏ xoá"></a>
-
             </td>
         </tr>
         <?php }?>
