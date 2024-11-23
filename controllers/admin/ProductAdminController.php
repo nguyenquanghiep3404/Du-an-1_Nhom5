@@ -99,7 +99,7 @@ class ProductAdminController {
     {
 
         if(isset($_GET['id'])) {
-            $id = $_GET['id'];
+            $product_id = $_GET['id'];
             $one = $this->productQuery->getone_product($product_id);
         }
         if((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
@@ -148,14 +148,14 @@ class ProductAdminController {
 
             if(empty($message)) {
                 $galleryData = ["images" => $gallery_images];
-                $product_gallery = json_encode($gallery_images);
-                if($image != "" && $product_gallery != "") {
+                $gallery = json_encode($gallery_images);
+                if($image != "" && $gallery != "") {
                     $this->productQuery->update_product($name, $image,	$price,$category_id,$sale_price, $description, $gallery, $product_id);
                 } else {
                     $this->productQuery->update_product_noneimg($name,	$price,$category_id,$sale_price, $description,$product_id);
                 }
             }
-            header('Location: index.php?action=list');
+            header('Location: index.php?action=product');
         
 
            
