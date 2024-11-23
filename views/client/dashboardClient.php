@@ -414,6 +414,7 @@
                               {"breakpoint":300, "settings": { "slidesToShow": 1 } }
                              ]
                         }'>
+                                <!-- sản phẩm -->
                             <article class="col single_product">
                                 <figure>
                                     <div class="product_thumb">
@@ -421,17 +422,20 @@
                                             <img class="primary_img" src="public/client/assets/img/product/product1.jpg"
                                                 alt="consectetur">
                                         </a>
-                                        <!-- Để nguyên -->
+                                        
                                         <div class="product_action">
                                             <ul>
                                                 <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
                                                         data-tippy="Thêm vào giỏ hàng" href="#" data-tippy-inertia="true"
                                                         data-tippy-delay="50" data-tippy-arrow="true"
                                                         data-tippy-placement="left">
-                                                        <span class="material-symbols-outlined">add_shopping_cart</span></a></li>
+                                                        <button type="submit"> <span class="material-symbols-outlined">add_shopping_cart</span></button>
+                                                        
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
+                                    
                                     <div class="product_content text-center">
                                         <div class="product_ratting">
                                             <ul class="d-flex justify-content-center">
@@ -450,12 +454,14 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+                                            <button class="btn btn-primary" href="#" >Mua ngay</button>
                                         </div>
                         
                                     </div>
+                                    
                                 </figure>
                             </article>
+                            <!-- ket thuc san pham -->
                             <article class="col single_product">
                                 <figure>
                                     <div class="product_thumb">

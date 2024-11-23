@@ -236,55 +236,6 @@ public function all()
         }
 
     } // END FUNCTION ALL()
-
-
-    // public function find($product_id)
-    // {
-    //     try{
-    //         $sql = "SELECT * FROM products WHERE product_id = $product_id";
-    //         $data = $this->conn->query($sql)->fetch();
-    //         // 3. Convert dữ liệu từ array sang object
-    //         if ($data !== false) {
-    //             $product = new Product();
-    //             $product->product_id = $data["product_id"];
-    //             $product->name = $data["name"];
-    //             $product->image = $data["image"];
-    //             $product->price = $data["price"];
-    //             // $product->publisher = $data["publisher"];
-    //             // $product->publish_date = $data["publish_date"];
-
-    //             // 4. Return kết quả
-    //             return $product;
-    //         } else {
-    //             echo "Lỗi: ID không tồn tại. Mời bạn kiểm tra lại.";
-    //         }
-    //     } catch (Exception $error) {
-    //         echo "<h1>";
-    //         echo "Lỗi hàm find trong model: " . $error->getMessage();
-    //         echo "</h1>";
-    //     }
-    // }
-    // public function edit($product_id, Product $product)
-    // {
-    //     try{
-    //         $sql = "UPDATE `products` SET `name`='$product->name',`image`='$product->image',`price`='$product->price' WHERE product_id = $product_id";
-
-    //         // 2. Thực hiện truy vấn
-    //         $data = $this->conn->query($sql);
-
-    //         // 3. Return kết quả
-    //         // = 1 khi có chỉnh sửa dữ liệu
-    //         // = 0 khi không chỉnh sửa dữ liệu nào cả
-    //         if ($data === 1 || $data === 0) {
-    //             return "success";
-    //         }
-    //     }catch (Exception $error) {
-    //         echo "<h1>";
-    //         echo "Lỗi hàm update trong model: " . $error->getMessage();
-    //         echo "</h1>";
-    //     }
-    // }
-
     
     // function hideProduct($product_id) {
     //     $conn = connect_db(); 

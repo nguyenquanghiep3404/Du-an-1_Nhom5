@@ -85,13 +85,7 @@ switch ($action) {
         $loginAdmin->loginPost();
         break;
 
-    // client
-    case "client";
-        include './views/client/dashboardClient.php';
-        break;
-    case "cart";
-        include './views/client/cart.php';
-        break;
+    
 
 
     case "logout";
@@ -111,5 +105,15 @@ switch ($action) {
         $registerAdmin->delete();
         break;
 
+    // client
+    case "client";
+        include './views/client/dashboardClient.php';
+        break;
+    case "cart";
+        include './views/client/cart.php';
+        break;
+    case "product-details":
+        include './views/client/product-details.php';
+        break;
 }
 ?>
