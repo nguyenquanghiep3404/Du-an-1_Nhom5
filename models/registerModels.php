@@ -14,7 +14,7 @@ class registerModel{
     }
     public function delete($id)
     {
-         $sql = "DELETE FROM users WHERE `users`.`id`={$id} ";
+         $sql = "DELETE FROM users WHERE `users`.`user_id`={$id} ";
          $this->conn->exec($sql);
     }
     public function inset($name,$email,$password,$phone,$address)

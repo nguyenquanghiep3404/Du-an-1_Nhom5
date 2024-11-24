@@ -110,14 +110,14 @@
     <tbody>
         <?php foreach($register as $registers) {?>
         <tr>
-            <td><?= $registers['id'] ?></td>
+            <td><?= $registers['user_id'] ?></td>
             <td><?= $registers['name'] ?></td>
             <td><?= $registers['email'] ?></td>
             <td><?= $registers['password'] ?></td>
             <td><?= $registers['phone'] ?></td>
             <td><?= $registers['address'] ?></td>
             <td>
-               <a href="?action=delete&id=<?= $registers['id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><button class="button btn btn-danger">Xoá</button></a>
+               <a href="?action=delete&id=<?= $registers['user_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><button class="button btn btn-danger">Xoá</button></a>
             </td>
         </tr>
         <?php }?>

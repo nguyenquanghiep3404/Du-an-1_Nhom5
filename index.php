@@ -6,22 +6,19 @@ require_once "./commons/function.php";
 // Kết nối với model
 require_once './models/Product.php';
 require_once './models/categoryModel.php';
-
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
+require_once './models/checkout.php';
+require_once './models/profileModel.php';
 // Kết nối Controller
+// Controller bên admin
 require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php';
 require_once './controllers/admin/registerControllers.php';
 require_once './controllers/admin/loginController.php';
-$action = isset($_GET["action"]) ? $_GET["action"] :'admin';
-$productAdmin = new ProductAdminController();
-$categoryAdmin = new categoryControllers();
-$loginAdmin = new loginController();
-$registerAdmin = new registerController();
-
-
-
+// Controller bên client
+require_once './controllers/client/checkout.php';
+require_once './controllers/client/profileController.php';
 // Lấy giá trị "id" từ đường dẫn url
 $product_id = "";
 if (isset($_GET["id"])) {
@@ -33,6 +30,7 @@ $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
 $loginAdmin = new loginController();
 $registerAdmin = new registerController();
+$profileAdmin = new profileController();
 switch ($action) {
     case "admin":
         include './views/admin/dashboard.php';
@@ -110,6 +108,13 @@ switch ($action) {
     case "delete";
         $registerAdmin->delete();
         break;
-
+    // Checkout
+    case 'checkout';
+        $registerAdmin->checkout();
+        break;
+    // Thông tin cá nhân
+    case 'profile';
+        $profileAdmin->profile();
+        break;
 }
 ?>

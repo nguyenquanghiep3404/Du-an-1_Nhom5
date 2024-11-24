@@ -258,7 +258,7 @@
 
                                             <?php if (isset($_SESSION['name'])) {
                                             ?>
-                                                <li><a href="#">Thông tin cá nhân</a></li>
+                                                <li><a href="?action=profile">Thông tin cá nhân</a></li>
                                                 <li><a href="#">My Account</a></li>
                                                     <?php
                                                     if ($_SESSION['role_id'] == 1) {?>
@@ -274,11 +274,6 @@
                                                     <li><a href="?action=register">Register</a></li>
                                                 <?php } ?>
 
-                                                
-
-                                            <li><a href="#">My Account</a></li>
-                                            <li><a href="#">Login </a></li>
-                                            <li><a href="#">Contact</a></li>
 
                                         </ul>
                                     </li>
