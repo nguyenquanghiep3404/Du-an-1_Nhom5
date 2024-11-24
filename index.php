@@ -1,4 +1,5 @@
 <?php 
+ini_set('memory_limit', '1G');
 session_start();
 // Kết nối PDO
 require_once "./commons/env.php";
@@ -6,20 +7,17 @@ require_once "./commons/function.php";
 // Kết nối với model
 require_once './models/Product.php';
 require_once './models/categoryModel.php';
-
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
+require_once './models/ProductClientModels.php';
+// require_once './models/cartsModels.php';
 // Kết nối Controller
 require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php';
 require_once './controllers/admin/registerControllers.php';
 require_once './controllers/admin/loginController.php';
-$action = isset($_GET["action"]) ? $_GET["action"] :'admin';
-$productAdmin = new ProductAdminController();
-$categoryAdmin = new categoryControllers();
-$loginAdmin = new loginController();
-$registerAdmin = new registerController();
-
+// require_once './controllers/client/CartsControllers.php';
+require_once './controllers/client/ProductClientControllers.php';
 
 
 // Lấy giá trị "id" từ đường dẫn url
@@ -33,6 +31,7 @@ $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
 $loginAdmin = new loginController();
 $registerAdmin = new registerController();
+$productClient = new ProductClientControllers();
 switch ($action) {
     case "admin":
         include './views/admin/dashboard.php';
@@ -85,9 +84,6 @@ switch ($action) {
         $loginAdmin->loginPost();
         break;
 
-    
-
-
     case "logout";
         $loginAdmin->logout();
         break;
@@ -107,7 +103,7 @@ switch ($action) {
 
     // client
     case "client";
-        include './views/client/dashboardClient.php';
+        $productClient->home();
         break;
     case "cart";
         include './views/client/cart.php';

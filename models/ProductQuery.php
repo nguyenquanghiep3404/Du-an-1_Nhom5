@@ -101,100 +101,121 @@ class ProductQuery  {
                 WHERE p.hide = 0 AND p.id=?";
         return pdo_query_one($sql, $product_id);
     }
-    // Hiển thị danh sách sản phẩm dưới dạng HTML
-    function show_product($list_product)
-{
-    $html_product = '';
+    // Lấy top 4 sp moi nhat
 
-    foreach ($list_product as $pd) {
-        extract($pd);
-
-        if (isset($sale) && $sale > 0) {
-            $discountAmount = $sale * $price / 100;
-            $discountedPrice = $price - $discountAmount;
-
-            $boxPrice = '
-                <div class="product-price">
-                    <span class="product-origin">' . number_format($discountedPrice, 0, ',', '.') . ' đ</span>
-                    <span class="product-discount">' . number_format($price, 0, ',', '.') . ' đ</span>
-                </div>
-            ';
-
-            $boxSale = '
-                <div class="product-status">
-                    <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                        <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                            <img alt="" aria-hidden="true" src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg" style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                        </span>
-                        <img alt="" srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x" src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                    </span>
-                    <span class="percent-discount"> -' . $sale . '%</span>
-                </div>';
-        } else {
-            $boxPrice = '
-                <div class="product-price">
-                    <span class="product-origin">' . number_format($price, 0, ',', '.') . ' đ</span>
-                </div>
-            ';
-
-            $boxSale = '';
+    public function getTop4ProductLastes() {
+        try{
+            $sql = "SELECT * FROM products ORDER BY created_at LIMIT 4 ";
+            $data = $this->conn->query($sql)->fetchAll();
+            $ds = [];
+            // chuyển dữ liệu sang object product
+            foreach ($data as $row) {
+                $product = convertToObjectProduct($row);
+                $ds[] = $product;
+            }
+            return $ds;
+        }catch (Exception $error) {
+            echo "<h1>";
+            echo "Lỗi hàm insert trong model: " . $error->getMessage();
+            echo "</h1>";
         }
-
-        if ($hot == 1) {
-            $hot = '                    
-                <div class="selling">
-                    <span>Bán chạy</span>
-                </div>
-            ';
-        } else {
-            $hot = '
-                <div class="selling" style="opacity:0">
-                    <span>Bán chạy</span>
-                </div>
-            ';
-        }
-
-        $currentDateTime = date('Y-m-d H:i:s');
-
-        $createdDate = strtotime($created_at);
-
-        $currentDate = strtotime($currentDateTime);
-        $newProduct = strtotime('-15 days', $currentDate);
-
-        if ($createdDate >= $newProduct) {
-            $new = '
-                <div class="new-pd">
-                    <img class="new-icon" src="uploads/new-icon.png" />
-                </div>
-            ';
-        } else {
-            $new = '';
-        }
-
-        // liên kêts
-        $link = "index.php?page=details&id=" . $id;
-
-        $html_product .= '
-            <div class="product-item">
-                <a href="' . $link . '">
-                    <img class="product-image" src="uploads/' . $img . '" width="100%">
-                </a>
-                <div class="box-title flex">
-                        ' . $hot . '
-                        ' . $new . '
-                </div>
-                <div class="product-content">
-                    <a href="' . $link . '" class="name-product">' . $name . '</a>
-                    ' . $boxPrice . '
-                </div>
-
-                ' . $boxSale . '
-            </div>
-        ';
     }
+    
 
-    return $html_product;
-}
+    // Hiển thị danh sách sản phẩm dưới dạng HTML
+//     function show_product($list_product)
+// {
+//     $html_product = '';
+
+//     foreach ($list_product as $pd) {
+//         extract($pd);
+
+//         if (isset($sale) && $sale > 0) {
+//             $discountAmount = $sale * $price / 100;
+//             $discountedPrice = $price - $discountAmount;
+
+//             $boxPrice = '
+//                 <div class="product-price">
+//                     <span class="product-origin">' . number_format($discountedPrice, 0, ',', '.') . ' đ</span>
+//                     <span class="product-discount">' . number_format($price, 0, ',', '.') . ' đ</span>
+//                 </div>
+//             ';
+
+//             $boxSale = '
+//                 <div class="product-status">
+//                     <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
+//                         <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
+//                             <img alt="" aria-hidden="true" src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg" style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
+//                         </span>
+//                         <img alt="" srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x" src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+//                     </span>
+//                     <span class="percent-discount"> -' . $sale . '%</span>
+//                 </div>';
+//         } else {
+//             $boxPrice = '
+//                 <div class="product-price">
+//                     <span class="product-origin">' . number_format($price, 0, ',', '.') . ' đ</span>
+//                 </div>
+//             ';
+
+//             $boxSale = '';
+//         }
+
+//         if ($hot == 1) {
+//             $hot = '                    
+//                 <div class="selling">
+//                     <span>Bán chạy</span>
+//                 </div>
+//             ';
+//         } else {
+//             $hot = '
+//                 <div class="selling" style="opacity:0">
+//                     <span>Bán chạy</span>
+//                 </div>
+//             ';
+//         }
+
+//         $currentDateTime = date('Y-m-d H:i:s');
+
+//         $createdDate = strtotime($created_at);
+
+//         $currentDate = strtotime($currentDateTime);
+//         $newProduct = strtotime('-15 days', $currentDate);
+
+//         if ($createdDate >= $newProduct) {
+//             $new = '
+//                 <div class="new-pd">
+//                     <img class="new-icon" src="uploads/new-icon.png" />
+//                 </div>
+//             ';
+//         } else {
+//             $new = '';
+//         }
+
+//         // liên kêts
+//         $link = "index.php?page=details&id=" . $id;
+
+//         $html_product .= '
+//             <div class="product-item">
+//                 <a href="' . $link . '">
+//                     <img class="product-image" src="uploads/' . $img . '" width="100%">
+//                 </a>
+//                 <div class="box-title flex">
+//                         ' . $hot . '
+//                         ' . $new . '
+//                 </div>
+//                 <div class="product-content">
+//                     <a href="' . $link . '" class="name-product">' . $name . '</a>
+//                     ' . $boxPrice . '
+//                 </div>
+
+//                 ' . $boxSale . '
+//             </div>
+//         ';
+//     }
+
+//     return $html_product;
+// }
 // show sản phẩm
 public function all()
     {

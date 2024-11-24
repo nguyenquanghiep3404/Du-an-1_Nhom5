@@ -167,7 +167,9 @@ class ProductAdminController {
         include "./views/admin/product/edit.php";
 
     } // end edit sản phẩm
-    
+    public function showsp(){
+        $spmoi = $this->productQuery->render_allproduct();
+    }
 
 //     public function hide() {
 //         $product_id = $_GET['id'];
