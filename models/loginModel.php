@@ -12,7 +12,7 @@
     }
     public function Role($username)
     {
-        $sql = "SELECT id_role FROM `users` WHERE name = '$username'";
+        $sql = "SELECT role_id FROM `users` WHERE name = '$username'";
         $stsm = $this->conn->query($sql);
         return $stsm->fetch();
     }

@@ -1,4 +1,6 @@
+
 <?php include './views/client/layout/headerHome.php' ?>
+
 
     <!-- bat dau moi -->
     <!-- product section start -->
@@ -8,10 +10,12 @@
                 <div class="section_title">
                     <h2>Sản phẩm mới</h2>
                 </div>
+
                 
                     <div class="all_product">
                         <a href="shop.html">Xem thêm</a>
                     </div>
+
             </div>
             <div class="product_container row">
                 <div class="tab-content">
@@ -30,6 +34,7 @@
                               {"breakpoint":300, "settings": { "slidesToShow": 1 } }
                              ]
                         }'>
+
                                 <!-- sản phẩm -->
                                 <!-- // echo "<pre>";
                                 // print_r($listProductLastes); -->              
@@ -78,6 +83,7 @@
                                     </article>
                                 <?php endforeach; ?> 
                                 <!-- kết thúc sản phẩm -->
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="clothings" role="tabpanel">
@@ -1445,10 +1451,12 @@
                 <div class="section_title">
                     <h2>Bán chạy nhất</h2>
                 </div>
+
                 
                     <div class="all_product">
                         <a href="shop.html">Xem thêm</a>
                     </div>
+
             </div>
             <div class="product_container row">
                 <div class="tab-content">
@@ -1503,9 +1511,11 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
                                         </div>
-                        
+
+
                                     </div>
                                 </figure>
                             </article>
@@ -1545,9 +1555,98 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+                                      <a class="btn btn-primary" href="#">Mua ngay</a>
                                         </div>
+
+
+                                </figure>
+                            </article>
+                            <article class="col single_product">
+                                <figure>
+                                    <div class="product_thumb">
+                                        <a href="product-details.html">
+                                            <img class="primary_img" src="public/client/assets/img/product/product1.jpg"
+                                                alt="consectetur">
+                                        </a>
+                                        <!-- Để nguyên -->
+                                        <div class="product_action">
+                                            <ul>
+                                                <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
+                                                        data-tippy="Thêm vào giỏ hàng" href="#" data-tippy-inertia="true"
+                                                        data-tippy-delay="50" data-tippy-arrow="true"
+                                                        data-tippy-placement="left">
+                                                        <span class="material-symbols-outlined">add_shopping_cart</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product_content text-center">
+                                        <div class="product_ratting">
+                                            <ul class="d-flex justify-content-center">
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><span>(4)</span></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="product_name"><a href="product-details.html">Basic Joggin Shorts</a>
+                                        </h4>
+                                        <div class="price_box">
+                                            <span class="current_price">$26.00</span>
+                                            <span class="old_price">$62.00</span>
+                                        </div>
+                                        <div class="add_to_cart">
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
+                                        </div>
+
+
+                                </figure>
+                            </article>
+                            <article class="col single_product">
+                                <figure>
+                                    <div class="product_thumb">
+                                        <a href="product-details.html">
+                                            <img class="primary_img" src="public/client/assets/img/product/product1.jpg"
+                                                alt="consectetur">
+                                        </a>
+                                        <!-- Để nguyên -->
+                                        <div class="product_action">
+                                            <ul>
+                                                <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
+                                                        data-tippy="Thêm vào giỏ hàng" href="#" data-tippy-inertia="true"
+                                                        data-tippy-delay="50" data-tippy-arrow="true"
+                                                        data-tippy-placement="left">
+                                                        <span class="material-symbols-outlined">add_shopping_cart</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product_content text-center">
+                                        <div class="product_ratting">
+                                            <ul class="d-flex justify-content-center">
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
+                                                <li><span>(4)</span></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="product_name"><a href="product-details.html">Basic Joggin Shorts</a>
+                                        </h4>
+                                        <div class="price_box">
+                                            <span class="current_price">$26.00</span>
+                                            <span class="old_price">$62.00</span>
+                                        </div>
+                                        <div class="add_to_cart">
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
+                                        </div>
+
+
                         
+
                                     </div>
                                 </figure>
                             </article>
@@ -1587,9 +1686,11 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
+
                                             <a class="btn btn-primary" href="#" >Mua ngay</a>
                                         </div>
                         
+
                                     </div>
                                 </figure>
                             </article>
@@ -1629,93 +1730,10 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
                                         </div>
-                        
-                                    </div>
-                                </figure>
-                            </article>
-                            <article class="col single_product">
-                                <figure>
-                                    <div class="product_thumb">
-                                        <a href="product-details.html">
-                                            <img class="primary_img" src="public/client/assets/img/product/product1.jpg"
-                                                alt="consectetur">
-                                        </a>
-                                        <!-- Để nguyên -->
-                                        <div class="product_action">
-                                            <ul>
-                                                <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                        data-tippy="Thêm vào giỏ hàng" href="#" data-tippy-inertia="true"
-                                                        data-tippy-delay="50" data-tippy-arrow="true"
-                                                        data-tippy-placement="left">
-                                                        <span class="material-symbols-outlined">add_shopping_cart</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_content text-center">
-                                        <div class="product_ratting">
-                                            <ul class="d-flex justify-content-center">
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><span>(4)</span></li>
-                                            </ul>
-                                        </div>
-                                        <h4 class="product_name"><a href="product-details.html">Basic Joggin Shorts</a>
-                                        </h4>
-                                        <div class="price_box">
-                                            <span class="current_price">$26.00</span>
-                                            <span class="old_price">$62.00</span>
-                                        </div>
-                                        <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
-                                        </div>
-                        
-                                    </div>
-                                </figure>
-                            </article>
-                            <article class="col single_product">
-                                <figure>
-                                    <div class="product_thumb">
-                                        <a href="product-details.html">
-                                            <img class="primary_img" src="public/client/assets/img/product/product1.jpg"
-                                                alt="consectetur">
-                                        </a>
-                                        <!-- Để nguyên -->
-                                        <div class="product_action">
-                                            <ul>
-                                                <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                        data-tippy="Thêm vào giỏ hàng" href="#" data-tippy-inertia="true"
-                                                        data-tippy-delay="50" data-tippy-arrow="true"
-                                                        data-tippy-placement="left">
-                                                        <span class="material-symbols-outlined">add_shopping_cart</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_content text-center">
-                                        <div class="product_ratting">
-                                            <ul class="d-flex justify-content-center">
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-android-star"></i></a></li>
-                                                <li><span>(4)</span></li>
-                                            </ul>
-                                        </div>
-                                        <h4 class="product_name"><a href="product-details.html">Basic Joggin Shorts</a>
-                                        </h4>
-                                        <div class="price_box">
-                                            <span class="current_price">$26.00</span>
-                                            <span class="old_price">$62.00</span>
-                                        </div>
-                                        <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
-                                        </div>
-                        
+
                                     </div>
                                 </figure>
                             </article>
@@ -3093,10 +3111,12 @@
                 <div class="section_title">
                     <h2>Sản phẩm chạy bộ</h2>
                 </div>
+
                 
                     <div class="all_product">
                         <a href="shop.html">Xem thêm</a>
                     </div>
+
             </div>
             <div class="product_container row">
                 <div class="tab-content">
@@ -3151,9 +3171,10 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
+
                                             <a class="btn btn-primary" href="#" >Mua ngay</a>
                                         </div>
-                        
+
                                     </div>
                                 </figure>
                             </article>
@@ -3193,9 +3214,10 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
                                         </div>
-                        
+
                                     </div>
                                 </figure>
                             </article>
@@ -3235,9 +3257,11 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
                                         </div>
-                        
+
+
                                     </div>
                                 </figure>
                             </article>
@@ -3277,9 +3301,11 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
                                         </div>
-                        
+
+
                                     </div>
                                 </figure>
                             </article>
@@ -3319,9 +3345,11 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
                                         </div>
-                        
+
+
                                     </div>
                                 </figure>
                             </article>
@@ -3361,9 +3389,10 @@
                                             <span class="old_price">$62.00</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" >Mua ngay</a>
+
+                                            <a class="btn btn-primary" href="#">Mua ngay</a>
                                         </div>
-                        
+
                                     </div>
                                 </figure>
                             </article>
@@ -4798,7 +4827,7 @@
     </section>
     <!-- blog section end -->
 
-    
+
 
     <!-- modal area start-->
     <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
@@ -4880,4 +4909,8 @@
     </div>
     <!-- modal area end-->
 
+
     <?php include './views/client/layout/footerHome.php' ?>
+
+
+

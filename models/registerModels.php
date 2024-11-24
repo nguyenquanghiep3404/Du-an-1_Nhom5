@@ -14,10 +14,10 @@ class registerModel{
     }
     public function delete($id)
     {
-         $sql = "DELETE FROM users WHERE `users`.`id`={$id} ";
+         $sql = "DELETE FROM users WHERE `users`.`user_id`={$id} ";
          $this->conn->exec($sql);
     }
-    public function inset($name,$email,$password,$address,$phone)
+    public function inset($name,$email,$password,$phone,$address)
     {
         $sql = "INSERT INTO `users` (`name`,`email`,`password`,`phone`,`address`) VALUE ('{$name}','{$email}','{$password}','{$phone}','{$address}') ";
         $this->conn->exec($sql);
