@@ -1,4 +1,5 @@
 <?php 
+ini_set('memory_limit', '1G');
 session_start();
 // Kết nối PDO
 require_once "./commons/env.php";
@@ -8,17 +9,29 @@ require_once './models/Product.php';
 require_once './models/categoryModel.php';
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
+
+require_once './models/ProductClientModels.php';
+// require_once './models/cartsModels.php';
+
 require_once './models/checkout.php';
 require_once './models/profileModel.php';
+
 // Kết nối Controller
 // Controller bên admin
 require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php';
 require_once './controllers/admin/registerControllers.php';
 require_once './controllers/admin/loginController.php';
+
+// require_once './controllers/client/CartsControllers.php';
+require_once './controllers/client/ProductClientControllers.php';
+
+
+
 // Controller bên client
 require_once './controllers/client/checkout.php';
 require_once './controllers/client/profileController.php';
+
 // Lấy giá trị "id" từ đường dẫn url
 $product_id = "";
 if (isset($_GET["id"])) {
@@ -30,7 +43,11 @@ $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
 $loginAdmin = new loginController();
 $registerAdmin = new registerController();
+
+$productClient = new ProductClientControllers();
+
 $profileAdmin = new profileController();
+
 switch ($action) {
     case "admin":
         include './views/admin/dashboard.php';
@@ -83,15 +100,6 @@ switch ($action) {
         $loginAdmin->loginPost();
         break;
 
-    // client
-    case "client";
-        include './views/client/dashboardClient.php';
-        break;
-    case "cart";
-        include './views/client/cart.php';
-        break;
-
-
     case "logout";
         $loginAdmin->logout();
         break;
@@ -108,6 +116,18 @@ switch ($action) {
     case "delete";
         $registerAdmin->delete();
         break;
+
+
+    // client
+    case "client";
+        $productClient->home();
+        break;
+    case "cart";
+        include './views/client/cart.php';
+        break;
+    case "product-details":
+        include './views/client/product-details.php';
+
     // Checkout
     case 'checkout';
         $registerAdmin->checkout();
@@ -115,6 +135,7 @@ switch ($action) {
     // Thông tin cá nhân
     case 'profile';
         $profileAdmin->profile();
+
         break;
 }
 ?>
