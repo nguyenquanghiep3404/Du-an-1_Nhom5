@@ -34,10 +34,12 @@
     <!-- Structured Data  -->
     <script type="application/ld+json">
         {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "name": "Replace_with_your_site_title",
-        "url": "Replace_with_your_site_URL"
+
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "name": "Replace_with_your_site_title",
+            "url": "Replace_with_your_site_URL"
+
         }
     </script>
 
@@ -53,7 +55,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="offcanvas_menu_wrapper" >
+
+                    <div class="offcanvas_menu_wrapper">
+
                         <div class="canvas_close">
                             <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                         </div>
@@ -75,7 +79,7 @@
                                 <li><a href="#"><i class="icon-social-pinterest icons"></i></a></li>
                             </ul>
                         </div>
-                        
+
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children active">
@@ -199,7 +203,7 @@
                                         <li><a href="#"><i class="icon-social-pinterest icons"></i></a></li>
                                     </ul>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -216,7 +220,11 @@
                                 <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
                             </div>
                             <div class="header_logo">
+
+                                
+
                                 <a class="sticky_none" href="###"><img src="public/client/assets/img/logo/logo.png" width="86px" ></a>
+
                             </div>
                             <!--main menu start-->
                             <div class="main_menu d-none d-lg-block">
@@ -247,15 +255,36 @@
                                     <li class="header_search"><a href="#"><i class="icon-magnifier icons"></i></a></li>
                                     <li class="account_link"><a href="#"><i class="icon-user icons"></i></a>
                                         <ul class="dropdown_account_link">
-                                            <li><a href="#">My Account</a></li>
-                                            <li><a href="#">Login </a></li>
-                                            <li><a href="#">Contact</a></li>
+
+                                            <?php if (isset($_SESSION['name'])) {
+                                            ?>
+                                                <li><a href="?action=profile">Thông tin cá nhân</a></li>
+                                                <li><a href="#">My Account</a></li>
+                                                    <?php
+                                                    if ($_SESSION['role_id'] == 1) {?>
+                                                       <li><a href="?action=admin">Admin</a></li>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                        <?php } else { ?>
+
+                                                    <li><a href="?action=login">Login</a></li>
+                                                    <li><a href="#">Contact</a></li>
+                                                    <li><a href="?action=register">Register</a></li>
+                                                <?php } ?>
+
+
                                         </ul>
                                     </li>
                                     <li><a href="#"><i class="icon-heart icons"></i></a> <span
                                             class="item_count">2</span></li>
                                     <li class="shopping_cart"><a href="#"><i class="icon-basket-loaded icons"></i></a>
-                                        <span class="item_count">2</span></li>
+
+                                        <span class="item_count">2</span>
+                                    </li>
+
+
                                 </ul>
                             </div>
                         </div>
@@ -308,7 +337,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-7">
                             <div class="slider_text">
-                                
+
                                 <h1 class="text-white fw-bold">PANTS COLLECTION</h1>
                                 <p class="text-white">Nhập mã “WINTER100" - Giảm thêm 100K cho đơn từ 950K </p>
                                 <a class="btn btn-primary" href="shop.html">KHÁM PHÁ NGAY</a>
@@ -322,7 +351,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-7">
                             <div class="slider_text">
-                                
+
                                 <h1 class="text-white fw-bold">KEEP WARM FOR WINTER</h1>
                                 <p class="text-white">Nhập mã “WINTER50" - Giảm thêm 50K cho đơn từ 550K </p>
                                 <a class="btn btn-primary" href="shop.html">KHÁM PHÁ NGAY</a>
