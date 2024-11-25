@@ -62,6 +62,13 @@ class ProductQuery  {
         $sql = "SELECT * FROM products WHERE product_id=?";
         return pdo_query($sql, $product_id);
     }
+        function find($product_id){
+            $sql = "SELECT * FROM products WHERE product_id= $product_id";
+            $data = $this->conn->query($sql)->fetch();
+            $product = convertToObjectProduct($data);
+            return $product;
+
+        }
     // Truy xuất tất cả sản phẩm từ bảng product biến thể
         function get_allvariant()
     {
