@@ -36,15 +36,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach ($_SESSION["myCart"] as $pro) : ?>
                                         <tr class="border-top">
                                             <td>
                                                 <div class="cart_product_thumb">
-                                                    <img src="assets/img/product/product4.jpg" alt="">
+                                                    <img src="<?= BASE_URL. $pro['image'] ?>" alt="">
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="cart_product_text">
-                                                    <h4>Example With Title Product</h4>
+                                                    <h4><?= $pro['name'] ?></h4>
                                                     <ul>
                                                         <li><i class="ion-ios-arrow-right"></i> Color : <span>White</span></li>
                                                         <li><i class="ion-ios-arrow-right"></i> Size : <span>XL</span></li>
@@ -53,7 +54,7 @@
                                             </td>
                                             <td>
                                                 <div class="cart_product_price">
-                                                    <span>$45.05</span>
+                                                    <span><?=$pro['price']?>đ</span>
                                                 </div>
                                             </td>
                                             <td class="product_quantity">
@@ -63,7 +64,7 @@
                                             </td>
                                             <td>
                                                 <div class="cart_product_price">
-                                                    <span>$45.05</span>
+                                                    <span><?=$pro['total'] ?></span>
                                                 </div>
                                             </td>
                                             <td>
@@ -73,44 +74,9 @@
                                             </td>
 
                                         </tr>
-                                        <tr class="border-top">
-                                            <td>
-                                                <div class="cart_product_thumb">
-                                                    <img src="assets/img/product/product6.jpg" alt="">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="cart_product_text">
-                                                    <h4>Example With Title Product</h4>
-                                                    <ul>
-                                                        <li><i class="ion-ios-arrow-right"></i> Color : <span>White</span></li>
-                                                        <li><i class="ion-ios-arrow-right"></i> Size : <span>XL</span></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="cart_product_price">
-                                                    <span>$45.05</span>
-                                                </div>
-                                            </td>
-                                            <td class="product_quantity">
-                                                <div class="cart_product_quantity">
-                                                    <input min="1" max="100" value="1" type="number">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="cart_product_price">
-                                                    <span>$45.05</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="cart_product_remove text-right">
-                                                    <a href="#"><i class="ion-android-close"></i></a>
-                                                </div>
-                                            </td>
-
-                                        </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
+
                                 </table>
                             </div>
                             <div class="cart_page_button border-top d-flex justify-content-between">

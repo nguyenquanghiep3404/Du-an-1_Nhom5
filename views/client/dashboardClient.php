@@ -74,10 +74,15 @@
                                                     <span class="current_price"><?= $product->price ?>đ</span>
                                                     <span class="old_price"><?= $product->sale_price ?>đ</span>
                                                 </div>
-                                                <div class="add_to_cart">
-                                                    <a class="btn btn-primary" href="#" >Mua ngay</a>
-                                                </div>
-                                
+
+                                                    <div class="add_to_cart">
+                                                        <form action="?action=cart" method="POST">
+                                                            <input type="hidden" name="product_id" value="<?php echo $product->product_id ?>">
+                                                            <input type="hidden" name="quantity" value="1">
+                                                            <button class="btn btn-primary" href="####" name="add_to_cart" >Mua ngay</button>
+                                                        </form>
+                                                    </div>
+
                                             </div>
                                         </figure>
                                     </article>

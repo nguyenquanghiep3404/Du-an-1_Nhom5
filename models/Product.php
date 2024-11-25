@@ -14,6 +14,7 @@ class Product
     public $updated_at;
 
     public $created_at;
+    public $quantity;
     
    
     public $category_id;

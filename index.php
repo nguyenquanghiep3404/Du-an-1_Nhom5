@@ -38,13 +38,14 @@ if (isset($_GET["id"])) {
     $product_id = $_GET["id"];
 }
 
+
 $action = isset($_GET["action"]) ? $_GET["action"] :'client';
 $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
 $loginAdmin = new loginController();
 $registerAdmin = new registerController();
 
-$productClient = new ProductClientControllers();
+$HomeClient = new HomeClientControllers();
 
 $profileAdmin = new profileController();
 
@@ -90,9 +91,6 @@ switch ($action) {
         $categoryAdmin->updatePost_dm();
         break;
     // Login
-    case "client";
-        $loginAdmin->home();
-        break;
     case "login";
         $loginAdmin->login();
         break;
@@ -120,10 +118,10 @@ switch ($action) {
 
     // client
     case "client";
-        $productClient->home();
+        $HomeClient->home();
         break;
     case "cart";
-        include './views/client/cart.php';
+        $HomeClient->cart();
         break;
     case "product-details":
         include './views/client/product-details.php';
