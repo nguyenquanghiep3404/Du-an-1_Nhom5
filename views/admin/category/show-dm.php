@@ -100,7 +100,7 @@
     <!-- NAVBAR -->
     
 <a href="?action=create-dm"><input type="button" value="Nhập thêm" class="input mt-5 input-group bg-primary text-white"></a>
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
             <td>ID</td>
