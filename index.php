@@ -1,6 +1,6 @@
 <?php 
-ini_set('memory_limit', '1G');
 session_start();
+ini_set('memory_limit', '1G');
 // Kết nối PDO
 require_once "./commons/env.php";
 require_once "./commons/function.php";
@@ -9,12 +9,10 @@ require_once './models/Product.php';
 require_once './models/categoryModel.php';
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
-
 require_once './models/ProductClientModels.php';
-// require_once './models/cartsModels.php';
-
-require_once './models/checkout.php';
+require_once './models/checkoutModel.php';
 require_once './models/profileModel.php';
+// require_once './models/cartsModels.php';
 
 // Kết nối Controller
 // Controller bên admin
@@ -22,9 +20,9 @@ require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php';
 require_once './controllers/admin/registerControllers.php';
 require_once './controllers/admin/loginController.php';
-
-// require_once './controllers/client/CartsControllers.php';
 require_once './controllers/client/ProductClientControllers.php';
+// require_once './controllers/client/CartsControllers.php';
+
 
 
 
@@ -44,7 +42,7 @@ $productAdmin = new ProductAdminController();
 $categoryAdmin = new categoryControllers();
 $loginAdmin = new loginController();
 $registerAdmin = new registerController();
-
+$checkoutAdmin = new checkoutController();
 $HomeClient = new HomeClientControllers();
 
 $profileAdmin = new profileController();
@@ -127,13 +125,18 @@ switch ($action) {
         include './views/client/product-details.php';
 
     // Checkout
-    case 'checkout';
-        $registerAdmin->checkout();
+    // case 'checkout';
+    //     $checkoutAdmin->checkout();
+    //     break;
+    case 'show_checkout';
+        $checkoutAdmin->showOrderDetails();
+        break;
+    case 'createOrederDetails';
+        $checkoutAdmin->CreateOrderDetails();
         break;
     // Thông tin cá nhân
     case 'profile';
         $profileAdmin->profile();
-
         break;
 }
 ?>
