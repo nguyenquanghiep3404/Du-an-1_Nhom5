@@ -258,11 +258,12 @@
 
                                             <?php if (isset($_SESSION['name'])) {
                                             ?>
-                                                <li><a href="?action=profile">Thông tin cá nhân</a></li>
+                                                <li><a href="?action=profile"><?= $_SESSION['name']['name'] ?></a></li>
                                                 <li><a href="#">My Account</a></li>
                                                     <?php
                                                     if ($_SESSION['role_id'] == 1) {?>
                                                        <li><a href="?action=admin">Admin</a></li>
+                                                       <li><a href="?action=logout">Logout</a></li>
                                                     <?php
                                                     }
                                                     ?>
