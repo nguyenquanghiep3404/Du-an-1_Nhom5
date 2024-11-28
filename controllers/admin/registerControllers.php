@@ -31,8 +31,6 @@ class registerController{
         $this->registerModel->inset($name,$email,$password,$phone,$address);
         header('location:?action=login');
     }
-    public function checkout(){
-        require_once './views/client/checkout.php';
-    }
+    
 } 
  ?>

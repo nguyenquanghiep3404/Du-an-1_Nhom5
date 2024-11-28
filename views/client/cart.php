@@ -167,7 +167,7 @@ $temporary = $_SESSION['temporary'] ?? 0;
                                    </div>
                                </div>
                                <div class="proceed_checkout_btn">
-                                   <a class="btn btn-primary" href="#">Tiến Hành Thanh Toán</a>
+                                   <a class="btn btn-primary" href="?action=show_checkout">Tiến Hành Thanh Toán</a>
                                </div>
                                <a href="#">Checkout with Mutilple Adresses</a>
                             </div>

@@ -20,7 +20,7 @@
     <!--Checkout page section-->
     <div class="checkout_section" id="accordion">
        <div class="container">
-            <div class="returning_coupon_area">
+            <!-- <div class="returning_coupon_area">
                 <div class="row">
                     <div class="col-lg-7 col-md-6">
                         <div class="user-actions">
@@ -74,45 +74,37 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="checkout_form">
                 <div class="row">
                     <div class="col-lg-7 col-md-6">
-                        <form action="#">
+                <form action="?action=createOrederDetails" method="POST">
                             <h3>Billing Details</h3>
                             <div class="checkout_form_input">
                                 <label>Full Name <span>*</span></label>
-                                <input type="text" name="name">
-                            </div>
-                            <div class="checkout_form_input">
-                                <label>Company Name</label>
-                                <input type="text" >
+                                <input type="text" name="name" value="<?= $showCheckout['name']  ?>">
                             </div>
                             <div class="checkout_form_input">
                                <label>Address  <span>*</span></label>
-                                <input type="text" name="address">
-                            </div>
-                            <div class="checkout_form_input">
-                                <label>Town / City <span>*</span></label>
-                                <input  type="text" name="city">
+                                <input type="text" name="address" value="<?= $showCheckout['address']  ?>">
                             </div>
                             <div class="checkout_form_input">
                                 <label> Email Address   <span>*</span></label>
-                                <input  type="text" name="email">
+                                <input  type="text" name="email" value="<?= $showCheckout['email']  ?>">
                             </div>
                             <div class="checkout_form_input">
                                 <label> Phone <span>*</span></label>
-                                <input  type="text" name="phone">
+                                <input  type="text" name="phone" value="<?= $showCheckout['phone']  ?>">
                             </div>
                             <div class="checkout_form_input">
                                 <label>Order Notes</label>
                                 <textarea name="note"></textarea>
                             </div>
-                        </form>
+                        <!-- </form> -->
                     </div>
                     <div class="col-lg-5 col-md-6">
                         <div class="order_table_right">
-                            <form action="#">
+                            <!-- <form action="#"> -->
                                 <h3>Your order</h3>
                                 <div class="order_table table-responsive">
                                     <table>
@@ -193,11 +185,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="place_order_btn">
-                                   <a class="btn btn-primary" href="#">place order</a>
+                                <div class="place_order_btn" >
+                                    <button class="btn btn-primary">place order</button>
+                                   <!-- <a class="btn btn-primary" href="#">place order</a> -->
                                </div>
-
-                            </form>
+                                <!-- <button type="submit" class="btn btn-primary">place order</button> -->
+                </form>
                         </div>
                     </div>
                 </div>
