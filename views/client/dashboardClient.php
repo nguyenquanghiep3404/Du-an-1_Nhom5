@@ -34,15 +34,17 @@
                               {"breakpoint":300, "settings": { "slidesToShow": 1 } }
                              ]
                         }'>
-
+                                <!-- <?php echo "<pre>";
+                                                                    print_r($listProductLastes);  
+                                                                    ?> -->
                                 <!-- sản phẩm -->
-                                <!-- // echo "<pre>";
-                                // print_r($listProductLastes); -->              
+                                
                                 <?php foreach ($listProductLastes as $product) : ?> 
+                                        
                                     <article class="col single_product">
                                         <figure>
                                             <div class="product_thumb">
-                                                <a href="product-details.html">
+                                                <a href="" >
                                                     <img class="primary_img" src="<?= BASE_URL. $product->image ?>"
                                                         alt="consectetur">
                                                 </a>
@@ -76,7 +78,7 @@
                                                 </div>
 
                                                     <div class="add_to_cart">
-                                                        <form action="?action=cart" method="POST">
+                                                        <form action="?action=addToCart" method="POST">
                                                             <input type="hidden" name="product_id" value="<?php echo $product->product_id ?>">
                                                             <input type="hidden" name="quantity" value="1">
                                                             <button class="btn btn-primary" href="####" name="add_to_cart" >Mua ngay</button>
@@ -4893,17 +4895,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="modal_social">
-                                        <h2>Share this product</h2>
-                                        <ul>
-                                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                            <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a>
-                                            </li>
-                                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

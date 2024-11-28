@@ -16,14 +16,14 @@
         $stsm = $this->conn->query($sql);
         return $stsm->fetch();
     }
-    // public function getTaiKhoanFromEmail($email){
-    //   $sql = "SELECT * FROM users WHERE email = :email";
-    //   $stmt = $this->conn->prepare($sql);
-    //   $stmt->execute([
-    //     ':email' =>$email
-    //   ]);
-    //   return $stmt->fetch();
-    // }
+    public function getTaiKhoanFromEmail($name){
+      $sql = "SELECT * FROM users WHERE name = :name";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->execute([
+        ':name' =>$name
+      ]);
+      return $stmt->fetch();
+    }
     
   }
 ?>
