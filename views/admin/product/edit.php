@@ -1,16 +1,5 @@
 <?php include ('./views/admin/layout/header.php'); ?>
-
-
-<?php
-$gallery_db = json_decode($one[0]['gallery'], true);
-$gallery = [];
-$html_gallery = '';
-foreach($gallery_db as $img_gallery) {
-    $gallery[] = $img_gallery;
-    $html_gallery .= '<img src="./uploads/product_gallery/'.$img_gallery.'" width="50px" alt="">';
-}
- ?>
-
+<!-- 
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
@@ -79,7 +68,7 @@ foreach($gallery_db as $img_gallery) {
             </a>
         </li>
     </ul>
-</section>>
+</section> -->
 <section id="content">
     <nav>
         <i class='bx bx-menu'></i>
@@ -102,122 +91,73 @@ foreach($gallery_db as $img_gallery) {
     </nav>
     <main class="my-5">
         <div class="container">
-            <h3 class="text-center"> Chỉnh Sửa Sản Phẩm</h3>
+            <h3 class="text-center"> Chỉnh Sửa Sản Phẩm: <?= $product['name'] ?></h3>
 
-            <form action="index.php?action=product-edit&id=<?= $one[0]['product_id'] ?>" method="post"
-                style="width:500px; margin:0 auto;" class="mt-3 mb-5" enctype="multipart/form-data">
+            <form action="?action=product-form-edit" method="post" enctype="multipart/form-data" style="width:500px; margin:0 auto;" class="mt-3 mb-5">
+    <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+    <input type="hidden" name="current_image" value="<?= $product['image'] ?>">
 
+    <div class="form-group mb-3">
+        <label for="id_category">Tên Danh Mục</label>
+        <select class="form-control" name="category_id" id="category_id">
+            <?php foreach ($listCategories as $cate): ?> 
+                <option <?= $cate['category_id'] == $product['category_id'] ? 'selected' : '' ?> value="<?= $cate['category_id'] ?>">
+                    <?= $cate['name'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
-                <div class=" form-group mb-3">
-                    <label for="id_category">Tên Danh Mục</label>
-                        <select class="form-control" name="category_id" id="id_category">
-                            <?php foreach ($listCategories as $cate): ?> 
-                                <option value="">Chọn Danh Mục</option>
-                                <option value="<?= $cate['category_id'] ?>"><?= $cate['name'] ?></option>
-                            <?php endforeach; ?>   
-                        </select>
-                   
-                </div>
+    <div class="form-group mb-3">
+        <label for="name">Tên Sản Phẩm</label>
+        <input type="text" name="product_name" id="name" class="form-control" value="<?= $product['name'] ?>">
+    </div>
 
-                <div class="form-group mb-3">
-                    <label for="name">Tên Sản Phẩm</label>
-                    <input type="text" name="product_name" id="name" class="form-control" value="<?= $one[0]['name'] ?>">
-                </div>
+    <div class="form-group mb-3">
+        <label for="img">Hình Ảnh Hiện Tại</label>
+        <img src="<?= $product['image'] ?>" alt="" class="img-thumbnail d-block mb-2" width="150">
+        <input type="file" name="image" id="img" class="form-control">
+    </div>
 
-                <div class="form-group mb-3">
-                    <label for="img">Hình Ảnh</label>
-                    <input type="file" name="image" id="img" class="form-control d-block" value="<?= $one[0]['image'] ?>">
-                    <img src="./uploads/<?= $one[0]['image'] ?>" width="50px" alt="">
-                    <input type="hidden" name="image" id="img" class="form-control d-block" value="<?= $one[0]['image'] ?>">
-                </div>
+    <div class="form-group mb-3">
+        <label for="gallery">Album Ảnh</label>
+        <input type="file" name="product_gallery[]" id="gallery" class="form-control" multiple>
+    </div>
 
-                <div class="form-group mb-3">
-                    <label for="gallery">Bộ sưu tập</label>
-                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
-                        value="<?= $one[0]['gallery'] ?>">
-                    <?= $html_gallery ?>
-                    <input type="hidden" name="gallery[]" id="gallery" class="form-control d-block" multiple
-                        value="<?= $one[0]['gallery'] ?>">
-                </div>
+    <div class="form-group mb-3">
+        <label for="product_description">Mô tả sản phẩm</label>
+        <textarea id="product_description" name="product_description" class="form-control" rows="4"><?= $product['description'] ?></textarea>
+    </div>
 
-                <div class="form-group mb-3">
-                    <label for="info"> Mô Tả</label>
-                    <!-- <input type="text" name="info" id="info" class="form-control" value="<?= $one[0]['description'] ?>"> -->
-                    <textarea name="description" id="info" cols="30" rows="10"
-                        class="form-control"><?= $one[0]['description'] ?></textarea>
-                </div>
+    <div class="form-group mb-3">
+        <label for="product_price">Giá</label>
+        <input type="text" name="product_price" id="product_price" class="form-control" value="<?= $product['price'] ?>">
+    </div>
 
-                <div class=" form-group mb-3">
-                    <label for="price">Giá</label>
-                    <input type="text" name="price" id="price" class="form-control" value="<?= $one[0]['price'] ?>">
-                </div>
+    <div class="form-group mb-3">
+        <label for="product_sale_price">Sale</label>
+        <input type="text" name="product_sale_price" id="product_sale_price" class="form-control" value="<?= $product['sale_price'] ?>">
+    </div>
 
-                <div class="form-group mb-3">
-                    <label for="sale">Sale</label>
-                    <input type="text" name="sale_price" id="sale" class="form-control" value="<?= $one[0]['sale_price'] ?>">
-                </div>
-                <div class="form-group mb-3">
-                    <div class="group-checkout">
-                        <label for="size">
-                            Size
-                            <span>*</span>
-                        </label>
-                        <select class="form-select" name="size" id="size">
-                            <option selected disabled hidden>
-                                <?php
-                                if(isset($variant)) {
-                                    foreach($variant as $size) {
-                                        echo '<option value="'.$size['product_id'].'">'.$size['size'].'</option>';
+    <div class="form-group mb-3">
+        <label for="size">Size</label>
+        <input type="text" name="size" id="size" class="form-control" value="<?= $product['size'] ?>">
+    </div>
 
-                                    }
-                                }
-                                ?>
-                            </option>
-                        </select>
-                    </div>
+    <div class="form-group mb-3">
+        <label for="color">Màu</label>
+        <input type="text" name="color" id="color" class="form-control" value="<?= $product['color'] ?>">
+    </div>
 
-                    <div class="group-checkout">
-                        <label for="size">
-                            Màu
-                            <span>*</span>
-                        </label>
-                        <select class="form-select" name="color" id="color">
+    <div class="form-group mb-3">
+        <label for="quantity">Số Lượng</label>
+        <input type="number" name="quantity" id="quantity" class="form-control" value="<?= $product['quantity'] ?>">
+    </div>
 
-                            <?php
-                            if(isset($variant)) {
-                                foreach($variant as $color) {
-                                    echo '<option value="'.$color['product_id'].'">'.$color['color'].'</option>';
-
-                                }
-                            }
-                            ?>
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="group-checkout">
-                        <label for="size">
-                            Số Lượng
-                            <span>*</span>
-                        </label>
-                        <select class="form-select" name="color" id="color">
-
-                            <?php
-                            if(isset($variant)) {
-                                foreach($variant as $quantity) {
-                                    echo '<option value="'.$quantity['product_id'].'">'.$quantity['quantity'].'</option>';
-                                }
-                            }
-                            ?>
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group mb-3">
-                    <input type="submit" name="capnhat" value="Chỉnh Sửa Sản Phẩm" class="btn btn-dark px-5">
-                </div>
-            </form>
+    <div class="form-group mb-3">
+        <button type="submit" class="btn btn-dark px-5">Sửa thông tin</button>
+    </div>
+</form>
         </div>
     </main>
     

@@ -68,7 +68,7 @@
                     <div class="product_d_right">
                        <form action="#">
                             <h1><div class="product-name">
-                    <?= $name ?>
+                            <?= $product['name'] ?>
                 </div> </h1>
                             <div class="product_ratting_review d-flex align-items-center">
                                 <div class=" product_ratting">
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="price_box">
-                                <span class="current_price">$39.00</span>
+                                <span class="current_price"><?=  $product['price'] ?></span>
                             </div>
                             <div class="product_availalbe">
                                 <ul class="d-flex">

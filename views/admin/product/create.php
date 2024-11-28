@@ -6,6 +6,7 @@
 input {
     display: none;
 }
+
 </style>
 
 <?php include ('./views/admin/layout/header.php'); ?>
@@ -106,20 +107,21 @@ input {
             <form  method="post" style="width:500px; margin:0 auto;"
                 class="mt-3 mb-5" enctype="multipart/form-data" onsubmit="return validateForm()">
                 <div class=" form-group mb-3">
-                    <label for="id_category">Tên Danh Mục</label>
-                        <select class="form-control" name="category_id" id="id_category">
+                    <label for="category_id">Tên Danh Mục</label>
+                        <select class="form-control" name="category_id" id="category_id">
+                            <option value="0" selected disabled>Chọn Danh Mục</option>
                             <?php foreach ($listCategories as $cate): ?> 
-                                <option value="">Chọn Danh Mục</option>
                                 <option value="<?= $cate['category_id'] ?>"><?= $cate['name'] ?></option>
                             <?php endforeach; ?>   
                         </select>
-                    <span class="err" id="categoryErr"></span>
+                        <span class="err text-danger" id="categoryErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="name">Tên Sản Phẩm</label>
                     <input type="text" name="product_name" id="name" class="form-control">
                     <span class="err text-danger" id="nameErr"></span>
+                    
                 </div>
 
                 <div class="form-group mb-3">
@@ -135,8 +137,8 @@ input {
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="info"> Mô Tả</label>
-                    <input type="text" name="product_description" id="info" class="form-control">
+                    <label for="product_description"> Mô Tả</label>
+                    <input type="text" name="product_description" id="product_description" class="form-control">
                     <span class="err text-danger" id="infoErr"></span>
                 </div>
 
@@ -155,7 +157,7 @@ input {
                 
                 <div class="form-group mb-3">
                     <label for="size">Size</label>
-                    <input type="text" name="size" id="size" class="form-control">
+                    <input type="text" name="size" id="size" class="form-control" placeholder="S, M, L, XL, XXL">
                     <span class="err text-danger" id="sizeErr"></span>
                 </div>
 
@@ -184,7 +186,7 @@ function validateForm() {
     resetErrors();
 
     // Validate category
-    var category = document.getElementById('id_category');
+    var category = document.getElementById('category_id');
     if (category.value.trim() === '0') {
         displayError('categoryErr', 'Vui lòng chọn danh mục');
         category.focus();
@@ -211,56 +213,57 @@ function validateForm() {
         gallery.focus();
         return false;
     }
-
-
-    var info = document.getElementById('info');
-    if (info.files.length === 0) {
-        displayError('infoErr', 'Vui lòng chọn hình ảnh');
-        info.focus();
+    var product_description = document.getElementById('product_description');
+    if (product_description.value.trim() === '') {
+        displayError('infoErr', 'Vui lòng nhập mô tả');
+        product_description.focus();
         return false;
     }
-    // Validate image
-    var price = document.getElementById('price');
-    if (price.files.length === 0) {
-        displayError('priceErr', 'Vui lòng chọn hình ảnh');
+   // Validate price
+   var price = document.getElementById('price');
+    if (price.value.trim() === '' || isNaN(price.value.trim()) || parseFloat(price.value.trim()) <= 0) {
+        displayError('priceErr', 'Vui lòng nhập giá tiền hợp lệ');
         price.focus();
         return false;
     }
-    // Validate image
-    var sale = document.getElementById('sale');
-    if (sale.files.length === 0) {
-        displayError('saleErr', 'Vui lòng chọn hình ảnh');
-        sale.focus();
+    // Validate sale
+    // var sale = document.getElementById('sale');
+    // if (sale.value.trim() !== '' && (isNaN(sale.value.trim()) || parseFloat(sale.value.trim()) < 0)) {
+    //     displayError('saleErr', 'Vui lòng nhập giá khuyến mãi hợp lệ (hoặc để trống)');
+    //     sale.focus();
+    //     return false;
+    // }
+    var price = document.getElementById('sale');
+    if (sale.value.trim() === '' || isNaN(sale.value.trim()) || parseFloat(sale.value.trim()) <= 0) {
+        displayError('saleErr', 'Vui lòng nhập giá tiền hợp lệ');
+        price.focus();
         return false;
     }
-    // Validate image
-    var view = document.getElementById('view');
-    if (view.files.length === 0) {
-        displayError('viewErr', 'Vui lòng chọn hình ảnh');
-        view.focus();
-        return false;
-    }
-    // Validate image
+
+    // Validate size
     var size = document.getElementById('size');
-    if (size.files.length === 0) {
-        displayError('sizeErr', 'Vui lòng chọn hình ảnh');
+    if (size.value.trim() === '') {
+        displayError('sizeErr', 'Vui lòng nhập size (ví dụ: S, M, L)');
         size.focus();
         return false;
     }
-    // Validate image
+
+    // Validate color
     var color = document.getElementById('color');
-    if (color.files.length === 0) {
-        displayError('colorErr', 'Vui lòng chọn hình ảnh');
+    if (color.value.trim() === '') {
+        displayError('colorErr', 'Vui lòng nhập màu sắc');
         color.focus();
         return false;
     }
-    // Validate image
+
+    // Validate quantity
     var quantity = document.getElementById('quantity');
-    if (quantity.files.length === 0) {
-        displayError('quantityErr', 'Vui lòng chọn hình ảnh');
+    if (quantity.value.trim() === '' || isNaN(quantity.value.trim()) || parseInt(quantity.value.trim()) <= 0) {
+        displayError('quantityErr', 'Vui lòng nhập số lượng hợp lệ');
         quantity.focus();
         return false;
     }
+
     // Add more validations as needed
 
     // If all validations pass, return true to allow form submission

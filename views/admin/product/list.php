@@ -101,80 +101,46 @@
                 <th>Tên</th>
                 <th>Hình Ảnh</th>
                 <th>Giá</th>
+                <th>Danh mục</th>
                 <th>Ngày Nhập</th>
                 <th>Ngày chỉnh sửa</th>
+                <th>Trạng thái</th>
                 <th>Thao Tác</th>
             </tr>
         </thead>
         <tbody>
             <?php 
-            $i = 1;
-            foreach ($danhSachProduct as $product) { ?>
+            
+            foreach ($danhSachProduct as $key => $product) : ?>
                 <tr>
-                    <td> <?= $product->product_id ?> </td>
-                    <td> <?= $product->name ?></td>
+                    <!-- <?php var_dump($product) ?> -->
+                    <td> <?= $key +1 ?> </td>
+                    <td> <?= $product['name'] ?></td>
                     <td>
                         <div style="height: 60px; width: 60px">
-                            <img style="max-height:100%; max-width:100%;" src="<?= $product->image ?>">
+                            <img style="max-height:100%; max-width:100%;" src="<?= BASE_URL .   $product['image'] ?>">
                         </div>
                     </td>
-                    <td> <?= $product->price ?> </td>
-                    <td><?= htmlspecialchars($product->created_at) ?></td>
+                    <td> <?= $product['price'] ?> </td>
+                    <td><?= $product['category_name'] ?></td>
+                    <td><?=  $product['created_at'] ?></td>
                     <td>
-                        
+                    <?=  $product['updated_at'] ?>
                     </td>
-                    <td>
-                        <a href="?action=product-edit&id=<?= $product->product_id ?>">Sửa</a>
-                        <a href="?action=product-delete&id=<?= $product->product_id ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
-                    </td>
+                    <td><?=  $product['status'] ==1 ? 'Còn bán' : 'Dừng bán'  ?> </td>
+                        <!-- <a href="?action=product-edit&id=<?= $product->product_id ?>">Sửa</a>
+                        <a href="?action=product-delete&id=<?= $product->product_id ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a> -->
+
+                        <td>
+                            <a href="<?= BASE_URL. '?action=product-details&product_id='.$product['product_id'] ?>">
+                            <button class="btn btn-primary"><i class="far fa-eye"></i></button>
+                            </a>
+                            <a href="<?= '?action=product-form-edit&id='.$product['product_id'] ?>"><i class="bx bx-edit"></i></a>
+                            <a href="<?= '?action=product-delete&product_id='.$product['product_id'] ?>"><i class="bx bx-trash"></i></a>
+                        </td>
                 </tr>
-            <?php
-        $i++;
-        } ?>
+                <?php endforeach ?>
         </tbody>
     </table >
-
-    <!-- <main>
-        <h3 class="text-center">Quản Lý Sản Phẩm</h3>
-        <a href="index.php?action=product-create">Thêm sản phẩm mới</a>
-        <table class="table table-show-category">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tên</th>
-                    <th>Hình Ảnh</th>
-                    <th>Giá</th>
-                    <th>Ngày Nhập</th>
-
-                    <th>Thao Tác</th>
-                </tr>
-            </thead>
-            <?php
-            $i = 1;
-            foreach ($product as $key => $product) {
-            ?>
-                <tbody>
-                    <tr>
-                        <td>
-                            <?php echo $i ?>
-                        </td>
-                        <td>
-                            <?php echo $product['name'] ?>
-                        </td>
-                        <td><img src="..\uploads\product<?php echo $product['image'] ?>" alt="" width="50px"></td>
-                        <td>
-                            <?php echo number_format($product['price'], 0, ',', '.') . 'đ' ?>
-                        </td>
-
-                        <td>
-                            <?php echo $product['created_at'] ?>
-                        </td>
-                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i class="bx bx-edit"></i></a><a href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i class="bx bx-trash"></i></a></td>
-                    </tr>
-                </tbody>
-            <?php
-                $i++;
-            }
-            ?> -->
 
 <?php include ('./views/admin/layout/footer.php'); ?>

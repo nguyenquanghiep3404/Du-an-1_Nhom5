@@ -1,5 +1,5 @@
 <?php 
-ini_set('memory_limit', '1G');
+// ini_set('memory_limit', '1G');
 session_start();
 // Kết nối PDO
 require_once "./commons/env.php";
@@ -11,8 +11,8 @@ require_once './models/registerModels.php';
 require_once './models/loginModel.php';
 
 require_once './models/ProductClientModels.php';
-// require_once './models/cartsModels.php';
-
+require_once './models/cartModels.php';
+require_once './models/ProductQuery.php';
 require_once './models/checkout.php';
 require_once './models/profileModel.php';
 
@@ -59,9 +59,15 @@ switch ($action) {
     case "product-create":
         $productAdmin->create();
         break;
-    case "product-edit":
-        $productAdmin->edit($product_id);
-        break;
+        case "product-form-edit":
+            $productAdmin->Edit();
+            break;
+    // case "product-form-edit":
+    //     $productAdmin->formEditProduct($product_id);
+    //     break;
+    // case "product-edit":
+    //     $productAdmin->postEditSanPham($product_id);
+    //     break;
     
     // case "hide-product":
     //     $productAdmin->hide();
@@ -120,12 +126,26 @@ switch ($action) {
     case "client";
         $HomeClient->home();
         break;
-    case "cart";
-        $HomeClient->cart();
+    case "addToCart";
+        $HomeClient->addToCart();
         break;
+    case "update_cart_quantity":
+            $HomeClient->updateCartQuantity();
+            break;
+    
+    // Xóa sản phẩm khỏi giỏ hàng
+    case "remove_cart_item":
+            $HomeClient->removeCartItem();
+            break;
+    // case "cart";
+    //     $HomeClient->cart();
+    //     break;
+    // case "update-cart";
+    //     $HomeClient->cart();
+    //     break;
     case "product-details":
-        include './views/client/product-details.php';
-
+        $productAdmin->productDetails();
+        break;
     // Checkout
     case 'checkout';
         $registerAdmin->checkout();

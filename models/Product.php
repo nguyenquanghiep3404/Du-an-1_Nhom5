@@ -22,6 +22,8 @@ class Product
     public $description;
 
     public $gallery;
+    public $color;
+    public $size;
 
 }
 
