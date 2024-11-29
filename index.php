@@ -13,7 +13,7 @@ require_once './models/ProductClientModels.php';
 
 require_once './models/cartModels.php';
 require_once './models/ProductQuery.php';
-require_once './models/checkout.php';
+
 
 require_once './models/checkoutModel.php';
 
@@ -63,16 +63,11 @@ switch ($action) {
     case "product-create":
         $productAdmin->create();
         break;
-        case "product-form-edit":
-            $productAdmin->Edit();
-            break;
-    // case "product-form-edit":
-    //     $productAdmin->formEditProduct($product_id);
-    //     break;
-    // case "product-edit":
-    //     $productAdmin->postEditSanPham($product_id);
-    //     break;
-    
+    case "product-form-edit":
+        $productAdmin->Edit();
+        break;
+    // case "delete-product":
+    //     $productAdmin->DeleteProduct();
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;

@@ -188,16 +188,23 @@ class ProductQuery  {
         return pdo_query($sql);
     }
     // Cập nhật cả ảnh sản phẩm.(khi người dùng tải lên hình ảnh mới hoặc thay đổi thư viện ảnh.)
-    function update_product($name, $image,	$price,$category_id,$sale_price, $description, $product_id)
-    {
-        try {
-            $sql = "UPDATE products SET  name = ?, image = ?,	price =?,category_id = ?,sale_price =?, description = ?, gallery = ?, created_at=NOW(), updated_at=NOW() WHERE product_id=?";
-            pdo_execute($sql, $name, $image,$price,$category_id,$sale_price, $description, $product_id);
-            echo "Chỉnh sửa thành công";
-        } catch (PDOException $e) {
-            echo "Chỉnh Sửa thất bại! ".$e->getMessage();
-        }       
+    // function update_product($name, $image,	$price,$category_id,$sale_price, $description,$gallery, $product_id)
+    // {
+    //     try {
+    //         $sql = "UPDATE products SET  name = ?, image = ?,	price =?,category_id = ?,sale_price =?, description = ?, gallery = ?, created_at=NOW(), updated_at=NOW() WHERE product_id=?";
+    //         pdo_execute($sql, $name, $image,$price,$category_id,$sale_price, $description,$gallery, $product_id);
+    //         echo "Chỉnh sửa thành công";
+    //     } catch (PDOException $e) {
+    //         echo "Chỉnh Sửa thất bại! ".$e->getMessage();
+    //     }       
+    // }
+    function update_product($name, $image, $price, $category_id, $sale_price, $description, $gallery, $product_id) {
+        $sql = "UPDATE products 
+                SET name = ?, image = ?, price = ?, category_id = ?, sale_price = ?, description = ?, gallery = ?, updated_at = NOW() 
+                WHERE product_id = ?";
+        return pdo_execute($sql, $name, $image, $price, $category_id, $sale_price, $description, $gallery, $product_id);
     }
+    
     // Không cập nhật ảnh (Dùng để cập nhật sản phẩm không bao gồm hình ảnh (trong trường hợp hình ảnh không được tải lên mới).)
     function update_product_noneimg($name,	$price,$category_id,$sale_price, $description,$product_id){
         try {
@@ -287,66 +294,16 @@ class ProductQuery  {
     // {
     //     $this->conn = null;
     // }
-    // Hàm cập nhật sản phẩm
-    public function updateProduct($product_id, $name, $image, $price, $category_id, $sale_price, $description)
+    function deleteProduct($product_id)
     {
-        $sql = "UPDATE products SET name = ?, image = ?, price = ?, category_id = ?, sale_price = ?, description = ? WHERE product_id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$name, $image, $price, $category_id, $sale_price, $description, $product_id]);
-    }
-
-    // Hàm cập nhật biến thể sản phẩm
-    public function updateProductVariants($product_id, $size, $color, $quantity)
-    {
-        $sql = "UPDATE product_variant SET size = ?, color = ?, quantity = ? WHERE product_id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$size, $color, $quantity, $product_id]);
-    }
-
-    // Hàm thêm mới ảnh gallery
-    public function addGalleryImages($product_id, $images)
-    {
-        foreach ($images as $image) {
-            $sql = "INSERT INTO product_galleries (product_id, image) VALUES (?, ?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$product_id, $image]);
+        $sql = "DELETE FROM products WHERE  product_id=?";
+        if (is_array($product_id)) {
+            foreach ($product_id as $mang) {
+                pdo_execute($sql, $mang);
+            }
+        } else {
+            pdo_execute($sql, $product_id);
         }
     }
-
-    // Hàm xóa ảnh gallery cũ
-    public function deleteGalleryImages($product_id)
-    {
-        $sql = "DELETE FROM product_gallery WHERE product_id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$product_id]);
-    }
-    
-    public function getProductById($product_id)
-{
-    // Lấy thông tin sản phẩm
-    $sql = "SELECT * FROM products WHERE product_id = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute([$product_id]);
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$product) {
-        return null; // Không tìm thấy sản phẩm
-    }
-
-    // Giải mã gallery JSON
-    $product['gallery'] = $product['gallery'] ? json_decode($product['gallery'], true) : [];
-
-    // Lấy thông tin biến thể (nếu có bảng variants)
-    $sqlVariants = "SELECT size, color, quantity FROM product_variant WHERE product_id = ?";
-    $stmtVariants = $this->conn->prepare($sqlVariants);
-    $stmtVariants->execute([$product_id]);
-    $variants = $stmtVariants->fetchAll(PDO::FETCH_ASSOC);
-
-    // Gắn thông tin biến thể vào sản phẩm
-    $product['product_variant'] = $variants;
-
-    return $product;
-}
-
 }
 ?>
