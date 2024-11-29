@@ -13,8 +13,16 @@ class checkoutController{
     
 
     public function showOrderDetails()
-    {
+    {   
+        if(isset($_SESSION['name'])){
         $showCheckout = $this->checkModel->getUserName($_SESSION['name']['name']);
+        
+    }else{
+        $showCheckout['name'] = '';
+        $showCheckout['email'] = '';
+        $showCheckout['phone'] = '';
+        $showCheckout['address'] = '';
+    }
         // var_dump($_SESSION['name']['name']);
         require_once './views/client/checkout.php';
     }

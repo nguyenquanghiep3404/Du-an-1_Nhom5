@@ -13,8 +13,6 @@ require_once './models/ProductClientModels.php';
 
 require_once './models/cartModels.php';
 require_once './models/ProductQuery.php';
-require_once './models/checkout.php';
-
 require_once './models/checkoutModel.php';
 
 require_once './models/profileModel.php';
