@@ -165,7 +165,7 @@ class ProductAdminController {
                 $galleryData = ["images" => $gallery_images];
                 $gallery = json_encode($gallery_images);
 
-                if($image != "" && $gallery != "") {
+                if($image != "" && $gallery_images != "") {
                     $this->productQuery->update_product($name, $image,	$price,$category_id,$sale_price, $description,$gallery, $id);
                 } else {
                     $this->productQuery->update_product_noneimg($name,	$price,$category_id,$sale_price, $description,$id );
