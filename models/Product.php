@@ -4,7 +4,7 @@ class Product
     public $product_id;
     public $name;
 
-    public $content; 
+ 
     public $price;
 
     public $sale_price;
@@ -14,8 +14,16 @@ class Product
     public $updated_at;
 
     public $created_at;
+    public $quantity;
     
-    public $status;
+   
+    public $category_id;
+
+    public $description;
+
+    public $gallery;
+    public $color;
+    public $size;
 
 }
 

@@ -1,19 +1,26 @@
-<?php include './views/admin/layout/header.php' ?>
 
+
+<?php include ('./views/admin/layout/header.php'); ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
+
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
         <li>
+
             <a href="index.php?action=admin">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
-        <li class="active">
-            <a href="index.php?action=category">
+
+        <li>
+
+            <!-- <a href="index.php?act=home-dm"> -->
+            <a href="index.php?action=home-dm">
+
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
@@ -49,7 +56,9 @@
             </a>
         </li>
         <li>
+
             <a href="index.php?action=voucher">
+
                 <i class='bx bxs-slideshow'></i>
                 <span class="text">Slider Shows</span>
             </a>
@@ -63,7 +72,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="index.php?action=logout" class="logout">
+            <a href="?action=logout" class="logout">
                 <i class='bx bxs-log-out-circle'></i>
                 <span class="text">Đăng Xuất</span>
             </a>
@@ -76,7 +85,9 @@
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
-        <a href="#index.php?action=category" class="nav-link">Danh Mục Sản Phẩm</a>
+
+        <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
+
         <form action="#">
             <div class="form-input">
                 <input type="search" placeholder="Tìm Kiếm...">
@@ -89,14 +100,13 @@
             <i class='bx bxs-bell'></i>
             <span class="num">8</span>
         </a>
-        <a href="#" class="profile">
-            <img src="img/people.png">
-        </a>
+       
     </nav>
     <!-- NAVBAR -->
-<body>
+
     <h1>Update Category</h1>
-    <form action="?act=updatePost-dm&id=<?= $cateEdit['id'] ?>" method="POST">
+    <form action="?action=updatePost-dm&id=<?= $cateEdit['category_id'] ?>" method="POST">
+
         <label for="">ID:</label>
         <input type="text" id="id" disabled>
         <label for="">Name:</label>
@@ -107,5 +117,4 @@
         <input type="text" disabled>
         <input type="submit" value="Update">
     </form>
-</body>
-<?php include './views/admin/layout/footer.php' ?>
+    <?php include ('./views/admin/layout/footer.php'); ?>

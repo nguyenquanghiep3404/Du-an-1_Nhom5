@@ -68,24 +68,7 @@
                             <li><a href="#"><i class="icon-social-pinterest icons"></i></a></li>
                         </ul>
                     </div>
-                    <div class="language_currency">
-                        <ul class="d-flex">
-                            <li class="language"><a href="#"> Eng <i class="icon-right ion-ios-arrow-down"></i></a>
-                                <ul class="dropdown_language">
-                                    <li><a href="#">French</a></li>
-                                    <li><a href="#">Spanish</a></li>
-                                    <li><a href="#">Russian</a></li>
-                                </ul>
-                            </li>
-                            <li class="currency"><a href="#"> USd <i class="icon-right ion-ios-arrow-down"></i></a>
-                                <ul class="dropdown_currency">
-                                    <li><a href="#">€ Euro</a></li>
-                                    <li><a href="#">£ Pound Sterling</a></li>
-                                    <li><a href="#">$ US Dollar</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                    
                     <div id="menu" class="text-left ">
                         <ul class="offcanvas_main_menu">
                             <li class="menu-item-has-children active">
@@ -189,12 +172,12 @@
                     <div class="header_top_inner d-flex justify-content-between align-items-center">
                         <div class="header_contact_info">
                             <ul class="d-flex">
-                                <li class="text-white"> <i class="icons icon-phone"></i> <a href="tel:+05483716566">+054 8371 65 66</a></li>
-                                <li class="text-white"> <i class="icon-envelope-letter icons"></i> <a href="#">uthrstore@domain.com</a></li>
+                                <li class="text-white"> <i class="icons icon-phone"></i> <a href="tel:+05483716566">18001888</a></li>
+                                <li class="text-white"> <i class="icon-envelope-letter icons"></i> <a href="#">codex.mendoza@cm.com</a></li>
                             </ul>
                         </div>
                         <div class="free_shipping_text">
-                            <p class="text-white">Free shipping worldwide for orders over $99 <a href="#">Learn More</a></p>
+                            <p class="text-white">Miễn phí vận chuyển trên toàn quốc cho đơn hàng trên 1 triệu đồng <a href="#">Learn More</a></p>
                         </div>
                         <div class="header_top_sidebar d-flex align-items-center">
                             <div class="header_social d-flex">
@@ -205,24 +188,6 @@
                                     <li><a href="#"><i class="icon-social-instagram icons"></i></a></li>
                                     <li><a href="#"><i class="icon-social-youtube icons"></i></a></li>
                                     <li><a href="#"><i class="icon-social-pinterest icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="language_currency">
-                                <ul class="d-flex">
-                                    <li class="language"><a href="#"> Eng <i class="icon-right ion-ios-arrow-down"></i></a>
-                                        <ul class="dropdown_language">
-                                            <li><a href="#">French</a></li>
-                                            <li><a href="#">Spanish</a></li>
-                                            <li><a href="#">Russian</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="currency"><a href="#"> USd <i class="icon-right ion-ios-arrow-down"></i></a>
-                                        <ul class="dropdown_currency">
-                                            <li><a href="#">€ Euro</a></li>
-                                            <li><a href="#">£ Pound Sterling</a></li>
-                                            <li><a href="#">$ US Dollar</a></li>
-                                        </ul>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -247,23 +212,23 @@
                         <div class="main_menu d-none d-lg-block">
                             <nav>
                                 <ul class="d-flex">
-                                    <li><a href="index.html">demo</a> </li>
-                                    <li><a href="shop.html">shop</a></li>
-                                    <li><a class="active" href="product-details.html">product</a></li>
-                                    <li><a href="#">sale</a></li>
-                                    <li><a href="#">pages</a>
+                                    <li><a href="###">Trang chủ</a> </li>
+                                    <li><a href="###">Giới thiệu</a></li>
+                                    <li><a class="" href="###">Sản phẩm</a></li>
+                                    <li><a href="###">Cửa hàng</a></li>
+                                    <li><a href="###">Liên Hệ</a>
                                         <ul class="sub_menu">
                                             <li><a href="cart.html">Cart Pages</a></li>
                                             <li><a href="checkout.html">Checkout Pages</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="blog.html">blog</a>
+                                    <li><a href="blog.html">Tin Tức</a>
                                         <ul class="sub_menu">
                                             <li><a href="blog.html">Blog Pages</a></li>
                                             <li><a href="blog-details.html">Blog Details</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">buy</a></li>
+                                    <li><a href="#">Tuyển Dụng</a></li>
                                 </ul>
                             </nav>
                         </div>

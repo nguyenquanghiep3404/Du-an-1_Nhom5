@@ -1,17 +1,6 @@
 <?php include ('./views/admin/layout/header.php'); ?>
-
-
-<!-- <?php
-// $gallery_db = json_decode($one[0]['gallery'], true);
-// $gallery = [];
-// $html_gallery = '';
-// foreach($gallery_db as $img_gallery) {
-//     $gallery[] = $img_gallery;
-//     $html_gallery .= '<img src="../uploads/'.$img_gallery.'" width="50px" alt="">';
-// }
-?> -->
-
-<!-- <section id="sidebar">
+<!-- 
+<section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
@@ -79,7 +68,7 @@
             </a>
         </li>
     </ul>
-</section>> -->
+</section> -->
 <section id="content">
     <nav>
         <i class='bx bx-menu'></i>
@@ -97,121 +86,143 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            
         </a>
     </nav>
-
     <main class="my-5">
         <div class="container">
-            <h3 class="text-center"> Chỉnh Sửa Sản Phẩm</h3>
+            <h3 class="text-center"> Chỉnh Sửa Sản Phẩm: <?= $one[0]['name'] ?></h3>
 
-            <form action="index.php?action=product-edit&id=" method="post"
-                style="width:500px; margin:0 auto;" class="mt-3 mb-5" enctype="multipart/form-data">
+            <form action="?action=product-form-edit&id=<?= $one[0]['product_id'] ?>" method="post" enctype="multipart/form-data" style="width:1000px; margin:0 auto;" class="mt-3 mb-5">
 
+    <div class="form-group mb-3">
+        <label for="id_category">Tên Danh Mục</label>
+        <!-- <select class="form-control" name="category_id" id="category_id">
+            <?php foreach ($listCategories as $cate): ?> 
+                <option <?= $cate['category_id'] == $one['category_id'] ? 'selected' : '' ?> value="<?= $cate['category_id'] ?>">
+                    <?= $cate['name'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select> -->
+        <select class="form-control" name="category_id" id="category_id">
+            <?php
+                if(isset($listCategories)) {
+                    foreach($listCategories as $cate) {
+                        echo '<option value="'.$cate['category_id'].'">'.$cate['name'].'</option>';
+                }
+                }
+                ?>
+        </select>
+    </div>
 
-                <div class="form-group mb-3">
-                    <label for="id_category">Tên Danh Mục</label>
+    <div class="form-group mb-3">
+        <label for="name">Tên Sản Phẩm</label>
+        <input type="text" name="name" id="name" class="form-control" value="<?= $one[0]['name']?>">
+    </div>
 
-                    
-                    <div class="form-group mb-3">
-                        <label for="name">Tên Sản Phẩm</label>
-                        <input type="text" name="name" id="name" class="form-control" value="<?= $product->name ?>">
-                        <!-- <span class="err" id="nameErr"></span> -->
-                    </div>
-                <!-- Khu vực nhập ảnh -->
-                <div class="form-group mb-3">
-                    <label for="image">Hình Ảnh</label>
-                    <input type="file" name="file_anh_upload" id="image" class="form-control d-block">
+    <div class="form-group mb-3">
+        <label for="img">Hình Ảnh Hiện Tại</label>
+        <img src="<?= $one[0]['image'] ?>" alt="" class="img-thumbnail d-block mb-2" width="150" >
+        <input type="file" name="image" id="image" class="form-control">
+        
+    </div>
 
-                    <!-- <span class="err" id="imageErr"></span> -->
-                </div>
-                <div>
-                <!-- Hiển thị ảnh -->
-                <div>
-                    <span>Ảnh hiện tại:</span>
-                    <div style="height: 60px; width: 100px">
-                        <img style="max-height:100%; max-width:100%;" src="<?= $product->image ?>">
-                    </div>
-                </div>
+    <div class="form-group mb-3">
+        <label for="gallery">Gallery Hiện Tại</label>
+        <div class="d-flex flex-wrap gap-2">
+        <?php
+        $gallery_images = json_decode($one[0]['gallery'], true); // Giải mã JSON thành mảng
+        if (!empty($gallery_images)) {
+            foreach ($gallery_images as $gallery_image) {
+                echo '<img src="' . $gallery_image . '" alt="Ảnh gallery" class="img-thumbnail mb-2" width="100">';
+            }
+        } else {
+            echo '<p>Không có ảnh trong gallery.</p>';
+        }
+        ?>
+        </div>
+        <input type="file" name="product_gallery[]" id="gallery" class="form-control" multiple>
+    </div>
 
-                <span>Đường dẫn ảnh:</span>
-                <input type="text" name="image" value="<?= $product->image ?>">
-                </div>
-                <!-- <div class="form-group mb-3">
-                    <label for="gallery">Bộ sưu tập</label>
-                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
-                    <span class="err" id="galleryErr"></span>
-                </div> -->
+    <div class="form-group mb-3">
+        <label for="product_description">Mô tả sản phẩm</label>
+        <textarea id="product_description" name="product_description" class="form-control" rows="4"><?= $one[0]['description'] ?></textarea>
+    </div>
 
-                <div class="form-group mb-3">
-                    <label for="info"> Mô Tả</label>
-                    <input type="text" name="content" id="info" class="form-control" value="<?= $product->content ?>">
-                    <!-- <span class="err" id="infoErr"></span> -->
-                </div>
+    <div class="form-group mb-3">
+        <label for="product_price">Giá</label>
+        <input type="text" name="product_price" id="product_price" class="form-control" value="<?= $one[0]['price'] ?>">
+    </div>
 
-                <div class="form-group mb-3">
-                    <label for="price">Giá</label>
-                    <input type="text" name="price" id="price" class="form-control" value="<?= $product->price ?>">
-                    <!-- <span class="err" id="priceErr"></span> -->
-                </div>
+    <div class="form-group mb-3">
+        <label for="product_sale_price">Sale</label>
+        <input type="text" name="product_sale_price" id="product_sale_price" class="form-control" value="<?= $one[0]['sale_price'] ?>">
+    </div>
 
-                <!-- <div class="form-group mb-3">
-                    <label for="sale">Sale</label>
-                    <input type="text" name="sale" id="sale" class="form-control">
-                    <span class="err" id="saleErr"></span>
-                </div> -->
+    <div class="form-group mb-3">
+            <div class="group-checkout">
+                        <label for="size">
+                            Size
+                            <span>*</span>
+                        </label>
+                        <select class="form-select" name="size" id="size">
+                            <option selected disabled hidden>
+                                <?php
+                                if(isset($variant)) {
+                                    foreach($variant as $size) {
+                                        echo '<option value="'.$size['product_variant_id'].'">'.$size['size'].'</option>';
 
-                <!-- <div class="form-group mb-3">
-                    <label for="view">Lượt Xem</label>
-                    <input type="text" name="view" id="view" class="form-control">
-                    <span class="err" id="viewErr"></span>
-                </div> -->
-                <!-- <div class="form-group mb-3">
-                    <div class="group-checkout">
-                        <label for="hot">Hot</label>
-
-                        <select class="form-control" name="hot" id="hot">
-                            <option value="0">Bình Thường</option>
-                            <option value="1">Sản Phẩm Hot</option>
+                                    }
+                                }
+                                ?>
+                            </option>
                         </select>
-                        <span class="err" id="hotErr"></span>
-                    </div>
-                </div> -->
-                <!-- <div class="form-group mb-3">
-                    <label for="size">Size</label>
-                    <input type="text" name="size" id="size" class="form-control">
-                    <span class="err" id="sizeErr"></span>
-                </div> -->
+            </div>
 
-                <!-- <div class="form-group mb-3">
-                    <label for="color">Màu Sắc</label>
-                    <input type="text" name="color" id="color" class="form-control">
-                    <span class="err" id="colorErr"></span>
-                </div> -->
+            <div class="group-checkout">
+                        <label for="size">
+                            Màu
+                            <span>*</span>
+                        </label>
+                        <select class="form-select" name="color" id="color">
 
-                <!-- <div class="form-group mb-3">
-                    <label for="quantity">Số Lượng</label>
-                    <input type="text" name="quantity" id="quantity" class="form-control">
-                    <span class="err" id="quantityErr"></span>
-                </div> -->
-                <div class="form-group mb-3">
-                    <input type="submit" name="submitForm" value="Chỉnh Sửa Sản Phẩm" class="btn btn-dark px-5">
-                </div>
-                <!-- Khu vực thông báo lỗi -->
-                <div style="color: red;">
-                    <?= $thongBaoLoi ?>
-                </div>
-                <div style="color: red;">
-                    <?= $thongBaoLoiUploadFile ?>
-                </div>
+                            <?php
+                            if(isset($variant)) {
+                                foreach($variant as $color) {
+                                    echo '<option value="'.$color['product_id'].'">'.$color['color'].'</option>';
 
-                <!-- Khu vực thông báo thành công -->
-                <div style="color: green;">
-                    <?= $thongBaoThanhCong ?>
-                </div>
-            </form>
+                                }
+                            }
+                            ?>
+                            </option>
+                        </select>
+            </div>        
+
+            <div class="group-checkout">
+                    <label for="size">
+                        Số Lượng
+                        <span>*</span>
+                    </label>    
+                    <select class="form-select" name="quantity" id="quantity">
+                        <?php
+                            if(isset($variant)) {
+                                foreach($variant as $quantity) {
+                                    echo '<option value="'.$quantity['product_id'].'">'.$quantity['quantity'].'</option>';
+                                }
+                            }
+                        ?>
+                        </option>
+                    </select>
+            </div>        
+        </div>
+
+    <div class="form-group mb-3">
+        <button type="submit" name="capnhat" class="btn btn-dark px-5">Sửa thông tin</button>
+    </div>
+</form>
         </div>
     </main>
+    
 
 
 

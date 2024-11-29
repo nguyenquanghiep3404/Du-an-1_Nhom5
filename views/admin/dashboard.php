@@ -13,7 +13,9 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=category">
+
+            <!-- <a href="index.php?act=home-dm"> -->
+            <a href="index.php?action=home-dm">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
@@ -37,7 +39,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=user">
+            <a href="?action=all_register">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
@@ -90,7 +92,7 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            <!-- <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>"> -->
         </a>
     </nav>
     <!-- NAVBAR -->

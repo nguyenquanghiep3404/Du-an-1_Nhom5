@@ -2,206 +2,212 @@
 require_once './models/Product.php';
 require_once './models/ProductQuery.php';
 
-class ProductAdminController  {
+ob_start();
+
+class ProductAdminController {
 
     public $productQuery;
-
+    
     // Khai báo phương thức 
     public function __construct()
     {
-        // 1. Khởi tạo giá trị cho thuộc tính bookQuery
+        // 1. Khởi tạo giá trị cho thuộc tính productQuery
         $this->productQuery = new ProductQuery();
         // Mở trình duyệt lên để kiểm tra kết quả
+
     }
+
+    // Hiện sản phẩm
     public function showList()
     {
-        // 1. Gọi xuống model để lấy danh sách book
-        $danhSachProduct = $this->productQuery->all();
+        // 1. Gọi xuống model để lấy danh sách product
+        $danhSachProduct = $this->productQuery->getAllProduct();
+        $variant = $this->productQuery->get_allvariant();
+        $listCategories = $this->productQuery->getAllCategories();
+        $product = $this->productQuery->render_allproduct();
         
         // Hiển thị file view
         include './views/admin/product/list.php'; // Gọi đến view danh sách sản phẩm
     }
+    // Thêm mới sản phẩm vào database
     public function Create()
-    {
-        $product = new Product();
-        $thongBaoLoi = "";
-        $thongBaoThanhCong = ""; // Hiển thị thành khi có
-        $thongBaoLoiUploadFile = "";
+    {   
+        if((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
+            
+                $name = $_POST['product_name'];
+                $category_id = $_POST['category_id'];
+                $price = $_POST['product_price'];
+                $sale_price = $_POST['product_sale_price'];
+                $description = $_POST['product_description'];
 
-        // 2. Kiểm tra người dùng ấn submit form chưa
-        if (isset($_POST["submitForm"])) {
-            // $product->product_id = $_POST["product_id"];
-            $product->name = trim($_POST["name"]);
-            $product->content = trim($_POST["content"]);
-            $product->price = trim($_POST["price"]);
-            // $product->sale_price = trim($_POST["sale_price"]);
-            $product->image = trim($_POST["image"]);
-            // $product->updated_at = trim($_POST["updated_at"]);
-            // $product->created_at = trim($_POST["created_at"]);
-            // $product->status = trim($_POST["status"]);
+                
 
-            // 4. Validate form
-            // Validate bắt buộc: title, author, publisher, publish_date
-            if ($product->name === "" || $product->content === "" || $product->price === "" ) {
-                $thongBaoLoi = "Tên sách, Tác giả, Nhà xuất bản, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
-                // Mở file view để hiển thị biến $thongBaoLoi ra
+        // Xử lý tải lên ảnh chính
+        $image = "";
+            // luu hinh ảnh vao
+        if($_FILES["product_image"]["error"] == UPLOAD_ERR_OK) {
+            $target_dir = "./uploads/product/";
+            $target_file = $target_dir.basename($_FILES["product_image"]["name"]);
+
+            if(move_uploaded_file($_FILES["product_image"]["tmp_name"], $target_file)) {
+                $image = $target_file;
+            } else {
+                $message = "Lỗi khi tải lên ảnh.";
             }
-            // 6. Xử lý upload file
-            var_dump($_FILES);
-            // Lưu ý 2 thông tin
-            // name: tên file mà bạn lựa chọn upload
-            // tmp_name: vị trí bộ nhớ tạm đang lưu trữ file upload
-            // Kiểm tra xem người dùng có chọn file không
+        }
+        
+        // Xử lý việc tải nhiều ảnh
+        $gallery_images = [];
+        $target_dir_gallery = "./uploads/product_gallery/";
 
-            if ($_FILES["file_anh_upload"]["name"] !== "") {
-                // Thực hiện upload
-                // Tham số 1: Vị trí bộ nhớ tạm đang lưu trữ file
-                // Tham số 2: Vị trí bạn muốn lưu file vào. Chọn là thư mục upload trong source code
-                $thamSo1 = $_FILES["file_anh_upload"]["tmp_name"];
-                $thamSo2 = "./uploads/" . $_FILES["file_anh_upload"]["name"];
-                $ketQuaUploadFile = move_uploaded_file($thamSo1, $thamSo2);
-                // Kiểm tra kết quả upload
-                if ($ketQuaUploadFile) {
-                    // Gán giá trị đường vẫn file biến để lưu xuống csdl
-                    $product->image = $thamSo2;
+        if(isset($_FILES["product_gallery"])) {
+            foreach($_FILES["product_gallery"]["tmp_name"] as $key => $tmp_name) {
+                $gallery_image_name = $_FILES["product_gallery"]["name"][$key];
+                $gallery_target_file = $target_dir_gallery.basename($gallery_image_name);
 
-                } else {
-                    // Upload thất bài
-                    // Hiển thị lỗi
-                    $thongBaoLoiUploadFile = "Upload file không thành công. Mời bạn thử lại.";
+                // Chỉ xử lý ảnh nếu người dùng đã tải lên
+                if($_FILES["product_gallery"]["error"][$key] == UPLOAD_ERR_OK) {
+                    if(move_uploaded_file($tmp_name, $gallery_target_file)) {
+                        $gallery_images[] = $gallery_target_file;
+                    } else {
+                        $message = "Lỗi khi tải lên ảnh trong gallery.";
+                        break;
+                    }
                 }
             }
-            // 7. Kiểm tra trạng thái thông báo lỗi hiện tại đã hết chưa
-            if ($thongBaoLoi === "" && $thongBaoLoiUploadFile === "") {
-                // 8. Gọi xuống model để insert dữ liệu
-                $ketQua = $this->productQuery->insert($product);
+        }
+         
+        if(empty($message)) {
+            $galleryData = ["images" => $gallery_images];
+            $gallery = json_encode($gallery_images);
+            $product_id=$this->productQuery->addProduct($name, $image,	$price,$category_id,$sale_price, $description,$gallery);
+            // $this->productQuery->insertAlbumAnhSan($product_id, $link_product_gallery);
+            $size = $_POST['size'];
+            $color = $_POST['color'];
+            $quantity = $_POST['quantity'];
+            // Insert data into the 'variant' table
+            $this->productQuery->addProductVariants($product_id,	$size,	$color,	$quantity);
+            header('Location: index.php?action=product');
+         }
 
-                // 9. Hiển thị thông báo
-                if ($ketQua === "success") {
-                    // Hiển thị thông báo thành công
-                    $thongBaoThanhCong = "Tạo mới thành công. Mời bạn tiếp tục tạo mới hoặc quay lại danh sách.";
-
-                    // Reset form
-                    $product = new Product();
-
-                } else {
-                    // Hiển thị thông báo lỗi
-                    $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
-
-                }
-
-            }
         }// END if submit form
         // Hiển thị file view
+        $variant = $this->productQuery->get_allvariant();
+        // lấy danh mục
+        $listCategories = $this->productQuery->getAllCategories();
+        $product = $this->productQuery->render_allproduct();
         include "./views/admin/product/create.php";
-    }
-    // END showCreate()
-
-    public function edit($product_id)
+    }// END Create()
+    public function Edit()
     {
-        
-            $product = new Product();
-            $thongBaoLoi = "";
-            $thongBaoThanhCong = ""; // Hiển thị thành khi có
-            $thongBaoLoiUploadFile = "";
+        if(isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $one =$this->productQuery->getone_product($id);
+        }
+            // if ($one) {
+            //     // Sản phẩm được tìm thấy
+            //     // Thực hiện xử lý tiếp
+            //     print_r($one); // In thông tin sản phẩm (test)
+            // } else {
+        //     //     // Không tìm thấy sản phẩm
+        //     //     echo "Không tìm thấy sản phẩm với ID: $id";
+        //     // }
 
-        // Gọi xuống model để lấy chi tiết bản ghi và lưu vào biến $book
-        $product = $this->productQuery->find($product_id);
-        // --> Mở trình duyệt và f5, sẽ thầy input đã hiển thị được giá trị bản ghi
+        // } else {
+        //     // Tham số ID không được truyền qua URL
+        //     echo "Tham số ID không tồn tại trong URL.";
+        // }
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['capnhat'])) {
+            $category_id = $_POST['category_id'] ?? null;
+            $name = $_POST['name'] ?? null;
+            $description = $_POST['product_description'] ??null;
+            $price = $_POST['product_price'] ??null;
+            $sale_price = $_POST['product_sale_price'] ??null;
+            $size = $_POST['size'] ?? null;
+            $color = $_POST['color'] ??null;
+            $quantity = $_POST['quantity'] ??null;
 
-        // 2. Kiểm tra người dùng ấn submit form chưa
-        if (isset($_POST["submitForm"])) {
-            // $product->product_id = $_POST["product_id"];
-            $product->name = trim($_POST["name"]);
-            $product->content = trim($_POST["content"]);
-            $product->price = trim($_POST["price"]);
-            // $product->sale_price = trim($_POST["sale_price"]);
-            $product->image = trim($_POST["image"]);
-            // $product->updated_at = trim($_POST["updated_at"]);
-            // $product->created_at = trim($_POST["created_at"]);
-            // $product->status = trim($_POST["status"]);
+            // xu li tai len anh chinh
+            $image = "";
 
-            // 4. Validate form
-            // Validate bắt buộc: title, author, publisher, publish_date
-            if ($product->name === "" || $product->content === "" || $product->price === "" ) {
-                $thongBaoLoi = "Tên sách, Tác giả, Nhà xuất bản, Ngày xuất bản là thông tin bắt buộc. Mời bạn nhập đầy đủ thông tin và thử lại.";
-                // Mở file view để hiển thị biến $thongBaoLoi ra
-            }
-            // 6. Xử lý upload file
-            var_dump($_FILES);
-            // Lưu ý 2 thông tin
-            // name: tên file mà bạn lựa chọn upload
-            // tmp_name: vị trí bộ nhớ tạm đang lưu trữ file upload
-            // Kiểm tra xem người dùng có chọn file không
+                // luu hinh ảnh vao
+            if($_FILES["image"]["error"] == UPLOAD_ERR_OK) {
+                $target_dir = "./uploads/product/";
+                $target_file = $target_dir.basename($_FILES["image"]["name"]);
 
-            if ($_FILES["file_anh_upload"]["name"] !== "") {
-                // Thực hiện upload
-                // Tham số 1: Vị trí bộ nhớ tạm đang lưu trữ file
-                // Tham số 2: Vị trí bạn muốn lưu file vào. Chọn là thư mục upload trong source code
-                $thamSo1 = $_FILES["file_anh_upload"]["tmp_name"];
-                $thamSo2 = "./uploads/" . $_FILES["file_anh_upload"]["name"];
-                $ketQuaUploadFile = move_uploaded_file($thamSo1, $thamSo2);
-                // Kiểm tra kết quả upload
-                if ($ketQuaUploadFile) {
-                    // Gán giá trị đường vẫn file biến để lưu xuống csdl
-                    $product->image = $thamSo2;
-
+                if(move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                    $image = $target_file;
                 } else {
-                    // Upload thất bài
-                    // Hiển thị lỗi
-                    $thongBaoLoiUploadFile = "Upload file không thành công. Mời bạn thử lại.";
+                    $message = "Lỗi khi tải lên ảnh.";
                 }
             }
-            // 7. Kiểm tra trạng thái thông báo lỗi hiện tại đã hết chưa
-            if ($thongBaoLoi === "" && $thongBaoLoiUploadFile === "") {
-                // 8. Gọi xuống model để insert dữ liệu
-                $ketQua = $this->productQuery->edit($product_id,$product);
+            // Xử lý việc tải nhiều ảnh
+            $gallery_images = [];
+            $target_dir_gallery = "./uploads/product_gallery/";
 
-                // 9. Hiển thị thông báo
-                if ($ketQua === "success") {
-                    // Hiển thị thông báo thành công
-                    $thongBaoThanhCong = "sua thành công. Mời bạn tiếp tục tạo sua hoặc quay lại danh sách.";
+            if(isset($_FILES["product_gallery"])) {
+            foreach($_FILES["product_gallery"]["tmp_name"] as $key => $tmp_name) {
+                $gallery_image_name = $_FILES["product_gallery"]["name"][$key];
+                $gallery_target_file = $target_dir_gallery.basename($gallery_image_name);
 
-                    
-
-                } else {
-                    // Hiển thị thông báo lỗi
-                    $thongBaoLoi = "Tạo mới thất bại. Mời bạn kiểm tra lỗi và thực hiện lại.";
-
+                // Chỉ xử lý ảnh nếu người dùng đã tải lên
+                if($_FILES["product_gallery"]["error"][$key] == UPLOAD_ERR_OK) {
+                    if(move_uploaded_file($tmp_name, $gallery_target_file)) {
+                        $gallery_images[] = $gallery_target_file;
+                    } else {
+                        $message = "Lỗi khi tải lên ảnh trong gallery.";
+                        break;
+                    }
                 }
-
             }
-        }// END if submit form
-        // Hiển thị file view
-        include "./views/admin/product/edit.php";
+            }
+            if(empty($message)) {
+                $galleryData = ["images" => $gallery_images];
+                $gallery = json_encode($gallery_images);
+
+                if($image != "" && $gallery_images != "") {
+                    $this->productQuery->update_product($name, $image,	$price,$category_id,$sale_price, $description,$gallery, $id);
+                } else {
+                    $this->productQuery->update_product_noneimg($name,	$price,$category_id,$sale_price, $description,$id );
+                }
+            }
+            header('Location: index.php?action=product');
+        
+
+        }
+
+        // echo "<pre>";
+        // print_r($_POST);
+        // print_r($_FILES);
+        // echo "</pre>";
+        
+        $listCategories = $this->productQuery->getAllCategories();
+        $variant = $this->productQuery->get_allvariant();
+        $product = $this->productQuery->render_allproduct();
+                
+        include './views/admin/product/edit.php';
+    }
+
+    public function productDetails()
+    {
+        $product_id = $_GET['product_id'];
+        $product = $this->productQuery->getDetailSan($product_id);
+        
+        // $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
+
+        // $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
         
         
-    } // end showupdate
+        include "./views/client/product-details.php";
+        
+    }
     
-//     public function edit() {
-//         $product_id = $_GET['product_id'];
-//         $productModel = new ProductModel();
-//         $product = $productModel->getProductById($product_id);
+    // Xóa sản phẩm
+    
+    public function showsp(){
+        $spmoi = $this->productQuery->render_allproduct();
+    }
 
-//         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//             $name = $_POST['name'];
-//             $image = $_FILES['image']['name'];
-//             $price = $_POST['price'];
-
-//             // Xử lý upload ảnh mới nếu có, nếu không giữ nguyên ảnh cũ
-//             if (!empty($image)) {
-//                 move_uploaded_file($_FILES['image']['tmp_name'], "./uploads/" . $image);
-//             } else {
-//                 $image = $product['image'];
-//             }
-
-//             if ($productModel->updateProduct($product_id, $name, $image, $price)) {
-//                 header('Location: index.php?action=product');
-//                 exit();
-//             }
-//         }
-//         include './views/admin/product/edit.php';
-//     }
 //     public function hide() {
 //         $product_id = $_GET['id'];
 //         $productModel = new ProductModel();
@@ -221,11 +227,11 @@ class ProductAdminController  {
 //     }
 // }
     
-    public function __destruct()
-        {
-            // Code...
-        }
+    // public function __destruct()
+    //     {
+    //         // Code...
+    //     }
 
 }
-
+ob_end_flush();
 ?>
