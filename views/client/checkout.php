@@ -1,26 +1,26 @@
-<?php include ('./views/client/layout/header.php'); ?>
-      <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area breadcrumbs_other">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content text-center">
-                        <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li><a href="#">pages</a></li>
-                        </ul>
-                        <h3>checkout</h3>
-                    </div>
+<?php include('./views/client/layout/header.php'); ?>
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area breadcrumbs_other">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content text-center">
+                    <ul>
+                        <li><a href="index.html">home</a></li>
+                        <li><a href="#">pages</a></li>
+                    </ul>
+                    <h3>checkout</h3>
                 </div>
             </div>
         </div>
     </div>
-    <!--breadcrumbs area end-->
+</div>
+<!--breadcrumbs area end-->
 
-    <!--Checkout page section-->
-    <div class="checkout_section" id="accordion">
-       <div class="container">
-            <!-- <div class="returning_coupon_area">
+<!--Checkout page section-->
+<div class="checkout_section" id="accordion">
+    <div class="container">
+        <!-- <div class="returning_coupon_area">
                 <div class="row">
                     <div class="col-lg-7 col-md-6">
                         <div class="user-actions">
@@ -75,127 +75,139 @@
                     </div>
                 </div>
             </div> -->
-            <div class="checkout_form">
-                <div class="row">
-                    <div class="col-lg-7 col-md-6">
-                <form action="?action=createOrederDetails" method="POST">
-                            <h3>Billing Details</h3>
-                            <div class="checkout_form_input">
-                                <label>Full Name <span>*</span></label>
-                                <input type="text" name="name" value="<?= $showCheckout['name']  ?>">
-                            </div>
-                            <div class="checkout_form_input">
-                               <label>Address  <span>*</span></label>
-                                <input type="text" name="address" value="<?= $showCheckout['address']  ?>">
-                            </div>
-                            <div class="checkout_form_input">
-                                <label> Email Address   <span>*</span></label>
-                                <input  type="text" name="email" value="<?= $showCheckout['email']  ?>">
-                            </div>
-                            <div class="checkout_form_input">
-                                <label> Phone <span>*</span></label>
-                                <input  type="text" name="phone" value="<?= $showCheckout['phone']  ?>">
-                            </div>
-                            <div class="checkout_form_input">
-                                <label>Order Notes</label>
-                                <textarea name="note"></textarea>
-                            </div>
+        <div class="checkout_form">
+            <div class="row">
+                <div class="col-lg-7 col-md-6">
+                    <form action="?action=createOrederDetails" method="POST">
+                        <h3>Billing Details</h3>
+                        <div class="checkout_form_input">
+                            <label>Full Name <span>*</span></label>
+                            <input type="text" name="name" value="<?= $showCheckout['name']  ?>">
+                        </div>
+                        <div class="checkout_form_input">
+                            <label>Address <span>*</span></label>
+                            <input type="text" name="address" value="<?= $showCheckout['address']  ?>">
+                        </div>
+                        <div class="checkout_form_input">
+                            <label> Email Address <span>*</span></label>
+                            <input type="text" name="email" value="<?= $showCheckout['email']  ?>">
+                        </div>
+                        <div class="checkout_form_input">
+                            <label> Phone <span>*</span></label>
+                            <input type="text" name="phone" value="<?= $showCheckout['phone']  ?>">
+                        </div>
+                        <div class="checkout_form_input">
+                            <label>Order Notes</label>
+                            <textarea name="note"></textarea>
+                        </div>
                         <!-- </form> -->
-                    </div>
-                    <div class="col-lg-5 col-md-6">
-                        <div class="order_table_right">
-                            <!-- <form action="#"> -->
-                                <h3>Your order</h3>
-                                <div class="order_table table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th class="text-right">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td> Slim Collarless Blaze   </td>
-                                                <td class="text-right"> $75.20  </td>
-                                            </tr>
-                                            <tr>
-                                                <td> Denim Kimono Jacket     </td>
-                                                <td class="text-right"> $50.00</td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td>Cart Subtotal  </td>
-                                                <td class="text-right">$225.60</td>
-                                            </tr>
-                                            <tr class="order_total">
-                                                <th>Order Total</th>
-                                                <td class="text-right">$225.60</td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                    <div class="panel-default">
-                                        <div class="panel_radio">
-                                            <input id="payment1" name="check_method" type="radio" data-target="createp_account" />
-                                            <span class="checkmark"></span>
-                                        </div>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <div class="order_table_right">
+                        <!-- <form action="#"> -->
+                        <h3>Your order</h3>
+                        <div class="order_table table-responsive">
+                            <?php $cartTotal = 0 ?>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th class="text-right">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($_SESSION['myCart'] as $index => $order): ?>
+                                      <?php  $cartTotal += $order['price'] * $order['quantity']; ?>
+                                        <tr>
+                                            <td>
+                                                <input type="hidden" name="" value="<?= $order['name'] ?>">
+                                                <span><?= $order['name'] ?></span>
+                                            </td>
+                                            <td class="text-right">
+                                                <input type="hidden" name="" value="<?= $order['price'] * $order['quantity'] ?>">
+                                                <span><?= number_format($order['price'] * $order['quantity'], 0, ',', '.') ?>đ</span>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>Cart Subtotal</td>
+                                        <td class="text-right">
+                                            <input type="hidden" name="" value="<?= $cartTotal  ?>">
+                                            <span><?= number_format($cartTotal, 0, ',', '.') ?>đ</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="order_total">
+                                        <th>Order Total</th>
+                                        <td class="text-right">
+                                            <input type="hidden" name="" value="<?= $cartTotal  ?>">
+                                            <span><?= number_format($cartTotal, 0, ',', '.') ?>đ</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="panel-default">
+                                <div class="panel_radio">
+                                    <input id="payment1" name="check_method" type="radio" data-target="createp_account" />
+                                    <span class="checkmark"></span>
+                                </div>
 
-                                        <label for="payment1" data-toggle="collapse" data-target="#panel1" >direct bank transfer</label>
-                                        <div id="panel1" class="collapse show one" data-parent="#accordion">
-                                            <div class="card-body1">
-                                               <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-default">
-                                        <div class="panel_radio">
-                                            <input id="payment2" name="check_method" type="radio" data-target="createp_account" />
-                                            <span class="checkmark"></span>
-                                        </div>
-                                        <label for="payment2" data-toggle="collapse" data-target="#method2" >cheque payment</label>
-                                        <div id="method2" class="collapse two" data-parent="#accordion">
-                                            <div class="card-body1">
-                                               <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-default">
-                                        <div class="panel_radio">
-                                            <input id="payment3" name="check_method" type="radio" data-target="createp_account" />
-                                            <span class="checkmark"></span>
-                                        </div>
-                                        <label for="payment3" data-toggle="collapse" data-target="#method3" >cash on delivery</label>
-                                        <div id="method3" class="collapse three" data-parent="#accordion">
-                                            <div class="card-body1">
-                                               <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-default">
-                                        <div class="panel_radio">
-                                            <input id="payment4" name="check_method" type="radio" data-target="createp_account" />
-                                            <span class="checkmark"></span>
-                                        </div>
-                                        <label for="payment4" data-toggle="collapse" data-target="#method4" >Paypal</label>
-                                        <div id="method4" class="collapse four" data-parent="#accordion">
-                                            <div class="card-body1">
-                                               <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
-                                            </div>
-                                        </div>
+                                <label for="payment1" data-toggle="collapse" data-target="#panel1">direct bank transfer</label>
+                                <div id="panel1" class="collapse show one" data-parent="#accordion">
+                                    <div class="card-body1">
+                                        <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
                                     </div>
                                 </div>
-                                <div class="place_order_btn" >
-                                    <button class="btn btn-primary">place order</button>
-                                   <!-- <a class="btn btn-primary" href="#">place order</a> -->
-                               </div>
-                                <!-- <button type="submit" class="btn btn-primary">place order</button> -->
-                </form>
+                            </div>
+                            <div class="panel-default">
+                                <div class="panel_radio">
+                                    <input id="payment2" name="check_method" type="radio" data-target="createp_account" />
+                                    <span class="checkmark"></span>
+                                </div>
+                                <label for="payment2" data-toggle="collapse" data-target="#method2">cheque payment</label>
+                                <div id="method2" class="collapse two" data-parent="#accordion">
+                                    <div class="card-body1">
+                                        <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-default">
+                                <div class="panel_radio">
+                                    <input id="payment3" name="check_method" type="radio" data-target="createp_account" />
+                                    <span class="checkmark"></span>
+                                </div>
+                                <label for="payment3" data-toggle="collapse" data-target="#method3">cash on delivery</label>
+                                <div id="method3" class="collapse three" data-parent="#accordion">
+                                    <div class="card-body1">
+                                        <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-default">
+                                <div class="panel_radio">
+                                    <input id="payment4" name="check_method" type="radio" data-target="createp_account" />
+                                    <span class="checkmark"></span>
+                                </div>
+                                <label for="payment4" data-toggle="collapse" data-target="#method4">Paypal</label>
+                                <div id="method4" class="collapse four" data-parent="#accordion">
+                                    <div class="card-body1">
+                                        <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="place_order_btn">
+                            <button class="btn btn-primary">place order</button>
+                            <!-- <a class="btn btn-primary" href="#">place order</a> -->
+                        </div>
+                        <!-- <button type="submit" class="btn btn-primary">place order</button> -->
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Checkout page section end-->
-    <?php include ('./views/client/layout/footer.php'); ?>
+</div>
+<!--Checkout page section end-->
+<?php include('./views/client/layout/footer.php'); ?>
