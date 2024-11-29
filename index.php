@@ -1,6 +1,6 @@
 <?php 
 session_start();
-ini_set('memory_limit', '1G');
+
 // Kết nối PDO
 require_once "./commons/env.php";
 require_once "./commons/function.php";
