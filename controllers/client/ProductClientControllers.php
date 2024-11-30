@@ -33,7 +33,7 @@ class HomeClientControllers {
         include './views/client/product-details.php';
     }
     public function addToCart(){
-        var_dump($_POST);
+        // var_dump($_POST);
         // them san pham khi khach nhanh nut mua ngay hoac them vao gio hang
         if(isset($_POST['add_to_cart']) && $_POST['product_id']>0){
             // tìm sp khách hàng đã bấm mua ngay bằng id
@@ -41,6 +41,7 @@ class HomeClientControllers {
             $total = $product->price * $_POST['quantity'];
             // chèn thông tin vào giỏ hàng
             $array_pro = [
+                "product_id"=>$product->product_id,
                 "image" => $product->image,
                 "name"=> $product->name,
                 "price" => $product->price,
@@ -54,6 +55,7 @@ class HomeClientControllers {
                 $_SESSION['myCart'] = []; // Khởi tạo giỏ hàng nếu chưa tồn tại
             }
             array_push($_SESSION['myCart'],$array_pro);
+            // var_dump($_SESSION['myCart']);
             // echo "<pre>";
             // print_r($_SESSION['myCart']);
             

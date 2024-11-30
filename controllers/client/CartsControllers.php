@@ -112,7 +112,7 @@ class CartsControllers {
     
 
     public function addToCart(){
-        if (isset($_POST['btn-addToCart'])){
+        if (isset($_POST['add_to_cart'])){
             $product_id = $_POST['product-id'];
                 $product_img = $_POST['product-img'];
                 $product_name = $_POST['product-name'];
@@ -130,13 +130,13 @@ class CartsControllers {
                     "quantity" => $product_quantity,
                     "price" => $product_price
                 );
-                
-                if (!isset($_SESSION["cart"])) {
-                    $_SESSION["cart"] = array();
+                var_dump($pdCart);
+                if (!isset($_SESSION["myCart"])) {
+                    $_SESSION["myCart"] = $pdCart;
                 }
         }
     }
-}
+ }
 
 
 
