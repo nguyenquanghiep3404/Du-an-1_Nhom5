@@ -1,5 +1,6 @@
 <?php 
 session_start();
+ob_start();
 
 // Kết nối PDO
 require_once "./commons/env.php";
