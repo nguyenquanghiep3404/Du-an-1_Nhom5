@@ -27,7 +27,7 @@
     <!--modernizr min js here-->
     <script src="public/client/assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
-
+    
     <!-- Structured Data  -->
     <script type="application/ld+json">
         {
@@ -243,7 +243,16 @@
                                     </ul>
                                 </li>
                                 <li><a href="#"><i class="icon-heart icons"></i></a> <span class="item_count">2</span></li>
-                                <li class="shopping_cart"><a href="#"><i class="icon-basket-loaded icons"></i></a> <span class="item_count">2</span></li>
+                                <li class="shopping_cart"><a href="#"><i class="icon-basket-loaded icons"></i></a>
+                                <span class="item_count">
+                                   <?php 
+                                   if(isset($_SESSION["myCart"]) ){
+                                    echo count($_SESSION["myCart"]);
+                                   }else{
+                                    echo 0;
+                                   }
+                                   ?> 
+                                </span></li>
                             </ul>
                         </div>
                     </div>
