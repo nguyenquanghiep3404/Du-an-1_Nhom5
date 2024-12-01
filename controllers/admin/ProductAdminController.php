@@ -40,8 +40,6 @@ class ProductAdminController {
                 $sale_price = $_POST['product_sale_price'];
                 $description = $_POST['product_description'];
 
-                
-
         // Xử lý tải lên ảnh chính
         $image = "";
             // luu hinh ảnh vao
@@ -188,19 +186,7 @@ class ProductAdminController {
         include './views/admin/product/edit.php';
     }
 
-    public function productDetails()
-    {
-        $product_id = $_GET['product_id'];
-        $product = $this->productQuery->getDetailSan($product_id);
-        
-        // $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
-
-        // $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
-        
-        
-        include "./views/client/product-details.php";
-        
-    }
+    
     
     // Xóa sản phẩm
     

@@ -33,10 +33,8 @@ require_once './controllers/client/ProductClientControllers.php';
 require_once './controllers/client/checkout.php';
 require_once './controllers/client/profileController.php';
 
-// Lấy giá trị "id" từ đường dẫn url
-$product_id = "";
-if (isset($_GET["id"])) {
-    $product_id = $_GET["id"];
+if (!isset($_SESSION['myCart']) || !is_array($_SESSION['myCart'])) {
+    $_SESSION['myCart'] = []; // Khởi tạo giỏ hàng nếu chưa tồn tại
 }
 
 
@@ -110,21 +108,25 @@ switch ($action) {
     case "registerPost";
         $registerAdmin->createRegisterPost();
         break;
-    case "all_register";
+    case "all_register":
         $registerAdmin->all_register();
         break;
-    case "delete";
+    case "delete":
         $registerAdmin->delete();
         break;
 
 
     // client
-    case "client";
+    case "client":
         $HomeClient->home();
         break;
-    case "addToCart";
+    case "addToCart":
         $HomeClient->addToCart();
+        // $HomeClient->addCart();
         break;
+    // case "addCartDetail":
+    //     $HomeClient->AddCartDetail();
+    //     break;
     case "update_cart_quantity":
             $HomeClient->updateCartQuantity();
             break;
@@ -140,7 +142,7 @@ switch ($action) {
     //     $HomeClient->cart();
     //     break;
     case "product-details":
-        $productAdmin->productDetails();
+        $HomeClient->productDetails();
         break;
     // Checkout
     // case 'checkout';

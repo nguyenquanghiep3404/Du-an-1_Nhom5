@@ -104,7 +104,7 @@
                 <th>Danh mục</th>
                 <th>Ngày Nhập</th>
                 <th>Ngày chỉnh sửa</th>
-                <th>Trạng thái</th>
+                <!-- <th>Trạng thái</th> -->
                 <th>Thao Tác</th>
             </tr>
         </thead>
@@ -127,7 +127,7 @@
                     <td>
                     <?=  $product['updated_at'] ?>
                     </td>
-                    <td><?=  $product['status'] ==1 ? 'Còn bán' : 'Dừng bán'  ?> </td>
+                    <!-- <td><?=  $product['status'] ==1 ? 'Còn bán' : 'Dừng bán'  ?> </td> -->
                         <!-- <a href="?action=product-edit&id=<?= $product->product_id ?>">Sửa</a>
                         <a href="?action=product-delete&id=<?= $product->product_id ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a> -->
 
