@@ -148,6 +148,7 @@
         </div>
     </div>
      <!--shopping cart area end -->
+     <!-- <?php var_dump($_SESSION['myCart']) ?> -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const cartTable = document.querySelector('table');

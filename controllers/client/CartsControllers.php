@@ -111,23 +111,6 @@ class CartsControllers {
     // }
     
 
-    // public function addToCart(){
-    //     if (isset($_POST['btn-addToCart'])){
-    //             $product_id = $_POST['product_id'];
-    //             $product_img = $_POST['product-image'];
-    //             $product_name = $_POST['product-name'];
-    //             $product_size = $_POST['size'];
-    //             $product_color = $_POST['color'];
-    //             $product_quantity = $_POST['quantity'];
-    //             $product_price = $_POST['product-price'];
-
-
-    //     }
-    //     var_dump($_POST);die;
-    //     include './views/client/cart.php';
-    // }
-    
-}
 
 
 
