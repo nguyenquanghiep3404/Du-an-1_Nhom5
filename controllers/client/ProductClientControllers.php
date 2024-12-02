@@ -50,6 +50,7 @@ class HomeClientControllers {
     }
     // 
     public function addToCart(){
+
         // Xóa toàn bộ giỏ hàng nếu được yêu cầu
         if (isset($_GET['emptyCart']) && ($_GET['emptyCart']) == 1) {
             unset($_SESSION['myCart']);
@@ -71,6 +72,26 @@ class HomeClientControllers {
             }
     
             // Khởi tạo giỏ hàng nếu chưa tồn tại
+
+        // var_dump($_POST);
+        // them san pham khi khach nhanh nut mua ngay hoac them vao gio hang
+        if(isset($_POST['add_to_cart']) && $_POST['product_id']>0){
+            // tìm sp khách hàng đã bấm mua ngay bằng id
+            $product = $this->productQuery->find($_POST['product_id']);
+            $total = $product->price * $_POST['quantity'];
+            // chèn thông tin vào giỏ hàng
+            $array_pro = [
+                "product_id"=>$product->product_id,
+                "image" => $product->image,
+                "name"=> $product->name,
+                "price" => $product->price,
+                "quantity" => $product->quantity,
+                "total" => $total,
+                "size" => $product->size,
+                "color" => $product->color
+            ];
+            // push mảng lên session
+
             if (!isset($_SESSION['myCart']) || !is_array($_SESSION['myCart'])) {
                 $_SESSION['myCart'] = [];
             }
@@ -104,6 +125,14 @@ class HomeClientControllers {
                 ];
                 array_push($_SESSION['myCart'], $array_pro);
             }
+
+            array_push($_SESSION['myCart'],$array_pro);
+            // var_dump($_SESSION['myCart']);
+            // echo "<pre>";
+            // print_r($_SESSION['myCart']);
+            
+
+
         }
     
         // Hiển thị trang giỏ hàng
