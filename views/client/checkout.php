@@ -211,3 +211,4 @@
 </div>
 <!--Checkout page section end-->
 <?php include('./views/client/layout/footer.php'); ?>
+<?php include './views/client/layout/miniCart.php' ?>

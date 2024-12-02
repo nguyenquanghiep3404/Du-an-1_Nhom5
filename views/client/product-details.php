@@ -1,5 +1,5 @@
 <?php include ('./views/client/layout/header.php'); ?>
-
+<?= var_dump($product) ?>
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area breadcrumbs_product">
         <div class="container">
@@ -7,9 +7,9 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li><a href="shop.html">shop</a></li>
-                            <li>Product Example</li>
+                            <li><a href="?action=client">Trang chủ</a></li>
+                            <li><a href="?action=product&product_id=<?= $category_id?>"><?= $product['category_name'] ?></a></li>
+                            <li><?= $product['name'] ?></li>
                         </ul>
                     </div>
                 </div>
@@ -23,47 +23,41 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <div class="product_zoom_gallery">
-                       <div class="zoom_gallery_inner d-flex">
-                           <div class="zoom_tab_img">
-                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="assets/img/product/small-product/product1.png" alt="tab-thumb"></a>
-                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="assets/img/product/small-product/product2.png" alt="tab-thumb"></a>
-                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="assets/img/product/small-product/product3.png" alt="tab-thumb"></a>
-                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="assets/img/product/small-product/product4.png" alt="tab-thumb"></a>
-                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="assets/img/product/small-product/product1.png" alt="tab-thumb"></a>
-                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="assets/img/product/small-product/product2.png" alt="tab-thumb"></a>
-                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="assets/img/product/small-product/product3.png" alt="tab-thumb"></a>
-                                <a class="zoom_tabimg_list" href="javascript:void(0)"><img src="assets/img/product/small-product/product4.png" alt="tab-thumb"></a>
-                           </div>
-                           <div class="product_zoom_main_img">
-                                <div class="product_zoom_thumb">
-                                    <img data-image="assets/img/product/big-product/product1.png" src="assets/img/product/big-product/product1.png" alt="">
-                                </div>
-                                <div class="product_zoom_thumb">
-                                    <img data-image="assets/img/product/big-product/product1.png" src="assets/img/product/big-product/product1.png" alt="">
-                                </div>
-                                <div class="product_zoom_thumb">
-                                    <img data-image="assets/img/product/big-product/product1.png" src="assets/img/product/big-product/product1.png" alt="">
-                                </div>
-                                <div class="product_zoom_thumb">
-                                    <img data-image="assets/img/product/big-product/product1.png" src="assets/img/product/big-product/product1.png" alt="">
-                                </div>
-                                <div class="product_zoom_thumb">
-                                    <img data-image="assets/img/product/big-product/product1.png" src="assets/img/product/big-product/product1.png" alt="">
-                                </div>
-                                <div class="product_zoom_thumb">
-                                    <img data-image="assets/img/product/big-product/product1.png" src="assets/img/product/big-product/product1.png" alt="">
-                                </div>
-                                <div class="product_zoom_thumb">
-                                    <img data-image="assets/img/product/big-product/product1.png" src="assets/img/product/big-product/product1.png" alt="">
-                                </div>
-                                <div class="product_zoom_thumb">
-                                    <img data-image="assets/img/product/big-product/product1.png" src="assets/img/product/big-product/product1.png" alt="">
-                                </div>
+                <div class="product_zoom_gallery">
+    <div class="zoom_gallery_inner d-flex">
+                <div class="zoom_tab_img">
+                    <?php
+                    // Trích xuất mảng `gallery` và chuyển đổi từ JSON nếu cần
+                    $images = json_decode($product['gallery']); // Dữ liệu của bạn
+                    if (is_array($images)) {
+                        foreach ($images as $image) {
+                            // Hiển thị từng ảnh nhỏ (thumbnail)
+                            echo '<a class="zoom_tabimg_list" href="javascript:void(0)">
+                                    <img src="' . $image . '" alt="tab-thumb" onclick="changeImage(this)" />
+                                </a>';
+                        }
+                        }
+                        ?>
+                    </div>
+
+                        <div class="product_zoom_main_img">
+                            <div class="large-img">
+                                <!-- Ảnh lớn, hiển thị mặc định là ảnh đầu tiên trong mảng -->
+                                <img src="<?= $product['image']; ?>" alt="Large Image" width="100%" id="largeImage">
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    // Hàm thay đổi ảnh lớn khi người dùng click vào ảnh nhỏ
+                    function changeImage(thumbnail) {
+                        var largeImage = document.getElementById("largeImage");
+                        largeImage.src = thumbnail.src; // Cập nhật src của ảnh lớn
+                    }
+                </script>
+                </div>
+                
                 <div class="col-lg-6 col-md-6">
                     <div class="product_d_right">
                        <form action="#">
@@ -92,66 +86,111 @@
                             </div>
                             <div class="product_availalbe">
                                 <ul class="d-flex">
-                                    <li><i class="icon-layers icons"></i> Only <span>15</span> left </li>
-                                    <li>Availalbe: <span class="stock">In Stock</span></li>
+                                    <li><i class="icon-layers icons"></i> Chỉ còn: <span>  <?= $product['quantity'] ?></span> sản phẩm </li>
+                                    <li>Trạng thái: <span class="stock">Còn hàng</span></li>
                                 </ul>
                             </div>
                             <div class="product_desc">
-                                <p>A t-shirt that comes in three colors (red, white and blue) and three sizes (small, medium, large) is a configurable product.  </p>
+                                <p> <?=  $product['description'] ?>  </p>
                             </div>
-                            <div class="product_variant">
-                                <div class="filter__list widget_color d-flex align-items-center">
-                                    <h3>select color</h3>
-                                    <ul>
-                                       <li>
-                                            <input type="checkbox">
-                                            <span class="checkmark color1"></span>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox">
-                                            <span class="checkmark color2"></span>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox">
-                                            <span class="checkmark color3"></span>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox">
-                                            <span class="checkmark color5"></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="filter__list widget_size d-flex align-items-center">
-                                    <h3>select size</h3>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)">S </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> M</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">L</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> XL</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">XLL</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <!-- /////// -->
+                             <form action="?action=addToCart" method="POST" id="form-cart">
+                                <div class="product_variant">
+                                    <!-- Chọn biến thể màu -->
+                                    <div class="filter__list widget_color d-flex align-items-center">
+                                        <h3>Màu sắc</h3>
+                                        <?php
+                                            $currentColor = null;
 
-                                <div class="variant_quantity_btn d-flex">
-                                    <div class="pro-qty border">
-                                        <input min="1" max="100" type="tex" value="1">
+                                            usort($variant, function ($a, $b) {
+                                                return strcmp($a['color'], $b['color']);
+                                            });
+
+                                            foreach ($variant as $va) {
+                                                extract($va);
+
+                                                if ($currentColor !== $color) {
+                                                    echo '
+                                                            <div class="size-item">
+                                                                <input type="radio" name="color" id="' . $color . '" value="' . $color . '" class="color">
+                                                                <label for="' . $color . '" class="color-label" >' . $color . '</label>
+                                                            </div>
+                                                        ';
+                                                    $currentColor = $color;
+                                                }
+                                            }
+                                            ?>
                                     </div>
-                                    <button class="button btn btn-primary" type="submit"><i class="ion-android-add"></i> Add To Cart</button>
-                                    <a class="wishlist" href="#"><i class="ion-ios-heart"></i></a>
+                                    <!-- chọn biến thể size -->
+                                    <div class="filter__list widget_size d-flex align-items-center">
+                                        <h3>Kích thước</h3>
+                                        
+                                            <?php
+                                            $currentSize = null;
+                                            usort($variant, function ($a, $b) {
+                                                return strcmp($a['size'], $b['size']);
+                                            });
+
+                                            foreach ($variant as $va) {
+                                                extract($va);
+
+                                                if ($currentSize !== $size) {
+                                                    echo '<div class="size-item">
+                                                                    <input type="radio" name="size" id="' . $size . '" value="' . $size . '" class="size">
+                                                                    <label for="' . $size . '" class="size-label">' . $size . '</label>
+                                                                </div>
+                                                        ';
+                                                    $currentSize = $size;
+                                                }
+                                            }
+                                            ?>
+
+                                        
+                                    </div>
+                                    
+                                    <!-- chọn số lượng -->
+                                    <div class="variant_quantity_btn d-flex">
+                                        <div class="">
+                                            <button id="decrement">-</button>
+                                            <input type="number" name="quantity" id="quantity" value="1" min="1" max="10">
+                                            <button id="increment" >+</button>
+                                            <script>
+                                                var decrementButton = document.getElementById("decrement");
+                                                var incrementButton = document.getElementById("increment");
+                                                var quantityInput = document.getElementById("quantity");
+
+                                                decrementButton.addEventListener("click", function (e) {
+                                                    e.preventDefault();
+                                                    var currentQuantity = parseInt(quantityInput.value);
+                                                    if (currentQuantity > 1) {
+                                                        quantityInput.value = currentQuantity - 1;
+                                                    }
+                                                });
+
+                                                incrementButton.addEventListener("click", function (e) {
+                                                    e.preventDefault();
+                                                    var currentQuantity = parseInt(quantityInput.value);
+                                                    quantityInput.value = currentQuantity + 1;
+                                                });
+                                            </script>
+                                        </div>
+                                            <!-- ẩn thông tin sản phẩm -->
+                                            <input type="hidden" name="product-id" value="<?= $product['product_id'] ?>">
+                                            <input type="hidden" name="product-img" value="<?=$product['product_id'] ?>">
+                                            <input type="hidden" name="product-name" value="<?= $product['product_id'] ?>">
+                                            <input type="hidden" name="product-price" value="<?= $product['product_id'] ?>">
+
+                                            
+                                            <button class="button btn btn-primary" type="submit" id="btn-addToCart" name="add_to_cart">
+                                                <i class="ion-android-add"></i> Thêm Giỏ Hàng
+                                            </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
+
+                            <!-- end /////// -->
                             <div class="product_sku">
-                                <p><span>SKU: </span> #ABC123456</p>
+                                <p><span>SKU: </span> <?php echo $product_id ?></p>
                             </div>
                             <div class="product_tags d-flex">
                                 <span>tags: </span>
@@ -161,6 +200,7 @@
                                     <li><a href="#">accessorires</a></li>
                                 </ul>
                             </div>
+                            <!-- Phần mạng xã hội -->
                             <div class="priduct_social d-flex">
                                 <span>SHARE: </span>
                                 <ul>
@@ -202,10 +242,6 @@
                                 <li>
                                      <a data-toggle="tab" href="#tabinfo" role="tab" aria-controls="tabinfo" aria-selected="false">Custom Tab Info  </a>
                                 </li>
-                                <li>
-                                     <a data-toggle="tab" href="#video" role="tab" aria-controls="video" aria-selected="false">Custom Tab Video </a>
-                                </li>
-
                             </ul>
                         </div>
                         <div class="tab-content">
@@ -344,11 +380,7 @@
                                     <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="video" role="tabpanel" >
-                                <div class="product_tab_vidio text-center">
-                                    <iframe width="729" height="410" src="https://www.youtube.com/embed/BUWzX78Ye_8"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                            </div>
+                            
 
                         </div>
                     </div>
@@ -643,87 +675,9 @@
     </section>
     <!--product area end-->
 
-     <!-- modal area start-->
-    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true"><i class="ion-android-close"></i></span>
-                </button>
-                <div class="modal_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="modal_zoom_gallery">
-                                   <div class="product_zoom_thumb">
-                                        <img src="assets/img/product/big-product/product1.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="modal_right">
-                                    <div class="modal_title mb-10">
-                                        <h2>Donec Ac Tempus</h2>
-                                    </div>
-                                    <div class="modal_price mb-10">
-                                        <span class="new_price">$64.99</span>
-                                        <span class="old_price" >$78.99</span>
-                                    </div>
-                                    <div class="modal_description mb-15">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui,  </p>
-                                    </div>
-                                    <div class="variants_selects">
-                                        <div class="variants_size">
-                                           <h2>size</h2>
-                                           <select class="select_option">
-                                               <option selected value="1">s</option>
-                                               <option value="1">m</option>
-                                               <option value="1">l</option>
-                                               <option value="1">xl</option>
-                                               <option value="1">xxl</option>
-                                           </select>
-                                        </div>
-                                        <div class="variants_color">
-                                           <h2>color</h2>
-                                           <select class="select_option">
-                                               <option selected value="1">purple</option>
-                                               <option value="1">violet</option>
-                                               <option value="1">black</option>
-                                               <option value="1">pink</option>
-                                               <option value="1">orange</option>
-                                           </select>
-                                        </div>
-                                        <div class="modal_add_to_cart">
-                                            <form action="<?= BASE_URL . '?action=cart' ?> " method="POST">
-                                                <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
-                                                <input type="hidden" name="product-image" value="<?= $image ?>">
-                                                <input type="hidden" name="product-name" value="<?= $name ?>">
-                                                <input type="hidden" name="product-price" value="<?= $sale_price ?>">
-                                                <input min="1" max="100" step="2" value="1" type="number">
-                                                <button type="submit" id="btn-addToCart" name="btn-addToCart">add to cart</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="modal_social">
-                                        <h2>Share this product</h2>
-                                        <ul>
-                                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                            <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- modal area end-->
-
+    
+    <?php include './views/client/layout/modalPoduct.php' ?>
+    <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>
 
 

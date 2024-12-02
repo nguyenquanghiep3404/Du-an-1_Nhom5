@@ -116,64 +116,7 @@
         </div>
     </div>
     <!--offcanvas menu area end-->
-    <!--mini cart-->
-    <div class="mini_cart">
-        <div class="cart_gallery">
-            <div class="cart_close">
-                <div class="cart_text">
-                    <h3>cart</h3>
-                </div>
-                <div class="mini_cart_close">
-                    <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="public/client/assets/img/product/product1.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Primis In Faucibus</a>
-                    <p>1 x <span> $65.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="public/client/assets/img/product/product2.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Letraset Sheets</a>
-                    <p>1 x <span> $60.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_table">
-            <div class="cart_table_border">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-                <div class="cart_total mt-10">
-                    <span>total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_footer">
-            <div class="cart_button">
-                <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
-            </div>
-            <div class="cart_button">
-                <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
-            </div>
-        </div>
-    </div>
-    <!--mini cart end-->
+    
     <!--header area start-->
     <header class="header_section header_transparent">
         <div class="header_top">
@@ -230,16 +173,27 @@
                             <div class="main_menu d-none d-lg-block">
                                 <nav>
                                     <ul class="d-flex">
-                                        <li><a class="active" href="index.html">Trang chủ</a> </li>
+                                        <li><a class="active" href="?action=client">Trang chủ</a> </li>
                                         <li><a href="shop.html">Giới thiệu</a></li>
-                                        <li><a href="product-details.html">Sản phẩm</a></li>
-                                        <li><a href="#">Cửa hàng</a></li>
-                                        <li><a href="#">Liên Hệ</a>
-                                            <ul class="sub_menu">
-                                                <li><a href="cart.html">Cart Pages</a></li>
-                                                <li><a href="checkout.html">Checkout Pages</a></li>
+                                        <li>
+                                        <a href="product-details.html">Sản phẩm</a>
+                                        <ul class="sub_menu">
+                                            <li>
+                                            <span class="category-title" style="font-size: 20px; text-decoration: underline;">Áo Nam</span>
+                                            <ul class="category-menu">
+                                                <li><a href="#">Áo thun</a></li>
+                                                <li><a href="#">Áo sơ mi</a></li>
+                                                <li><a href="#">Áo polo</a></li>
+                                                <li><a href="#">Áo dài tay</a></li>
+                                                <li><a href="#">Áo khoác</a></li>
+                                                <li><a href="#">Áo Tanktop</a></li>
+                                                <li><a href="#">Áo thể thao</a></li>
                                             </ul>
+                                            </li>
+                                        </ul>
                                         </li>
+                                        <li><a href="#">Cửa hàng</a></li>
+                                        <li><a href="#">Liên Hệ</a></li>
                                         <li><a href="blog.html">Tin tức</a>
                                             <ul class="sub_menu">
                                                 <li><a href="blog.html">Blog Pages</a></li>
@@ -259,20 +213,20 @@
                                             <?php if (isset($_SESSION['name'])) {
                                             ?>
                                                 <li><a href="?action=profile"><?= $_SESSION['name']['name'] ?></a></li>
-                                                <li><a href="#">My Account</a></li>
+                                                <li><a href="#">Tài khoản của tôi</a></li>
                                                     <?php
                                                     if ($_SESSION['role_id'] == 1) {?>
-                                                       <li><a href="?action=admin">Admin</a></li>
-                                                       <li><a href="?action=logout">Logout</a></li>
+                                                       <li><a href="?action=admin">=>Admin</a></li>
+                                                       <li><a href="?action=logout">Đăng Xuất</a></li>
                                                     <?php
                                                     }
                                                     ?>
 
                                                         <?php } else { ?>
 
-                                                    <li><a href="?action=login">Login</a></li>
-                                                    <li><a href="#">Contact</a></li>
-                                                    <li><a href="?action=register">Register</a></li>
+                                                    <li><a href="?action=login">Đăng Nhập</a></li>
+                                                    <li><a href="#">Liên Hệ</a></li>
+                                                    <li><a href="?action=register">Đăng Kí</a></li>
                                                 <?php } ?>
 
 
@@ -282,7 +236,15 @@
                                             class="item_count">2</span></li>
                                     <li class="shopping_cart"><a href="#"><i class="icon-basket-loaded icons"></i></a>
 
-                                        <span class="item_count">2</span>
+                                    <span class="item_count">
+                                    <?php 
+                                        if(isset($_SESSION["myCart"]) ){
+                                            echo count($_SESSION["myCart"]);
+                                        }else{
+                                            echo 0;
+                                            }
+                                        ?> 
+                                    </span>
                                     </li>
 
 
@@ -294,12 +256,12 @@
             </div>
         </div>
         <!-- page search box -->
-        <div class="page_search_box">
+        <div class="page_search_box" style="height: 40%;">
             <div class="search_close">
                 <i class="ion-close-round"></i>
             </div>
-            <form class="border-bottom" action="#">
-                <input class="border-0" placeholder="Search products..." type="text">
+            <form class="border-bottom" action="?action=timkiemsanpham" method="POST">
+                <input class="border-0" name="kyw" placeholder="Tìm kiếm sản phẩm..." type="text">
                 <button type="submit"><span class="icon-magnifier icons"></span></button>
             </form>
         </div>

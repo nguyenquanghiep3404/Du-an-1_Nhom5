@@ -10,6 +10,8 @@ class ProductQuery  {
     {
         $this->conn = connect_db();
     }
+    // ### ADMIN
+
     // getall sản phẩm (lấy tất cả thông tin từ bảng san pham)
     public function getAllProduct()
     {
@@ -57,83 +59,27 @@ class ProductQuery  {
             echo "</h1>";
         }
     }
-    public function insertAlbumAnhSan($product_id, $link_product_gallery){
+    public function getDetailSan($product_id) {
         try {
-            $sql = 'INSERT INTO product_galleries (product_id, link_product_gallery)
-                    VALUES (:product_id, :link_product_gallery)';
-
+            $sql = '
+                SELECT 
+                    p.*, 
+                    c.name AS category_name, 
+                    pv.color, 
+                    pv.size, 
+                    pv.quantity
+                FROM products AS p
+                INNER JOIN categories AS c ON p.category_id = c.category_id
+                LEFT JOIN product_variant AS pv ON p.product_id = pv.product_id
+                WHERE p.product_id = :product_id
+            ';
+    
             $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute([
-                ':product_id' => $product_id,
-                ':link_product_gallery' => $link_product_gallery,
-            ]);
-
-            // Lấy id sản phẩm vừa thêm
-            return true;
+            $stmt->execute([':product_id' => $product_id]);
+    
+            return $stmt->fetch(); // Trả về dữ liệu của sản phẩm
         } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
-        }
-    }
-    public function getDetailSan($product_id){
-        try {
-            $sql = 'SELECT products.*, categories.name AS category_name
-            FROM products
-            INNER JOIN categories ON products.category_id = categories.category_id
-            WHERE products.product_id = :product_id';
-
-            $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute([':product_id'=>$product_id]);
-
-            return $stmt->fetch();
-        } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
-        }
-    }
-    public function getListAnhSanPham($product_id){
-        try {
-            $sql = 'SELECT * FROM product_galleries WHERE product_id = :product_id';
-
-            $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute([':product_id'=>$product_id]);
-
-            return $stmt->fetchAll();
-        } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
-        }
-    }
-    public function updateSanPham($name, $image,	$price,$category_id,$sale_price, $description,$product_id){
-        try {
-            
-            $sql = 'UPDATE products
-                    SET 
-                        name = :name,
-                        image = :image,
-                        price = :price,
-                        category_id = :category_id,
-                        sale_price = :sale_price,
-                        description = :description,
-                    WHERE product_id = :product_id';
-            
-            $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute([
-                ':name' => $name,
-                ':image' => $image,
-                ':price' => $price,
-                ':category_id' => $category_id,
-                ':sale_price' => $sale_price,
-                ':description' => $description,
-                ':product_id' => $product_id
-                
-            ]);
-
-            // Lấy id sản phẩm vừa thêm
-            return true;
-        } catch (Exception $e) {
-            echo "lỗi" . $e->getMessage();
+            echo "Lỗi: " . $e->getMessage();
         }
     }
     // thêm sản phẩm vào bảng biến thể
@@ -216,16 +162,6 @@ class ProductQuery  {
         }
     }
 
-    // Lấy sản phẩm kèm tên danh mục liên quan
-        function get_product_by_id($product_id)
-    {
-        $sql = "SELECT p.*, c.name AS category_name,c.id AS category_id
-                FROM product AS p
-                JOIN categories AS c ON p.category_id = c.id
-                WHERE p.hide = 0 AND p.id=?";
-        return pdo_query_one($sql, $product_id);
-    }
-
     ### TRANG CHU
     // Lấy top 4 sp moi nhat
     //  p.*: Lấy tất cả các cột từ bảng products.
@@ -249,7 +185,7 @@ class ProductQuery  {
                     p.product_id = vp.product_id 
                 ORDER BY 
                     p.created_at 
-                LIMIT 4
+                LIMIT 8
             ";
             $data = $this->conn->query($sql)->fetchAll();
             $ds = [];
@@ -268,7 +204,29 @@ class ProductQuery  {
             echo "</h1>";
         }
     }
-    
+    function get_product_by_variant($product_id)
+    {
+        $sql = "SELECT products.product_id, product_variant.* FROM products
+        INNER JOIN product_variant ON products.product_id = product_variant.product_variant_id
+        WHERE products.product_id = ? AND quantity > 0";
+
+        return pdo_query($sql, $product_id);
+    }
+    function get_product_by_id($product_id)
+    {
+        $sql = "SELECT p.*, c.name AS category_name, c.category_id AS id_category
+                FROM products AS p
+                JOIN categories AS c ON p.category_id = c.category_id
+                WHERE p.product_id = ?";
+        return pdo_query_one($sql, $product_id);
+    }
+    public function delete($product_id) {
+        $sql = "DELETE FROM products WHERE product_id = :product_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':product_id' => $product_id,
+        ]);
+    }
 // }
 // show sản phẩm
 
@@ -304,6 +262,14 @@ class ProductQuery  {
         } else {
             pdo_execute($sql, $product_id);
         }
+    }
+    // Hàm tìm kiếm sản phẩm theo từ khóa
+    public function searchProducts($keyword) {
+        $query = "SELECT * FROM products WHERE name LIKE :keyword";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

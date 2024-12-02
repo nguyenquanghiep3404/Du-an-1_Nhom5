@@ -1,5 +1,6 @@
 <?php 
 session_start();
+ob_start();
 
 // Kết nối PDO
 require_once "./commons/env.php";
@@ -9,15 +10,11 @@ require_once './models/Product.php';
 require_once './models/categoryModel.php';
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
-require_once './models/ProductClientModels.php';
-
-require_once './models/cartModels.php';
+require_once './models/historicModel.php';
 require_once './models/ProductQuery.php';
-
-
 require_once './models/checkoutModel.php';
-
 require_once './models/profileModel.php';
+require_once './models/OrderModel.php';
 // require_once './models/cartsModels.php';
 
 // Kết nối Controller
@@ -26,20 +23,24 @@ require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php';
 require_once './controllers/admin/registerControllers.php';
 require_once './controllers/admin/loginController.php';
-require_once './controllers/client/ProductClientControllers.php';
-// require_once './controllers/client/CartsControllers.php';
-
-
-
+require_once './controllers/admin/OrderControllers.php';
 
 // Controller bên client
 require_once './controllers/client/checkout.php';
 require_once './controllers/client/profileController.php';
-
+require_once './controllers/client/ProductClientControllers.php';
+// require_once './controllers/client/CartsControllers.php';
 // Lấy giá trị "id" từ đường dẫn url
 $product_id = "";
 if (isset($_GET["id"])) {
     $product_id = $_GET["id"];
+
+require_once './controllers/client/historic.php';
+
+
+if (!isset($_SESSION['myCart']) || !is_array($_SESSION['myCart'])) {
+    $_SESSION['myCart'] = []; // Khởi tạo giỏ hàng nếu chưa tồn tại
+
 }
 
 
@@ -51,8 +52,11 @@ $registerAdmin = new registerController();
 $checkoutAdmin = new checkoutController();
 $HomeClient = new HomeClientControllers();
 
-$profileAdmin = new profileController();
 
+$historicClient = new historicController();
+
+$profileAdmin = new profileController();
+$orderAdmin = new OrderControllers();
 switch ($action) {
     case "admin":
         include './views/admin/dashboard.php';
@@ -66,8 +70,8 @@ switch ($action) {
     case "product-form-edit":
         $productAdmin->Edit();
         break;
-    // case "delete-product":
-    //     $productAdmin->DeleteProduct();
+    case "delete-product":
+        $productAdmin->deleteProduct();
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
@@ -113,21 +117,25 @@ switch ($action) {
     case "registerPost";
         $registerAdmin->createRegisterPost();
         break;
-    case "all_register";
+    case "all_register":
         $registerAdmin->all_register();
         break;
-    case "delete";
+    case "delete":
         $registerAdmin->delete();
         break;
 
 
     // client
-    case "client";
+    case "client":
         $HomeClient->home();
         break;
-    case "addToCart";
+    case "addToCart":
         $HomeClient->addToCart();
+        // $HomeClient->addCart();
         break;
+    // case "addCartDetail":
+    //     $HomeClient->AddCartDetail();
+    //     break;
     case "update_cart_quantity":
             $HomeClient->updateCartQuantity();
             break;
@@ -143,7 +151,13 @@ switch ($action) {
     //     $HomeClient->cart();
     //     break;
     case "product-details":
-        $productAdmin->productDetails();
+        $HomeClient->productDetails();
+        break;
+    case "miniProduct":
+        $HomeClient->productDetails();
+        break;
+    case "CategoryProductClient":
+        $HomeClient->categoryProductClient();
         break;
     // Checkout
     // case 'checkout';
@@ -158,6 +172,23 @@ switch ($action) {
     // Thông tin cá nhân
     case 'profile';
         $profileAdmin->profile();
+        break;
+    // Quản lý đơn hàng
+    case 'listOrders';
+        $orderAdmin->listOrder();
+        break;
+    case 'updateOrder';
+        $orderAdmin->updateOrder();
+        break;
+    case 'updateOrderPost';
+        $orderAdmin->updateOrder_POST();
+
+    case 'timkiemsanpham':
+        $HomeClient->search();
+        break;
+    case 'historic':
+        $historicClient->orderHistory();
+
         break;
 }
 ?>

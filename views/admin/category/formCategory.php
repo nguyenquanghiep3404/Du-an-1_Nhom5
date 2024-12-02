@@ -1,5 +1,4 @@
-
-<?php include ('./views/admin/layout/header.php'); ?>
+<?php include('./views/admin/layout/header.php'); ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
@@ -102,18 +101,30 @@
 
     </nav>
     <!-- NAVBAR -->
-<body>
-    <h1>New Category</h1>
-    <form action="?action=createPost-dm" method="POST">
 
-        <label for="">ID:</label>
-        <input type="text" id="id" disabled>
-        <label for="">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="">Description:</label>
-        <input type="text" id="description" name="description" required>
-        <label for="">Status:</label>
-        <input type="text" disabled>
-        <input type="submit" value="New">
-    </form>
-    <?php include ('./views/admin/layout/footer.php'); ?>
+    <body>
+        <div class="container mt-5">
+            <h1 class="text-center text-primary mb-4">New Category</h1>
+            <form action="?action=createPost-dm" method="POST" class="bg-light p-4 rounded shadow">
+                <div class="mb-3">
+                    <label for="">ID:</label>
+                    <input type="text" id="id" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="">Description:</label>
+                    <input type="text" id="description" name="description" required>
+                </div>
+                <div class="mb-3">
+                    <label for="">Status:</label>
+                    <input type="text" disabled>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input type="submit" value="New" class="btn btn-primary w-50">
+                </div>
+            </form>
+        </div>
+        <?php include('./views/admin/layout/footer.php'); ?>

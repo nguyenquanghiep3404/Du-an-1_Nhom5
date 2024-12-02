@@ -1,13 +1,5 @@
 <?php include ('./views/client/layout/header.php'); ?>
-<?php
-// tổng giá trị đơn hàng
-$total_price = $_SESSION['total_price'] ?? 0;
-// tổng số lượng sản phẩm trong giỏ hàng
-$total_order = $_SESSION['total_order'] ?? 0;
-// tổng giá trị tạm thời của giỏ hàng
-$temporary = $_SESSION['temporary'] ?? 0;
 
-?>
       <!--breadcrumbs area start-->
     <div class="breadcrumbs_area breadcrumbs_other">
         <div class="container">
@@ -25,7 +17,7 @@ $temporary = $_SESSION['temporary'] ?? 0;
         </div>
     </div>
     <!--breadcrumbs area end-->
-
+    <!-- <?php echo var_dump($_SESSION['myCart']) ?> -->
      <!--shopping cart area start -->
     <div class="shopping_cart_area">
         <div class="container">
@@ -46,8 +38,11 @@ $temporary = $_SESSION['temporary'] ?? 0;
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+                                    
                                     <?php $cartTotal = 0; // Biến tổng giá trị giỏ hàng ?>
-                                    <?php foreach ($_SESSION['myCart'] as $index => $pro) : ?>
+                                    <?php if(isset($_SESSION['myCart']) && count($_SESSION['myCart'])>0){
+                                    foreach ($_SESSION['myCart'] as $index => $pro) : ?>
                                         <?php $cartTotal += $pro['price'] * $pro['quantity']; ?>
                                         <tr class="border-top" data-index="<?= $index ?>">
                                             <td>
@@ -69,11 +64,12 @@ $temporary = $_SESSION['temporary'] ?? 0;
                                                     <span><?= number_format($pro['price'], 0, ',', '.') ?>đ</span>
                                                 </div>
                                             </td>
+                                           
                                             <td class="product_quantity">
                                                 <div class="cart_product_quantity">
                                                     <input 
                                                         min="1" 
-                                                        max="100" 
+                                                        max="10" 
                                                         value="<?= $pro['quantity'] ?>" 
                                                         type="number" 
                                                         class="quantity-input" 
@@ -88,31 +84,49 @@ $temporary = $_SESSION['temporary'] ?? 0;
                                             </td>
                                             <td>
                                                 <div class="cart_product_remove text-right">
-                                                    <a href="#" class="remove-item" data-index="<?= $index ?>"><i class="ion-android-close"></i></a>
+                                                    <a href="" class="remove-item" data-index="<?= $index ?>"><i class="ion-android-close"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                    <?php endforeach; } 
+                                    else{
+                                        // echo "Giỏ hàng của bạn đang trống";
+                                    }?>
+                                    
                                 </tbody>
                                 <tfoot>
-                                    <tr>
-                                        <td colspan="4" class="text-right">Tổng cộng:</td>
-                                        <td colspan="2" class="cart-total">
-                                            <span><?= number_format($cartTotal, 0, ',', '.') ?>đ</span>
+                                    <tr class="cart_grandtotal  ">
+                                        <td colspan="4" class="text-right text-danger" style="font-size: 30px;">Tổng cộng:</td>
+                                        <td colspan="2" class="cart-total text-danger " >
+                                            <span style="font-size: 30px;"><?= number_format($cartTotal, 0, ',', '.') ?>đ</span>
                                         </td>
                                     </tr>
                                 </tfoot>
                             </table>
 
                             </div>
-                            <div class="cart_page_button border-top d-flex justify-content-between">
-                                <div class="shopping_cart_btn">
-                                    <a href="?action=cart&action=del_all" class="btn btn-primary border">XÓA TOÀN BỘ GIỎ HÀNG</a>
-                                    <button class="btn btn-primary border" type="submit">UPDATE YOUR CART</button>
-                                </div>
+                            <div class="cart_page_button border-top d-flex justify-content-between grand_totall_area" style="height:200px">
+                                
                                 <div class="shopping_continue_btn">
-                                    <button class="btn btn-primary" type="submit">TIẾP TỤC MUA SẮM</button>
+                                    <a href="?action=addToCart&emptyCart=1" class="btn btn-primary">XOÁ TOÀN BỘ GIỎ HÀNG</a>
+                                    <button  type="submit" class="btn btn-primary">TIẾP TỤC MUA SẮM</button>
                                 </div>
+                                <!--Tổng tiền  -->
+                                <div class="col-lg-4 col-md-6 col-sm-8">
+                                <div class="grand_totall_area">
+                                <div class="mb-2  border-bottom " >
+                                    
+                                    <!-- <div class="cart_grandtotal d-flex justify-content-between ">
+                                        <p style="font-size: 28px;" class="cart-total" >Tổng</p>
+                                        <span style="font-size: 28px;" ><?= number_format($cartTotal, 0, ',', '.') ?>đ
+                                            </span>
+                                    </div> -->
+                                </div>
+                                <div class="proceed_checkout_btn">
+                                    <a class="btn btn-primary" href="?action=show_checkout">Tiến Hành Thanh Toán</a>
+                                </div>
+                                </div>
+                            </div>
                             </div>
                          </div>
                      </div>
@@ -120,58 +134,16 @@ $temporary = $_SESSION['temporary'] ?? 0;
                  <!--coupon code area start-->
                 <div class="cart_page_bottom">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="shopping_coupon_calculate top">
-                                <h3 class="border-bottom">Tính Toán Vận Chuyển </h3>
-                                <select class="select_option border">
-                                    <option value="1">United Kingdom (UK)  </option>
-                                    <option value="2">Åland Islands  </option>
-                                    <option value="3">Afghanistan  </option>
-                                    <option value="4">Belgium </option>
-                                    <option value="5">Albania  </option>
-                                </select>
-                                <input class="border" placeholder="State / Country" type="text">
-                                <input class="border" placeholder="Postcode / Zip" type="text">
-                                <button class="btn btn-primary" type="submit">get a quote</button>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        
+                        <!-- <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="shopping_coupon_calculate">
                                 <h3 class="border-bottom">Mã Giảm Giá   </h3>
                                 <p>Enter your coupon code if you have one.</p>
                                 <input class="border" placeholder="Enter your code" type="text">
                                 <button class="btn btn-primary" type="submit">apply coupon</button>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-8">
-                            <div class="grand_totall_area">
-                               <div class="grand_totall_inner border-bottom">
-                                   <div class="cart_subtotal d-flex justify-content-between">
-                                       <p style="font-size: 17px;" class="text-capitalize">Tạm tính </p>
-                                       <span style="font-size: 17px;">
-                                            <?php
-                                                if (isset($temporary)) {
-                                                    echo number_format($temporary, 0, ',', '.') . ' đ';
-                                                } else {
-                                                    echo '0 đ';
-                                                }
-                                            ?>
-                                        </span>
-                                   </div>
-                                   <div class="cart_grandtotal d-flex justify-content-between">
-                                       <p style="font-size: 28px;">Tổng</p>
-                                       <span style="font-size: 28px;"><?php if (isset($total_price)) {
-                                            echo number_format($total_price, 0, ',', '.');
-                                            } ?>đ
-                                        </span>
-                                   </div>
-                               </div>
-                               <div class="proceed_checkout_btn">
-                                   <a class="btn btn-primary" href="?action=show_checkout">Tiến Hành Thanh Toán</a>
-                               </div>
-                               <a href="#">Checkout with Mutilple Adresses</a>
-                            </div>
-                        </div>
+                        </div> -->
+                        
                     </div>
                 </div>
                 <!--coupon code area end-->
@@ -253,3 +225,4 @@ $temporary = $_SESSION['temporary'] ?? 0;
 
 </script>
      <?php include ('./views/client/layout/footer.php'); ?>
+     <?php include './views/client/layout/miniCart.php' ?>
