@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=bill">
+            <a href="?action=listOrders">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
             </a>

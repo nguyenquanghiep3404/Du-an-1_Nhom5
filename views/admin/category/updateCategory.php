@@ -1,6 +1,4 @@
-
-
-<?php include ('./views/admin/layout/header.php'); ?>
+<?php include('./views/admin/layout/header.php'); ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
@@ -100,21 +98,30 @@
             <i class='bx bxs-bell'></i>
             <span class="num">8</span>
         </a>
-       
+
     </nav>
     <!-- NAVBAR -->
 
-    <h1>Update Category</h1>
-    <form action="?action=updatePost-dm&id=<?= $cateEdit['category_id'] ?>" method="POST">
-
-        <label for="">ID:</label>
-        <input type="text" id="id" disabled>
-        <label for="">Name:</label>
-        <input type="text" id="name" name="name" value="<?= $cateEdit['name'] ?>"required>
-        <label for="">Description:</label>
-        <input type="text" id="description" name="description" value="<?= $cateEdit['description'] ?>" required>
-        <label for="">Status:</label>
-        <input type="text" disabled>
-        <input type="submit" value="Update">
+    <h1 class="text-center text-success mb-4">Update Category</h1>
+    <form action="?action=updatePost-dm&id=<?= $cateEdit['category_id'] ?>" method="POST" class="bg-light p-4 rounded shadow">
+        <div class="mb-3">
+            <label for="">ID:</label>
+            <input type="text" id="id" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="">Name:</label>
+            <input type="text" id="name" name="name" value="<?= $cateEdit['name'] ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="">Description:</label>
+            <input type="text" id="description" name="description" value="<?= $cateEdit['description'] ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="">Status:</label>
+            <input type="text" disabled>
+        </div>
+        <div  class="d-flex justify-content-center">
+            <input type="submit" value="Update" class="btn btn-success w-50">
+        </div>
     </form>
-    <?php include ('./views/admin/layout/footer.php'); ?>
+    <?php include('./views/admin/layout/footer.php'); ?>
