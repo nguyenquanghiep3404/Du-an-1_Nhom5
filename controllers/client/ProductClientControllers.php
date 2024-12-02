@@ -1,5 +1,4 @@
 <?php 
-require_once './models/ProductClientModels.php';
 require_once './models/ProductQuery.php';
 require_once './commons/function.php';
 require_once './models/cartModels.php';
@@ -36,6 +35,18 @@ class HomeClientControllers {
         
         include "./views/client/product-details.php";
         
+    }
+    public function miniProduct(){
+        $product_id = $_GET['product_id'];
+        $product = $this->productQuery->getDetailSan($product_id);
+        $variant = $this->productQuery->get_product_by_variant($product_id);
+        include './views/client/layout/modalPoduct.php';
+    }
+    public function categoryProductClient(){
+        $listCategories = $this->productQuery->getAllCategories();
+        $variant = $this->productQuery->get_allvariant();
+        $product = $this->productQuery->render_allproduct();
+        include './views/client/categoryProductClient.php';
     }
     // 
     public function addToCart(){

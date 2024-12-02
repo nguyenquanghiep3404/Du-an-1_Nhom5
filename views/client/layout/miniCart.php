@@ -1,70 +1,146 @@
+<!--mini cart-->
+<?php 
+$cartTotal = 0; // Khởi tạo tổng tiền giỏ hàng
+?>
 
-    <!-- modal area start-->
-    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><i class="ion-android-close"></i></span>
-                </button>
-                <div class="modal_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="modal_zoom_gallery">
-                                    <div class="product_zoom_thumb">
-                                        <img src="public/client/assets/img/product/big-product/product1.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="modal_right">
-                                    <div class="modal_title mb-10">
-                                        <h2>Donec Ac Tempus</h2>
-                                    </div>
-                                    <div class="modal_price mb-10">
-                                        <span class="new_price">$64.99</span>
-                                        <span class="old_price">$78.99</span>
-                                    </div>
-                                    <div class="modal_description mb-15">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste
-                                            laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam
-                                            in quos qui, </p>
-                                    </div>
-                                    <div class="variants_selects">
-                                        <div class="variants_size">
-                                            <h2>size</h2>
-                                            <select class="select_option">
-                                                <option selected value="1">s</option>
-                                                <option value="1">m</option>
-                                                <option value="1">l</option>
-                                                <option value="1">xl</option>
-                                                <option value="1">xxl</option>
-                                            </select>
-                                        </div>
-                                        <div class="variants_color">
-                                            <h2>color</h2>
-                                            <select class="select_option">
-                                                <option selected value="1">purple</option>
-                                                <option value="1">violet</option>
-                                                <option value="1">black</option>
-                                                <option value="1">pink</option>
-                                                <option value="1">orange</option>
-                                            </select>
-                                        </div>
-                                        <div class="modal_add_to_cart">
-                                            <form action="#">
-                                                <input min="1" max="100" step="2" value="1" type="number">
-                                                <button type="submit">add to cart</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
+<!-- Kiểm tra nếu giỏ hàng có dữ liệu -->
+<?php if (isset($_SESSION['myCart']) && count($_SESSION['myCart']) > 0): ?>
+
+    <div class="mini_cart">
+        <div class="cart_gallery">
+            <!-- Header mini cart -->
+            <div class="cart_close">
+                <div class="cart_text">
+                    <h3>Giỏ hàng</h3>
+                </div>
+                <div class="mini_cart_close">
+                    <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
+                </div>
+            </div>
+
+            <!-- Lặp qua từng sản phẩm trong giỏ hàng -->
+            <?php foreach ($_SESSION['myCart'] as $index => $pro): ?>
+                <?php $cartTotal += $pro['price'] * $pro['quantity']; // Cộng tổng tiền ?>
+
+                <div class="cart_item">
+                    <!-- Hình ảnh sản phẩm -->
+                    <div class="cart_img">
+                        <a href="#"><img src="<?= BASE_URL . $pro['image'] ?>" alt="<?= $pro['name'] ?>"></a>
                     </div>
+
+                    <!-- Thông tin sản phẩm -->
+                    <div class="cart_info">
+                        <a href="#"><?= $pro['name'] ?></a>
+                        <p><?= $pro['quantity'] ?> x <span><?= number_format($pro['price'], 0, ',', '.') ?>đ</span></p>
+                    </div>
+
+                    <!-- Nút xóa sản phẩm -->
+                    <div class="cart_remove">
+                        <a href="#" data-index="<?= $index ?>"><i class="icon-close icons"></i></a>
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Hiển thị tổng tiền -->
+        <div class="mini_cart_table">
+            <div class="cart_table_border">
+                <div class="cart_total mt-10">
+                    <span>Tổng tiền:</span>
+                    <span class="price"><?= number_format($cartTotal, 0, ',', '.') ?>đ</span>
                 </div>
             </div>
         </div>
+
+        <!-- Footer mini cart -->
+        <div class="mini_cart_footer">
+            <div class="cart_button">
+                <a href="?action=addToCart"><i class="fa fa-shopping-cart"></i> Xem giỏ hàng</a>
+            </div>
+            <div class="cart_button">
+                <a href="?action=show_checkout"><i class="fa fa-sign-in"></i> Thanh toán</a>
+            </div>
+        </div>
     </div>
-    <!-- modal area end-->
+
+<?php else: ?>
+    <!-- Thông báo giỏ hàng trống -->
+    <p>Giỏ hàng của bạn đang trống</p>
+<?php endif; ?>
+
+    <!--mini cart end-->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const cartTable = document.querySelector('table');
+    const cartTotal = document.querySelector('.cart-total span');
+
+    // Gửi AJAX để cập nhật số lượng
+    function updateQuantity(index, quantity) {
+        fetch('?action=update_cart_quantity', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `index=${index}&quantity=${quantity}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Cập nhật tổng tiền sản phẩm
+                const row = cartTable.querySelector(`tr[data-index="${index}"]`);
+                const totalCell = row.querySelector('.total-price span');
+                totalCell.textContent = data.productTotal.toLocaleString('vi-VN') + 'đ';
+
+                // Cập nhật tổng tiền giỏ hàng
+                cartTotal.textContent = data.cartTotal.toLocaleString('vi-VN') + 'đ';
+            } else {
+                alert(data.message || 'Có lỗi xảy ra!');
+            }
+        });
+    }
+
+    // Gửi AJAX để xóa sản phẩm
+    function removeItem(index) {
+        fetch('?action=remove_cart_item', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `index=${index}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Xóa dòng sản phẩm khỏi bảng
+                const row = cartTable.querySelector(`tr[data-index="${index}"]`);
+                row.remove();
+
+                // Cập nhật tổng tiền giỏ hàng
+                cartTotal.textContent = data.cartTotal.toLocaleString('vi-VN') + 'đ';
+            } else {
+                alert(data.message || 'Có lỗi xảy ra!');
+            }
+        });
+    }
+
+    // Lắng nghe thay đổi số lượng
+    cartTable.addEventListener('input', function (e) {
+        if (e.target.classList.contains('quantity-input')) {
+            const quantity = parseInt(e.target.value, 10);
+            const index = e.target.dataset.index;
+
+            updateQuantity(index, quantity);
+        }
+    });
+
+    // Lắng nghe sự kiện xóa sản phẩm
+    cartTable.addEventListener('click', function (e) {
+        if (e.target.closest('.remove-item')) {
+            const index = e.target.closest('.remove-item').dataset.index;
+
+            if (confirm('Bạn có chắc muốn xóa sản phẩm này?')) {
+                removeItem(index);
+            }
+        }
+    });
+});
+
+</script>

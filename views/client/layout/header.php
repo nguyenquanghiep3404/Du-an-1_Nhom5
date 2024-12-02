@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Codex. Mendoza – Product Details </title>
+    <title>Codex. Mendoza - Website bán áo nam </title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
@@ -105,64 +105,7 @@
     </div>
 </div>
 <!--offcanvas menu area end-->
-<!--mini cart-->
-<div class="mini_cart">
-    <div class="cart_gallery">
-        <div class="cart_close">
-            <div class="cart_text">
-                <h3>cart</h3>
-            </div>
-            <div class="mini_cart_close">
-                <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
-            </div>
-        </div>
-        <div class="cart_item">
-           <div class="cart_img">
-               <a href="#"><img src="public/client/assets/img/product/product1.jpg" alt=""></a>
-           </div>
-            <div class="cart_info">
-                <a href="#">Primis In Faucibus</a>
-                <p>1 x <span> $65.00 </span></p>
-            </div>
-            <div class="cart_remove">
-                <a href="#"><i class="icon-close icons"></i></a>
-            </div>
-        </div>
-        <div class="cart_item">
-           <div class="cart_img">
-               <a href="#"><img src="public/client/assets/img/product/product2.jpg" alt=""></a>
-           </div>
-            <div class="cart_info">
-                <a href="#">Letraset Sheets</a>
-                <p>1 x <span> $60.00 </span></p>
-            </div>
-            <div class="cart_remove">
-                <a href="#"><i class="icon-close icons"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="mini_cart_table">
-        <div class="cart_table_border">
-            <div class="cart_total">
-                <span>Sub total:</span>
-                <span class="price">$125.00</span>
-            </div>
-            <div class="cart_total mt-10">
-                <span>total:</span>
-                <span class="price">$125.00</span>
-            </div>
-        </div>
-    </div>
-    <div class="mini_cart_footer">
-       <div class="cart_button">
-            <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
-        </div>
-        <div class="cart_button">
-            <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
-        </div>
-    </div>
-</div>
-<!--mini cart end-->
+
 <!--header area start-->
 <header class="header_section border-bottom">
     <div class="header_top">
@@ -206,13 +149,13 @@
                             <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
                         </div>
                         <div class="header_logo">
-                            <a class="sticky_none" href="index.html"><img src="public/client/assets/img/logo/logo.png" alt=""></a>
+                            <a class="sticky_none" href="?action=client"><img src="public/client/assets/img/logo/logo.png" alt=""></a>
                         </div>
                         <!--main menu start-->
                         <div class="main_menu d-none d-lg-block">
                             <nav>
                                 <ul class="d-flex">
-                                    <li><a href="###">Trang chủ</a> </li>
+                                    <li><a href="?action=client">Trang chủ</a> </li>
                                     <li><a href="###">Giới thiệu</a></li>
                                     <li><a class="" href="###">Sản phẩm</a></li>
                                     <li><a href="###">Cửa hàng</a></li>
@@ -236,10 +179,29 @@
                             <ul class="d-flex">
                                 <li class="header_search"><a href="#"><i class="icon-magnifier icons"></i></a></li>
                                 <li class="account_link"><a href="#"><i class="icon-user icons"></i></a>
-                                    <ul class="dropdown_account_link">
+                                <ul class="dropdown_account_link">
+
+                                    <?php if (isset($_SESSION['name'])) {
+                                    ?>
+                                        <li><a href="?action=profile"><?= $_SESSION['name']['name'] ?></a></li>
                                         <li><a href="#">My Account</a></li>
-                                        <li><a href="#">Login</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                            <?php
+                                            if ($_SESSION['role_id'] == 1) {?>
+                                            <li><a href="?action=admin">Admin</a></li>
+                                            <li><a href="?action=logout">Logout</a></li>
+                                            
+                                            <?php
+                                            }
+                                            ?>
+
+                                                <?php } else { ?>
+
+                                            <li><a href="?action=login">Login</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="?action=register">Register</a></li>
+                                        <?php } ?>
+
+
                                     </ul>
                                 </li>
                                 <li><a href="#"><i class="icon-heart icons"></i></a> <span class="item_count">2</span></li>
@@ -273,3 +235,4 @@
 
 </header>
 <!--header area end-->
+<?php include './views/client/layout/miniCart.php' ?>

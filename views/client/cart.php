@@ -84,7 +84,7 @@
                                             </td>
                                             <td>
                                                 <div class="cart_product_remove text-right">
-                                                    <a href="?action=addToCart" class="remove-item" data-index="<?= $index ?>"><i class="ion-android-close"></i></a>
+                                                    <a href="" class="remove-item" data-index="<?= $index ?>"><i class="ion-android-close"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -105,8 +105,10 @@
 
                             </div>
                             <div class="cart_page_button border-top d-flex justify-content-between grand_totall_area" style="height:200px">
+                                
                                 <div class="shopping_continue_btn">
-                                    <button class="btn btn-primary" type="submit">TIẾP TỤC MUA SẮM</button>
+                                    <a href="?action=addToCart&emptyCart=1" class="btn btn-primary">XOÁ TOÀN BỘ GIỎ HÀNG</a>
+                                    <button  type="submit" class="btn btn-primary">TIẾP TỤC MUA SẮM</button>
                                 </div>
                                 <!--Tổng tiền  -->
                                 <div class="col-lg-4 col-md-6 col-sm-8">
@@ -222,3 +224,4 @@
 
 </script>
      <?php include ('./views/client/layout/footer.php'); ?>
+     <?php include './views/client/layout/miniCart.php' ?>

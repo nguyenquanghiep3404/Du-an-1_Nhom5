@@ -9,14 +9,9 @@ require_once './models/Product.php';
 require_once './models/categoryModel.php';
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
-require_once './models/ProductClientModels.php';
-
 require_once './models/cartModels.php';
 require_once './models/ProductQuery.php';
-
-
 require_once './models/checkoutModel.php';
-
 require_once './models/profileModel.php';
 // require_once './models/cartsModels.php';
 
@@ -64,8 +59,8 @@ switch ($action) {
     case "product-form-edit":
         $productAdmin->Edit();
         break;
-    // case "delete-product":
-    //     $productAdmin->DeleteProduct();
+    case "delete-product":
+        $productAdmin->deleteProduct();
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
@@ -146,6 +141,12 @@ switch ($action) {
     //     break;
     case "product-details":
         $HomeClient->productDetails();
+        break;
+    case "miniProduct":
+        $HomeClient->productDetails();
+        break;
+    case "CategoryProductClient":
+        $HomeClient->categoryProductClient();
         break;
     // Checkout
     // case 'checkout';
