@@ -98,7 +98,7 @@ class HomeClientControllers {
                     "name" => $product->name,
                     "price" => $product->price,
                     "quantity" => $quantity, // Số lượng từ yêu cầu
-                    "total" => $product->price * $quantity, // Tính tổng giá trị
+                    // "total" => $product->price * $quantity, // Tính tổng giá trị
                     "size" => $product->size,
                     "color" => $product->color
                 ];

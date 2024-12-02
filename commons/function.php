@@ -136,14 +136,6 @@ function convertToObjectProduct ($row){
     return $product;
 }
 
-// Xóa file 
-function deleteFile($file){
-    $pathDelete = PATH_ROOT . $file;
-    if (file_exists($pathDelete)) {
-        unlink($pathDelete);
-    }
-}
-
 // format date 
 // function formatDate($date){
 //     return date("d-m-Y", strtotime($date));
