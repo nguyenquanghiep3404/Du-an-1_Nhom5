@@ -104,7 +104,7 @@
                 <th>Danh mục</th>
                 <th>Ngày Nhập</th>
                 <th>Ngày chỉnh sửa</th>
-                <th>Trạng thái</th>
+                <!-- <th>Trạng thái</th> -->
                 <th>Thao Tác</th>
             </tr>
         </thead>
@@ -127,16 +127,19 @@
                     <td>
                     <?=  $product['updated_at'] ?>
                     </td>
-                    <td><?=  $product['status'] ==1 ? 'Còn bán' : 'Dừng bán'  ?> </td>
+                    <!-- <td><?=  $product['status'] ==1 ? 'Còn bán' : 'Dừng bán'  ?> </td> -->
                         <!-- <a href="?action=product-edit&id=<?= $product->product_id ?>">Sửa</a>
                         <a href="?action=product-delete&id=<?= $product->product_id ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a> -->
 
                         <td>
-                            <a href="<?= BASE_URL. '?action=product-details&product_id='.$product['product_id'] ?>">
+                            <!-- <a href="<?= BASE_URL. '?action=product-details&product_id='.$product['product_id'] ?>">
                             <button class="btn btn-primary"><i class="far fa-eye"></i></button>
-                            </a>
+                            </a> -->
                             <a href="<?= '?action=product-form-edit&id='.$product['product_id'] ?>"><i class="bx bx-edit"></i></a>
-                            <a href="<?= '?action=delete-product&id='.$product['product_id'] ?>"><i class="bx bx-trash"></i></a>
+                            <!-- <a href="<?= '?action=delete-product&id=' . $product['product_id'] ?>" 
+                                onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">
+                                <i class="bx bx-trash"></i>
+                            </a> -->
                         </td>
                 </tr>
                 <?php endforeach ?>

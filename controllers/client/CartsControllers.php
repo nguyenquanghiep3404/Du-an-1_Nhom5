@@ -111,32 +111,23 @@ class CartsControllers {
     // }
     
 
-    public function addToCart(){
-        if (isset($_POST['add_to_cart'])){
-            $product_id = $_POST['product-id'];
-                $product_img = $_POST['product-img'];
-                $product_name = $_POST['product-name'];
-                $product_size = $_POST['size'];
-                $product_color = $_POST['color'];
-                $product_quantity = $_POST['quantity'];
-                $product_price = $_POST['product-price'];
+    // public function addToCart(){
+    //     if (isset($_POST['btn-addToCart'])){
+    //             $product_id = $_POST['product_id'];
+    //             $product_img = $_POST['product-image'];
+    //             $product_name = $_POST['product-name'];
+    //             $product_size = $_POST['size'];
+    //             $product_color = $_POST['color'];
+    //             $product_quantity = $_POST['quantity'];
+    //             $product_price = $_POST['product-price'];
 
-                $pdCart = array(
-                    "id" => $product_id,
-                    "img" => $product_img,
-                    "name" => $product_name,
-                    "size" => $product_size,
-                    "color" => $product_color,
-                    "quantity" => $product_quantity,
-                    "price" => $product_price
-                );
-                var_dump($pdCart);
-                if (!isset($_SESSION["myCart"])) {
-                    $_SESSION["myCart"] = $pdCart;
-                }
-        }
-    }
- }
+
+    //     }
+    //     var_dump($_POST);die;
+    //     include './views/client/cart.php';
+    // }
+    
+}
 
 
 
