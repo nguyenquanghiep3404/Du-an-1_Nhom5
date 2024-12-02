@@ -10,7 +10,7 @@ require_once './models/Product.php';
 require_once './models/categoryModel.php';
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
-require_once './models/cartModels.php';
+
 require_once './models/ProductQuery.php';
 require_once './models/checkoutModel.php';
 require_once './models/profileModel.php';
