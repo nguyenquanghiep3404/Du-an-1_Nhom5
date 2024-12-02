@@ -136,7 +136,10 @@
                             <button class="btn btn-primary"><i class="far fa-eye"></i></button>
                             </a>
                             <a href="<?= '?action=product-form-edit&id='.$product['product_id'] ?>"><i class="bx bx-edit"></i></a>
-                            <a href="<?= '?action=delete-product&id='.$product['product_id'] ?>"><i class="bx bx-trash"></i></a>
+                            <a href="<?= '?action=delete-product&id=' . $product['product_id'] ?>" 
+                                onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">
+                                <i class="bx bx-trash"></i>
+                            </a>
                         </td>
                 </tr>
                 <?php endforeach ?>

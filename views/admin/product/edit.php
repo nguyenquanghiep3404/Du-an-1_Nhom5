@@ -1,5 +1,5 @@
 <?php include ('./views/admin/layout/header.php'); ?>
-<!-- 
+
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
@@ -68,7 +68,7 @@
             </a>
         </li>
     </ul>
-</section> -->
+</section>
 <section id="content">
     <nav>
         <i class='bx bx-menu'></i>
@@ -104,7 +104,7 @@
                 </option>
             <?php endforeach; ?>
         </select> -->
-        <select class="form-control" name="category_id" id="category_id">
+        <select  class="form-control" name="category_id" id="category_id">
             <?php
                 if(isset($listCategories)) {
                     foreach($listCategories as $cate) {
@@ -158,7 +158,7 @@
         <label for="product_sale_price">Sale</label>
         <input type="text" name="product_sale_price" id="product_sale_price" class="form-control" value="<?= $one[0]['sale_price'] ?>">
     </div>
-
+        <?php var_dump($variant) ?>
     <div class="form-group mb-3">
             <div class="group-checkout">
                         <label for="size">

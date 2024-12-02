@@ -105,11 +105,11 @@ class ProductAdminController {
             // if ($one) {
             //     // Sản phẩm được tìm thấy
             //     // Thực hiện xử lý tiếp
-            //     print_r($one); // In thông tin sản phẩm (test)
+            //     print_r($one);die; // In thông tin sản phẩm (test)
             // } else {
-        //     //     // Không tìm thấy sản phẩm
-        //     //     echo "Không tìm thấy sản phẩm với ID: $id";
-        //     // }
+            //     // Không tìm thấy sản phẩm
+            //     echo "Không tìm thấy sản phẩm với ID: $id";
+            // }
 
         // } else {
         //     // Tham số ID không được truyền qua URL
@@ -174,10 +174,10 @@ class ProductAdminController {
 
         }
 
-        // echo "<pre>";
-        // print_r($_POST);
-        // print_r($_FILES);
-        // echo "</pre>";
+        echo "<pre>";
+        print_r($_POST);
+        print_r($_FILES);
+        echo "</pre>";
         
         $listCategories = $this->productQuery->getAllCategories();
         $variant = $this->productQuery->get_allvariant();
@@ -189,6 +189,18 @@ class ProductAdminController {
     
     
     // Xóa sản phẩm
+    public function deleteProduct() {
+        if (isset($_GET['id'])) {
+            $product_id = $_GET['id'];
+    
+            // Gọi model để xóa sản phẩm
+            $this->productQuery->delete($product_id);
+    
+            // Chuyển hướng về danh sách sản phẩm sau khi xóa
+            header('Location: index.php?action=product');
+            exit;
+        }
+    }
     
     public function showsp(){
         $spmoi = $this->productQuery->render_allproduct();

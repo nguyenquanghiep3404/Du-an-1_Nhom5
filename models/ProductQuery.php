@@ -220,6 +220,13 @@ class ProductQuery  {
                 WHERE p.product_id = ?";
         return pdo_query_one($sql, $product_id);
     }
+    public function delete($product_id) {
+        $sql = "DELETE FROM products WHERE product_id = :product_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':product_id' => $product_id,
+        ]);
+    }
 // }
 // show sản phẩm
 

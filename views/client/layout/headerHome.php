@@ -116,64 +116,7 @@
         </div>
     </div>
     <!--offcanvas menu area end-->
-    <!--mini cart-->
-    <div class="mini_cart">
-        <div class="cart_gallery">
-            <div class="cart_close">
-                <div class="cart_text">
-                    <h3>cart</h3>
-                </div>
-                <div class="mini_cart_close">
-                    <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="public/client/assets/img/product/product1.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Primis In Faucibus</a>
-                    <p>1 x <span> $65.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="public/client/assets/img/product/product2.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Letraset Sheets</a>
-                    <p>1 x <span> $60.00 </span></p>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="icon-close icons"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_table">
-            <div class="cart_table_border">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-                <div class="cart_total mt-10">
-                    <span>total:</span>
-                    <span class="price">$125.00</span>
-                </div>
-            </div>
-        </div>
-        <div class="mini_cart_footer">
-            <div class="cart_button">
-                <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
-            </div>
-            <div class="cart_button">
-                <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
-            </div>
-        </div>
-    </div>
-    <!--mini cart end-->
+    
     <!--header area start-->
     <header class="header_section header_transparent">
         <div class="header_top">
@@ -230,16 +173,27 @@
                             <div class="main_menu d-none d-lg-block">
                                 <nav>
                                     <ul class="d-flex">
-                                        <li><a class="active" href="index.html">Trang chủ</a> </li>
+                                        <li><a class="active" href="?action=client">Trang chủ</a> </li>
                                         <li><a href="shop.html">Giới thiệu</a></li>
-                                        <li><a href="product-details.html">Sản phẩm</a></li>
-                                        <li><a href="#">Cửa hàng</a></li>
-                                        <li><a href="#">Liên Hệ</a>
-                                            <ul class="sub_menu">
-                                                <li><a href="cart.html">Cart Pages</a></li>
-                                                <li><a href="checkout.html">Checkout Pages</a></li>
+                                        <li>
+                                        <a href="product-details.html">Sản phẩm</a>
+                                        <ul class="sub_menu">
+                                            <li>
+                                            <span class="category-title" style="font-size: 20px; text-decoration: underline;">Áo Nam</span>
+                                            <ul class="category-menu">
+                                                <li><a href="#">Áo thun</a></li>
+                                                <li><a href="#">Áo sơ mi</a></li>
+                                                <li><a href="#">Áo polo</a></li>
+                                                <li><a href="#">Áo dài tay</a></li>
+                                                <li><a href="#">Áo khoác</a></li>
+                                                <li><a href="#">Áo Tanktop</a></li>
+                                                <li><a href="#">Áo thể thao</a></li>
                                             </ul>
+                                            </li>
+                                        </ul>
                                         </li>
+                                        <li><a href="#">Cửa hàng</a></li>
+                                        <li><a href="#">Liên Hệ</a></li>
                                         <li><a href="blog.html">Tin tức</a>
                                             <ul class="sub_menu">
                                                 <li><a href="blog.html">Blog Pages</a></li>

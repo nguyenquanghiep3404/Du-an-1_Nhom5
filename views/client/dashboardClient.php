@@ -12,10 +12,7 @@
                 </div>
 
                 
-                    <div class="all_product">
-                        <a href="shop.html">Xem thêm</a>
-                    </div>
-
+                   
             </div>
             <div class="product_container row">
                 <div class="tab-content">
@@ -55,7 +52,7 @@
                                                                 data-tippy="Thêm vào giỏ hàng" href="#" data-tippy-inertia="true"
                                                                 data-tippy-delay="50" data-tippy-arrow="true"
                                                                 data-tippy-placement="left">
-                                                                <span class="material-symbols-outlined">add_shopping_cart</span></a></li>
+                                                                <span class="material-symbols-outlined" href="?action=miniPoduct&product_id='.$product->product_id?>">add_shopping_cart</span></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -73,8 +70,8 @@
                                                 <h4 class="product_name"><a href="###"><?= $product->name ?></a>
                                                 </h4>
                                                 <div class="price_box">
-                                                    <span class="current_price"><?= $product->price ?>đ</span>
-                                                    <span class="old_price"><?= $product->sale_price ?>đ</span>
+                                                    <span class="current_price"><?= number_format($product->price, 0, ',', '.') ?>đ</span>
+                                                    <span class="old_price"><?= number_format($product->sale_price , 0, ',', '.')?>đ</span>
                                                 </div>
 
                                                     <div class="add_to_cart">
@@ -4835,7 +4832,7 @@
     <!-- blog section end -->
 
 
-
+    <?php include './views/client/layout/modalPoduct.php' ?>
     <?php include './views/client/layout/miniCart.php' ?>
 
     <?php include './views/client/layout/footerHome.php' ?>
