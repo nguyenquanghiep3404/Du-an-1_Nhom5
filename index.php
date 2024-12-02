@@ -163,5 +163,8 @@ switch ($action) {
     case 'profile';
         $profileAdmin->profile();
         break;
+    case 'timkiemsanpham':
+        $HomeClient->search();
+        break;
 }
 ?>
