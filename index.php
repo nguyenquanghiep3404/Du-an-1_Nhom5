@@ -14,6 +14,7 @@ require_once './models/historicModel.php';
 require_once './models/ProductQuery.php';
 require_once './models/checkoutModel.php';
 require_once './models/profileModel.php';
+require_once './models/OrderModel.php';
 // require_once './models/cartsModels.php';
 
 // Kết nối Controller
@@ -22,16 +23,24 @@ require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php';
 require_once './controllers/admin/registerControllers.php';
 require_once './controllers/admin/loginController.php';
-// require_once './controllers/client/CartsControllers.php';
+require_once './controllers/admin/OrderControllers.php';
+
 // Controller bên client
 require_once './controllers/client/checkout.php';
 require_once './controllers/client/profileController.php';
 require_once './controllers/client/ProductClientControllers.php';
+// require_once './controllers/client/CartsControllers.php';
+// Lấy giá trị "id" từ đường dẫn url
+$product_id = "";
+if (isset($_GET["id"])) {
+    $product_id = $_GET["id"];
+
 require_once './controllers/client/historic.php';
 
 
 if (!isset($_SESSION['myCart']) || !is_array($_SESSION['myCart'])) {
     $_SESSION['myCart'] = []; // Khởi tạo giỏ hàng nếu chưa tồn tại
+
 }
 
 
@@ -42,9 +51,12 @@ $loginAdmin = new loginController();
 $registerAdmin = new registerController();
 $checkoutAdmin = new checkoutController();
 $HomeClient = new HomeClientControllers();
-$historicClient = new historicController();
-$profileAdmin = new profileController();
 
+
+$historicClient = new historicController();
+
+$profileAdmin = new profileController();
+$orderAdmin = new OrderControllers();
 switch ($action) {
     case "admin":
         include './views/admin/dashboard.php';
@@ -161,11 +173,22 @@ switch ($action) {
     case 'profile';
         $profileAdmin->profile();
         break;
+    // Quản lý đơn hàng
+    case 'listOrders';
+        $orderAdmin->listOrder();
+        break;
+    case 'updateOrder';
+        $orderAdmin->updateOrder();
+        break;
+    case 'updateOrderPost';
+        $orderAdmin->updateOrder_POST();
+
     case 'timkiemsanpham':
         $HomeClient->search();
         break;
     case 'historic':
         $historicClient->orderHistory();
+
         break;
 }
 ?>
