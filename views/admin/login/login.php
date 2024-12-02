@@ -2,7 +2,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         
         <div class="bg-white p-4 rounded shadow-sm w-100 " style="max-width: 400px;">
-   <form action="?action=loginPost" method="POST">
+   <form action="?action=loginPost" method="POST" style="padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
         <h2 class="text-center mb-4">Đăng Nhập</h2>
     
             <div class="mb-3">
