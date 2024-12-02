@@ -223,12 +223,12 @@
         </div>
     </div>
     <!-- page search box -->
-    <div class="page_search_box">
+    <div class="page_search_box" style="height: 40%;">
         <div class="search_close">
             <i class="ion-close-round"></i>
         </div>
-        <form class="border-bottom" action="#">
-            <input class="border-0" placeholder="Search products..." type="text">
+        <form class="border-bottom" action="?action=timkiemsanpham" method="POST">
+            <input class="border-0" name="kyw" placeholder="Tìm kiếm sản phẩm..." type="text">
             <button type="submit"><span class="icon-magnifier icons"></span></button>
         </form>
     </div>
