@@ -10,7 +10,7 @@ require_once './models/Product.php';
 require_once './models/categoryModel.php';
 require_once './models/registerModels.php';
 require_once './models/loginModel.php';
-
+require_once './models/historicModel.php';
 require_once './models/ProductQuery.php';
 require_once './models/checkoutModel.php';
 require_once './models/profileModel.php';
@@ -22,15 +22,13 @@ require_once './controllers/admin/ProductAdminController.php';
 require_once './controllers/admin/categoryControllers.php';
 require_once './controllers/admin/registerControllers.php';
 require_once './controllers/admin/loginController.php';
-require_once './controllers/client/ProductClientControllers.php';
 // require_once './controllers/client/CartsControllers.php';
-
-
-
-
 // Controller bên client
 require_once './controllers/client/checkout.php';
 require_once './controllers/client/profileController.php';
+require_once './controllers/client/ProductClientControllers.php';
+require_once './controllers/client/historic.php';
+
 
 if (!isset($_SESSION['myCart']) || !is_array($_SESSION['myCart'])) {
     $_SESSION['myCart'] = []; // Khởi tạo giỏ hàng nếu chưa tồn tại
@@ -44,7 +42,7 @@ $loginAdmin = new loginController();
 $registerAdmin = new registerController();
 $checkoutAdmin = new checkoutController();
 $HomeClient = new HomeClientControllers();
-
+$historicClient = new historicController();
 $profileAdmin = new profileController();
 
 switch ($action) {
@@ -165,6 +163,9 @@ switch ($action) {
         break;
     case 'timkiemsanpham':
         $HomeClient->search();
+        break;
+    case 'historic':
+        $historicClient->orderHistory();
         break;
 }
 ?>

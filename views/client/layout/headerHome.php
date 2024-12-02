@@ -213,20 +213,20 @@
                                             <?php if (isset($_SESSION['name'])) {
                                             ?>
                                                 <li><a href="?action=profile"><?= $_SESSION['name']['name'] ?></a></li>
-                                                <li><a href="#">My Account</a></li>
+                                                <li><a href="#">Tài khoản của tôi</a></li>
                                                     <?php
                                                     if ($_SESSION['role_id'] == 1) {?>
-                                                       <li><a href="?action=admin">Admin</a></li>
-                                                       <li><a href="?action=logout">Logout</a></li>
+                                                       <li><a href="?action=admin">=>Admin</a></li>
+                                                       <li><a href="?action=logout">Đăng Xuất</a></li>
                                                     <?php
                                                     }
                                                     ?>
 
                                                         <?php } else { ?>
 
-                                                    <li><a href="?action=login">Login</a></li>
-                                                    <li><a href="#">Contact</a></li>
-                                                    <li><a href="?action=register">Register</a></li>
+                                                    <li><a href="?action=login">Đăng Nhập</a></li>
+                                                    <li><a href="#">Liên Hệ</a></li>
+                                                    <li><a href="?action=register">Đăng Kí</a></li>
                                                 <?php } ?>
 
 

@@ -25,7 +25,7 @@
                         <li class="list-group-item">
                             <strong>Đơn hàng của tôi</strong>
                             <ul class="list-unstyled ms-3">
-                                <li><a href="#" onclick="saveClick('Tất cả các đơn hàng')">Tất cả các đơn hàng</a></li>
+                                <li><a href="?action=historic" onclick="saveClick('Tất cả các đơn hàng')">Tất cả các đơn hàng</a></li>
                                 <li><a href="#" onclick="saveClick('Đơn hàng xử lý')">Đơn hàng đang xử lý</a></li>
                                 <li><a href="#" onclick="saveClick('Đơn hàng chờ lấy hàng')">Đơn hàng chờ lấy hàng</a></li>
                                 <li><a href="#" onclick="saveClick('Đơn hàng đang giao')">Đơn hàng đang giao</a></li>
