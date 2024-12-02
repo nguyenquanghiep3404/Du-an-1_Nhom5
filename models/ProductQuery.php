@@ -263,5 +263,13 @@ class ProductQuery  {
             pdo_execute($sql, $product_id);
         }
     }
+    // Hàm tìm kiếm sản phẩm theo từ khóa
+    public function searchProducts($keyword) {
+        $query = "SELECT * FROM products WHERE name LIKE :keyword";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

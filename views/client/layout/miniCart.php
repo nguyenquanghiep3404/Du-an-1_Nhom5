@@ -66,7 +66,7 @@ $cartTotal = 0; // Khởi tạo tổng tiền giỏ hàng
 
 <?php else: ?>
     <!-- Thông báo giỏ hàng trống -->
-    <p>Giỏ hàng của bạn đang trống</p>
+    <!-- <p>Giỏ hàng của bạn đang trống</p> -->
 <?php endif; ?>
 
     <!--mini cart end-->

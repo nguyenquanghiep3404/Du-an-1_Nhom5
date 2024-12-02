@@ -88,8 +88,9 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    <?php endforeach; } else{
-                                        echo "Giỏ hàng của bạn đang trống";
+                                    <?php endforeach; } 
+                                    else{
+                                        // echo "Giỏ hàng của bạn đang trống";
                                     }?>
                                     
                                 </tbody>

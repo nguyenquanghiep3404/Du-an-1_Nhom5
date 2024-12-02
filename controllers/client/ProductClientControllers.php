@@ -162,6 +162,16 @@ class HomeClientControllers {
             echo json_encode(['status' => 'error', 'message' => 'Dữ liệu không hợp lệ']);
         }
     }
+    public function search() {
+        $results = [];
+        if (isset($_POST['kyw']) && !empty($_POST['kyw'])) {
+            $keyword = trim($_POST['kyw']);
+            $results = $this->productQuery->searchProducts($keyword);
+        }
+
+        // Trả dữ liệu về view
+        require './views/client/searchResults.php';
+    }
 
 
 }
