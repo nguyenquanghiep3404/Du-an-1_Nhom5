@@ -118,7 +118,7 @@
                     <td> <?= $product['name'] ?></td>
                     <td>
                         <div style="height: 60px; width: 60px">
-                            <img style="max-height:100%; max-width:100%;" src="<?= BASE_URL .   $product['image'] ?>">
+                            <img style="max-height:100%; max-width:100%;" src="<?=  $product['image'] ?>">
                         </div>
                     </td>
                     <td> <?= $product['price'] ?> </td>
@@ -132,7 +132,7 @@
                         <a href="?action=product-delete&id=<?= $product->product_id ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a> -->
 
                         <td>
-                            <!-- <a href="<?= BASE_URL. '?action=product-details&product_id='.$product['product_id'] ?>">
+                            <!-- <a href="<?= '?action=product-details&product_id='.$product['product_id'] ?>">
                             <button class="btn btn-primary"><i class="far fa-eye"></i></button>
                             </a> -->
                             <a href="<?= '?action=product-form-edit&id='.$product['product_id'] ?>"><i class="bx bx-edit"></i></a>

@@ -7,15 +7,15 @@ class OrderModel{
     }
     
     public function allOrder()
-    {
+    {   
         $sql = "SELECT * FROM `order_details`";
         $data = $this->conn->query($sql);
         return $data->fetchAll();
     }
     
-    public function updateOrder($id,$status)
+    public function updateOrder($id,$status,$updated_at)
     {
-        $sql = "UPDATE `order_details` SET `status` = '$status' WHERE `order_detail_id` = '$id' ";
+        $sql = "UPDATE `order_details` SET `status` = '$status' , `updated_at` = '$updated_at' WHERE `order_detail_id` = '$id' ";
         $this->conn->exec($sql);
     }
     public function find($id)
