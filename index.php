@@ -33,7 +33,7 @@ require_once './controllers/client/ProductClientControllers.php';
 // Lấy giá trị "id" từ đường dẫn url
 $product_id = "";
 if (isset($_GET["id"])) {
-    $product_id = $_GET["id"];
+    $product_id = $_GET["id"];}
 
 require_once './controllers/client/historic.php';
 
@@ -59,6 +59,15 @@ $profileAdmin = new profileController();
 $orderAdmin = new OrderControllers();
 switch ($action) {
     case "admin":
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
         include './views/admin/dashboard.php';
         break;
     case "product":
@@ -70,8 +79,8 @@ switch ($action) {
     case "product-form-edit":
         $productAdmin->Edit();
         break;
-    case "delete-product":
-        $productAdmin->deleteProduct();
+    // case "delete-product":
+    //     $productAdmin->deleteProduct();
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
@@ -188,7 +197,12 @@ switch ($action) {
         break;
     case 'historic':
         $historicClient->orderHistory();
-
+        break;
+    case 'viewOrderDetails':
+        $historicClient->viewOrderDetails();
+        break;
+    case "403":
+        include './views/client/403page.php';
         break;
 }
 ?>

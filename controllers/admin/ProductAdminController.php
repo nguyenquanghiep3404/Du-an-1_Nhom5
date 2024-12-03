@@ -20,6 +20,16 @@ class ProductAdminController {
     // Hiện sản phẩm
     public function showList()
     {
+        // logic quyền admin
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
         // 1. Gọi xuống model để lấy danh sách product
         $danhSachProduct = $this->productQuery->getAllProduct();
         $variant = $this->productQuery->get_allvariant();
@@ -32,6 +42,16 @@ class ProductAdminController {
     // Thêm mới sản phẩm vào database
     public function Create()
     {   
+        // logic quyền admin
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
         if((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
             
                 $name = $_POST['product_name'];
@@ -97,7 +117,17 @@ class ProductAdminController {
         include "./views/admin/product/create.php";
     }// END Create()
     public function Edit()
-    {
+    {   
+        // logic quyền admin
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
         if(isset($_GET['id'])) {
             $id = $_GET['id'];
             $one =$this->productQuery->getone_product($id);
@@ -189,18 +219,18 @@ class ProductAdminController {
     
     
     // Xóa sản phẩm
-    public function deleteProduct() {
-        if (isset($_GET['id'])) {
-            $product_id = $_GET['id'];
+    // public function deleteProduct() {
+    //     if (isset($_GET['id'])) {
+    //         $product_id = $_GET['id'];
     
-            // Gọi model để xóa sản phẩm
-            $this->productQuery->delete($product_id);
+    //         // Gọi model để xóa sản phẩm
+    //         $this->productQuery->delete($product_id);
     
-            // Chuyển hướng về danh sách sản phẩm sau khi xóa
-            header('Location: index.php?action=product');
-            exit;
-        }
-    }
+    //         // Chuyển hướng về danh sách sản phẩm sau khi xóa
+    //         header('Location: index.php?action=product');
+    //         exit;
+    //     }
+    // }
     
     public function showsp(){
         $spmoi = $this->productQuery->render_allproduct();

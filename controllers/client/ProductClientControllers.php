@@ -51,11 +51,11 @@ class HomeClientControllers {
     // 
     public function addToCart(){
         // yêu cầu người dùng đăng nhập thì mới đặt được hàng
-        if (!isset($_SESSION['name'])) {
-            echo "<script>alert('Vui lòng đăng nhập để đặt hàng.');</script>";
-            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
-            exit();
-        }
+        // if (!isset($_SESSION['name'])) {
+        //     echo "<script>alert('Vui lòng đăng nhập để đặt hàng.');</script>";
+        //     header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+        //     exit();
+        // }
         // Xóa toàn bộ giỏ hàng nếu được yêu cầu
         if (isset($_GET['emptyCart']) && ($_GET['emptyCart']) == 1) {
             unset($_SESSION['myCart']);

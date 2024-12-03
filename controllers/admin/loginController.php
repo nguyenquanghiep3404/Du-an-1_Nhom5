@@ -27,8 +27,11 @@ class loginController{
                $_SESSION['role_id'] = $this->loginModel->Role($username)['role_id'];
             //    var_dump($_SESSION['id_role']);
                header('location:?action=client');
-            }else{
-               echo "Sai tên đăng nhập hoặc mất khẩu";
+            }else {
+                // Lưu thông báo lỗi vào session tạm
+                $_SESSION['login_error'] = "Sai tên đăng nhập hoặc mật khẩu!";
+                header('location:?action=login');
+                exit();
             }
 
         }
@@ -37,7 +40,7 @@ class loginController{
     public function logout()
     {
         unset($_SESSION['name']);
-        unset($_SESSION['myCart']);
+       
         header('location:?action=client');
         
     } 

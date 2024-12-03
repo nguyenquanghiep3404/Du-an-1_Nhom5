@@ -9,7 +9,7 @@
                         <li><a href="index.html">home</a></li>
                         <li><a href="#">pages</a></li>
                     </ul>
-                    <h3>checkout</h3>
+                    <h3>Trang Thanh Toán</h3>
                 </div>
             </div>
         </div>

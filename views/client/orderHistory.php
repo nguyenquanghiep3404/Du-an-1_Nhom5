@@ -17,7 +17,7 @@
     </style>
 
 <div>
-   <!-- <?php var_dump($orderHistory) ?> -->
+   <?php var_dump($orderHistory) ?>
     <h2 class="text-center mt-4 mb-4">Lịch sử đơn hàng</h>
     <table class="mt-3" style="margin-left:25px;margin-right:15px;">
         <thead>
@@ -31,6 +31,8 @@
                 <th>Số điện thoại</th>
                 <th>Địa chỉ</th>
                  <th>Ghi chú</th>
+                 <th>Ngày đặt</th>
+                 <th>Chi tiết</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +47,13 @@
                     <td><?= ($order['phone']) ?></td>
                     <td><?= ($order['address']) ?></td>
                     <td><?= ($order['note']) ?></td>
+                    <td></td>
+                    <td>
+                        <a href="?action=viewOrderDetails&order_id=<?= ($order['order_id']) ?>" 
+                            class="btn btn-info btn-sm">
+                            Xem chi tiết
+                        </a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
