@@ -20,9 +20,9 @@ class checkoutModel{
         return $data->fetch();
     }
 
-    public function insetOrderDetails($name,$email,$phone,$address,$note,$id)
-    {
-        $sql = "INSERT INTO `order_details` (`name`, `email`, `phone`, `address`, `note`, `user_id`) VALUE ('$name', '$email', '$phone', '$address', '$note', '$id')";
+    public function insetOrderDetails($name,$email,$phone,$address,$note,$id,$created_at)
+    {   
+        $sql = "INSERT INTO `order_details` (`name`, `email`, `phone`, `address`, `note`, `user_id`, `created_at` ) VALUE ('$name', '$email', '$phone', '$address', '$note', '$id', '$created_at')";
         $this->conn->exec($sql);
     }
     

@@ -29,11 +29,18 @@ require_once './controllers/admin/OrderControllers.php';
 require_once './controllers/client/checkout.php';
 require_once './controllers/client/profileController.php';
 require_once './controllers/client/ProductClientControllers.php';
+// require_once './controllers/client/historic.php';
+
 // require_once './controllers/client/CartsControllers.php';
 // Lấy giá trị "id" từ đường dẫn url
 $product_id = "";
 if (isset($_GET["id"])) {
+
     $product_id = $_GET["id"];}
+
+    $product_id = $_GET["id"];
+}    
+
 
 require_once './controllers/client/historic.php';
 
@@ -51,10 +58,7 @@ $loginAdmin = new loginController();
 $registerAdmin = new registerController();
 $checkoutAdmin = new checkoutController();
 $HomeClient = new HomeClientControllers();
-
-
 $historicClient = new historicController();
-
 $profileAdmin = new profileController();
 $orderAdmin = new OrderControllers();
 switch ($action) {
@@ -208,5 +212,6 @@ switch ($action) {
         http_response_code(404);
         require_once "./views/404page.php";
         break;
-}
+        }
+    
 ?>

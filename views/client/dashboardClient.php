@@ -42,7 +42,7 @@
                                         <figure>
                                             <div class="product_thumb">
                                                 <a href="<?='?action=product-details&product_id='.$product->product_id?>">
-                                                    <img class="primary_img" src="<?= BASE_URL. $product->image ?>"
+                                                    <img class="primary_img" src="<?=$product->image ?>"
                                                         alt="consectetur">
                                                 </a>
                                                 <!-- Để nguyên -->
