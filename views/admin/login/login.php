@@ -83,12 +83,12 @@
                 <form action="?action=loginPost" method="POST">
                   <div class="mb-7">
                     <label for="email" class="form-label fw-bold">Tên Đăng Nhập</label>
-                    <input type="text" class="form-control py-6" name="name" id="name" aria-describedby="emailHelp">
+                    <input type="text" class="form-control py-6" name="name" id="name" aria-describedby="emailHelp" placeholder="Nhập tên của bạn">
                     
                   </div>
                   <div class="mb-9">
                     <label for="password" name="password" class="form-label fw-bold">Mật Khẩu</label>
-                    <input type="password" class="form-control py-6" id="password" name="password">
+                    <input type="password" class="form-control py-6" id="password" name="password" placeholder="Nhập mật khẩu của bạn">
 
                   </div>
                   <div class="d-md-flex align-items-center justify-content-between mb-7 pb-1">

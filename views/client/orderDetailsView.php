@@ -1,17 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết đơn hàng</title>
-</head>
-<body>
-    <h1>Chi tiết đơn hàng</h1>
+<?php include ('./views/client/layout/header.php') ?>
+<style>
+        table {
+            width: 95%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+<div>
+    <h2 class="text-center mt-4 mb-4">Chi tiết đơn hàng</h2>
 
     <?php if (empty($orderDetails)): ?>
         <p>Không tìm thấy chi tiết đơn hàng.</p>
     <?php else: ?>
-        <table border="1">
+        <table class="mt-3" style="margin-left:25px;margin-right:15px;">
             <thead>
                 <tr>
                     <th>Tên sản phẩm</th>
@@ -33,7 +43,10 @@
             </tbody>
         </table>
     <?php endif; ?>
-
-    <a href="?action=orderHistory">Quay lại lịch sử đơn hàng</a>
-</body>
-</html>
+    <div class="text-primary" style="padding-top:10px;margin-left:25px;margin-right:15px;">
+    <a  href="?action=historic">Quay lại lịch sử đơn hàng</a>
+    </div>
+</div>
+<?php include './views/client/layout/modalPoduct.php' ?>
+    <?php include './views/client/layout/miniCart.php' ?>
+    <?php include ('./views/client/layout/footer.php'); ?>

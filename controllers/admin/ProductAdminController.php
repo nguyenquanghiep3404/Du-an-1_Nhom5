@@ -19,17 +19,18 @@ class ProductAdminController {
 
     // Hiện sản phẩm
     public function showList()
-    {
+    {   
+        // // Kiểm tra quyền của người dùng phải có role = 0 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
         // logic quyền admin
         if (!isset($_SESSION['name'])) {
             header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
             exit();
         }
-        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
-        if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
-            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
-            exit();
-        }
+        
         // 1. Gọi xuống model để lấy danh sách product
         $danhSachProduct = $this->productQuery->getAllProduct();
         $variant = $this->productQuery->get_allvariant();
@@ -47,8 +48,8 @@ class ProductAdminController {
             header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
             exit();
         }
-        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
-        if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+        // Kiểm tra quyền của người dùng phải có role =0 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
             header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
             exit();
         }
@@ -124,7 +125,7 @@ class ProductAdminController {
             exit();
         }
         // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
-        if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
             header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
             exit();
         }
