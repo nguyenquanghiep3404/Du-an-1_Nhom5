@@ -189,18 +189,18 @@ class ProductAdminController {
     
     
     // Xóa sản phẩm
-    public function deleteProduct() {
-        if (isset($_GET['id'])) {
-            $product_id = $_GET['id'];
+    // public function deleteProduct() {
+    //     if (isset($_GET['id'])) {
+    //         $product_id = $_GET['id'];
     
-            // Gọi model để xóa sản phẩm
-            $this->productQuery->delete($product_id);
+    //         // Gọi model để xóa sản phẩm
+    //         $this->productQuery->delete($product_id);
     
-            // Chuyển hướng về danh sách sản phẩm sau khi xóa
-            header('Location: index.php?action=product');
-            exit;
-        }
-    }
+    //         // Chuyển hướng về danh sách sản phẩm sau khi xóa
+    //         header('Location: index.php?action=product');
+    //         exit;
+    //     }
+    // }
     
     public function showsp(){
         $spmoi = $this->productQuery->render_allproduct();

@@ -70,8 +70,8 @@ switch ($action) {
     case "product-form-edit":
         $productAdmin->Edit();
         break;
-    case "delete-product":
-        $productAdmin->deleteProduct();
+    // case "delete-product":
+    //     $productAdmin->deleteProduct();
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
