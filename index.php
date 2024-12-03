@@ -191,7 +191,6 @@ switch ($action) {
         break;
     case 'updateOrderPost';
         $orderAdmin->updateOrder_POST();
-
     case 'timkiemsanpham':
         $HomeClient->search();
         break;
