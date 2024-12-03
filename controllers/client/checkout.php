@@ -35,8 +35,10 @@ class checkoutController{
         $phone = $_POST['phone'];
         $address = $_POST['address'];
         $note = $_POST['note'];
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $created_at = date('Y-m-d H:i:s');
         $id = $_SESSION['name']['user_id'];
-        $this->checkModel->insetOrderDetails($name,$email,$phone,$address,$note,$id); // Thêm chi tiết đơn hàng
+        $this->checkModel->insetOrderDetails($name,$email,$phone,$address,$note,$id,$created_at); // Thêm chi tiết đơn hàng
         $order_details_id = $this->checkModel->getOrder_details_user_id($id)['order_detail_id']; // Lấy ID của chi tiết đơn hàng vừa tạo
         if (isset($_SESSION['myCart']) && is_array($_SESSION['myCart'])) {
             foreach ($_SESSION['myCart'] as $item) {

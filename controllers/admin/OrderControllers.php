@@ -9,6 +9,13 @@ class OrderControllers{
     public function listOrder()
     {
         $orders = $this->orderModel->allOrder();
+        // Tham chiếu giá trị status
+        $statusShow = [
+            0 => 'Chờ xác nhận',
+            1 => 'Đã xác nhận',
+            2 => 'Đang vận chuyển',
+            3 => 'Hoàn thành',
+         ];
         require_once './views/admin/Order/showOrder.php';
     }
     public function updateOrder()
@@ -23,10 +30,14 @@ class OrderControllers{
         // var_dump( $id =  $_POST['order_detail_id']);
         $id = $_GET['id'];
         $status = $_POST['status'];
-        $this->orderModel->updateOrder($id,$status);
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $updated_at = date('Y-m-d H:i:s');
+        $this->orderModel->updateOrder($id,$status,$updated_at);
         // require_once './views/admin/Order/Order.php';
         header('location:?action=listOrders');
-} 
+    }    
+    
+    
     } 
     
 ?>
