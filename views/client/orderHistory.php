@@ -1,7 +1,7 @@
-<?php include ('./views/client/layout/header.php'); ?>
+<?php include ('./views/client/layout/header.php') ?>
     <style>
         table {
-            width: 90%;
+            width: 95%;
             border-collapse: collapse;
         }
         table, th, td {

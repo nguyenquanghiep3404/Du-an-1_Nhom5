@@ -23,7 +23,7 @@
             <button type="submit" name="btn-login" class="btn btn-danger w-100">Đăng Nhập</button>
 
         <div class="text-center mt-3">
-            <p>Bạn chưa có tài khoản? <a href="#" class="text-danger">Đăng Ký Ngay</a></p>
-            <a href="#" class="text-danger">Quên Mật Khẩu</a>
+            <p>Bạn chưa có tài khoản? <a href="?action=register" class="text-danger">Đăng Ký Ngay</a></p>
+            <a href="?action=client" class="text-danger">Quay về Trang chủ</a>
         </div>
 </form>

@@ -22,7 +22,7 @@ class historicController {
         // }
 
         // Kiểm tra nếu người dùng chưa đăng nhập
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['name'])) {
             echo "<script>alert('Vui lòng đăng nhập để xem lịch sử đơn hàng.');</script>";
             header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
             exit();

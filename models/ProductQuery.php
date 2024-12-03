@@ -146,7 +146,7 @@ class ProductQuery  {
     // }
     function update_product($name, $image, $price, $category_id, $sale_price, $description, $gallery, $product_id) {
         $sql = "UPDATE products 
-                SET name = ?, image = ?, price = ?, category_id = ?, sale_price = ?, description = ?, gallery = ?, updated_at = NOW() 
+                SET name = ?, image = ?, price = ?, category_id = ?, sale_price = ?, description = ?, gallery = ?,created_at=NOW(), updated_at = NOW() 
                 WHERE product_id = ?";
         return pdo_execute($sql, $name, $image, $price, $category_id, $sale_price, $description, $gallery, $product_id);
     }
@@ -220,13 +220,7 @@ class ProductQuery  {
                 WHERE p.product_id = ?";
         return pdo_query_one($sql, $product_id);
     }
-    public function delete($product_id) {
-        $sql = "DELETE FROM products WHERE product_id = :product_id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([
-            ':product_id' => $product_id,
-        ]);
-    }
+    
 // }
 // show sản phẩm
 
@@ -252,17 +246,7 @@ class ProductQuery  {
     // {
     //     $this->conn = null;
     // }
-    function deleteProduct($product_id)
-    {
-        $sql = "DELETE FROM products WHERE  product_id=?";
-        if (is_array($product_id)) {
-            foreach ($product_id as $mang) {
-                pdo_execute($sql, $mang);
-            }
-        } else {
-            pdo_execute($sql, $product_id);
-        }
-    }
+   
     // Hàm tìm kiếm sản phẩm theo từ khóa
     public function searchProducts($keyword) {
         $query = "SELECT * FROM products WHERE name LIKE :keyword";

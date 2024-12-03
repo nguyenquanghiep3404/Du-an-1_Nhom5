@@ -37,7 +37,9 @@ class loginController{
     public function logout()
     {
         unset($_SESSION['name']);
+        unset($_SESSION['myCart']);
         header('location:?action=client');
+        
     } 
 }
 
