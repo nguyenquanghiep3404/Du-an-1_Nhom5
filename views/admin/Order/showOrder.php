@@ -98,40 +98,35 @@
         
     </nav>
     <!-- NAVBAR -->
-    <h1 class="text-center text-primary mb-4">Quản Lý Danh Mục</h1>
-    <div class="d-flex justify-content-end mb-3">
-<a href="?action=create-dm"><input type="button" value="Nhập thêm" class="btn btn-primary"></a>
-</div>
+<h1 class="text-center text-primary mb-4">Danh sách đơn hàng</h1>
+
 <table class="table table-hover table-bordered text-center align-middle">
     <thead class="table-dark">
         <tr>
-            <td>ID</td>
-            <td>Name</td>
-            <td>Description</td>
-            <td>Status</td>
-
-            <td>Operation</td>
-
+            <th>ID</th>
+            <th>Khách hàng</th>
+            <th>Email</th>
+            <th>Điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach($cate as $cates) {?>
-        <tr>
-
-            <td><?= $cates['category_id'] ?></td>
-            <td><?= $cates['name'] ?></td>
-            <td><?= $cates['description'] ?></td>
-            <td><?= $cates['status'] ?></td>
-            <td>
-
-              
-               <!-- <a href="?act=delete-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a> -->
-               <a href="?action=update-dm&id=<?= $cates['category_id'] ?>" ><input type="button" class="btn btn-warning btn-sm" value="Sửa"></a>
-               <a href="?action=hide-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')" class="btn btn-danger btn-sm">Xoá</a>
-               <a href="?action=show-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')" class="btn btn-success btn-sm">Bỏ Xoá</a>
-            </td>
-        </tr>
-        <?php }?>
+        <!-- <input type="hidden" name="order_detail_id" value="<?= $order['order_detail_id'] ?>"> -->
+        <?php foreach ($orders as $order) { ?>
+            <tr>
+                    <td><?= $order['order_detail_id'] ?></td>
+                    <td><?= $order['name'] ?></td>
+                    <td><?= $order['email'] ?></td>
+                    <td><?= $order['phone'] ?></td>
+                    <td><?= $order['address'] ?></td>
+                    <td><?=$order['status']?></td>
+                    <td>
+                        <a href="?action=updateOrder&id=<?= $order['order_detail_id'] ?>" class="btn btn-warning btn-sm">update</a>
+                    </td>
+            </tr>
+        <?php } ?>
     </tbody>
 </table>
 <?php include ('./views/admin/layout/footer.php'); ?>
