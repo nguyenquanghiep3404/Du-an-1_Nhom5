@@ -126,7 +126,7 @@
                     <td><?= $order['updated_at'] ?></td>
                     <td><?=$statusShow[$order['status']]?></td>
                     <td>
-                        <a href="" class="btn btn-primary btn-sm">Xem chi tiết</a>
+                        <a href="?action=showOrder&id=<?= $order['order_detail_id'] ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
                         <a href="?action=updateOrder&id=<?= $order['order_detail_id'] ?>" class="btn btn-warning btn-sm">Cập nhật</a>
                     </td>
             </tr>
