@@ -180,30 +180,28 @@
                                 <li class="header_search"><a href="#"><i class="icon-magnifier icons"></i></a></li>
                                 <li class="account_link"><a href="#"><i class="icon-user icons"></i></a>
                                 <ul class="dropdown_account_link">
-
-                                    <?php if (isset($_SESSION['name'])) {
-                                    ?>
-                                        <li><a href="?action=profile"><?= $_SESSION['name']['name'] ?></a></li>
-                                        <li><a href="#">My Account</a></li>
+                                        <?php if (isset($_SESSION['name'])) { ?>
+                                            <li><a href="?action=profile">Xin Chào <?=  ($_SESSION['name']['name']) ?>!</a></li>
+                                            <li><a href="?action=profile">Quản Lý Tài Khoản</a></li>
                                             <?php
-                                            if ($_SESSION['role_id'] == 1) {?>
-                                            <li><a href="?action=admin">Admin</a></li>
-                                            <li><a href="?action=logout">Logout</a></li>
-                                            
+                                            if ($_SESSION['role_id'] == 0) { // Quản trị viên
+                                            ?>
+                                                <li><a href="?action=admin">Truy Cập Trang Admin</a></li>
+                                            <?php
+                                            } elseif ($_SESSION['role_id'] == 1) { // Người dùng thông thường
+                                            ?>
+                                                
                                             <?php
                                             }
                                             ?>
-
-                                                <?php } else { ?>
-
-                                            <li><a href="?action=login">Login</a></li>
-                                            <li><a href="#">Contact</a></li>
-                                            <li><a href="?action=register">Register</a></li>
+                                            
+                                            <li><a href="?action=logout">Đăng Xuất</a></li>
+                                        <?php } else { ?>
+                                            <li><a href="?action=login">Đăng Nhập</a></li>
+                                            <li><a href="?action=register">Đăng Kí</a></li>
                                         <?php } ?>
-
-
                                     </ul>
-                                </li>
+                                    </li>
                                 <li><a href="#"><i class="icon-heart icons"></i></a> <span class="item_count">2</span></li>
                                 <li class="shopping_cart"><a href="#"><i class="icon-basket-loaded icons"></i></a>
                                 <span class="item_count">

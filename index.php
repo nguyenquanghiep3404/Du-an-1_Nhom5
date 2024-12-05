@@ -33,13 +33,13 @@ require_once './controllers/client/ProductClientControllers.php';
 
 // require_once './controllers/client/CartsControllers.php';
 // Lấy giá trị "id" từ đường dẫn url
-$product_id = "";
-if (isset($_GET["id"])) {
+// $product_id = "";
+// if (isset($_GET["id"])) {
 
-    $product_id = $_GET["id"];}
+//     $product_id = $_GET["id"];}
 
-    $product_id = $_GET["id"];
-}    
+//     $product_id = $_GET["id"];
+// }    
 
 
 require_once './controllers/client/historic.php';
@@ -204,6 +204,7 @@ switch ($action) {
     case 'viewOrderDetails':
         $historicClient->viewOrderDetails();
         break;
+    
     // Thông báo lỗi 403: Không có quyền truy cập - 404: truy cập sai đường dẫn
     case "403":
         include './views/403page.php';

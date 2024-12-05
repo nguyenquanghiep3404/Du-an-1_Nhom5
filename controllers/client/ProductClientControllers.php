@@ -36,12 +36,12 @@ class HomeClientControllers {
         include "./views/client/product-details.php";
         
     }
-    public function miniProduct(){
-        $product_id = $_GET['product_id'];
-        $product = $this->productQuery->getDetailSan($product_id);
-        $variant = $this->productQuery->get_product_by_variant($product_id);
-        include './views/client/layout/modalPoduct.php';
-    }
+    // public function miniProduct(){
+    //     $product_id = $_GET['product_id'];
+    //     $product = $this->productQuery->getDetailSan($product_id);
+    //     $variant = $this->productQuery->get_product_by_variant($product_id);
+    //     include './views/client/layout/modalPoduct.php';
+    // }
     public function categoryProductClient(){
         $listCategories = $this->productQuery->getAllCategories();
         $variant = $this->productQuery->get_allvariant();

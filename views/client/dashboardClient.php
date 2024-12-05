@@ -49,10 +49,10 @@
                                                 <div class="product_action">
                                                     <ul>
                                                         <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                                data-tippy="Thêm vào giỏ hàng" href="#" data-tippy-inertia="true"
+                                                                data-tippy="Thêm vào giỏ hàng"  data-tippy-inertia="true"
                                                                 data-tippy-delay="50" data-tippy-arrow="true"
                                                                 data-tippy-placement="left">
-                                                                <span class="material-symbols-outlined" href="?action=miniPoduct&product_id='.$product->product_id?>">add_shopping_cart</span></a></li>
+                                                                <span class="material-symbols-outlined">add_shopping_cart</span></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -4832,7 +4832,7 @@
     <!-- blog section end -->
 
 
-    <?php include './views/client/layout/modalPoduct.php' ?>
+    
     <?php include './views/client/layout/miniCart.php' ?>
 
     <?php include './views/client/layout/footerHome.php' ?>
