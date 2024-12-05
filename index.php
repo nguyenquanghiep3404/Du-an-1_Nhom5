@@ -188,8 +188,10 @@ switch ($action) {
         break;
     case 'historic':
         $historicClient->orderHistory();
-
         break;
-        }
+    case 'showOrder':
+        $orderAdmin->showOrder();
+        break;
+    }
     
 ?>

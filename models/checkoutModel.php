@@ -8,7 +8,7 @@ class checkoutModel{
     
     public function getOrder_details_user_id($user_id)
     {
-        $sql = "SELECT * FROM `order_details` WHERE `order_details` . `user_id` = '$user_id'";
+        $sql = "SELECT * FROM `order_details`  WHERE `order_details` . `user_id` = '$user_id' ORDER BY order_detail_id DESC";
         $data = $this->conn->query($sql);
         return $data->fetch();
     }

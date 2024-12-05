@@ -44,7 +44,7 @@ class checkoutController{
             foreach ($_SESSION['myCart'] as $item) {
         $product_id = $item['product_id'];
         $quantity = $item['quantity'];
-        $price = $item['price'];
+        $price = $item['total'];
         // var_dump($_SESSION['myCart']);
         // Lưu thông tin sản phẩm trong đơn hàng
         $this->checkModel->insetOrder($id, $product_id,$order_details_id,$quantity,$price);
