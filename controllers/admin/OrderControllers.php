@@ -37,7 +37,14 @@ class OrderControllers{
         header('location:?action=listOrders');
     }    
     
-    
+    // Chi tiết đơn hàng 
+    public function showOrder()
+    {   
+        $id = $_GET['id'];
+        $showOrder = $this->orderModel->allShow($id);
+        require_once './views/admin/Order/showOrderDetails.php';
+        // var_dump($showOrder);
+    }
     } 
     
 ?>

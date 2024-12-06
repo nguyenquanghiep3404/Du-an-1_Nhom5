@@ -213,6 +213,9 @@ switch ($action) {
         http_response_code(404);
         require_once "./views/404page.php";
         break;
-        }
+    case 'showOrder':
+        $orderAdmin->showOrder();
+        break;
+    }
     
 ?>
