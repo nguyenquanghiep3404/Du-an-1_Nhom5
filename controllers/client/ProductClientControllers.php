@@ -24,14 +24,14 @@ class HomeClientControllers {
     {
         $product_id = $_GET['product_id'];
         $product = $this->productQuery->getDetailSan($product_id);
-        $variant = $this->productQuery->get_product_by_variant($product_id);
+        $variant = $this->productQuery->getProductByVariant($product_id);
         // if (isset($_GET['product_id'])) {
         //     $product_id = $_GET['product_id'];
         //     $product = $this->productQuery->get_product_by_id($product_id);
         //     $variant = $this->productQuery->get_product_by_variant($product_id);
         // }
-        $product_id = $_GET['product_id'];
-        $allComment = $this->commentModel->allComment($product_id);
+        
+
         
         include "./views/client/product-details.php";
         
@@ -62,12 +62,15 @@ class HomeClientControllers {
             header('Location: ?action=addToCart');
             exit();
         }
-    
+        
         // Xử lý khi người dùng thêm sản phẩm vào giỏ hàng
-        if (isset($_POST['add_to_cart']) && $_POST['product_id'] > 0) {
+        if (isset($_POST['add_to_cart']) && $_POST['product_id'] > 0 ) {
             $product_id = $_POST['product_id'];
+            
             $quantity = isset($_POST['quantity']) && $_POST['quantity'] > 0 ? (int)$_POST['quantity'] : 1;
-    
+
+            $size = $_POST['size'] ?? null;
+            $color = $_POST['color'] ?? null;
             // Tìm thông tin sản phẩm từ database
             $product = $this->productQuery->find($product_id);
             if (!$product) {
@@ -75,6 +78,16 @@ class HomeClientControllers {
                 header('Location: ?action=addToCart&error=notfound');
                 exit();
             }
+            
+        
+            // Kiểm tra biến thể có tồn tại không
+            // $variant = $this->productQuery->checkVariant($product_id, $size, $color);
+            // if (!$variant) {
+            //     echo "Biến thể không tồn tại.";
+            //     exit();
+            // }
+            
+
     
             // Khởi tạo giỏ hàng nếu chưa tồn tại
             if (!isset($_SESSION['myCart']) || !is_array($_SESSION['myCart'])) {
@@ -84,7 +97,7 @@ class HomeClientControllers {
             // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
             $product_exists = false;
             foreach ($_SESSION['myCart'] as $key => $value) {
-                if ($value['product_id'] == $product_id) {
+                if ($value['product_id'] == $product_id && $value['color'] == $color && $value['size'] == $size) {
                     $product_exists = true;
     
                     // Tăng số lượng sản phẩm
@@ -103,14 +116,14 @@ class HomeClientControllers {
                     "image" => $product->image,
                     "name" => $product->name,
                     "price" => $product->price,
-                    "quantity" => $quantity, // Số lượng từ yêu cầu
-                    "total" => $product->price * $quantity, // Tính tổng giá trị
-                    "size" => $product->size,
-                    "color" => $product->color
+                   "color" => $_POST['color'],
+                    "size" => $_POST['size'],
+                "quantity" => $_POST['quantity']
                 ];
                 array_push($_SESSION['myCart'], $array_pro);
             }
         }
+       
     
         // Hiển thị trang giỏ hàng
         include './views/client/cart.php';

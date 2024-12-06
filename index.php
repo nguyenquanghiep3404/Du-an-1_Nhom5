@@ -217,6 +217,17 @@ switch ($action) {
     case 'delete_comment':
         $commentAdmin->delete();
         break;
+    case 'Vnpay':
+        $checkoutAdmin->returnVNpay();
+        break;
+    // Thông báo lỗi 403: Không có quyền truy cập - 404: truy cập sai đường dẫn
+    case "403":
+        include './views/403page.php';
+        break;
+    default:
+        http_response_code(404);
+        require_once "./views/404page.php";
+        break;
     }
     
     

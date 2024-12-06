@@ -12,7 +12,7 @@ class ProductQuery  {
     }
     // ### ADMIN
 
-    // getall sản phẩm (lấy tất cả thông tin từ bảng san pham)
+    // getall sản phẩm (lấy tất cả thông tin từ bảng san pham) trong admin
     public function getAllProduct()
     {
         //khai báo try catch
@@ -59,6 +59,7 @@ class ProductQuery  {
             echo "</h1>";
         }
     }
+    // Lấy thông tin chi tiết sản phẩm
     public function getDetailSan($product_id) {
         try {
             $sql = '
@@ -82,7 +83,7 @@ class ProductQuery  {
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    // thêm sản phẩm vào bảng biến thể
+    // thêm các màu số lượng vào bảng biến thể
     public function addProductVariants ($product_id,	$size,	$color,	$quantity)
     {
         //khai bao try catch
@@ -127,6 +128,14 @@ class ProductQuery  {
             return null; // Không tìm thấy sản phẩm
         }
     }
+    public function updateProductVariant($variant_id, $size, $color, $quantity)
+{
+    $sql = "UPDATE product_variant SET size = ?, color = ?, quantity = ? WHERE product_variant_id = ?";
+    $stmt = $this->conn->prepare($sql);
+
+    // Truyền mảng tham số khớp với các placeholder
+    $stmt->execute([$size, $color, $quantity, $variant_id]);
+}
     // Truy xuất tất cả sản phẩm từ bảng product biến thể
         function get_allvariant()
     {
@@ -204,20 +213,34 @@ class ProductQuery  {
             echo "</h1>";
         }
     }
-    function get_product_by_variant($product_id)
+    public function getProductByVariant($product_id)
     {
-        $sql = "SELECT products.product_id, product_variant.* FROM products
-        INNER JOIN product_variant ON products.product_id = product_variant.product_variant_id
-        WHERE products.product_id = ? AND quantity > 0";
+        
+        $sql = "SELECT 
+                    pv.product_variant_id, 
+                    pv.product_id, 
+                    pv.size, 
+                    pv.color, 
+                    pv.quantity 
+                FROM product_variant pv
+                WHERE pv.product_id = :product_id";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $stmt->execute();
 
-        return pdo_query($sql, $product_id);
+        // Lấy dữ liệu dạng mảng
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+        
     }
-    function get_product_by_id($product_id)
+    function getProductById($product_id)
     {
-        $sql = "SELECT p.*, c.name AS category_name, c.category_id AS id_category
+        $sql = "SELECT p.*, c.name AS categories_name, c.category_id 
                 FROM products AS p
                 JOIN categories AS c ON p.category_id = c.category_id
-                WHERE p.product_id = ?";
+                WHERE  c.status = 0 p.product_id = ?";
         return pdo_query_one($sql, $product_id);
     }
     

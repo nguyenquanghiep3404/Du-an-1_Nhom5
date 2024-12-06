@@ -96,25 +96,29 @@ class ProductAdminController {
             }
         }
          
-        if(empty($message)) {
-            $galleryData = ["images" => $gallery_images];
+        if (empty($message)) {
+            // Chuyển gallery thành JSON
             $gallery = json_encode($gallery_images);
-            $product_id=$this->productQuery->addProduct($name, $image,	$price,$category_id,$sale_price, $description,$gallery);
-            // $this->productQuery->insertAlbumAnhSan($product_id, $link_product_gallery);
-            $size = $_POST['size'];
-            $color = $_POST['color'];
-            $quantity = $_POST['quantity'];
-            // Insert data into the 'variant' table
-            $this->productQuery->addProductVariants($product_id,	$size,	$color,	$quantity);
-            header('Location: index.php?action=product');
-         }
 
+            // Thêm sản phẩm vào bảng `products`
+            $product_id = $this->productQuery->addProduct($name, $image, $price, $category_id, $sale_price, $description, $gallery);
+
+            // Lưu biến thể sản phẩm vào bảng `product_variants`
+            foreach ($_POST['variant_size'] as $key => $size) {
+                $color = $_POST['variant_color'][$key];
+                $quantity = $_POST['variant_quantity'][$key];
+              
+
+                $this->productQuery->addProductVariants($product_id, $size, $color, $quantity);
+            }
+
+            header('Location: index.php?action=product');
+        }
         }// END if submit form
-        // Hiển thị file view
-        $variant = $this->productQuery->get_allvariant();
+        
         // lấy danh mục
         $listCategories = $this->productQuery->getAllCategories();
-        $product = $this->productQuery->render_allproduct();
+        
         include "./views/admin/product/create.php";
     }// END Create()
     public function Edit()
@@ -200,18 +204,24 @@ class ProductAdminController {
                     $this->productQuery->update_product_noneimg($name,	$price,$category_id,$sale_price, $description,$id );
                 }
             }
-            header('Location: index.php?action=product');
-        
+            // Cập nhật biến thể
+            foreach ($_POST['variant_id'] as $key => $variant_id) {
+                            $size = $_POST['variant_size'][$key];
+                            $color = $_POST['variant_color'][$key];
+                            $quantity = $_POST['variant_quantity'][$key];
+                            
+                            $this->productQuery->updateProductVariant($variant_id, $size, $color, $quantity);}
 
+            header('Location: index.php?action=product');  
         }
 
-        echo "<pre>";
-        print_r($_POST);
-        print_r($_FILES);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($_POST);
+        // print_r($_FILES);
+        // echo "</pre>";
         
         $listCategories = $this->productQuery->getAllCategories();
-        $variant = $this->productQuery->get_allvariant();
+        $variant = $this->productQuery->getProductByVariant($id);
         $product = $this->productQuery->render_allproduct();
                 
         include './views/admin/product/edit.php';

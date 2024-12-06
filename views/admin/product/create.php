@@ -34,13 +34,13 @@ input {
             </a>
         </li>
         <li>
-            <a href="?action=listOrders">
+            <a href="index.php?action=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
             </a>
         </li>
         <li>
-            <a href="?action=showComment">
+            <a href="index.php?action=respon">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>
@@ -155,22 +155,17 @@ input {
                 </div>
 
                 
-                <div class="form-group mb-3">
-                    <label for="size">Size</label>
-                    <input type="text" name="size" id="size" class="form-control" placeholder="S, M, L, XL, XXL">
-                    <span class="err text-danger" id="sizeErr"></span>
+                <div id="variant_list">
+                    <div class="variant_item mb-3">
+                        <label>Kích Cỡ</label>
+                        <input type="text" name="variant_size[]" class="form-control" placeholder="S, M, L">
+                        <label>Màu Sắc</label>
+                        <input type="text" name="variant_color[]" class="form-control" placeholder="Đỏ, Xanh, Vàng">
+                        <label>Số Lượng</label>
+                        <input type="number" name="variant_quantity[]" class="form-control" placeholder="Số lượng">
+                    </div>
                 </div>
-
-                <div class="form-group mb-3">
-                    <label for="color">Màu Sắc</label>
-                    <input type="text" name="color" id="color" class="form-control">
-                    <span class="err text-danger" id="colorErr"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="quantity">Số Lượng</label>
-                    <input type="text" name="quantity" id="quantity" class="form-control">
-                    <span class="err text-danger" id="quantityErr"></span>
-                </div>
+                <button type="button" id="add_variant" class="btn btn-primary mt-3">Thêm Biến Thể</button>
                 <div class="form-group mb-3">
                     <input type="submit" name="themmoi" value="Thêm Sản Phẩm Mới" class="btn btn-dark px-5">
                 </div>
@@ -283,8 +278,19 @@ function displayError(elementId, message) {
     var errorElement = document.getElementById(elementId);
     errorElement.innerText = message;
 }
-</script>
-<?php include ('./views/admin/layout/footer.php'); ?>
-<!-- ... Your existing HTML code ... -->
 
-<!-- ... Your existing HTML code ... -->
+document.getElementById('add_variant').addEventListener('click', function () {
+        const variantList = document.getElementById('variant_list');
+        const newVariant = document.querySelector('.variant_item').cloneNode(true);
+        newVariant.querySelectorAll('input').forEach(input => input.value = '');
+        variantList.appendChild(newVariant);
+    });
+
+    document.getElementById('variant_list').addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove_variant')) {
+            e.target.parentElement.remove();
+        }
+    });
+</script>
+
+<?php include ('./views/admin/layout/footer.php'); ?>
