@@ -215,6 +215,10 @@
                                             <?php
                                             if ($_SESSION['role_id'] == 0) { // Quản trị viên
                                             ?>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 939bf980e3be707969a790103fea3bc501ae9889
                                                 <li><a href="?action=admin">Truy Cập Trang Admin</a></li>
                                             <?php
                                             } elseif ($_SESSION['role_id'] == 1) { // Người dùng thông thường
@@ -230,6 +234,10 @@
                                             <li><a href="?action=register">Đăng Kí</a></li>
                                         <?php } ?>
                                     </ul>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 939bf980e3be707969a790103fea3bc501ae9889
                                     </li>
                                     <li><a href="#"><i class="icon-heart icons"></i></a> <span
                                             class="item_count">2</span></li>

@@ -227,6 +227,7 @@ switch ($action) {
     default:
         http_response_code(404);
         require_once "./views/404page.php";
+
         break;
     }
     
