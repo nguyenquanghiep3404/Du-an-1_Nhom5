@@ -86,6 +86,7 @@ class checkoutModel{
         header('Location: ' . $vnp_Url);
         die();
     }
+
     public function __destruct()
     {
         $this -> conn = null;
