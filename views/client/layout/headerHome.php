@@ -214,6 +214,7 @@
                                             ?>
                                                 <li><a href="?action=profile"><?= $_SESSION['name']['name'] ?></a></li>
                                                 <li><a href="#">Tài khoản của tôi</a></li>
+                                                <li><a href="?action=logout">Đăng Xuất</a></li>
                                                     <?php
                                                     if ($_SESSION['role_id'] == 1) {?>
                                                        <li><a href="?action=admin">=>Admin</a></li>
