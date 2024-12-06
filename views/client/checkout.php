@@ -78,7 +78,7 @@
         <div class="checkout_form">
             <div class="row">
                 <div class="col-lg-7 col-md-6">
-                    <form action="?action=createOrederDetails" method="POST">
+                    <form action="?action=createOrederDetails" method="POST" onsubmit="return alert('Mua hàng thành công')">
                         <h3>Billing Details</h3>
                         <div class="checkout_form_input">
                             <label>Full Name <span>*</span></label>
@@ -198,7 +198,7 @@
                             </div>
                         </div>
                         <div class="place_order_btn">
-                            <button class="btn btn-primary">place order</button>
+                            <button type="submit" class="btn btn-primary">place order</button>
                             <!-- <a class="btn btn-primary" href="#">place order</a> -->
                         </div>
                         <!-- <button type="submit" class="btn btn-primary">place order</button> -->
