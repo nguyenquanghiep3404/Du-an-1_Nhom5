@@ -33,7 +33,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=respon">
+            <a href="?action=showComment">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>

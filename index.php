@@ -1,7 +1,7 @@
 <?php 
 session_start();
 ob_start();
-
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 // Kết nối PDO
 require_once "./commons/env.php";
 require_once "./commons/function.php";
@@ -15,6 +15,7 @@ require_once './models/ProductQuery.php';
 require_once './models/checkoutModel.php';
 require_once './models/profileModel.php';
 require_once './models/OrderModel.php';
+require_once './models/commentModel.php';
 // require_once './models/cartsModels.php';
 
 // Kết nối Controller
@@ -29,6 +30,7 @@ require_once './controllers/admin/OrderControllers.php';
 require_once './controllers/client/checkout.php';
 require_once './controllers/client/profileController.php';
 require_once './controllers/client/ProductClientControllers.php';
+require_once './controllers/client/commentController.php';
 // require_once './controllers/client/historic.php';
 
 // require_once './controllers/client/CartsControllers.php';
@@ -61,6 +63,7 @@ $HomeClient = new HomeClientControllers();
 $historicClient = new historicController();
 $profileAdmin = new profileController();
 $orderAdmin = new OrderControllers();
+$commentAdmin = new commentController();
 switch ($action) {
     case "admin":
         if (!isset($_SESSION['name'])) {
@@ -201,23 +204,18 @@ switch ($action) {
     case 'historic':
         $historicClient->orderHistory();
         break;
-    case 'viewOrderDetails':
-        $historicClient->viewOrderDetails();
-        break;
-    
-    // Thông báo lỗi 403: Không có quyền truy cập - 404: truy cập sai đường dẫn
-    case "403":
-        include './views/403page.php';
-        break;
-    default:
-        http_response_code(404);
-        require_once "./views/404page.php";
-        break;
     case 'showOrder':
         $orderAdmin->showOrder();
         break;
-    case 'Vnpay':
-        $checkoutAdmin->returnVNpay();
+    // Bình luận
+    case 'createComment':
+        $commentAdmin->comment();
+        break;
+    case 'showComment':
+        $commentAdmin->showComment();
+        break;
+    case 'delete_comment':
+        $commentAdmin->delete();
         break;
     }
     

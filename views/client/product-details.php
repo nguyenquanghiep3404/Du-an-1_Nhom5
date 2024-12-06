@@ -258,66 +258,56 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="reviews" role="tabpanel" >
-                                <div class="reviews_wrapper">
-                                    <h2>1 review for Donec eu furniture</h2>
-                                    <div class="reviews_comment_box">
-                                        <div class="comment_thmb">
-                                            <img src="assets/img/blog/comment2.jpg" alt="">
-                                        </div>
-                                        <div class="comment_text">
-                                            <div class="reviews_meta">
-                                                <div class="star_rating">
-                                                    <ul class="d-flex">
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <p><strong>admin </strong>- September 12, 2018</p>
-                                                <span>roadthemes</span>
-                                            </div>
-                                        </div>
+                            <div class="tab-pane fade" id="reviews" role="tabpanel">
+    <div class="reviews_wrapper container mt-4">
+        <!-- Tiêu đề -->
+        <h2 class="mb-4">1 review for Donec eu furniture</h2>
 
-                                    </div>
-                                    <div class="comment_title">
-                                        <h2>Add a review </h2>
-                                        <p>Your email address will not be published.  Required fields are marked </p>
-                                    </div>
-                                    <div class="product_ratting mb-10">
-                                       <h3>Your rating</h3>
-                                        <ul class="d-flex">
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                               <li><a href="#"><i class="icon-star"></i></a></li>
-                                               <li><a href="#"><i class="icon-star"></i></a></li>
-                                               <li><a href="#"><i class="icon-star"></i></a></li>
-                                               <li><a href="#"><i class="icon-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product_review_form">
-                                        <form action="#">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <label for="review_comment">Your review </label>
-                                                    <textarea name="comment" id="review_comment" ></textarea>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6">
-                                                    <label for="author">Name</label>
-                                                    <input id="author"  type="text">
+        <!-- Phần hiển thị đánh giá -->
+        <div class="reviews_comment_box d-flex align-items-start mb-4 p-3 bg-light rounded shadow-sm">
+            <!-- Ảnh người dùng -->
+            <!-- Nội dung đánh giá -->
+            <div class="comment_text">
+                <div class="reviews_meta">
+                    <!-- Xếp hạng sao -->
+                    <div class="star_rating mb-2">
+                        <ul class="d-flex list-unstyled mb-0">
+                            <li><i class="fas fa-star text-warning"></i></li>
+                            <li><i class="fas fa-star text-warning"></i></li>
+                            <li><i class="fas fa-star text-warning"></i></li>
+                            <li><i class="fas fa-star text-warning"></i></li>
+                            <li><i class="fas fa-star text-warning"></i></li>
+                        </ul>
+                    </div>
+                    <!-- Hiển thị các đánh giá -->
+                    <?php foreach ($allComment as $item) { ?>
+                        <p class="mb-1">
+                            <strong><?= $item['name'] ?></strong>
+                            <span class="text-muted small"> - Ngày: <?= $item['create_at'] ?></span>
+                        </p>
+                        <p><?= $item['comment'] ?></p>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
 
-                                                </div>
-                                                <div class="col-lg-6 col-md-6">
-                                                    <label for="email">Email </label>
-                                                    <input id="email"  type="text">
-                                                </div>
-                                            </div>
-                                            <button type="submit">Submit</button>
-                                         </form>
-                                    </div>
-                                </div>
-                            </div>
+        <!-- Form gửi đánh giá -->
+        <div class="product_review_form mt-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Gửi đánh giá của bạn</h5>
+                    <form action="?action=createComment&product_id=<?= $product['product_id'] ?>" method="POST">
+                        <div class="mb-3">
+                            <label for="review_comment" class="form-label">Đánh giá của bạn</label>
+                            <textarea name="comment" id="review_comment" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                             <div class="tab-pane fade" id="tags" role="tabpanel" >
                                 <div class="product_info_content">
                                     <ul>

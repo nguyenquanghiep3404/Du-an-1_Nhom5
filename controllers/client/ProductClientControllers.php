@@ -8,11 +8,11 @@ class HomeClientControllers {
     public $categoryQuery;
     public $cartModels;
     public $loginModel;
-   
+    public $commentModel;
     public function __construct() {
         $this->productQuery = new ProductQuery();
-        
         $this->loginModel = new LoginModel();
+        $this->commentModel = new commentModel();
     }
 
     // trang sản phẩm hiện thị view trang chủ
@@ -30,8 +30,8 @@ class HomeClientControllers {
         //     $product = $this->productQuery->get_product_by_id($product_id);
         //     $variant = $this->productQuery->get_product_by_variant($product_id);
         // }
-        
-
+        $product_id = $_GET['product_id'];
+        $allComment = $this->commentModel->allComment($product_id);
         
         include "./views/client/product-details.php";
         
