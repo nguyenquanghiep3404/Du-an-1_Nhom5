@@ -1,5 +1,81 @@
-<main>
+<?php include ('./views/client/layout/header.php'); ?>
 
+<style>
+    /* Base styling for the container */
+.condition {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for each step form */
+.step-cart, .step-checkout, .step-complete {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.step-cart svg, .step-checkout svg, .step-complete svg {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Text styling for steps */
+.step-cart p, .step-checkout p, .step-complete p {
+    font-size: 14px;
+    color: rgb(153, 153, 153);
+    font-weight: bold;
+    margin: 0;
+}
+
+.step-cart:hover p, .step-checkout:hover p, .step-complete.active p {
+    color: #C92027;
+}
+
+.step-cart:hover svg, .step-checkout:hover svg, .step-complete.active svg {
+    transform: scale(1.1);
+    fill: #C92027;
+}
+
+/* Dotline separator */
+.dotline {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ddd;
+    margin: 0 15px;
+}
+
+/* Active step */
+.step-complete.active p {
+    color: #C92027;
+}
+
+.step-complete.active svg {
+    fill: #C92027;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .condition {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dotline {
+        display: none;
+    }
+
+    .step-cart, .step-checkout, .step-complete {
+        margin-bottom: 10px;
+    }
+}
+</style>
+<main>
     <!-- start of main -->
     <div class="container" style="background: #f5f5f5;">
         <div class="row my-5">
@@ -34,17 +110,19 @@
                 <div class="message-box">
                     <div class="success-container">
 
+                        <div class="col-4">
 
                         <br>
-                        <img src="" alt="" style="height: 100px;">
+                        <!-- <img src="https://file.hstatic.net/1000192210/file/thu-cam-on-khach-hang-4_3b7d25fd4d38407fb250e37f268f87cb.jpg" alt="" style="width: 300px;"> -->
                         <br>
+                        </div>
                         <div style="padding-left: 5%; padding-right: 5%">
-                            <hr </div>
+                            <hr> </div>
                             <br>
                             <h1 class="monserrat-font" style="color: Grey">Cảm ơn bạn đẵ đặt hàng</h1>
                             <br>
 
-                            <div class="confirm-green-box">
+                            <div class="confirm-green-box " >
                                 <br>
 
                                 <?php
@@ -58,7 +136,7 @@
                             </div>
 
                             <br>
-                            <a href="index.php" id="create-btn" class="btn btn-ouioui-secondary margin-left-5px">Back to shop</a>
+                            <a href="index.php" id="create-btn" class="btn btn-ouioui-secondary margin-left-5px">Quay trở lại trang mua sắm</a>
                         </div>
                     </div>
                 </div>
@@ -66,9 +144,10 @@
 
         </div>
         <!-- end of main -->
+        </main>
+
+        <?php include './views/client/layout/modalPoduct.php' ?>
+    <?php include './views/client/layout/miniCart.php' ?>
+    <?php include ('./views/client/layout/footer.php'); ?>
 
 
-
-
-
-</main>

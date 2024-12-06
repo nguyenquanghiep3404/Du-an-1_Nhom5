@@ -7,7 +7,7 @@ class checkoutController{
     }
     
     public function returnVNpay(){
-        require_once './views/client/vnpay_return.php';
+        require_once './views/client/order_success.php';
     }
     
 
@@ -77,7 +77,7 @@ class checkoutController{
         $vnp_TxnRef = $order_id; // Mã đơn hàng
         $vnp_OrderInfo = "Thanh toán đơn hàng $order_id";
         $vnp_OrderType = "billpayment";
-        $vnp_Amount = $amount *100 ; // Quy đổi ra VNĐ (x100)
+        $vnp_Amount = $amount; // Quy đổi ra VNĐ (x100)
         $vnp_Locale = "vn";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
     
