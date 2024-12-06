@@ -24,13 +24,13 @@
             </a>
         </li>
         <li>
-            <a href="?action=listOrders">
+            <a href="index.php?action=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
             </a>
         </li>
         <li>
-            <a href="?action=showComment">
+            <a href="index.php?action=respon">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>
@@ -158,63 +158,40 @@
         <label for="product_sale_price">Sale</label>
         <input type="text" name="product_sale_price" id="product_sale_price" class="form-control" value="<?= $one[0]['sale_price'] ?>">
     </div>
-        <?php var_dump($variant) ?>
-    <div class="form-group mb-3">
-            <div class="group-checkout">
-                        <label for="size">
-                            Size
-                            <span>*</span>
-                        </label>
-                        <select class="form-select" name="size" id="size">
-                            <option selected disabled hidden>
-                                <?php
-                                if(isset($variant)) {
-                                    foreach($variant as $size) {
-                                        echo '<option value="'.$size['product_variant_id'].'">'.$size['size'].'</option>';
+        <!-- <?php var_dump($variant) ?> -->
+        <div class="form-group mb-3">
+    <!-- Biến Thể -->
+    <h4>Biến Thể</h4>
 
-                                    }
-                                }
-                                ?>
-                            </option>
-                        </select>
-            </div>
+    <div id="variant_list">
+        <?php if (!empty($variant) && is_array($variant)): ?>
+            <?php foreach ($variant as $variants): ?>
+                <div class="variant_item mb-3">
+                    <label for="variant_size">Kích Cỡ</label>
+                    <input type="text" name="variant_size[]" class="form-control" 
+                        value="<?= htmlspecialchars($variants['size']) ?>">
+                    
+                    <label for="variant_color">Màu Sắc</label>
+                    <input type="text" name="variant_color[]" class="form-control" 
+                        value="<?= htmlspecialchars($variants['color']) ?>">
+                    
+                    <label for="variant_quantity">Số Lượng</label>
+                    <input type="number" name="variant_quantity[]" class="form-control" 
+                        value="<?= htmlspecialchars($variants['quantity']) ?>">
 
-            <div class="group-checkout">
-                        <label for="size">
-                            Màu
-                            <span>*</span>
-                        </label>
-                        <select class="form-select" name="color" id="color">
+                    <input type="hidden" name="variant_id[]" 
+                        value="<?= htmlspecialchars($variants['product_variant_id']) ?>">
 
-                            <?php
-                            if(isset($variant)) {
-                                foreach($variant as $color) {
-                                    echo '<option value="'.$color['product_id'].'">'.$color['color'].'</option>';
+                    <button type="button" class="btn btn-danger mt-2 remove_variant">Xóa</button>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Không có biến thể nào được tìm thấy.</p>
+        <?php endif; ?>
+    </div>
 
-                                }
-                            }
-                            ?>
-                            </option>
-                        </select>
-            </div>        
-
-            <div class="group-checkout">
-                    <label for="size">
-                        Số Lượng
-                        <span>*</span>
-                    </label>    
-                    <select class="form-select" name="quantity" id="quantity">
-                        <?php
-                            if(isset($variant)) {
-                                foreach($variant as $quantity) {
-                                    echo '<option value="'.$quantity['product_id'].'">'.$quantity['quantity'].'</option>';
-                                }
-                            }
-                        ?>
-                        </option>
-                    </select>
-            </div>        
-        </div>
+    <button type="button" id="add_variant" class="btn btn-primary mt-3">Thêm Biến Thể</button>
+</div>
 
     <div class="form-group mb-3">
         <button type="submit" name="capnhat" class="btn btn-dark px-5">Sửa thông tin</button>
@@ -228,4 +205,18 @@
 
 
 </section>
+<script>
+    document.getElementById('add_variant').addEventListener('click', function () {
+        const variantList = document.getElementById('variant_list');
+        const newVariant = document.querySelector('.variant_item').cloneNode(true);
+        newVariant.querySelectorAll('input').forEach(input => input.value = '');
+        variantList.appendChild(newVariant);
+    });
+
+    document.getElementById('variant_list').addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove_variant')) {
+            e.target.parentElement.remove();
+        }
+    });
+</script>
 <?php include ('./views/admin/layout/footer.php'); ?>

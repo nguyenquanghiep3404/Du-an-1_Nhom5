@@ -45,16 +45,7 @@
                                                     <img class="primary_img" src="<?=$product->image ?>"
                                                         alt="consectetur">
                                                 </a>
-                                                <!-- Để nguyên -->
-                                                <div class="product_action">
-                                                    <ul>
-                                                        <li class="quick_view"><a data-toggle="modal" data-target="#modal_box"
-                                                                data-tippy="Thêm vào giỏ hàng" href="#" data-tippy-inertia="true"
-                                                                data-tippy-delay="50" data-tippy-arrow="true"
-                                                                data-tippy-placement="left">
-                                                                <span class="material-symbols-outlined" href="?action=miniPoduct&product_id='.$product->product_id?>">add_shopping_cart</span></a></li>
-                                                    </ul>
-                                                </div>
+                                                
                                             </div>
                                             <div class="product_content text-center">
                                                 <div class="product_ratting">
@@ -4832,7 +4823,7 @@
     <!-- blog section end -->
 
 
-    <?php include './views/client/layout/modalPoduct.php' ?>
+    
     <?php include './views/client/layout/miniCart.php' ?>
 
     <?php include './views/client/layout/footerHome.php' ?>

@@ -1,4 +1,4 @@
-<!-- <?php var_dump($product) ?> -->
+<?php var_dump($product) ?>
     <!-- modal area start-->
     <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -19,7 +19,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="modal_right">
                                     <div class="modal_title mb-10">
-                                        <h2><?php $pro['name'] ?></h2>
+                                        <h2><?php $product['name'] ?></h2>
                                     </div>
                                     <div class="modal_price mb-10">
                                         <span class="new_price">$64.9123</span>

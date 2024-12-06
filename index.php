@@ -35,10 +35,14 @@ require_once './controllers/client/commentController.php';
 
 // require_once './controllers/client/CartsControllers.php';
 // Lấy giá trị "id" từ đường dẫn url
-$product_id = "";
-if (isset($_GET["id"])) {
-    $product_id = $_GET["id"];
-}    
+// $product_id = "";
+// if (isset($_GET["id"])) {
+
+//     $product_id = $_GET["id"];}
+
+//     $product_id = $_GET["id"];
+// }    
+
 
 require_once './controllers/client/historic.php';
 
@@ -62,6 +66,15 @@ $orderAdmin = new OrderControllers();
 $commentAdmin = new commentController();
 switch ($action) {
     case "admin":
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
         include './views/admin/dashboard.php';
         break;
     case "product":
@@ -73,8 +86,8 @@ switch ($action) {
     case "product-form-edit":
         $productAdmin->Edit();
         break;
-    case "delete-product":
-        $productAdmin->deleteProduct();
+    // case "delete-product":
+    //     $productAdmin->deleteProduct();
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
@@ -185,7 +198,6 @@ switch ($action) {
         break;
     case 'updateOrderPost';
         $orderAdmin->updateOrder_POST();
-
     case 'timkiemsanpham':
         $HomeClient->search();
         break;
@@ -205,6 +217,19 @@ switch ($action) {
     case 'delete_comment':
         $commentAdmin->delete();
         break;
+    case 'Vnpay':
+        $checkoutAdmin->returnVNpay();
+        break;
+    // Thông báo lỗi 403: Không có quyền truy cập - 404: truy cập sai đường dẫn
+    case "403":
+        include './views/403page.php';
+        break;
+    default:
+        http_response_code(404);
+        require_once "./views/404page.php";
+
+        break;
     }
+    
     
 ?>
