@@ -98,37 +98,30 @@
         
     </nav>
     <!-- NAVBAR -->
-    <h1 class="text-center text-primary mb-4">Quản Lý Danh Mục</h1>
-    <div class="d-flex justify-content-end mb-3">
-<a href="?action=create-dm"><input type="button" value="Nhập thêm" class="btn btn-primary"></a>
-</div>
+    <h1 class="text-center text-primary mb-4">Quản Lý Bình luận</h1>
 <table class="table table-hover table-bordered text-center align-middle">
     <thead class="table-dark">
         <tr>
             <td>ID</td>
             <td>Name</td>
-            <td>Description</td>
-            <td>Status</td>
-
+            <td>Email</td>
+            <td>Create_at</td>
+            <td>Comment</td>
             <td>Operation</td>
 
         </tr>
     </thead>
     <tbody>
-        <?php foreach($cate as $cates) {?>
+        <?php foreach($showComment as $item) {?>
         <tr>
 
-            <td><?= $cates['category_id'] ?></td>
-            <td><?= $cates['name'] ?></td>
-            <td><?= $cates['description'] ?></td>
-            <td><?= $cates['status'] ?></td>
+            <td><?= $item['comment_id'] ?></td>
+            <td><?= $item['name'] ?></td>
+            <td><?= $item['email'] ?></td>
+            <td><?= $item['create_at'] ?></td>
+            <td><?= $item['comment'] ?></td>
             <td>
-
-              
-               <!-- <a href="?act=delete-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a> -->
-               <a href="?action=update-dm&id=<?= $cates['category_id'] ?>" ><input type="button" class="btn btn-warning btn-sm" value="Sửa"></a>
-               <a href="?action=hide-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')" class="btn btn-danger btn-sm">Xoá</a>
-               <a href="?action=show-dm&id=<?= $cates['category_id'] ?>" onclick="return confirm('Ban có muốn bỏ xoá không?')" class="btn btn-success btn-sm">Bỏ Xoá</a>
+               <a href="?action=delete_comment&id=<?= $item['comment_id'] ?>" onclick="return confirm('Ban có muốn xoá không?')"><input type="button" value="Xoá"></a>
             </td>
         </tr>
         <?php }?>
