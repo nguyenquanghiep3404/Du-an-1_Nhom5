@@ -153,22 +153,22 @@
                                     <span class="checkmark"></span>
                                 </div>
 
-                                <label for="payment1" data-toggle="collapse" data-target="#panel1">direct bank transfer</label>
+                                <label for="payment1" data-toggle="collapse" data-target="#panel1">Thanh toán bằng tiền mặt</label>
                                 <div id="panel1" class="collapse show one" data-parent="#accordion">
                                     <div class="card-body1">
-                                        <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
+                                        <p>Thanh toán trực tiếp. </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-default">
                                 <div class="panel_radio">
-                                    <input id="payment2" name="check_method" type="radio" data-target="createp_account" />
+                                    <input id="payment5" name="check_method" type="radio" value="vnpay" />
                                     <span class="checkmark"></span>
                                 </div>
-                                <label for="payment2" data-toggle="collapse" data-target="#method2">cheque payment</label>
-                                <div id="method2" class="collapse two" data-parent="#accordion">
+                                <label for="payment5" data-toggle="collapse" data-target="#method5">Thanh toán qua VNPAY</label>
+                                <div id="method5" class="collapse five" data-parent="#accordion">
                                     <div class="card-body1">
-                                        <p>Donec sed odio dui. Nulla vitae elit libero, a phara etra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
+                                        <p>Thanh toán trực tuyến an toàn qua VNPAY.</p>
                                     </div>
                                 </div>
                             </div>

@@ -216,6 +216,10 @@ switch ($action) {
     case 'showOrder':
         $orderAdmin->showOrder();
         break;
+    case 'Vnpay':
+        $checkoutAdmin->returnVNpay();
+        break;
     }
+    
     
 ?>
