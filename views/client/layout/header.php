@@ -180,17 +180,9 @@
                                 <li class="header_search"><a href="#"><i class="icon-magnifier icons"></i></a></li>
                                 <li class="account_link"><a href="#"><i class="icon-user icons"></i></a>
                                 <ul class="dropdown_account_link">
-<<<<<<< HEAD
                                         <?php if (isset($_SESSION['name'])) { ?>
                                             <li><a href="?action=profile">Xin Chào <?=  ($_SESSION['name']['name']) ?>!</a></li>
                                             <li><a href="?action=profile">Quản Lý Tài Khoản</a></li>
-=======
-
-                                        <?php if (isset($_SESSION['name'])) { ?>
-                                            <li><a href="?action=profile">Xin Chào <?=  ($_SESSION['name']['name']) ?>!</a></li>
-                                            <li><a href="?action=profile">Quản Lý Tài Khoản</a></li>
-
->>>>>>> 939bf980e3be707969a790103fea3bc501ae9889
                                             <?php
                                             if ($_SESSION['role_id'] == 0) { // Quản trị viên
                                             ?>
