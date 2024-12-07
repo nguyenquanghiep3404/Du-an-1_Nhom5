@@ -1,5 +1,4 @@
 <?php
-
 class checkoutController{
     public $checkModel;
     public function __construct()
@@ -50,19 +49,19 @@ class checkoutController{
                 $order_details_id = $this->checkModel->getOrder_details_user_id($id)['order_detail_id']; 
     
                 if (isset($_SESSION['myCart']) && is_array($_SESSION['myCart'])) {
-                    $cartTotal = 0;
+                    // $cartTotal = 0;
                     foreach ($_SESSION['myCart'] as $item) {
                         $product_id = $item['product_id'];
                         $quantity = $item['quantity'];
                         $price = $item['total'];
-                        
-                        $cartTotal += $price * $quantity;
+
+                        // $cartTotal += $price * $quantity;
                         $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price);
                     
                     }
                     
                 // Chỉ gọi hàm redirect sau khi xử lý tất cả sản phẩm
-                    $this->redirectToVnpay($cartTotal, $order_details_id, $id);
+                    $this->redirectToVnpay($price, $order_details_id, $id);
                 }
             } 
             // thanh toan truc tiep
@@ -71,17 +70,19 @@ class checkoutController{
                 $order_details_id = $this->checkModel->getOrder_details_user_id($id)['order_detail_id']; 
     
             if (isset($_SESSION['myCart']) && is_array($_SESSION['myCart'])) {
-                $cartTotal = 0;
+                // $cartTotal = 0;
                 foreach ($_SESSION['myCart'] as $item) {
                     $product_id = $item['product_id'];
                     $quantity = $item['quantity'];
-                    // $price = $item['price'];
                     $price = $item['total'];
-                    $cartTotal += $price * $quantity;
+                    // $price = $item['price'];
+                    // $cartTotal += $price * $quantity;
                     $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price);
                 }
                 unset($_SESSION['myCart']);
-            }
+                header("location:?action=Vnpay");
+
+            }   
             } else {
             echo "Giỏ hàng rỗng hoặc dữ liệu không đúng!";
         }

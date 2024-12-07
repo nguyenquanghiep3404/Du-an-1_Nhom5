@@ -72,6 +72,7 @@ foreach ($orderHistory as $order) {
                                         <td><?= $order['product_id'] ?></td>
                                         <td><?= $order['quantity'] ?></td>
                                         <td><?= number_format($order['price'], 0, ',', '.') ?> VND</td>
+                                        
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

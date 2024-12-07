@@ -119,7 +119,7 @@
                         <div style="padding-left: 5%; padding-right: 5%">
                             <hr> </div>
                             <br>
-                            <h1 class="monserrat-font" style="color: Grey">Cảm ơn bạn đẵ đặt hàng</h1>
+                            <h1 class="monserrat-font" style="color: Grey">Cảm ơn bạn đã đặt hàng</h1>
                             <br>
 
                             <div class="confirm-green-box " >
@@ -147,7 +147,7 @@
         <!-- end of main -->
         </main>
 
-        <?php include './views/client/layout/modalPoduct.php' ?>
+
     <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>
 

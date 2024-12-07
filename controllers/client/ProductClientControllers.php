@@ -117,7 +117,7 @@ class HomeClientControllers {
                     "image" => $product->image,
                     "name" => $product->name,
                     "price" => $product->price,
-                    // "total" => $product->price * $quantity,
+                    
                    "color" => $_POST['color'],
                     "size" => $_POST['size'],
                 "quantity" => $_POST['quantity']
