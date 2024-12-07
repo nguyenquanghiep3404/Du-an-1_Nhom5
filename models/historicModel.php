@@ -7,7 +7,7 @@ class historicModel {
     }
     // Lấy thông tin chi tiết đơn hàng của người dùng theo user_id
     public function getOrderHistoryByUserId($user_id) {
-        $sql = "SELECT o.order_id, o.product_id, o.quantity, o.price, od.name, od.email, od.phone, od.address, od.note, od.order_detail_id, od.created_at
+        $sql = "SELECT o.order_id, o.product_id, o.quantity, o.total, od.name, od.email, od.phone, od.address, od.note, od.order_detail_id, od.created_at
                 FROM orders o
                 JOIN order_details od ON o.order_detail_id = od.order_detail_id
                 WHERE o.user_id = :user_id";
@@ -22,7 +22,9 @@ class historicModel {
                     o.order_id, 
                     o.product_id, 
                     o.quantity, 
+                    o.total AS order_total, 
                     o.price AS order_price, 
+                    p.image AS product_image,
                     p.name AS product_name, 
                     p.price AS product_price
                 FROM orders o

@@ -47,16 +47,15 @@ foreach ($orderHistory as $order) {
                     <td><?= $firstOrder['note'] ?></td>
                     <td><?= $firstOrder['created_at'] ?></td>
                     <td>
-                        <button class="btn btn-info btn-sm" 
-                                onclick="toggleDetails(<?= $orderDetailId ?>)">
+                        <a href="?action=viewOrderDetails&order_id=<?= ($order['order_detail_id']) ?>" 
+                            class="btn btn-info btn-sm">
                             Xem chi tiết
-                        </button>
-                        
+                        </a>
                     </td>
                 </tr>
 
                 <!-- Hiển thị chi tiết sản phẩm, ban đầu ẩn -->
-                <tr id="details-<?= $orderDetailId ?>" style="display: none;">
+                <!-- <tr id="details-<?= $orderDetailId ?>" style="display: none;">
                     <td colspan="8">
                         <table class="table">
                             <thead>
@@ -71,14 +70,14 @@ foreach ($orderHistory as $order) {
                                     <tr>
                                         <td><?= $order['product_id'] ?></td>
                                         <td><?= $order['quantity'] ?></td>
-                                        <td><?= number_format($order['price'], 0, ',', '.') ?> VND</td>
+                                        <td><?= number_format($order['total'], 0, ',', '.') ?> VND</td>
                                         
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
                     </td>
-                </tr>
+                </tr> -->
             <?php endforeach; ?>
         </tbody>
     </table>

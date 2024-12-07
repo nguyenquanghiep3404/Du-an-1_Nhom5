@@ -17,6 +17,34 @@ class ProductAdminController {
 
     }
 
+    public function showAdmin(){
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
+        $totalProducts = $this->productQuery->getTotalProducts();
+        $totalUser = $this->productQuery->getTotalUser();
+        $totalCart = $this->productQuery->getTotalCart();
+        $totalComment = $this->productQuery->getTotalComment();
+        $totalCategories = $this->productQuery->getTotalCategories();
+
+
+        require_once './views/admin/dashboard.php';
+    }
+    public function showProductsByCategory($category_id) {
+        // Lấy danh mục và sản phẩm theo danh mục
+        $products = $this->productQuery->getProductsByCategory($category_id);
+        $categories = $this->productQuery->getAllCategories();
+        
+        // Truyền dữ liệu cho view
+        require_once('./views/client/categoryProductClient.php');
+    }
+
     // Hiện sản phẩm
     public function showList()
     {   

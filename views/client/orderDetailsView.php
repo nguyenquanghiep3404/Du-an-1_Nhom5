@@ -25,6 +25,7 @@
             <thead>
                 <tr>
                     <th>Tên sản phẩm</th>
+                    <th>Ảnh</th>
                     <th>Giá sản phẩm</th>
                     <th>Số lượng</th>
                     <th>Giá đơn hàng</th>
@@ -34,10 +35,11 @@
             <tbody>
                 <?php foreach ($orderDetails as $detail): ?>
                     <tr>
-                        <td><?= ($detail['name']) ?></td>
+                        <td><?= ($detail['product_name']) ?></td>
+                        <th> <img src="<?= ($detail['product_image']) ?>" alt="" width="50px"></th>
                         <td><?= number_format($detail['product_price'], 0, ',', '.') ?> VND</td>
                         <td><?= ($detail['quantity']) ?></td>
-                        <td><?= number_format($detail['order_price'], 0, ',', '.') ?> VND</td>
+                        <td><?= number_format($detail['order_total'], 0, ',', '.') ?> VND</td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -47,6 +49,6 @@
     <a  href="?action=historic">Quay lại lịch sử đơn hàng</a>
     </div>
 </div>
-<?php include './views/client/layout/modalPoduct.php' ?>
+
     <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>

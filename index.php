@@ -66,16 +66,7 @@ $orderAdmin = new OrderControllers();
 $commentAdmin = new commentController();
 switch ($action) {
     case "admin":
-        if (!isset($_SESSION['name'])) {
-            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
-            exit();
-        }
-        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
-        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
-            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
-            exit();
-        }
-        include './views/admin/dashboard.php';
+        $productAdmin->showAdmin();
         break;
     case "product":
         $productAdmin->showList();
@@ -91,8 +82,9 @@ switch ($action) {
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
-    // case "unhide-product":
-    //     $productAdmin->unhide();
+    // case "category-product":
+    //     $productAdmin->showProductsByCategory();
+    //     break;
     // Danh muc
     case "home-dm";
         $categoryAdmin->all_dm();
@@ -173,7 +165,11 @@ switch ($action) {
         $HomeClient->productDetails();
         break;
     case "CategoryProductClient":
-        $HomeClient->categoryProductClient();
+        // $category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : null;
+        // if ($category_id === null) {
+        //     die("Danh mục không hợp lệ. Vui lòng chọn một danh mục!");
+        // }
+        $HomeClient->categoryProductClient($category_id);
         break;
     // Checkout
     // case 'checkout';
@@ -204,6 +200,9 @@ switch ($action) {
     case 'historic':
         $historicClient->orderHistory();
         break;
+    case 'viewOrderDetails':
+        $historicClient->viewOrderDetails();
+        break;
     case 'showOrder':
         $orderAdmin->showOrder();
         break;
@@ -228,6 +227,10 @@ switch ($action) {
         http_response_code(404);
         require_once "./views/404page.php";
         break;
+    case 'mb':
+        include '.\views\client\Mbbank.php';
+        break;
+
     }
     
     

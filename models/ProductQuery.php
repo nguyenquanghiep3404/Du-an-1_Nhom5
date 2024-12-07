@@ -11,7 +11,36 @@ class ProductQuery  {
         $this->conn = connect_db();
     }
     // ### ADMIN
-
+    public function getTotalProducts() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_products FROM products");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_products'] ?? 0;
+    }
+    public function getTotalUser() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_users FROM users");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_users'] ?? 0;
+    }
+    public function getTotalCart() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_order_details FROM order_details");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_order_details'] ?? 0;
+    }
+    public function getTotalComment() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_comment FROM comment");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_comment'] ?? 0;
+    }
+    public function getTotalCategories() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_categories FROM categories");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_categories'] ?? 0;
+    }
     // getall sản phẩm (lấy tất cả thông tin từ bảng san pham) trong admin
     public function getAllProduct()
     {
@@ -41,7 +70,13 @@ class ProductQuery  {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-   
+    public function getProductsByCategory($category_id) {
+        $sql = "SELECT * FROM products WHERE hide = 0 AND category_id = :category_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT); // Xác định kiểu dữ liệu là số nguyên
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     // thêm sản phẩm vào bảng product
     public function addProduct ($name, $image,	$price,$category_id,$sale_price, $description, $gallery)

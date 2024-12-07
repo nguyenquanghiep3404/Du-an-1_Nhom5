@@ -120,7 +120,7 @@
         </div>
     </div>
     <!--breadcrumbs area end-->
-    <!-- <?php echo var_dump($_SESSION['myCart']) ?> -->
+    <?php echo var_dump($_SESSION['myCart']) ?>
      <!--shopping cart area start -->
     <div class="shopping_cart_area">
         <div class="container">

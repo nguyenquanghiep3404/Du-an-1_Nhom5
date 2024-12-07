@@ -43,10 +43,11 @@ class HomeClientControllers {
     //     $variant = $this->productQuery->get_product_by_variant($product_id);
     //     include './views/client/layout/modalPoduct.php';
     // }
-    public function categoryProductClient(){
+    public function categoryProductClient($category_id){
+        
         $listCategories = $this->productQuery->getAllCategories();
-        $variant = $this->productQuery->get_allvariant();
-        $product = $this->productQuery->render_allproduct();
+        
+        $products = $this->productQuery->getProductsByCategory($category_id);
         include './views/client/categoryProductClient.php';
     }
     // 
@@ -117,7 +118,7 @@ class HomeClientControllers {
                     "image" => $product->image,
                     "name" => $product->name,
                     "price" => $product->price,
-                    
+                    "total" => $product->price * $quantity,
                    "color" => $_POST['color'],
                     "size" => $_POST['size'],
                 "quantity" => $_POST['quantity']
