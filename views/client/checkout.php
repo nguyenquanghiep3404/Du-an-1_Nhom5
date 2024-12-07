@@ -224,7 +224,7 @@
                             </table>
                             <div class="panel-default">
                                 <div class="panel_radio">
-                                    <input id="payment1" name="check_method" type="radio" data-target="createp_account" />
+                                    <input id="payment1" name="check_method" type="radio" value="cod"  />
                                     <span class="checkmark"></span>
                                 </div>
 

@@ -34,7 +34,7 @@ class checkoutModel{
     public function processVnpayPayment($orderId, $name, $email, $phone, $address, $note)
     {
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "https://yourwebsite.com/vnpay_return.php"; // Cập nhật URL trả về
+        $vnp_Returnurl = "http://localhost/Du-an-1_Nhom5/index.php?action=Vnpay"; // Cập nhật URL trả về
         $vnp_TmnCode = "YOUR_TMN_CODE"; // Mã website VNPAY
         $vnp_HashSecret = "YOUR_HASH_SECRET"; // Chuỗi bí mật
 
@@ -86,6 +86,9 @@ class checkoutModel{
         header('Location: ' . $vnp_Url);
         die();
     }
+    
+    
+    
 
     public function __destruct()
     {

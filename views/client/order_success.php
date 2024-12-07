@@ -1,4 +1,4 @@
-<?php include ('./views/client/layout/header.php'); ?>
+<?php include ('./views/client/layout/header.php');  ?>
 
 <style>
     /* Base styling for the container */
@@ -129,7 +129,8 @@
                                 if (isset($_GET['idbill'])) { ?>
                                     <h5>Chúng tôi sẽ liên hệ bạn để xác nhận đơn hàng sớm nhất</h5>
                                     <p>Đơn hàng của bạn có mã #<?= $_GET['idbill'] ?>, đang cần được xác minh</p>
-                                <?php } else if (isset($_GET['vnp_TxnRef'])) { ?>
+                                <?php } else if (isset($_GET['vnp_TxnRef'])) { ?> 
+                                    <?php unset($_SESSION['myCart']); ?>
                                     <h5>Chúng tôi đã nhận được số tiền bạn vừa thanh toán</h5>
                                     <p>Đơn hàng của bạn có mã #<?= $_GET['vnp_TxnRef'] ?>, đơn hàng sẽ giao đến bạn sớm nhất</p>
                                 <?php } ?>

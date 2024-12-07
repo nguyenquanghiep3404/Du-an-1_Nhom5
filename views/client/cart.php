@@ -172,7 +172,7 @@
                                                 <div class="cart_product_quantity">
                                                     <input 
                                                         min="1" 
-                                                        max="10" 
+                                                        
                                                         value="<?= $pro['quantity'] ?>" 
                                                         type="number" 
                                                         class="quantity-input" 

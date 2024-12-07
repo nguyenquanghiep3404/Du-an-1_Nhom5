@@ -92,6 +92,6 @@ foreach ($orderHistory as $order) {
         }
     }
     </script>
-<?php include './views/client/layout/modalPoduct.php' ?>
+
     <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>

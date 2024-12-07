@@ -122,7 +122,7 @@ class ProductQuery  {
         $data = $this->conn->query($sql)->fetch();
         if ($data) {
             $product = convertToObjectProduct($data); // Chuyển đổi dữ liệu thành đối tượng
-            var_dump($product); // Debug dữ liệu trả về
+            // var_dump($product); // Debug dữ liệu trả về
             return $product;
         } else {
             return null; // Không tìm thấy sản phẩm

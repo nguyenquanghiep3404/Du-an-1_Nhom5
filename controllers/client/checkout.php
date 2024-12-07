@@ -1,4 +1,5 @@
 <?php
+
 class checkoutController{
     public $checkModel;
     public function __construct()
@@ -8,6 +9,7 @@ class checkoutController{
     
     public function returnVNpay(){
         require_once './views/client/order_success.php';
+        
     }
     
 
@@ -22,7 +24,7 @@ class checkoutController{
         $showCheckout['phone'] = '';
         $showCheckout['address'] = '';
     }
-        // var_dump($_SESSION['name']['name']);
+        // var_dump($_SESSION['myCart']);
         require_once './views/client/checkout.php';
     }
     
@@ -38,42 +40,60 @@ class checkoutController{
         $created_at = date('Y-m-d H:i:s');
         $id = $_SESSION['name']['user_id'];
     
-        // Thêm chi tiết đơn hàng
-        $this->checkModel->insetOrderDetails($name, $email, $phone, $address, $note, $id, $created_at); 
-        $order_details_id = $this->checkModel->getOrder_details_user_id($id)['order_detail_id']; 
-    
-        if (isset($_SESSION['myCart']) && is_array($_SESSION['myCart'])) {
-            $cartTotal = 0;
-            foreach ($_SESSION['myCart'] as $item) {
-                $product_id = $item['product_id'];
-                $quantity = $item['quantity'];
-                $price = $item['total'];
-                $cartTotal += $price * $quantity;
-    
-                // Lưu sản phẩm vào đơn hàng
-                $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price);
-            }
-            unset($_SESSION['myCart']);
-    
+
             if ($check_method === 'vnpay') {
                 // Chuyển hướng đến VNPAY
-                $this->redirectToVnpay($cartTotal, $order_details_id, $id);
-            } else {
-                // Phương thức thanh toán khác
-                header('location:?action=client');
+               
+                // Lưu sản phẩm vào đơn hàng
+                // Thêm chi tiết đơn hàng
+                $this->checkModel->insetOrderDetails($name, $email, $phone, $address, $note, $id, $created_at); 
+                $order_details_id = $this->checkModel->getOrder_details_user_id($id)['order_detail_id']; 
+    
+                if (isset($_SESSION['myCart']) && is_array($_SESSION['myCart'])) {
+                    $cartTotal = 0;
+                    foreach ($_SESSION['myCart'] as $item) {
+                        $product_id = $item['product_id'];
+                        $quantity = $item['quantity'];
+                        $price = $item['total'];
+                        
+                        $cartTotal += $price * $quantity;
+                        $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price);
+                    
+                    }
+                    
+                // Chỉ gọi hàm redirect sau khi xử lý tất cả sản phẩm
+                    $this->redirectToVnpay($cartTotal, $order_details_id, $id);
+                }
+            } 
+            // thanh toan truc tiep
+            else if($check_method === 'cod') {
+                $this->checkModel->insetOrderDetails($name, $email, $phone, $address, $note, $id, $created_at); 
+                $order_details_id = $this->checkModel->getOrder_details_user_id($id)['order_detail_id']; 
+    
+            if (isset($_SESSION['myCart']) && is_array($_SESSION['myCart'])) {
+                $cartTotal = 0;
+                foreach ($_SESSION['myCart'] as $item) {
+                    $product_id = $item['product_id'];
+                    $quantity = $item['quantity'];
+                    // $price = $item['price'];
+                    $price = $item['total'];
+                    $cartTotal += $price * $quantity;
+                    $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price);
+                }
+                unset($_SESSION['myCart']);
             }
-        } else {
+            } else {
             echo "Giỏ hàng rỗng hoặc dữ liệu không đúng!";
         }
     }
     
     // Hàm redirect đến VNPAY
-    private function redirectToVnpay($amount, $order_id, $user_id) {
+    public function redirectToVnpay($amount, $order_id, $user_id) {
         $vnp_TmnCode = "SF6QFXPR"; // Thay bằng mã TMN của bạn
         $vnp_HashSecret = "MU4F4UXIGGBAQUICD514Z684865TBBVD"; // Thay bằng chuỗi bí mật
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost/Du-an-1_Nhom5/?action=Vnpay"; // URL xử lý sau khi thanh toán
-    
+       
         $vnp_TxnRef = $order_id; // Mã đơn hàng
         $vnp_OrderInfo = "Thanh toán đơn hàng $order_id";
         $vnp_OrderType = "billpayment";
