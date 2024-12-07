@@ -8,7 +8,7 @@
 <?php include ('./views/client/layout/header.php'); ?>
 <body>
     <!-- <?php var_dump($keyword) ?> -->
-<h2 class="text-center mt-4 mb-3">Kết quả tìm kiếm cho:  <?php echo ($keyword) ?> </h2>
+<h2 class="text-center mt-4 mb-3">Kết quả tìm kiếm:  <?php echo ($keyword) ?> </h2>
     <?php if (!empty($results)): ?>
         <div class="product-list" style="padding-left:20px">
             <?php foreach ($results as $product): ?>

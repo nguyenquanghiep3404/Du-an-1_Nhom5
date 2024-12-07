@@ -17,9 +17,48 @@ class ProductAdminController {
 
     }
 
+    public function showAdmin(){
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
+        $totalProducts = $this->productQuery->getTotalProducts();
+        $totalUser = $this->productQuery->getTotalUser();
+        $totalCart = $this->productQuery->getTotalCart();
+        $totalComment = $this->productQuery->getTotalComment();
+        $totalCategories = $this->productQuery->getTotalCategories();
+
+
+        require_once './views/admin/dashboard.php';
+    }
+    public function showProductsByCategory($category_id) {
+        // Lấy danh mục và sản phẩm theo danh mục
+        $products = $this->productQuery->getProductsByCategory($category_id);
+        $categories = $this->productQuery->getAllCategories();
+        
+        // Truyền dữ liệu cho view
+        require_once('./views/client/categoryProductClient.php');
+    }
+
     // Hiện sản phẩm
     public function showList()
-    {
+    {   
+        // // Kiểm tra quyền của người dùng phải có role = 0 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
+        // logic quyền admin
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        
         // 1. Gọi xuống model để lấy danh sách product
         $danhSachProduct = $this->productQuery->getAllProduct();
         $variant = $this->productQuery->get_allvariant();
@@ -32,6 +71,16 @@ class ProductAdminController {
     // Thêm mới sản phẩm vào database
     public function Create()
     {   
+        // logic quyền admin
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =0 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
         if((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
             
                 $name = $_POST['product_name'];
@@ -75,29 +124,43 @@ class ProductAdminController {
             }
         }
          
-        if(empty($message)) {
-            $galleryData = ["images" => $gallery_images];
+        if (empty($message)) {
+            // Chuyển gallery thành JSON
             $gallery = json_encode($gallery_images);
-            $product_id=$this->productQuery->addProduct($name, $image,	$price,$category_id,$sale_price, $description,$gallery);
-            // $this->productQuery->insertAlbumAnhSan($product_id, $link_product_gallery);
-            $size = $_POST['size'];
-            $color = $_POST['color'];
-            $quantity = $_POST['quantity'];
-            // Insert data into the 'variant' table
-            $this->productQuery->addProductVariants($product_id,	$size,	$color,	$quantity);
-            header('Location: index.php?action=product');
-         }
 
+            // Thêm sản phẩm vào bảng `products`
+            $product_id = $this->productQuery->addProduct($name, $image, $price, $category_id, $sale_price, $description, $gallery);
+
+            // Lưu biến thể sản phẩm vào bảng `product_variants`
+            foreach ($_POST['variant_size'] as $key => $size) {
+                $color = $_POST['variant_color'][$key];
+                $quantity = $_POST['variant_quantity'][$key];
+              
+
+                $this->productQuery->addProductVariants($product_id, $size, $color, $quantity);
+            }
+
+            header('Location: index.php?action=product');
+        }
         }// END if submit form
-        // Hiển thị file view
-        $variant = $this->productQuery->get_allvariant();
+        
         // lấy danh mục
         $listCategories = $this->productQuery->getAllCategories();
-        $product = $this->productQuery->render_allproduct();
+        
         include "./views/admin/product/create.php";
     }// END Create()
     public function Edit()
-    {
+    {   
+        // logic quyền admin
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
         if(isset($_GET['id'])) {
             $id = $_GET['id'];
             $one =$this->productQuery->getone_product($id);
@@ -169,18 +232,24 @@ class ProductAdminController {
                     $this->productQuery->update_product_noneimg($name,	$price,$category_id,$sale_price, $description,$id );
                 }
             }
-            header('Location: index.php?action=product');
-        
+            // Cập nhật biến thể
+            foreach ($_POST['variant_id'] as $key => $variant_id) {
+                            $size = $_POST['variant_size'][$key];
+                            $color = $_POST['variant_color'][$key];
+                            $quantity = $_POST['variant_quantity'][$key];
+                            
+                            $this->productQuery->updateProductVariant($variant_id, $size, $color, $quantity);}
 
+            header('Location: index.php?action=product');  
         }
 
-        echo "<pre>";
-        print_r($_POST);
-        print_r($_FILES);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($_POST);
+        // print_r($_FILES);
+        // echo "</pre>";
         
         $listCategories = $this->productQuery->getAllCategories();
-        $variant = $this->productQuery->get_allvariant();
+        $variant = $this->productQuery->getProductByVariant($id);
         $product = $this->productQuery->render_allproduct();
                 
         include './views/admin/product/edit.php';
@@ -189,18 +258,18 @@ class ProductAdminController {
     
     
     // Xóa sản phẩm
-    public function deleteProduct() {
-        if (isset($_GET['id'])) {
-            $product_id = $_GET['id'];
+    // public function deleteProduct() {
+    //     if (isset($_GET['id'])) {
+    //         $product_id = $_GET['id'];
     
-            // Gọi model để xóa sản phẩm
-            $this->productQuery->delete($product_id);
+    //         // Gọi model để xóa sản phẩm
+    //         $this->productQuery->delete($product_id);
     
-            // Chuyển hướng về danh sách sản phẩm sau khi xóa
-            header('Location: index.php?action=product');
-            exit;
-        }
-    }
+    //         // Chuyển hướng về danh sách sản phẩm sau khi xóa
+    //         header('Location: index.php?action=product');
+    //         exit;
+    //     }
+    // }
     
     public function showsp(){
         $spmoi = $this->productQuery->render_allproduct();

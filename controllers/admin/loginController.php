@@ -24,11 +24,15 @@ class loginController{
             if($user){
                $_SESSION['name'] = $user;
                $_SESSION['user_id'] = $_SESSION['name']['user_id'];
+               $_SESSION['email'] = $_SESSION['name']['email'];
                $_SESSION['role_id'] = $this->loginModel->Role($username)['role_id'];
             //    var_dump($_SESSION['id_role']);
                header('location:?action=client');
-            }else{
-               echo "Sai tên đăng nhập hoặc mất khẩu";
+            }else {
+                // Lưu thông báo lỗi vào session tạm
+                $_SESSION['login_error'] = "Sai tên đăng nhập hoặc mật khẩu!";
+                header('location:?action=login');
+                exit();
             }
 
         }
@@ -37,7 +41,9 @@ class loginController{
     public function logout()
     {
         unset($_SESSION['name']);
+       
         header('location:?action=client');
+        
     } 
 }
 

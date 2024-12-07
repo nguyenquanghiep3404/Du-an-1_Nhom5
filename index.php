@@ -1,7 +1,7 @@
 <?php 
 session_start();
 ob_start();
-
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 // Kết nối PDO
 require_once "./commons/env.php";
 require_once "./commons/function.php";
@@ -15,6 +15,7 @@ require_once './models/ProductQuery.php';
 require_once './models/checkoutModel.php';
 require_once './models/profileModel.php';
 require_once './models/OrderModel.php';
+require_once './models/commentModel.php';
 // require_once './models/cartsModels.php';
 
 // Kết nối Controller
@@ -29,11 +30,19 @@ require_once './controllers/admin/OrderControllers.php';
 require_once './controllers/client/checkout.php';
 require_once './controllers/client/profileController.php';
 require_once './controllers/client/ProductClientControllers.php';
+require_once './controllers/client/commentController.php';
+// require_once './controllers/client/historic.php';
+
 // require_once './controllers/client/CartsControllers.php';
 // Lấy giá trị "id" từ đường dẫn url
-$product_id = "";
-if (isset($_GET["id"])) {
-    $product_id = $_GET["id"];
+// $product_id = "";
+// if (isset($_GET["id"])) {
+
+//     $product_id = $_GET["id"];}
+
+//     $product_id = $_GET["id"];
+// }    
+
 
 require_once './controllers/client/historic.php';
 
@@ -51,15 +60,13 @@ $loginAdmin = new loginController();
 $registerAdmin = new registerController();
 $checkoutAdmin = new checkoutController();
 $HomeClient = new HomeClientControllers();
-
-
 $historicClient = new historicController();
-
 $profileAdmin = new profileController();
 $orderAdmin = new OrderControllers();
+$commentAdmin = new commentController();
 switch ($action) {
     case "admin":
-        include './views/admin/dashboard.php';
+        $productAdmin->showAdmin();
         break;
     case "product":
         $productAdmin->showList();
@@ -70,13 +77,14 @@ switch ($action) {
     case "product-form-edit":
         $productAdmin->Edit();
         break;
-    case "delete-product":
-        $productAdmin->deleteProduct();
+    // case "delete-product":
+    //     $productAdmin->deleteProduct();
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;
-    // case "unhide-product":
-    //     $productAdmin->unhide();
+    // case "category-product":
+    //     $productAdmin->showProductsByCategory();
+    //     break;
     // Danh muc
     case "home-dm";
         $categoryAdmin->all_dm();
@@ -157,7 +165,11 @@ switch ($action) {
         $HomeClient->productDetails();
         break;
     case "CategoryProductClient":
-        $HomeClient->categoryProductClient();
+        // $category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : null;
+        // if ($category_id === null) {
+        //     die("Danh mục không hợp lệ. Vui lòng chọn một danh mục!");
+        // }
+        $HomeClient->categoryProductClient($category_id);
         break;
     // Checkout
     // case 'checkout';
@@ -182,13 +194,44 @@ switch ($action) {
         break;
     case 'updateOrderPost';
         $orderAdmin->updateOrder_POST();
-
     case 'timkiemsanpham':
         $HomeClient->search();
         break;
     case 'historic':
         $historicClient->orderHistory();
-
         break;
-}
+    case 'viewOrderDetails':
+        $historicClient->viewOrderDetails();
+        break;
+    case 'showOrder':
+        $orderAdmin->showOrder();
+        break;
+    // Bình luận
+    case 'createComment':
+        $commentAdmin->comment();
+        break;
+    case 'showComment':
+        $commentAdmin->showComment();
+        break;
+    case 'delete_comment':
+        $commentAdmin->delete();
+        break;
+    case 'Vnpay':
+        $checkoutAdmin->returnVNpay();
+        break;
+    // Thông báo lỗi 403: Không có quyền truy cập - 404: truy cập sai đường dẫn
+    case "403":
+        include './views/403page.php';
+        break;
+    default:
+        http_response_code(404);
+        require_once "./views/404page.php";
+        break;
+    case 'mb':
+        include '.\views\client\Mbbank.php';
+        break;
+
+    }
+    
+    
 ?>

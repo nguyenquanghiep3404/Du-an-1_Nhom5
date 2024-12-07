@@ -1,5 +1,6 @@
 <?php include ('./views/client/layout/header.php'); ?>
-<?= var_dump($product) ?>
+<!-- <?= var_dump($product) ?>
+<?= var_dump($variant) ?> -->
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area breadcrumbs_product">
         <div class="container">
@@ -60,7 +61,7 @@
                 
                 <div class="col-lg-6 col-md-6">
                     <div class="product_d_right">
-                       <form action="#">
+                       
                             <h1><div class="product-name">
                             <?= $product['name'] ?>
                 </div> </h1>
@@ -76,8 +77,8 @@
                                 </div>
                                 <div class="product_review">
                                     <ul class="d-flex">
-                                        <li>4 reviews</li>
-                                        <li>Write your review</li>
+                                        <li>4 đánh giá</li>
+                                        <li>Viết đánh giá ngay</li>
                                     </ul>
                                 </div>
                             </div>
@@ -85,108 +86,86 @@
                                 <span class="current_price"><?=  $product['price'] ?></span>
                             </div>
                             <div class="product_availalbe">
-                                <ul class="d-flex">
-                                    <li><i class="icon-layers icons"></i> Chỉ còn: <span>  <?= $product['quantity'] ?></span> sản phẩm </li>
-                                    <li>Trạng thái: <span class="stock">Còn hàng</span></li>
-                                </ul>
-                            </div>
-                            <div class="product_desc">
-                                <p> <?=  $product['description'] ?>  </p>
-                            </div>
-                            <!-- /////// -->
-                             <form action="?action=addToCart" method="POST" id="form-cart">
-                                <div class="product_variant">
-                                    <!-- Chọn biến thể màu -->
-                                    <div class="filter__list widget_color d-flex align-items-center">
-                                        <h3>Màu sắc</h3>
-                                        <?php
-                                            $currentColor = null;
+    <ul class="d-flex">
+        <li><i class="icon-layers icons"></i> Chỉ còn: <span id="quantity_display"><?= $product['quantity'] ?></span> sản phẩm </li>
+        <li>Trạng thái: <span class="stock">Còn hàng</span></li>
+    </ul>
+</div>
 
-                                            usort($variant, function ($a, $b) {
-                                                return strcmp($a['color'], $b['color']);
-                                            });
+<!-- Form chọn biến thể -->
+<form action="?action=addToCart" method="post">
+    <div class="product_variant">
+        <!-- Chọn biến thể màu -->
+        <div class="filter__list widget_color d-flex align-items-center">
+            <h3>Màu sắc</h3>
+            <?php
+            $currentColor = null;
+            usort($variant, function ($a, $b) {
+                return strcmp($a['color'], $b['color']);
+            });
 
-                                            foreach ($variant as $va) {
-                                                extract($va);
+            foreach ($variant as $va) {
+                extract($va);
 
-                                                if ($currentColor !== $color) {
-                                                    echo '
-                                                            <div class="size-item">
-                                                                <input type="radio" name="color" id="' . $color . '" value="' . $color . '" class="color">
-                                                                <label for="' . $color . '" class="color-label" >' . $color . '</label>
-                                                            </div>
-                                                        ';
-                                                    $currentColor = $color;
-                                                }
-                                            }
-                                            ?>
-                                    </div>
-                                    <!-- chọn biến thể size -->
-                                    <div class="filter__list widget_size d-flex align-items-center">
-                                        <h3>Kích thước</h3>
-                                        
-                                            <?php
-                                            $currentSize = null;
-                                            usort($variant, function ($a, $b) {
-                                                return strcmp($a['size'], $b['size']);
-                                            });
+                if ($currentColor !== $color) {
+                    echo '
+                        <div class="size-item">
+                            <input type="radio" name="color" id="color_' . htmlspecialchars($color) . '" 
+                                   value="' . htmlspecialchars($color) . '" class="color" 
+                                   data-quantity="' . htmlspecialchars($quantity) . '" 
+                                   data-size="' . htmlspecialchars($size) . '" required>
+                            <label for="color_' . htmlspecialchars($color) . '" class="color-label" >
+                                ' . htmlspecialchars($color) . '
+                            </label>
+                        </div>
+                    ';
+                    $currentColor = $color;
+                }
+            }
+            ?>
+        </div>
 
-                                            foreach ($variant as $va) {
-                                                extract($va);
+        <!-- Chọn biến thể size -->
+        <div class="filter__list widget_size d-flex align-items-center">
+            <h3>Kích thước</h3>
+            <?php
+            $currentSize = null;
+            usort($variant, function ($a, $b) {
+                return strcmp($a['size'], $b['size']);
+            });
 
-                                                if ($currentSize !== $size) {
-                                                    echo '<div class="size-item">
-                                                                    <input type="radio" name="size" id="' . $size . '" value="' . $size . '" class="size">
-                                                                    <label for="' . $size . '" class="size-label">' . $size . '</label>
-                                                                </div>
-                                                        ';
-                                                    $currentSize = $size;
-                                                }
-                                            }
-                                            ?>
+            foreach ($variant as $va) {
+                extract($va);
 
-                                        
-                                    </div>
-                                    
-                                    <!-- chọn số lượng -->
-                                    <div class="variant_quantity_btn d-flex">
-                                        <div class="">
-                                            <button id="decrement">-</button>
-                                            <input type="number" name="quantity" id="quantity" value="1" min="1" max="10">
-                                            <button id="increment" >+</button>
-                                            <script>
-                                                var decrementButton = document.getElementById("decrement");
-                                                var incrementButton = document.getElementById("increment");
-                                                var quantityInput = document.getElementById("quantity");
+                if ($currentSize !== $size) {
+                    echo '
+                        <div class="size-item">
+                            <input type="radio" name="size" id="size_' . htmlspecialchars($size) . '" 
+                                   value="' . htmlspecialchars($size) . '" class="size" 
+                                   data-quantity="' . htmlspecialchars($quantity) . '" required>
+                            <label for="size_' . htmlspecialchars($size) . '" class="size-label">
+                                ' . htmlspecialchars($size) . '
+                            </label>
+                        </div>
+                    ';
+                    $currentSize = $size;
+                }
+            }
+            ?>
+        </div>
+        <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+        <!-- Chọn số lượng -->
+        <div class="variant_quantity_btn d-flex align-items-center">
+            <button id="decrement" type="button">-</button>
+            <input type="number" name="quantity" id="quantity" value="1" min="1">
+            <button id="increment" type="button">+</button>
+        </div>
+        <!-- <input type="hidden" name="size" >
+        <input type="hidden" name="color" > -->
+        <button type="submit" name="add_to_cart">Thêm vào giỏ hàng</button>
 
-                                                decrementButton.addEventListener("click", function (e) {
-                                                    e.preventDefault();
-                                                    var currentQuantity = parseInt(quantityInput.value);
-                                                    if (currentQuantity > 1) {
-                                                        quantityInput.value = currentQuantity - 1;
-                                                    }
-                                                });
-
-                                                incrementButton.addEventListener("click", function (e) {
-                                                    e.preventDefault();
-                                                    var currentQuantity = parseInt(quantityInput.value);
-                                                    quantityInput.value = currentQuantity + 1;
-                                                });
-                                            </script>
-                                        </div>
-                                            <!-- ẩn thông tin sản phẩm -->
-                                            <input type="hidden" name="product-id" value="<?= $product['product_id'] ?>">
-                                            <input type="hidden" name="product-img" value="<?=$product['product_id'] ?>">
-                                            <input type="hidden" name="product-name" value="<?= $product['product_id'] ?>">
-                                            <input type="hidden" name="product-price" value="<?= $product['product_id'] ?>">
-
-                                            
-                                            <button class="button btn btn-primary" type="submit" id="btn-addToCart" name="add_to_cart">
-                                                <i class="ion-android-add"></i> Thêm Giỏ Hàng
-                                            </button>
-                                    </div>
-                                </div>
-                            </form>
+    </div>
+</form>
 
                             <!-- end /////// -->
                             <div class="product_sku">
@@ -195,9 +174,9 @@
                             <div class="product_tags d-flex">
                                 <span>tags: </span>
                                 <ul class="d-flex">
-                                    <li><a href="#">fashion,</a></li>
-                                    <li><a href="#">clothings,</a></li>
-                                    <li><a href="#">accessorires</a></li>
+                                    <li><a href="#">thời trang,</a></li>
+                                    <li><a href="#">áo nam,</a></li>
+                                    <li><a href="#">giá rẻ</a></li>
                                 </ul>
                             </div>
                             <!-- Phần mạng xã hội -->
@@ -227,161 +206,62 @@
                     <div class="product_d_inner">
                         <div class="product_info_button border-bottom">
                             <ul class="nav" role="tablist">
-                                <li >
-                                    <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Product Description</a>
-                                </li>
                                 <li>
                                    <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews          </a>
-                                </li>
-                                 <li>
-                                   <a data-toggle="tab" href="#tags" role="tab" aria-controls="tags" aria-selected="false">Tags </a>
-                                </li>
-                                <li>
-                                     <a data-toggle="tab" href="#additional" role="tab" aria-controls="additional" aria-selected="false">Additional Information </a>
-                                </li>
-                                <li>
-                                     <a data-toggle="tab" href="#tabinfo" role="tab" aria-controls="tabinfo" aria-selected="false">Custom Tab Info  </a>
-                                </li>
-                            </ul>
+                                </li>                    
+                        </ul>
                         </div>
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="info" role="tabpanel" >
-                                <div class="product_info_content">
-                                    <p>Coupling a blended linen construction with tailored style, the River Island HR Jasper Blazer will imprint a touch of dapper charm into your after-dark wardrobe. <br> Our model wearing a size medium blazer, and usually takes a size medium/38L shirt. <br> He is 6’2 1/2” (189cm) tall with a 38” (96 cm) chest and a 31” (78 cm) waist.</p>
-                                    <ul>
-                                        <li>Length: 74cm</li>
-                                        <li>Regular fit</li>
-                                        <li>Notched lapels</li>
-                                        <li>Twin button front fastening</li>
-                                        <li>Front patch pockets; chest pocket</li>
-                                        <li> Internal pockets</li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="tab-content"> 
                             <div class="tab-pane fade" id="reviews" role="tabpanel" >
                                 <div class="reviews_wrapper">
-                                    <h2>1 review for Donec eu furniture</h2>
-                                    <div class="reviews_comment_box">
-                                        <div class="comment_thmb">
-                                            <img src="assets/img/blog/comment2.jpg" alt="">
-                                        </div>
-                                        <div class="comment_text">
-                                            <div class="reviews_meta">
-                                                <div class="star_rating">
-                                                    <ul class="d-flex">
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                       <li><a href="#"><i class="icon-star"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <p><strong>admin </strong>- September 12, 2018</p>
-                                                <span>roadthemes</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="comment_title">
-                                        <h2>Add a review </h2>
-                                        <p>Your email address will not be published.  Required fields are marked </p>
-                                    </div>
-                                    <div class="product_ratting mb-10">
-                                       <h3>Your rating</h3>
-                                        <ul class="d-flex">
-                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                               <li><a href="#"><i class="icon-star"></i></a></li>
-                                               <li><a href="#"><i class="icon-star"></i></a></li>
-                                               <li><a href="#"><i class="icon-star"></i></a></li>
-                                               <li><a href="#"><i class="icon-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product_review_form">
-                                        <form action="#">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <label for="review_comment">Your review </label>
-                                                    <textarea name="comment" id="review_comment" ></textarea>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6">
-                                                    <label for="author">Name</label>
-                                                    <input id="author"  type="text">
-
-                                                </div>
-                                                <div class="col-lg-6 col-md-6">
-                                                    <label for="email">Email </label>
-                                                    <input id="email"  type="text">
+                                    <h2></h2>
+                                    <!-- Phần hiển thị đánh giá -->
+                                            <div class="reviews_comment_box d-flex align-items-start mb-4 p-3 bg-light rounded shadow-sm">
+                                                <!-- Ảnh người dùng -->
+                                                <!-- Nội dung đánh giá -->
+                                                <div class="comment_text">
+                                                    <div class="reviews_meta">
+                                                        <!-- Xếp hạng sao -->
+                                                        <div class="star_rating mb-2">
+                                                            <ul class="d-flex list-unstyled mb-0">
+                                                                <li><i class="fas fa-star text-warning"></i></li>
+                                                                <li><i class="fas fa-star text-warning"></i></li>
+                                                                <li><i class="fas fa-star text-warning"></i></li>
+                                                                <li><i class="fas fa-star text-warning"></i></li>
+                                                                <li><i class="fas fa-star text-warning"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- Hiển thị các đánh giá -->
+                                                        <?php foreach ($allComment as $item) { ?>
+                                                            <p class="mb-1">
+                                                                <strong><?= $item['name'] ?></strong>
+                                                                <span class="text-muted small"> - Ngày: <?= $item['create_at'] ?></span>
+                                                            </p>
+                                                            <p><?= $item['comment'] ?></p>
+                                                        <?php } ?>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <button type="submit">Submit</button>
-                                         </form>
+                                            <!-- Form gửi đánh giá -->
+                                            <div class="product_review_form mt-4">
+                                                <div class="card shadow-sm">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title mb-3">Gửi đánh giá của bạn</h5>
+                                                        <form action="?action=createComment&product_id=<?= $product['product_id'] ?>" method="POST">
+                                                            <div class="mb-3">
+                                                                <label for="review_comment" class="form-label">Đánh giá của bạn</label>
+                                                                <textarea name="comment" id="review_comment" class="form-control" rows="4" required></textarea>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <!--  -->
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="tags" role="tabpanel" >
-                                <div class="product_info_content">
-                                    <ul>
-                                        <li>Length: 74cm</li>
-                                        <li>Regular fit</li>
-                                        <li>Notched lapels</li>
-                                        <li>Twin button front fastening</li>
-                                        <li>Front patch pockets; chest pocket</li>
-                                        <li> Internal pockets</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="additional" role="tabpanel" >
-                                <div class="product_d_table">
-                                   <form action="#">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="first_child">Compositions</td>
-                                                    <td>Polyester</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Styles</td>
-                                                    <td>Girly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Properties</td>
-                                                    <td>Short Dress</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </form>
-                                </div>
-                                <div class="product_info_content">
-                                    <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                                </div>
-                            </div>
-                             <div class="tab-pane fade" id="tabinfo" role="tabpanel" >
-                                <div class="product_d_table">
-                                   <form action="#">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="first_child">Compositions</td>
-                                                    <td>Polyester</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Styles</td>
-                                                    <td>Girly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Properties</td>
-                                                    <td>Short Dress</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </form>
-                                </div>
-                                <div class="product_info_content">
-                                    <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                                </div>
-                            </div>
-                            
-
                         </div>
                     </div>
                 </div>
@@ -674,10 +554,178 @@
         </div>
     </section>
     <!--product area end-->
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const decrementButton = document.getElementById("decrement");
+        const incrementButton = document.getElementById("increment");
+        const quantityInput = document.getElementById("quantity");
+        const quantityDisplay = document.querySelector('.product_availalbe span'); // Phần tử hiển thị số lượng sản phẩm
 
+        const colorInputs = document.querySelectorAll('input[name="color"]');
+        const sizeInputs = document.querySelectorAll('input[name="size"]');
+
+        // Hàm tự động chọn kích thước khi chọn màu
+        function autoSelectSize() {
+            const selectedColor = document.querySelector('input[name="color"]:checked');
+            if (selectedColor) {
+                // Lấy kích thước từ thuộc tính data-size của màu đã chọn
+                const correspondingSize = selectedColor.getAttribute('data-size');
+                
+                // Deselect tất cả các lựa chọn kích thước trước đó
+                sizeInputs.forEach(function (sizeInput) {
+                    sizeInput.checked = false;
+                });
+
+                // Chọn kích thước tương ứng với màu đã chọn
+                const sizeToSelect = document.querySelector(`input[name="size"][value="${correspondingSize}"]`);
+                if (sizeToSelect) {
+                    sizeToSelect.checked = true;
+                }
+            }
+            updateQuantity(); // Cập nhật số lượng khi kích thước được chọn tự động
+        }
+
+        // Hàm cập nhật số lượng từ lựa chọn màu sắc hoặc kích thước
+        function updateQuantity() {
+            let selectedColor = document.querySelector('input[name="color"]:checked');
+            let selectedSize = document.querySelector('input[name="size"]:checked');
+
+            let availableQuantity = 0;
+            if (selectedColor) {
+                availableQuantity = selectedColor.getAttribute('data-quantity');
+            } else if (selectedSize) {
+                availableQuantity = selectedSize.getAttribute('data-quantity');
+            }
+
+            // Cập nhật hiển thị số lượng còn lại trong phần product_availalbe
+            if (quantityDisplay) {
+                quantityDisplay.textContent = availableQuantity; // Cập nhật giá trị số lượng
+            }
+
+            // Đảm bảo rằng số lượng không vượt quá số lượng tối đa của biến thể
+            if (parseInt(quantityInput.value) > availableQuantity) {
+                quantityInput.value = availableQuantity;
+            }
+        }
+
+        // Cập nhật số lượng khi thay đổi lựa chọn màu sắc hoặc kích thước
+        colorInputs.forEach(function (colorInput) {
+            colorInput.addEventListener('change', function () {
+                autoSelectSize(); // Tự động chọn kích thước khi màu thay đổi
+                updateQuantity();  // Cập nhật số lượng khi màu thay đổi
+            });
+        });
+
+        sizeInputs.forEach(function (sizeInput) {
+            sizeInput.addEventListener('change', updateQuantity); // Cập nhật số lượng khi kích thước thay đổi
+        });
+
+        // Điều khiển các nút giảm và tăng số lượng
+        decrementButton.addEventListener("click", function () {
+            let currentQuantity = parseInt(quantityInput.value);
+            if (currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+            }
+            updateQuantity(); // Cập nhật lại số lượng hiển thị bên ngoài
+        });
+
+        incrementButton.addEventListener("click", function () {
+            let currentQuantity = parseInt(quantityInput.value);
+            quantityInput.value = currentQuantity + 1;
+            updateQuantity(); // Cập nhật lại số lượng hiển thị bên ngoài
+        });
+
+        // Đảm bảo rằng giá trị của số lượng không vượt quá số lượng tối đa của biến thể
+        quantityInput.addEventListener('input', function () {
+            let currentQuantity = parseInt(quantityInput.value);
+            let selectedColor = document.querySelector('input[name="color"]:checked');
+            let selectedSize = document.querySelector('input[name="size"]:checked');
+
+            let maxQuantity = 0;
+            if (selectedColor) {
+                maxQuantity = parseInt(selectedColor.getAttribute('data-quantity'));
+            } else if (selectedSize) {
+                maxQuantity = parseInt(selectedSize.getAttribute('data-quantity'));
+            }
+
+            // Nếu số lượng nhập vào vượt quá giới hạn, đặt lại giá trị của số lượng
+            if (currentQuantity > maxQuantity) {
+                quantityInput.value = maxQuantity;
+            } else if (currentQuantity < 1) {
+                quantityInput.value = 1;
+            }
+            updateQuantity(); // Cập nhật lại số lượng hiển thị bên ngoài
+        });
+
+        // Cập nhật lần đầu khi trang được tải
+        updateQuantity();
+    });
+</script>
     
     <?php include './views/client/layout/modalPoduct.php' ?>
     <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>
+    <style>
+        .variant_quantity_btn {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa các phần tử */
+}
+
+.variant_quantity_btn button {
+    width: 30px;
+    height: 30px;
+    background-color: #1a4594; /* Màu cam cho nút */
+    color: #fff; /* Màu chữ */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.variant_quantity_btn button:hover {
+    background-color: #e63900; /* Màu khi hover */
+}
+
+.variant_quantity_btn input[type="number"] {
+    width: 60px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    -moz-appearance: textfield; /* Loại bỏ mũi tên trong Firefox */
+}
+
+.variant_quantity_btn input[type="number"]::-webkit-inner-spin-button,
+.variant_quantity_btn input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Loại bỏ mũi tên trong Chrome */
+    margin: 0;
+}
+
+button[name="add_to_cart"] {
+    background-color: #1a4594; /* Màu cam cho nút */
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 20px;
+}
+
+button[name="add_to_cart"]:hover {
+    background-color: #e63900; /* Màu khi hover */
+}
+    </style>
 
 

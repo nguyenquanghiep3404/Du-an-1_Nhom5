@@ -11,8 +11,37 @@ class ProductQuery  {
         $this->conn = connect_db();
     }
     // ### ADMIN
-
-    // getall sản phẩm (lấy tất cả thông tin từ bảng san pham)
+    public function getTotalProducts() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_products FROM products");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_products'] ?? 0;
+    }
+    public function getTotalUser() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_users FROM users");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_users'] ?? 0;
+    }
+    public function getTotalCart() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_order_details FROM order_details");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_order_details'] ?? 0;
+    }
+    public function getTotalComment() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_comment FROM comment");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_comment'] ?? 0;
+    }
+    public function getTotalCategories() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_categories FROM categories");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total_categories'] ?? 0;
+    }
+    // getall sản phẩm (lấy tất cả thông tin từ bảng san pham) trong admin
     public function getAllProduct()
     {
         //khai báo try catch
@@ -41,7 +70,13 @@ class ProductQuery  {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-   
+    public function getProductsByCategory($category_id) {
+        $sql = "SELECT * FROM products WHERE hide = 0 AND category_id = :category_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT); // Xác định kiểu dữ liệu là số nguyên
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     // thêm sản phẩm vào bảng product
     public function addProduct ($name, $image,	$price,$category_id,$sale_price, $description, $gallery)
@@ -59,6 +94,7 @@ class ProductQuery  {
             echo "</h1>";
         }
     }
+    // Lấy thông tin chi tiết sản phẩm
     public function getDetailSan($product_id) {
         try {
             $sql = '
@@ -82,7 +118,7 @@ class ProductQuery  {
             echo "Lỗi: " . $e->getMessage();
         }
     }
-    // thêm sản phẩm vào bảng biến thể
+    // thêm các màu số lượng vào bảng biến thể
     public function addProductVariants ($product_id,	$size,	$color,	$quantity)
     {
         //khai bao try catch
@@ -121,12 +157,20 @@ class ProductQuery  {
         $data = $this->conn->query($sql)->fetch();
         if ($data) {
             $product = convertToObjectProduct($data); // Chuyển đổi dữ liệu thành đối tượng
-            var_dump($product); // Debug dữ liệu trả về
+            // var_dump($product); // Debug dữ liệu trả về
             return $product;
         } else {
             return null; // Không tìm thấy sản phẩm
         }
     }
+    public function updateProductVariant($variant_id, $size, $color, $quantity)
+{
+    $sql = "UPDATE product_variant SET size = ?, color = ?, quantity = ? WHERE product_variant_id = ?";
+    $stmt = $this->conn->prepare($sql);
+
+    // Truyền mảng tham số khớp với các placeholder
+    $stmt->execute([$size, $color, $quantity, $variant_id]);
+}
     // Truy xuất tất cả sản phẩm từ bảng product biến thể
         function get_allvariant()
     {
@@ -146,7 +190,7 @@ class ProductQuery  {
     // }
     function update_product($name, $image, $price, $category_id, $sale_price, $description, $gallery, $product_id) {
         $sql = "UPDATE products 
-                SET name = ?, image = ?, price = ?, category_id = ?, sale_price = ?, description = ?, gallery = ?, updated_at = NOW() 
+                SET name = ?, image = ?, price = ?, category_id = ?, sale_price = ?, description = ?, gallery = ?,created_at=NOW(), updated_at = NOW() 
                 WHERE product_id = ?";
         return pdo_execute($sql, $name, $image, $price, $category_id, $sale_price, $description, $gallery, $product_id);
     }
@@ -204,29 +248,37 @@ class ProductQuery  {
             echo "</h1>";
         }
     }
-    function get_product_by_variant($product_id)
+    public function getProductByVariant($product_id)
     {
-        $sql = "SELECT products.product_id, product_variant.* FROM products
-        INNER JOIN product_variant ON products.product_id = product_variant.product_variant_id
-        WHERE products.product_id = ? AND quantity > 0";
+        
+        $sql = "SELECT 
+                    pv.product_variant_id, 
+                    pv.product_id, 
+                    pv.size, 
+                    pv.color, 
+                    pv.quantity 
+                FROM product_variant pv
+                WHERE pv.product_id = :product_id";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $stmt->execute();
 
-        return pdo_query($sql, $product_id);
+        // Lấy dữ liệu dạng mảng
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+        
     }
-    function get_product_by_id($product_id)
+    function getProductById($product_id)
     {
-        $sql = "SELECT p.*, c.name AS category_name, c.category_id AS id_category
+        $sql = "SELECT p.*, c.name AS categories_name, c.category_id 
                 FROM products AS p
                 JOIN categories AS c ON p.category_id = c.category_id
-                WHERE p.product_id = ?";
+                WHERE  c.status = 0 p.product_id = ?";
         return pdo_query_one($sql, $product_id);
     }
-    public function delete($product_id) {
-        $sql = "DELETE FROM products WHERE product_id = :product_id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([
-            ':product_id' => $product_id,
-        ]);
-    }
+    
 // }
 // show sản phẩm
 
@@ -252,17 +304,7 @@ class ProductQuery  {
     // {
     //     $this->conn = null;
     // }
-    function deleteProduct($product_id)
-    {
-        $sql = "DELETE FROM products WHERE  product_id=?";
-        if (is_array($product_id)) {
-            foreach ($product_id as $mang) {
-                pdo_execute($sql, $mang);
-            }
-        } else {
-            pdo_execute($sql, $product_id);
-        }
-    }
+   
     // Hàm tìm kiếm sản phẩm theo từ khóa
     public function searchProducts($keyword) {
         $query = "SELECT * FROM products WHERE name LIKE :keyword";

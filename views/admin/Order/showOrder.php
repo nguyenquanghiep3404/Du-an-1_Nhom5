@@ -35,7 +35,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=respon">
+            <a href="?action=showComment">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>
@@ -108,12 +108,13 @@
             <th>Email</th>
             <th>Điện thoại</th>
             <th>Địa chỉ</th>
+            <th>Ngày tạo</th>
+            <th>Ngày cập nhật</th>
             <th>Trạng thái</th>
             <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
-        <!-- <input type="hidden" name="order_detail_id" value="<?= $order['order_detail_id'] ?>"> -->
         <?php foreach ($orders as $order) { ?>
             <tr>
                     <td><?= $order['order_detail_id'] ?></td>
@@ -121,9 +122,12 @@
                     <td><?= $order['email'] ?></td>
                     <td><?= $order['phone'] ?></td>
                     <td><?= $order['address'] ?></td>
-                    <td><?=$order['status']?></td>
+                    <td><?= $order['created_at'] ?></td>
+                    <td><?= $order['updated_at'] ?></td>
+                    <td><?=$statusShow[$order['status']]?></td>
                     <td>
-                        <a href="?action=updateOrder&id=<?= $order['order_detail_id'] ?>" class="btn btn-warning btn-sm">update</a>
+                        <a href="?action=showOrder&id=<?= $order['order_detail_id'] ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
+                        <a href="?action=updateOrder&id=<?= $order['order_detail_id'] ?>" class="btn btn-warning btn-sm">Cập nhật</a>
                     </td>
             </tr>
         <?php } ?>

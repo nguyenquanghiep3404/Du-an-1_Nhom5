@@ -22,7 +22,7 @@ class historicController {
         // }
 
         // Kiểm tra nếu người dùng chưa đăng nhập
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['name'])) {
             echo "<script>alert('Vui lòng đăng nhập để xem lịch sử đơn hàng.');</script>";
             header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
             exit();
@@ -34,6 +34,29 @@ class historicController {
         $orderHistory = $this->historicModel->getOrderHistoryByUserId($user_id);
         require_once './views/client/orderHistory.php';
     }
+    public function viewOrderDetails() {
+        // Kiểm tra nếu người dùng chưa đăng nhập
+        if (!isset($_SESSION['name'])) {
+            echo "<script>alert('Vui lòng đăng nhập để xem lịch sử đơn hàng.');</script>";
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Lấy order_id từ URL (GET parameter)
+        if (isset($_GET['order_id'])) {
+            $order_id = intval($_GET['order_id']); // Chuyển về kiểu số nguyên
+        } else {
+            echo "<script>alert('Không tìm thấy đơn hàng.');</script>";
+            header('location:?action=orderHistory');
+            exit();
+        }
+
+        // Lấy dữ liệu chi tiết đơn hàng từ Model
+        $orderDetails = $this->historicModel->getOrderDetails($order_id);
+
+        // Gửi dữ liệu đến View
+        require_once './views/client/orderDetailsView.php';
+    }
+
 }
 
 

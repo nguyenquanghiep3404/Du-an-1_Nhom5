@@ -1,6 +1,6 @@
-<?php include ('./views/client/layout/header.php'); ?>
+<!-- <?php include ('./views/client/layout/header.php'); ?>
 
-    <!--shop  area start-->
+    shop  area start-->
     <div class="shop_section shop_reverse">
         <div class="container">
             <div class="row">
@@ -9,7 +9,7 @@
                     <aside class="sidebar_widget">
                         <div class="widget_inner">
                             <div class="widget_list widget_categories">
-                                <h2>Categories</h2>
+                                <h2>Danh</h2>
                                 <ul>
                                     <li class="widget_sub_categories"><a href="javascript:void(0)" data-toggle="collapse" data-target="#men">Men</a>
                                         <ul class="widget_dropdown_categories collapse show" id="men">
@@ -722,3 +722,150 @@
     <?php include ('./views/client/layout/footer.php'); ?>
 
   
+   <style>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container chính */
+.container {
+    display: flex;
+    margin: 20px;
+}
+
+/* Sidebar - Danh mục */
+.sidebar {
+    width: 20%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    color: #e67e22;
+}
+
+/* Product List */
+.product-list {
+    width: 75%;
+    margin-left: 20px;
+}
+
+.product-list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-item {
+    background-color: #fff;
+    padding: 15px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-item h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.product-item p {
+    font-size: 16px;
+    color: #e67e22;
+}
+
+.product-item a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.product-item a:hover {
+    background-color: #2980b9;
+}
+   </style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products by Category</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Categories -->
+        <div class="sidebar">
+            <h3>Danh mục</h3>
+            <ul>
+                <?php foreach ($listCategories as $category): ?>
+                    <li><a href="?action=category-product&category_id=<?php echo $category['category_id']; ?>"><?php echo $category['name']; ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+                    <?php var_dump($products) ?>
+        <!-- Product List -->
+        <div class="product-list">
+            <h2>Sản phẩm trong danh mục</h2>
+            <div class="products">
+                <?php foreach ($products as $product): ?>
+                    <div class="product-item">
+                        <img src="<?= $product['image']; ?>" alt="<?= $product['name']; ?>" style="width: 200px; height: auto;">
+                        <h3><?php echo $product['name']; ?></h3>
+                        <p><?php echo number_format($product['price'], 0, ',', '.'); ?> VNĐ</p>
+                        <a href="product_details.php?id=<?php echo $product['id']; ?>">Xem chi tiết</a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
