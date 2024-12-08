@@ -134,7 +134,7 @@ class ProductAdminController {
             // Lưu biến thể sản phẩm vào bảng `product_variants`
             foreach ($_POST['variant_size'] as $key => $size) {
                 $color = $_POST['variant_color'][$key];
-                $quantity = isset($_POST['variant_quantity'][$key]) && is_numeric($_POST['variant_quantity'][$key]) ? $_POST['variant_quantity'][$key] : 0;
+                $quantity = $_POST['variant_quantity'][$key];
 
                 $this->productQuery->addProductVariants($product_id, $size, $color, $quantity);
             }

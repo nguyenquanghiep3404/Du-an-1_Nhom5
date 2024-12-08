@@ -85,7 +85,7 @@
                                                 <li><a href="?action=profile"><i class="fas fa-user-circle"></i> Xin Chào <?= ($_SESSION['name']['name']) ?>!</a></li>
                                                 <li><a href="?action=profile"><i class="fas fa-user-cog"></i> Quản Lý Tài Khoản</a></li>
                                                 <?php if ($_SESSION['role_id'] == 0) { // Quản trị viên ?>
-                                                    <li><a href="?action=admin"><i class="fas fa-tools"></i> Truy Cập Trang Admin</a></li>
+                                                    <li><a href="?action=client"><i class="fas fa-tools"></i> Về trang Client</a></li>
                                                 <?php } ?>
                                                 <li><a href="?action=logout"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a></li>
                                             <?php } else { ?>
