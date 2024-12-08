@@ -157,7 +157,7 @@ input {
                 <div class="form-group mb-3">
                     <label for="sale">Sale</label>
                     <input type="text" name="product_sale_price" id="sale" class="form-control">
-                    <span class="err text-danger" id="saleErr"></span>
+                    
                 </div>
 
                 
@@ -165,10 +165,13 @@ input {
                     <div class="variant_item mb-3">
                         <label>Kích Cỡ</label>
                         <input type="text" name="variant_size[]" class="form-control" placeholder="S, M, L">
+                        <span class="err text-danger" id="variantSizeErr0"></span>
                         <label>Màu Sắc</label>
                         <input type="text" name="variant_color[]" class="form-control" placeholder="Đỏ, Xanh, Vàng">
+                        <span class="err text-danger" id="variantColorErr0"></span>
                         <label>Số Lượng</label>
-                        <input type="number" name="variant_quantity[]" class="form-control" placeholder="Số lượng">
+                        <input type="number" name="variant_quantity[]" id="variant_quantity[]" class="form-control" placeholder="Số lượng">
+                        <span class="err text-danger" id="variantQuantityErr0"></span>
                     </div>
                 </div>
                 <button type="button" id="add_variant" class="btn btn-primary mt-3">Thêm Biến Thể</button>
@@ -227,47 +230,57 @@ function validateForm() {
         price.focus();
         return false;
     }
-    // Validate sale
-    // var sale = document.getElementById('sale');
-    // if (sale.value.trim() !== '' && (isNaN(sale.value.trim()) || parseFloat(sale.value.trim()) < 0)) {
-    //     displayError('saleErr', 'Vui lòng nhập giá khuyến mãi hợp lệ (hoặc để trống)');
-    //     sale.focus();
+    // Validate variant quantity
+    var quantities = document.getElementsByName('variant_quantity[]');
+    var validQuantity = true; // Biến kiểm tra số lượng hợp lệ
+    quantities.forEach(function (quantity, index) {
+        if (quantity.value.trim() === '' || isNaN(quantity.value.trim()) || parseFloat(quantity.value.trim()) <= 0) {
+            // Hiển thị thông báo lỗi cho từng variant quantity
+            displayError('variantQuantityErr' + index, 'Vui lòng nhập số lượng hợp lệ cho biến thể ' + (index + 1));
+            validQuantity = false;
+        }
+    });
+
+    if (!validQuantity) {
+        return false; // Nếu có lỗi ở bất kỳ variant nào, không cho phép gửi form
+    }
+    // var price = document.getElementById('sale');
+    // if (sale.value.trim() === '' || isNaN(sale.value.trim()) || parseFloat(sale.value.trim()) <= 0) {
+    //     displayError('saleErr', 'Vui lòng nhập giá tiền hợp lệ');
+    //     price.focus();
     //     return false;
     // }
-    var price = document.getElementById('sale');
-    if (sale.value.trim() === '' || isNaN(sale.value.trim()) || parseFloat(sale.value.trim()) <= 0) {
-        displayError('saleErr', 'Vui lòng nhập giá tiền hợp lệ');
-        price.focus();
-        return false;
+
+    // Validate variant size
+    var sizes = document.getElementsByName('variant_size[]');
+    var validSize = true; // Biến kiểm tra size hợp lệ
+    sizes.forEach(function (size, index) {
+        if (size.value.trim() === '') {
+            // Hiển thị thông báo lỗi cho từng variant size
+            displayError('variantSizeErr' + index, 'Vui lòng nhập kích cỡ hợp lệ cho biến thể ' + (index + 1));
+            validSize = false;
+        }
+    });
+
+    if (!validSize) {
+        return false; // Nếu có lỗi ở bất kỳ variant size nào, không cho phép gửi form
     }
 
-    // Validate size
-    var size = document.getElementById('size');
-    if (size.value.trim() === '') {
-        displayError('sizeErr', 'Vui lòng nhập size (ví dụ: S, M, L)');
-        size.focus();
-        return false;
+    // Validate variant color
+    var colors = document.getElementsByName('variant_color[]');
+    var validColor = true; // Biến kiểm tra color hợp lệ
+    colors.forEach(function (color, index) {
+        if (color.value.trim() === '') {
+            // Hiển thị thông báo lỗi cho từng variant color
+            displayError('variantColorErr' + index, 'Vui lòng nhập màu sắc hợp lệ cho biến thể ' + (index + 1));
+            validColor = false;
+        }
+    });
+
+    if (!validColor) {
+        return false; // Nếu có lỗi ở bất kỳ variant color nào, không cho phép gửi form
     }
 
-    // Validate color
-    var color = document.getElementById('color');
-    if (color.value.trim() === '') {
-        displayError('colorErr', 'Vui lòng nhập màu sắc');
-        color.focus();
-        return false;
-    }
-
-    // Validate quantity
-    var quantity = document.getElementById('quantity');
-    if (quantity.value.trim() === '' || isNaN(quantity.value.trim()) || parseInt(quantity.value.trim()) <= 0) {
-        displayError('quantityErr', 'Vui lòng nhập số lượng hợp lệ');
-        quantity.focus();
-        return false;
-    }
-
-    // Add more validations as needed
-
-    // If all validations pass, return true to allow form submission
     return true;
 }
 
