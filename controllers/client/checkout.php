@@ -49,19 +49,24 @@ class checkoutController{
                 $order_details_id = $this->checkModel->getOrder_details_user_id($id)['order_detail_id']; 
     
                 if (isset($_SESSION['myCart']) && is_array($_SESSION['myCart'])) {
-                    // $cartTotal = 0;
+                    $order_total = 0;
                     foreach ($_SESSION['myCart'] as $item) {
                         $product_id = $item['product_id'];
                         $quantity = $item['quantity'];
-                        $price = $item['total'];
+                        $price = $item['price'];
+                        // $total =$item['total'] ;
+                        // Tính tổng tiền cho từng sản phẩm
+                        $total = $price * $quantity;
+                        // Cộng tổng tiền của giỏ hàng
+                        $order_total += $total;
 
-                        // $cartTotal += $price * $quantity;
-                        $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price);
+                    // Gọi hàm thêm sản phẩm vào đơn hàng
+                    $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price, $total);
                     
                     }
                     
                 // Chỉ gọi hàm redirect sau khi xử lý tất cả sản phẩm
-                    $this->redirectToVnpay($price, $order_details_id, $id);
+                    $this->redirectToVnpay($order_total, $order_details_id, $id);
                 }
             } 
             // thanh toan truc tiep
@@ -74,10 +79,16 @@ class checkoutController{
                 foreach ($_SESSION['myCart'] as $item) {
                     $product_id = $item['product_id'];
                     $quantity = $item['quantity'];
-                    $price = $item['total'];
+                    // $price = $item['total'];
                     // $price = $item['price'];
                     // $cartTotal += $price * $quantity;
-                    $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price);
+                        $price = $item['price'];
+                        // $cartTotal += $price * $quantity;
+                        // Tính tổng cho sản phẩm
+                        $total =$item['total'] ;
+
+                    // Gọi hàm thêm sản phẩm vào đơn hàng
+                    $this->checkModel->insetOrder($id, $product_id, $order_details_id, $quantity, $price, $total);
                 }
                 unset($_SESSION['myCart']);
                 header("location:?action=Vnpay");
@@ -138,6 +149,7 @@ class checkoutController{
         header("Location: $vnp_Url");
         exit();
     }
+    // mb
 
 }
 ?>

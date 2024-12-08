@@ -17,6 +17,34 @@ class ProductAdminController {
 
     }
 
+    public function showAdmin(){
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
+        // Kiểm tra quyền của người dùng phải có role =1 thì mới được vào admin
+        if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 0) {
+            header('location:?action=403'); // Chuyển hướng đến trang lỗi không đủ quyền
+            exit();
+        }
+        $totalProducts = $this->productQuery->getTotalProducts();
+        $totalUser = $this->productQuery->getTotalUser();
+        $totalCart = $this->productQuery->getTotalCart();
+        $totalComment = $this->productQuery->getTotalComment();
+        $totalCategories = $this->productQuery->getTotalCategories();
+
+
+        require_once './views/admin/dashboard.php';
+    }
+    public function showProductsByCategory($category_id) {
+        // Lấy danh mục và sản phẩm theo danh mục
+        $products = $this->productQuery->getProductsByCategory($category_id);
+        $categories = $this->productQuery->getAllCategories();
+        
+        // Truyền dữ liệu cho view
+        require_once('./views/client/categoryProductClient.php');
+    }
+
     // Hiện sản phẩm
     public function showList()
     {   
@@ -226,45 +254,33 @@ class ProductAdminController {
                 
         include './views/admin/product/edit.php';
     }
-
-    
-    
-    // Xóa sản phẩm
-    // public function deleteProduct() {
-    //     if (isset($_GET['id'])) {
-    //         $product_id = $_GET['id'];
-    
-    //         // Gọi model để xóa sản phẩm
-    //         $this->productQuery->delete($product_id);
-    
-    //         // Chuyển hướng về danh sách sản phẩm sau khi xóa
-    //         header('Location: index.php?action=product');
-    //         exit;
-    //     }
-    // }
     
     public function showsp(){
         $spmoi = $this->productQuery->render_allproduct();
     }
 
-//     public function hide() {
-//         $product_id = $_GET['id'];
-//         $productModel = new ProductModel();
-//         if ($productModel->hideProduct($product_id)) {
-//             header('Location: index.php?action=product');
-//             exit();
-//         }
-//     }
+    public function updateProductStatus($product_id, $status) {
+        if (isset($_POST['product_id']) && isset($_POST['new_status'])) {
+            $product_id = (int)$_POST['product_id'];
+            $new_status = (int)$_POST['new_status'];
+        
+            // Gọi hàm cập nhật trạng thái
+            $result = $this->productQuery->updateStatus($product_id, $new_status);
+        
+            // Kiểm tra kết quả và thông báo
+            // if ($result) {
+            //     echo "<script>alert('Cập nhật trạng thái thành công!');</script>";
+            // } else {
+            //     echo "<script>alert('Cập nhật trạng thái thất bại.');</script>";
+            // }
+        
+            // Chuyển hướng về danh sách sản phẩm
+            header('Location: ?action=product');
+            exit();
+        }
 
-//     public function unhide() {
-//         $product_id = $_GET['id'];
-//         $productModel = new ProductModel();
-//         if ($productModel->unhideProduct($product_id)) {
-//             header('Location: index.php?action=product');
-//             exit();
-//         }
-//     }
-// }
+    }
+    
     
     // public function __destruct()
     //     {

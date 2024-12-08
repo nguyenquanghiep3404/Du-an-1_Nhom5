@@ -1,4 +1,5 @@
-<?php include ('./views/client/layout/header.php') ?>
+<?php include ('./views/client/layout/header.php') 
+?>
 <style>
         table {
             width: 95%;
@@ -25,28 +26,38 @@
             <thead>
                 <tr>
                     <th>Tên sản phẩm</th>
+                    <th>Ảnh</th>
                     <th>Giá sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Giá đơn hàng</th>
+                    <th>Tổng giá sản phẩm</th>
                 </tr>
             </thead>
-            <?php var_dump($orderDetails) ?>
+            <!-- <?php var_dump($orderDetails) ?> -->
             <tbody>
                 <?php foreach ($orderDetails as $detail): ?>
                     <tr>
-                        <td><?= ($detail['name']) ?></td>
+                        <td><?= ($detail['product_name']) ?></td>
+                        <th> <img src="<?= ($detail['product_image']) ?>" alt="" width="50px"></th>
                         <td><?= number_format($detail['product_price'], 0, ',', '.') ?> VND</td>
                         <td><?= ($detail['quantity']) ?></td>
-                        <td><?= number_format($detail['order_price'], 0, ',', '.') ?> VND</td>
+                        <td><?= number_format($detail['order_total'], 0, ',', '.') ?> VND</td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     <?php endif; ?>
+    <div class="text-right " style="margin-right: 70px; margin-top:17px; font-size:20px"> <?php $totalAmount = 0;
+        foreach ($orderDetails as $order) {
+            $totalAmount += (float)$order['order_total'];
+        }
+        ?> 
+        <td colspan="4" style="text-align: right;"><strong style="font-size:25px">Tổng cộng:</strong></td>
+        <td><strong class="text-danger"><?= number_format($totalAmount, 0, ',', '.') ?> VND</strong></td>
+    </div>
     <div class="text-primary" style="padding-top:10px;margin-left:25px;margin-right:15px;">
     <a  href="?action=historic">Quay lại lịch sử đơn hàng</a>
     </div>
 </div>
-<?php include './views/client/layout/modalPoduct.php' ?>
+
     <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>

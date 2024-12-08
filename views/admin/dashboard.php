@@ -44,24 +44,8 @@
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
-        <li>
-            <a href="index.php?action=voucher">
-                <i class='bx bxs-offer'></i>
-                <span class="text">Mã Giảm Giá</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bxs-slideshow'></i>
-                <span class="text">Slider Shows</span>
-            </a>
-        </li>
-        <li>
-            <a href="index.php?action=arrange">
-                <i class='bx bxs-analyse'></i>
-                <span class="text">Thống Kê</span>
-            </a>
-        </li>
+       
+        
     </ul>
     <ul class="side-menu">
         <li>
@@ -78,7 +62,7 @@
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
-        <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
+        <a href="?action=admin" class="nav-link">Trang Chủ</a>
         <form action="#">
             <div class="form-input">
                 <input type="search" placeholder="Tìm Kiếm...">
@@ -91,9 +75,30 @@
             <i class='bx bxs-bell'></i>
             <span class="num">8</span>
         </a>
-        <a href="#" class="profile">
-            <!-- <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>"> -->
-        </a>
+        <div class="header_account">
+                                <ul class="d-flex">
+                                    <li class="header_search"><a href="#"><i class="icon-magnifier icons"></i></a></li>
+                                    <li class="account_link">
+                                        <a href="#"><i class="icon-user icons"></i> Tài Khoản</a>
+                                        <ul class="dropdown_account_link">
+                                            <?php if (isset($_SESSION['name'])) { ?>
+                                                <li><a href="?action=profile"><i class="fas fa-user-circle"></i> Xin Chào <?= ($_SESSION['name']['name']) ?>!</a></li>
+                                                <li><a href="?action=profile"><i class="fas fa-user-cog"></i> Quản Lý Tài Khoản</a></li>
+                                                <?php if ($_SESSION['role_id'] == 0) { // Quản trị viên ?>
+                                                    <li><a href="?action=admin"><i class="fas fa-tools"></i> Truy Cập Trang Admin</a></li>
+                                                <?php } ?>
+                                                <li><a href="?action=logout"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a></li>
+                                            <?php } else { ?>
+                                                <li><a href="?action=login"><i class="fas fa-sign-in-alt"></i> Đăng Nhập</a></li>
+                                                <li><a href="?action=register"><i class="fas fa-user-plus"></i> Đăng Kí</a></li>
+                                            <?php } ?>
+                                        </ul>
+                                    </li>
+                                    
+
+
+                                </ul>
+                            </div>
     </nav>
     <!-- NAVBAR -->
 
@@ -101,7 +106,7 @@
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Quản Trị Viên</h1>
+                <h1>Thống kê</h1>
             </div>
             <a href="#" class="btn-download">
                 <i class='bx bxs-cloud-download'></i>
@@ -113,52 +118,47 @@
             <li>
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text c-bill">
-                    <h3>0</h3>
+                    <h3><strong><?php echo $totalCart; ?></strong></h3>
                     <p>Đơn Hàng</p>
                 </span>
             </li>
             <li>
                 <i class='bx bxs-group'></i>
                 <span class="text c-user">
-                    <h3>0</h3>
+                    <h3><strong><?php echo $totalUser; ?></strong></h3>
                     <p>Tài Khoản</p>
                 </span>
             </li>
             <li>
                 <i class='bx bxs-category'></i>
                 <span class="text c-product">
-                    <h3>0</h3>
+                    <h3><strong><?php echo $totalProducts; ?></strong></h3>
                     <p>Sản Phẩm</p>
                 </span>
             </li>
+            
+        </ul>
+        <ul class="box-info">
+            <li>
+                <i class='bx bxs-comment-detail'></i>
+                <span class="text c-bill">
+                    <h3><strong><?php echo $totalComment; ?></strong></h3>
+                    <p>Bình luận</p>
+                </span>
+            </li>
+            <li>
+                <i class='bx bxs-category-alt'></i>
+                <span class="text c-user">
+                    <h3><strong><?php echo $totalCategories; ?></strong></h3>
+                    <p>Danh mục</p>
+                </span>
+            </li>
+            
+            
         </ul>
 
 
-        <div class="table-data">
-            <div class="order">
-                <div class="head">
-                    <h3>Đơn Hàng Chưa Được Xác Nhận</h3>
-                    <i class='bx bx-search'></i>
-                    <i class='bx bx-filter'></i>
-                </div>
-                <p class="err">
-                    
-                </p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Khách Hàng</th>
-                            <th>Ngày Đặt Hàng</th>
-                            <th>Trạng Thái</th>
-                            <th>Thao Tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      
     </main>
     <!-- MAIN -->
 </section>

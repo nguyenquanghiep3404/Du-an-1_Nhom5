@@ -31,8 +31,9 @@ class OrderModel
     {
         $sql = "SELECT 
     orders.order_id,
-    orders.price AS order_price,
+    orders.total AS order_price,
     orders.quantity,
+    
     
     order_details.name AS customer_name,
     order_details.address,

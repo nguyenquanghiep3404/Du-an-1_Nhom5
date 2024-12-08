@@ -10,7 +10,7 @@
     <!-- <?php var_dump($keyword) ?> -->
 <h2 class="text-center mt-4 mb-3">Kết quả tìm kiếm:  <?php echo ($keyword) ?> </h2>
     <?php if (!empty($results)): ?>
-        <div class="product-list" style="padding-left:20px">
+        <div class="product-list" style="padding-left:20px; margin-bottom:20px">
             <?php foreach ($results as $product): ?>
                 <div class="product-item">
                 <a href="?action=product-details&product_id=<?php echo $product['product_id']; ?>">
@@ -46,6 +46,6 @@
     <?php endif; ?>
 </body>
 </html>
-<?php include './views/client/layout/modalPoduct.php' ?>
+
     <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>

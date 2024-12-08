@@ -271,7 +271,7 @@
     <!--product info end-->
 
     <!--product area start-->
-    <section class="product_area related_products mb-118">
+    <!-- <section class="product_area related_products mb-118">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -552,7 +552,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!--product area end-->
     
     <script>
@@ -663,7 +663,7 @@
     });
 </script>
     
-    <?php include './views/client/layout/modalPoduct.php' ?>
+
     <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>
     <style>

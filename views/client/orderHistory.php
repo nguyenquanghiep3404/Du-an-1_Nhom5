@@ -20,6 +20,7 @@ foreach ($orderHistory as $order) {
     $groupedOrders[$order['order_detail_id']][] = $order;
 }  ?>
 <div>
+    <!-- <?php var_dump($groupedOrders) ?> -->
     <h2 class="text-center mt-4 mb-4">Lịch sử đơn hàng</h2>
     <table class="mt-3" style="margin-left:25px;margin-right:15px;">
         <thead>
@@ -31,13 +32,20 @@ foreach ($orderHistory as $order) {
                 <th>Địa chỉ</th>
                 <th>Ghi chú</th>
                 <th>Ngày đặt</th>
+                <th>Tổng tiền</th>
                 <th>Chi tiết</th>
             </tr>
         </thead>
         <tbody>
             
             <?php foreach ($groupedOrders as $orderDetailId => $orders): ?>
-                <?php $firstOrder = $orders[0]; // Lấy thông tin chung từ sản phẩm đầu tiên ?>
+                <?php 
+                $firstOrder = $orders[0]; // Lấy thông tin chung từ sản phẩm đầu tiên
+                $totalAmount = 0; 
+                foreach ($orders as $order) {
+                    $totalAmount += (float)$order['total']; // Cộng dồn giá trị 'total'
+                }
+                ?>
                 <tr>
                     <td><?= $orderDetailId ?></td>
                     <td><?= $firstOrder['name'] ?></td>
@@ -46,53 +54,17 @@ foreach ($orderHistory as $order) {
                     <td><?= $firstOrder['address'] ?></td>
                     <td><?= $firstOrder['note'] ?></td>
                     <td><?= $firstOrder['created_at'] ?></td>
+                    <td><?= number_format($totalAmount, 0, ',', '.') ?> VND</td>
                     <td>
-                        <button class="btn btn-info btn-sm" 
-                                onclick="toggleDetails(<?= $orderDetailId ?>)">
+                        <a href="?action=viewOrderDetails&order_id=<?=($firstOrder['order_detail_id']) ?>" 
+                            class="btn btn-info btn-sm">
                             Xem chi tiết
-                        </button>
-                        
-                    </td>
-                </tr>
-
-                <!-- Hiển thị chi tiết sản phẩm, ban đầu ẩn -->
-                <tr id="details-<?= $orderDetailId ?>" style="display: none;">
-                    <td colspan="8">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Mã sản phẩm</th>
-                                    <th>Số lượng</th>
-                                    <th>Giá</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($orders as $order): ?>
-                                    <tr>
-                                        <td><?= $order['product_id'] ?></td>
-                                        <td><?= $order['quantity'] ?></td>
-                                        <td><?= number_format($order['price'], 0, ',', '.') ?> VND</td>
-                                        
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        </a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
-    <script>
-        function toggleDetails(orderDetailId) {
-        const detailsRow = document.getElementById(`details-${orderDetailId}`);
-        if (detailsRow.style.display === "none") {
-            detailsRow.style.display = "table-row";
-        } else {
-            detailsRow.style.display = "none";
-        }
-    }
-    </script>
-
     <?php include './views/client/layout/miniCart.php' ?>
     <?php include ('./views/client/layout/footer.php'); ?>

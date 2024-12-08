@@ -208,7 +208,7 @@
                             </table>
 
                             </div>
-                            <div class="cart_page_button border-top d-flex justify-content-between grand_totall_area" style="height:200px">
+                            <div class="cart_page_button border-top d-flex justify-content-between grand_totall_area" style="height:200px;background-color:#aecfed ">
                                 
                                 <div class="shopping_continue_btn">
                                     <a href="?action=addToCart&emptyCart=1" class="btn btn-primary">XOÁ TOÀN BỘ GIỎ HÀNG</a>
@@ -216,7 +216,7 @@
                                 </div>
                                 <!--Tổng tiền  -->
                                 <div class="col-lg-4 col-md-6 col-sm-8">
-                                <div class="grand_totall_area">
+                                <div class="grand_totall_area" style="background-color:#aecfed">
                                 <div class="mb-2  border-bottom " >
                                     
                                     <!-- <div class="cart_grandtotal d-flex justify-content-between ">
@@ -225,7 +225,7 @@
                                             </span>
                                     </div> -->
                                 </div>
-                                <div class="proceed_checkout_btn">
+                                <div class="proceed_checkout_btn" >
                                     <a class="btn btn-primary" href="?action=show_checkout">Tiến Hành Thanh Toán</a>
                                 </div>
                                 </div>

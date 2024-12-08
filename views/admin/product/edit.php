@@ -1,5 +1,6 @@
 <?php include ('./views/admin/layout/header.php'); ?>
 
+
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
@@ -12,7 +13,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=category">
+            <a href="index.php?action=home-dm">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
@@ -24,41 +25,25 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=bill">
+            <a href="index.php?action=listOrders">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
             </a>
         </li>
         <li>
-            <a href="index.php?action=respon">
+            <a href="index.php?action=showComment">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>
         </li>
         <li>
-            <a href="index.php?action=user">
+            <a href="index.php?action=all_register">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
-        <li>
-            <a href="index.php?action=voucher">
-                <i class='bx bxs-offer'></i>
-                <span class="text">Mã Giảm Giá</span>
-            </a>
-        </li>
-        <li>
-            <a href="index.php?action=voucher">
-                <i class='bx bxs-slideshow'></i>
-                <span class="text">Slider Shows</span>
-            </a>
-        </li>
-        <li>
-            <a href="index.php?action=arrange">
-                <i class='bx bxs-analyse'></i>
-                <span class="text">Thống Kê</span>
-            </a>
-        </li>
+       
+
     </ul>
     <ul class="side-menu">
         <li>
@@ -69,10 +54,11 @@
         </li>
     </ul>
 </section>
+
 <section id="content">
-    <nav>
+<nav>
         <i class='bx bx-menu'></i>
-        <a href="#index.php?action=home" class="nav-link">Trang Chủ</a>
+        <a href="?action=admin" class="nav-link">Trang Chủ</a>
         <form action="#">
             <div class="form-input">
                 <input type="search" placeholder="Tìm Kiếm...">
@@ -85,10 +71,33 @@
             <i class='bx bxs-bell'></i>
             <span class="num">8</span>
         </a>
-        <a href="#" class="profile">
-            
-        </a>
+        <div class="header_account">
+                                <ul class="d-flex">
+                                    <li class="header_search"><a href="#"><i class="icon-magnifier icons"></i></a></li>
+                                    <li class="account_link">
+                                        <a href="#"><i class="icon-user icons"></i> Tài Khoản</a>
+                                        <ul class="dropdown_account_link">
+                                            <?php if (isset($_SESSION['name'])) { ?>
+                                                <li><a href="?action=profile"><i class="fas fa-user-circle"></i> Xin Chào <?= ($_SESSION['name']['name']) ?>!</a></li>
+                                                <li><a href="?action=profile"><i class="fas fa-user-cog"></i> Quản Lý Tài Khoản</a></li>
+                                                <?php if ($_SESSION['role_id'] == 0) { // Quản trị viên ?>
+                                                    <li><a href="?action=admin"><i class="fas fa-tools"></i> Truy Cập Trang Admin</a></li>
+                                                <?php } ?>
+                                                <li><a href="?action=logout"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a></li>
+                                            <?php } else { ?>
+                                                <li><a href="?action=login"><i class="fas fa-sign-in-alt"></i> Đăng Nhập</a></li>
+                                                <li><a href="?action=register"><i class="fas fa-user-plus"></i> Đăng Kí</a></li>
+                                            <?php } ?>
+                                        </ul>
+                                    </li>
+                                    
+
+
+                                </ul>
+                            </div>
     </nav>
+    <!-- NAVBAR -->
+
     <main class="my-5">
         <div class="container">
             <h3 class="text-center"> Chỉnh Sửa Sản Phẩm: <?= $one[0]['name'] ?></h3>
