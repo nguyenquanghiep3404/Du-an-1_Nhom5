@@ -20,8 +20,8 @@ class HomeClientControllers {
        
         $listProductLastes = $this->productQuery->getTop4ProductLastes();
         
-        $aophao = $this->productQuery->get_products_by_category_aophao(8, $limit = 8);
-        $aolen = $this->productQuery->get_products_by_category_aolen(5, $limit = 8);
+        // $aophao = $this->productQuery->get_products_by_category_aophao(8, $limit = 8);
+        // $aolen = $this->productQuery->get_products_by_category_aolen(5, $limit = 8);
         // var_dump($aophao) ;
         require_once './views/client/dashboardClient.php';
     }
