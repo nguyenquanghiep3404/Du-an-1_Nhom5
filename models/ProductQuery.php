@@ -407,5 +407,16 @@ class ProductQuery  {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function deleteProductVariant($variant_id)
+    {
+        $query = "DELETE FROM product_variant WHERE product_variant_id = :product_variant_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':product_variant_id', $variant_id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return true;  
+        } else {
+            return false;
+        }
+    }
 }
 ?>

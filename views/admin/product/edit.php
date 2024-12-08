@@ -191,14 +191,25 @@
                     <input type="hidden" name="variant_id[]" 
                         value="<?= htmlspecialchars($variants['product_variant_id']) ?>">
 
-                    <button type="button" class="btn btn-danger mt-2 remove_variant">Xóa</button>
+                        <a href="?action=product-form-edit&id=<?=$id?>&delete_variant=<?= $variants['product_variant_id'] ?>">
+                            <button type="button" class="btn btn-danger">Xóa</button>
+                        </a>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
             <p>Không có biến thể nào được tìm thấy.</p>
         <?php endif; ?>
     </div>
-
+    <div id="new-variants">
+        <div class="variant_item mb-3">
+            <label>Kích Cỡ</label>
+            <input type="text" name="new_variant_size[]" class="form-control" placeholder="S, M, L">
+            <label>Màu Sắc</label>
+            <input type="text" name="new_variant_color[]" class="form-control" placeholder="Đỏ, Xanh, Vàng">
+            <label>Số Lượng</label>
+            <input type="number" name="new_variant_quantity[]" class="form-control" placeholder="Số lượng">
+        </div>
+    </div>    
     <button type="button" id="add_variant" class="btn btn-primary mt-3">Thêm Biến Thể</button>
 </div>
 

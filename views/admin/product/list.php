@@ -129,7 +129,7 @@
                             <img style="max-height:100%; max-width:100%;" src="<?=  $product['image'] ?>">
                         </div>
                     </td>
-                    <td> <?= $product['price'] ?> </td>
+                    <td> <?= number_format($product['price'], 0, ',', '.') ?> VNĐ </td>
                     <td><?= $product['category_name'] ?></td>
                     <td><?=  $product['created_at'] ?></td>
                     <td>
@@ -167,5 +167,6 @@
                 <?php endforeach ?>
         </tbody>
     </table >
+    
 
 <?php include ('./views/admin/layout/footer.php'); ?>

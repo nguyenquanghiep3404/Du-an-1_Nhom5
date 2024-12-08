@@ -86,7 +86,7 @@ class ProductAdminController {
                 $name = $_POST['product_name'];
                 $category_id = $_POST['category_id'];
                 $price = $_POST['product_price'];
-                $sale_price = $_POST['product_sale_price'];
+                $sale_price = isset($_POST['product_sale_price']) && !empty($_POST['product_sale_price']) ? $_POST['product_sale_price'] : null;
                 $description = $_POST['product_description'];
 
         // Xử lý tải lên ảnh chính
@@ -135,7 +135,6 @@ class ProductAdminController {
             foreach ($_POST['variant_size'] as $key => $size) {
                 $color = $_POST['variant_color'][$key];
                 $quantity = $_POST['variant_quantity'][$key];
-              
 
                 $this->productQuery->addProductVariants($product_id, $size, $color, $quantity);
             }
@@ -164,6 +163,14 @@ class ProductAdminController {
         if(isset($_GET['id'])) {
             $id = $_GET['id'];
             $one =$this->productQuery->getone_product($id);
+        }
+        if (isset($_GET['delete_variant'])) {
+            $variant_id = $_GET['delete_variant'];
+                     
+            $this->productQuery->deleteProductVariant($variant_id);
+            
+            header("Location: ?action=product-form-edit&id=".$id);
+            exit();
         }
             // if ($one) {
             //     // Sản phẩm được tìm thấy
@@ -239,6 +246,17 @@ class ProductAdminController {
                             $quantity = $_POST['variant_quantity'][$key];
                             
                             $this->productQuery->updateProductVariant($variant_id, $size, $color, $quantity);}
+             // Thêm các biến thể mới nếu có
+             if (isset($_POST['new_variant_size'])) {
+                foreach ($_POST['new_variant_size'] as $key => $size) {
+                    $color = $_POST['new_variant_color'][$key];
+                    // Kiểm tra và gán giá trị mặc định nếu quantity trống hoặc không hợp lệ
+                    $quantity = isset($_POST['new_variant_quantity'][$key]) && is_numeric($_POST['new_variant_quantity'][$key]) ? $_POST['new_variant_quantity'][$key] : 0;
+                    
+
+                    $this->productQuery->addProductVariants($id, $size, $color, $quantity);
+                }
+            }
 
             header('Location: index.php?action=product');  
         }

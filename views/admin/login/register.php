@@ -195,12 +195,7 @@
                   </div>
 
                   <div class="d-md-flex align-items-center justify-content-between mb-7 pb-1">
-                    <div class="form-check mb-3 mb-md-0">
-                      <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
-                      <label class="form-check-label text-dark fs-3" for="flexCheckChecked">
-                        Remeber this Device
-                      </label>
-                    </div>
+                   
                   </div>
                   <button type="submit"  name="btn-login" class="btn btn-primary w-100 mb-7 rounded-pill">Đăng Nhập</button>
                   <div class="d-flex align-items-center">
