@@ -79,12 +79,6 @@ switch ($action) {
         break;
     case "update-product-status":
         $productAdmin->updateProductStatus($product_id, $status);
-    // case "hide-product":
-    //     $productAdmin->hide();
-    //     break;
-    // case "category-product":
-    //     $productAdmin->showProductsByCategory();
-    //     break;
     // Danh muc
     case "home-dm";
         $categoryAdmin->all_dm();
@@ -131,33 +125,20 @@ switch ($action) {
     case "delete":
         $registerAdmin->delete();
         break;
-
-
     // client
     case "client":
         $HomeClient->home();
         break;
     case "addToCart":
         $HomeClient->addToCart();
-        // $HomeClient->addCart();
         break;
-    // case "addCartDetail":
-    //     $HomeClient->AddCartDetail();
-    //     break;
     case "update_cart_quantity":
             $HomeClient->updateCartQuantity();
             break;
-    
     // Xóa sản phẩm khỏi giỏ hàng
     case "remove_cart_item":
             $HomeClient->removeCartItem();
             break;
-    // case "cart";
-    //     $HomeClient->cart();
-    //     break;
-    // case "update-cart";
-    //     $HomeClient->cart();
-    //     break;
     case "product-details":
         $HomeClient->productDetails();
         break;
@@ -171,10 +152,6 @@ switch ($action) {
         // }
         $HomeClient->categoryProductClient($category_id);
         break;
-    // Checkout
-    // case 'checkout';
-    //     $checkoutAdmin->checkout();
-    //     break;
     case 'show_checkout';
         $checkoutAdmin->showOrderDetails();
         break;
