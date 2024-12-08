@@ -28,7 +28,11 @@ class checkoutController{
     }
     
     
-    public function CreateOrderDetails() {   
+    public function CreateOrderDetails() { 
+        if (!isset($_SESSION['name'])) {
+            header('location:?action=login'); // Chuyển hướng đến trang đăng nhập
+            exit();
+        }
         $name = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
