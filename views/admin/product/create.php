@@ -234,12 +234,12 @@ function validateForm() {
     //     sale.focus();
     //     return false;
     // }
-    var price = document.getElementById('sale');
-    if (sale.value.trim() === '' || isNaN(sale.value.trim()) || parseFloat(sale.value.trim()) <= 0) {
-        displayError('saleErr', 'Vui lòng nhập giá tiền hợp lệ');
-        price.focus();
-        return false;
-    }
+    // var price = document.getElementById('sale');
+    // if (sale.value.trim() === '' || isNaN(sale.value.trim()) || parseFloat(sale.value.trim()) <= 0) {
+    //     displayError('saleErr', 'Vui lòng nhập giá tiền hợp lệ');
+    //     price.focus();
+    //     return false;
+    // }
 
     // Validate size
     var size = document.getElementById('size');
