@@ -222,20 +222,25 @@ class ProductQuery  {
                     vp.color,
                     vp.quantity
                 FROM 
-                    products AS p 
+                    products AS p
                 INNER JOIN 
                     product_variant AS vp 
-                ON 
-                    p.product_id = vp.product_id 
+                    ON p.product_id = vp.product_id
+                WHERE 
+                    vp.product_variant_id = (
+                        SELECT MIN(product_variant_id)
+                        FROM product_variant
+                        WHERE product_variant.product_id = p.product_id
+                    )
                 ORDER BY 
-                    p.created_at 
+                    p.created_at DESC
                 LIMIT 8
             ";
             $data = $this->conn->query($sql)->fetchAll();
             $ds = [];
             // Chuyển dữ liệu sang object product
             foreach ($data as $row) {
-                $product = convertToObjectProduct($row); // Cần sửa hàm này để xử lý thêm size và color
+                $product = convertToObjectProduct($row); // Sửa hàm này để xử lý thêm size và color
                 $product->size = $row['size']; // Thêm thông tin size
                 $product->color = $row['color']; // Thêm thông tin color
                 $product->quantity = $row['quantity'];
@@ -255,19 +260,22 @@ class ProductQuery  {
                 SELECT 
                     p.*, 
                     vp.size, 
-                    vp.color, 
+                    vp.color,
                     vp.quantity
                 FROM 
                     products AS p
                 INNER JOIN 
-                    product_variant AS vp
-                ON 
-                    p.product_id = vp.product_id
+                    product_variant AS vp 
+                    ON p.product_id = vp.product_id
                 WHERE 
-                    p.category_id = :category_id
+                    vp.product_variant_id = (
+                        SELECT MIN(product_variant_id)
+                        FROM product_variant
+                        WHERE product_variant.product_id = p.product_id
+                    )
                 ORDER BY 
                     p.created_at DESC
-                LIMIT :limit
+                LIMIT 8
             ";
             
             // Chuẩn bị câu truy vấn với PDO
@@ -298,18 +306,24 @@ class ProductQuery  {
         try {
             $sql = "
                 SELECT 
-                    p.*, vp.size, vp.color, vp.quantity 
+                    p.*, 
+                    vp.size, 
+                    vp.color,
+                    vp.quantity
                 FROM 
                     products AS p
                 INNER JOIN 
-                    product_variant AS vp
-                ON 
-                    p.product_id = vp.product_id
+                    product_variant AS vp 
+                    ON p.product_id = vp.product_id
                 WHERE 
-                    p.category_id = :category_id
+                    vp.product_variant_id = (
+                        SELECT MIN(product_variant_id)
+                        FROM product_variant
+                        WHERE product_variant.product_id = p.product_id
+                    )
                 ORDER BY 
                     p.created_at DESC
-                LIMIT :limit
+                LIMIT 8
             ";
             
             // Chuẩn bị câu truy vấn với PDO
