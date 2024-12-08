@@ -190,7 +190,7 @@ class ProductQuery  {
     // }
     function update_product($name, $image, $price, $category_id, $sale_price, $description, $gallery, $product_id) {
         $sql = "UPDATE products 
-                SET name = ?, image = ?, price = ?, category_id = ?, sale_price = ?, description = ?, gallery = ?,created_at=NOW(), updated_at = NOW() 
+                SET name = ?, image = ?, price = ?, category_id = ?, sale_price = ?, description = ?, gallery = ?, updated_at = NOW() 
                 WHERE product_id = ?";
         return pdo_execute($sql, $name, $image, $price, $category_id, $sale_price, $description, $gallery, $product_id);
     }
@@ -198,7 +198,7 @@ class ProductQuery  {
     // Không cập nhật ảnh (Dùng để cập nhật sản phẩm không bao gồm hình ảnh (trong trường hợp hình ảnh không được tải lên mới).)
     function update_product_noneimg($name,	$price,$category_id,$sale_price, $description,$product_id){
         try {
-            $sql = "UPDATE products SET name=?, price=?, category_id=?, sale_price=?, description=?, created_at=NOW(), updated_at=NOW() WHERE product_id=?";
+            $sql = "UPDATE products SET name=?, price=?, category_id=?, sale_price=?, description=?, updated_at=NOW() WHERE product_id=?";
             pdo_execute($sql, $name,	$price,$category_id,$sale_price, $description, $product_id);
             echo "Chỉnh sửa thành công";
         } catch (PDOException $e) {
@@ -248,6 +248,95 @@ class ProductQuery  {
             echo "</h1>";
         }
     }
+    // lấy tất cả danh mục áo phao
+    public function get_products_by_category_aophao($category_id, $limit = 8) {
+        try {
+            $sql = "
+                SELECT 
+                    p.*, 
+                    vp.size, 
+                    vp.color, 
+                    vp.quantity
+                FROM 
+                    products AS p
+                INNER JOIN 
+                    product_variant AS vp
+                ON 
+                    p.product_id = vp.product_id
+                WHERE 
+                    p.category_id = :category_id
+                ORDER BY 
+                    p.created_at DESC
+                LIMIT :limit
+            ";
+            
+            // Chuẩn bị câu truy vấn với PDO
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+    
+            $ds = [];
+            // Chuyển dữ liệu sang object product
+            foreach ($data as $row) {
+                $product = convertToObjectProduct($row); // Cần hàm chuyển đổi sang đối tượng Product
+                $product->size = $row['size']; // Thêm thông tin size
+                $product->color = $row['color']; // Thêm thông tin color
+                $product->quantity = $row['quantity'];
+                $ds[] = $product;
+            }
+            
+            return $ds;
+        } catch (Exception $error) {
+            echo "<h1>";
+            echo "Lỗi hàm get_products_by_category_aophao: " . $error->getMessage();
+            echo "</h1>";
+        }
+    }
+    public function get_products_by_category_aolen($category_id, $limit) {
+        try {
+            $sql = "
+                SELECT 
+                    p.*, vp.size, vp.color, vp.quantity 
+                FROM 
+                    products AS p
+                INNER JOIN 
+                    product_variant AS vp
+                ON 
+                    p.product_id = vp.product_id
+                WHERE 
+                    p.category_id = :category_id
+                ORDER BY 
+                    p.created_at DESC
+                LIMIT :limit
+            ";
+            
+            // Chuẩn bị câu truy vấn với PDO
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+    
+            $ds = [];
+            // Chuyển dữ liệu sang object Product
+            foreach ($data as $row) {
+                $product = convertToObjectProduct($row); // Hàm chuyển đổi sang đối tượng Product
+                $product->size = $row['size']; // Thêm thông tin size
+                $product->color = $row['color']; // Thêm thông tin color
+                $product->quantity = $row['quantity']; // Thêm thông tin quantity
+                $ds[] = $product;
+            }
+            
+            return $ds;
+        } catch (Exception $error) {
+            echo "<h1>";
+            echo "Lỗi hàm get_products_by_category_aophao: " . $error->getMessage();
+            echo "</h1>";
+            return [];
+        }
+    }
     public function getProductByVariant($product_id)
     {
         
@@ -279,26 +368,31 @@ class ProductQuery  {
         return pdo_query_one($sql, $product_id);
     }
     
-// }
-// show sản phẩm
-
+    // Cập nhật trạng thái sản phẩm
+    public function updateStatus($product_id, $status) {
+        try {
+            // Câu lệnh SQL cập nhật status
+            $sql = "UPDATE products SET status = :status WHERE product_id = :product_id";
+            $stmt = $this->conn->prepare($sql);
     
-    // function hideProduct($product_id) {
-    //     $conn = connect_db(); 
-    //     $sql = "UPDATE products SET status = 1 WHERE product_id  = :product_id ";
-    //     $stmt = $conn->prepare($sql);
-    //     $stmt->bindParam(':product_id ', $product_id);
-    //     $stmt->execute();
-    //     return $stmt->rowCount() > 0;
-    // }
-    // function unhideProduct($product_id) {
-    //     $conn = connect_db();
-    //     $sql = "UPDATE products SET status = 0 WHERE product_id  = :product_id ";
-    //     $stmt = $conn->prepare($sql);
-    //     $stmt->bindParam(':product_id ', $product_id);
-    //     $stmt->execute();
-    //     return $stmt->rowCount() > 0;
-    // }
+            // Gán giá trị vào các tham số
+            $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+            $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+    
+            // Thực thi truy vấn
+            $stmt->execute();
+    
+            // Kiểm tra kết quả
+            if ($stmt->rowCount() > 0) {
+                return "Cập nhật trạng thái thành công!";
+            } else {
+                return "Không tìm thấy sản phẩm hoặc trạng thái không thay đổi.";
+            }
+        } catch (PDOException $e) {
+            // Xử lý lỗi
+            return "Lỗi khi cập nhật trạng thái: " . $e->getMessage();
+        }
+    }
     
     // public function __destruct()
     // {

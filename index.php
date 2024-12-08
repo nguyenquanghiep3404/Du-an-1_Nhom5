@@ -77,8 +77,8 @@ switch ($action) {
     case "product-form-edit":
         $productAdmin->Edit();
         break;
-    // case "delete-product":
-    //     $productAdmin->deleteProduct();
+    case "update-product-status":
+        $productAdmin->updateProductStatus($product_id, $status);
     // case "hide-product":
     //     $productAdmin->hide();
     //     break;

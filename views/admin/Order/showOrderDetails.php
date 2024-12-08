@@ -1,13 +1,12 @@
 <?php include('./views/admin/layout/header.php'); ?>
+
 <div class="content-area">
     <div class="container py-5">
         <h2 class="text-center mb-4">Chi Tiết Đơn Hàng</h2>
         <section class="h-100 gradient-custom">
             <div class="card" style="border-radius: 10px;">
                 <div class="card-header px-4 py-5 bg-light">
-                    <h5 class="text-muted mb-0 text-center">
-                        Cảm ơn bạn vì đã đặt hàng, <span style="color: #a8729a;">Shop xin trịnh trọng cảm ơn</span>!
-                    </h5>
+                    
                 </div>
                 <div class="card-body p-4">
                     <?php foreach ($showOrder as $item) { ?>

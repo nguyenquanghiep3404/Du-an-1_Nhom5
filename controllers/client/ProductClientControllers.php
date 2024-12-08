@@ -17,8 +17,13 @@ class HomeClientControllers {
 
     // trang sản phẩm hiện thị view trang chủ
     public function home(){
+       
         $listProductLastes = $this->productQuery->getTop4ProductLastes();
-        include './views/client/dashboardClient.php';
+        
+        $aophao = $this->productQuery->get_products_by_category_aophao(8, $limit = 8);
+        $aolen = $this->productQuery->get_products_by_category_aolen(5, $limit = 8);
+        // var_dump($aophao) ;
+        require_once './views/client/dashboardClient.php';
     }
     public function productDetails()
     {
@@ -80,7 +85,13 @@ class HomeClientControllers {
                 header('Location: ?action=addToCart&error=notfound');
                 exit();
             }
-            
+            // Kiểm tra trạng thái sản phẩm
+            if ($product->status == 0) {
+                // Nếu sản phẩm bị ẩn, không cho thêm vào giỏ hàng
+                
+                header('Location: ?action=cart');
+                exit();
+            }
         
             // Kiểm tra biến thể có tồn tại không
             // $variant = $this->productQuery->checkVariant($product_id, $size, $color);
@@ -102,8 +113,9 @@ class HomeClientControllers {
                 if ($value['product_id'] == $product_id && $value['color'] == $color && $value['size'] == $size) {
                     $product_exists = true;
     
-                    // Tăng số lượng sản phẩm
-                    $_SESSION['myCart'][$key]['quantity'] += $quantity;
+                    // Không thay đổi số lượng nếu người dùng chỉ tải lại trang
+                // Chỉ tăng số lượng nếu `quantity` được cập nhật từ form
+                $_SESSION['myCart'][$key]['quantity'] = max($_SESSION['myCart'][$key]['quantity'], $quantity);
     
                     // Cập nhật lại tổng giá trị sản phẩm
                     $_SESSION['myCart'][$key]['total'] = $_SESSION['myCart'][$key]['quantity'] * $_SESSION['myCart'][$key]['price'];
