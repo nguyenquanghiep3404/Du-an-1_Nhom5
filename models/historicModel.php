@@ -18,18 +18,19 @@ class historicModel {
     }
     // chi tiet don hang
     public function getOrderDetails($order_detail_id) {
-        $sql = "SELECT 
-                    o.order_id, 
-                    o.product_id, 
-                    o.quantity, 
-                    o.total AS order_total, 
-                    o.price AS order_price, 
-                    p.image AS product_image,
-                    p.name AS product_name, 
-                    p.price AS product_price
-                FROM orders o
-                JOIN products p ON o.product_id = p.product_id
-                WHERE o.order_detail_id = :order_detail_id"; 
+            $sql = "SELECT 
+                o.order_detail_id, 
+                o.order_id, 
+                o.product_id, 
+                o.quantity, 
+                o.total AS order_total, 
+                o.price AS order_price, 
+                p.image AS product_image,
+                p.name AS product_name, 
+                p.price AS product_price
+            FROM orders o
+            JOIN products p ON o.product_id = p.product_id
+            WHERE o.order_detail_id = :order_detail_id"; 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':order_detail_id', $order_detail_id, PDO::PARAM_INT);
         $stmt->execute();

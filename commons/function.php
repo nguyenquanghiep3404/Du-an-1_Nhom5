@@ -133,6 +133,7 @@ function convertToObjectProduct ($row){
     $product->updated_at = $row['updated_at'];
     $product->description = $row['description'];
     $product->gallery = $row['gallery'];
+    $product->status= $row['status'];
     return $product;
 }
 

@@ -154,7 +154,7 @@
             <div class="row">
                 <div class="col-lg-7 col-md-6">
                     <form action="?action=createOrederDetails" method="POST" >
-                        <h3>Billing Details</h3>
+                        <h3>Điền thông tin </h3>
                         <div class="checkout_form_input">
                             <label>Tên  <span>*</span></label>
                             <input type="text" name="name" value="<?= $showCheckout['name']  ?>">
