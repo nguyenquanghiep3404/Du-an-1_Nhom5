@@ -97,7 +97,7 @@
     </nav>
     <!-- NAVBAR -->
     
-<h2 class="mb-4">Quản lý Users</h2>
+<h2 class="text-center mb-4">Quản lý Tài Khoản</h2>
 <table class="table table-striped table-hover">
     <thead class="thead-dark">
         <tr>
